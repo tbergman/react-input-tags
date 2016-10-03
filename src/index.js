@@ -7,13 +7,21 @@ var ReactDOM.render(
 */
 
 [1, 2, 3].map((item) => {
-  console.log(item);
+  console.log(item + 2);
 });
 
 var React = require('react');
 var ReactDOM = require('react-dom');
 
+const Test = React.createClass({
+  render: () => {
+    return (
+      <div>Yo</div>
+    );
+  }
+});
+
 ReactDOM.render(
-  <h1>Hello, world</h1>,
+  <Test />,
   document.getElementById('example')
 );
