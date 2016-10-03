@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
-import ReactTagging from './';
+import ReactTagging from '../src';
 
 describe('<ReactTagging />', () => {
   const wrapper = shallow(<ReactTagging />);
