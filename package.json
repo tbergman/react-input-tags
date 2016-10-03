@@ -4,9 +4,8 @@
   "description": "React component for tagging inputs",
   "main": "index.js",
   "scripts": {
-    "babel": "./node_modules/.bin/babel src -d lib",
-    "browserify": "./node_modules/.bin/browserify -t [ babelify ] example/index.js -o example/bundle.js",
-    "reload": "./node_modules/.bin/budo -H 127.0.0.1 -p 8000 -v -d ./lib src/index.js:static/bundle.js -- -t babelify -p [ browserify-hmr -u http://localhost:8002 -p 8002 ]"
+    "build": "browserify -t babelify example/index.js -o example/bundle.js",
+    "test": "mocha src/test.js --require babel-core/register"
   },
   "repository": {
     "type": "git",
@@ -28,5 +27,9 @@
     "react-dom": "^15.3.2"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "enzyme": "^2.4.1",
+    "mocha": "^3.1.0",
+    "react-addons-test-utils": "^15.3.2"
   }
 }
