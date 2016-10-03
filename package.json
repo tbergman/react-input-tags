@@ -1,0 +1,24 @@
+{
+  "name": "react-tagging",
+  "version": "1.0.0",
+  "description": "React component for tagging inputs",
+  "main": "index.js",
+  "scripts": {
+    "babel": "./node_modules/.bin/babel src -d lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baldwmic/react-tagging.git"
+  },
+  "author": "Michael Baldwin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/baldwmic/react-tagging/issues"
+  },
+  "homepage": "https://github.com/baldwmic/react-tagging#readme",
+  "dependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0"
+  },
+  "devDependencies": {}
+}
