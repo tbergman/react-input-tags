@@ -6,6 +6,7 @@ class Tag extends React.Component {
     console.log('clicked', event);
   }
 
+  // allow custom rendering of tag
   render() {
     const { index, value } = this.props;
     return (
@@ -20,7 +21,7 @@ class Tag extends React.Component {
 
 Tag.propTypes = {
   index: React.PropTypes.number.isRequired,
-  value: React.PropTypes.any.isRequired,
+  value: React.PropTypes.any,
 };
 
 export default Tag;

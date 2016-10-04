@@ -20870,6 +20870,9 @@ var Tag = function (_React$Component) {
 
   _createClass(Tag, [{
     key: 'render',
+
+
+    // allow custom rendering of tag
     value: function render() {
       var _props = this.props;
       var index = _props.index;
@@ -20892,7 +20895,7 @@ var Tag = function (_React$Component) {
 
 Tag.propTypes = {
   index: _react2.default.PropTypes.number.isRequired,
-  value: _react2.default.PropTypes.any.isRequired
+  value: _react2.default.PropTypes.any
 };
 
 exports.default = Tag;
@@ -20922,12 +20925,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var insertKeyCodes = {
+var defaultInsertKeyCodes = {
   13: 'enter',
-  9: 'tab'
+  9: 'tab',
+  188: 'comma'
 };
 
-var removeKeyCodes = {
+var defaultRemoveKeyCodes = {
   8: 'backspace / delete'
 };
 
@@ -20957,6 +20961,8 @@ var ReactTagging = function (_React$Component) {
       var tags = _this$props.tags;
       var handleInsert = _this$props.handleInsert;
       var handleRemove = _this$props.handleRemove;
+      var insertKeyCodes = _this$props.insertKeyCodes;
+      var removeKeyCodes = _this$props.removeKeyCodes;
 
 
       if (insertKeyCodes.hasOwnProperty(keyCode)) {
@@ -20971,15 +20977,23 @@ var ReactTagging = function (_React$Component) {
           handleRemove(tags, tags.length - 1);
         }
       }
+    }, _this.handleOnBlur = function () {
+      var inputValue = _this.state.inputValue;
+      var _this$props2 = _this.props;
+      var tags = _this$props2.tags;
+      var handleInsert = _this$props2.handleInsert;
+
+      if (inputValue !== '') {
+        _this.setState({ inputValue: '' });
+        handleInsert(tags, inputValue);
+      }
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(ReactTagging, [{
     key: 'render',
     value: function render() {
-      var _props = this.props;
-      var tags = _props.tags;
-      var renderTag = _props.renderTag;
+      var tags = this.props.tags;
       var inputValue = this.state.inputValue;
 
       return _react2.default.createElement(
@@ -20989,7 +21003,8 @@ var ReactTagging = function (_React$Component) {
           type: 'text',
           value: inputValue,
           onChange: this.handleOnChange,
-          onKeyDown: this.handleOnKeyDown
+          onKeyDown: this.handleOnKeyDown,
+          onBlur: this.handleOnBlur
         }),
         _react2.default.createElement(
           'ul',
@@ -21012,7 +21027,13 @@ ReactTagging.propTypes = {
   tags: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.any).isRequired,
   handleInsert: _react2.default.PropTypes.func.isRequired,
   handleRemove: _react2.default.PropTypes.func.isRequired,
-  renderTag: _react2.default.PropTypes.func
+  insertKeyCodes: _react2.default.PropTypes.obj,
+  removeKeyCodes: _react2.default.PropTypes.obj
+};
+
+ReactTagging.defaultProps = {
+  insertKeyCodes: defaultInsertKeyCodes,
+  removeKeyCodes: defaultRemoveKeyCodes
 };
 
 exports.default = ReactTagging;

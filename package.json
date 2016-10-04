@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "browserify -t babelify example/index.jsx -o example/bundle.js",
-    "test": "mocha test/* --require babel-core/register"
+    "test": "mocha test/* --require babel-core/register --require test/setup.js"
   },
   "repository": {
     "type": "git",
@@ -36,7 +36,10 @@
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-react": "^6.3.0",
+    "jsdom": "^9.6.0",
     "mocha": "^3.1.0",
-    "react-addons-test-utils": "^15.3.2"
+    "react-addons-test-utils": "^15.3.2",
+    "sinon": "^1.17.6",
+    "sinon-chai": "^2.8.0"
   }
 }

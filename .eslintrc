@@ -1,7 +1,7 @@
 {
   "parser": "babel-eslint",
   "extends": [
-    "airbnb",
+    "airbnb"
   ],
   "env": {
     "browser": true,
@@ -13,9 +13,11 @@
     "import/no-extraneous-dependencies": 0,
     "import/extensions": 0,
     "import/prefer-default-export": 0,
-    "no-prototype-builtins": 0,
+    "no-prototype-builtins": 0
   },
   "plugins": [
-    "react",
+    "react"
   ],
+  "globals": {
+  }
 }

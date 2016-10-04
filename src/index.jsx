@@ -1,16 +1,30 @@
 import React from 'react';
 import Tag from './Tag.jsx';
 
-const insertKeyCodes = {
+const defaultInsertKeyCodes = {
   13: 'enter',
   9: 'tab',
+  188: 'comma',
 };
 
-const removeKeyCodes = {
+const defaultRemoveKeyCodes = {
   8: 'backspace / delete',
 };
 
-class ReactTagging extends React.Component {
+export class TagsInput extends React.Component {
+  static propTypes = {
+    tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
+    handleInsert: React.PropTypes.func.isRequired,
+    handleRemove: React.PropTypes.func.isRequired,
+    insertKeyCodes: React.PropTypes.object,
+    removeKeyCodes: React.PropTypes.object,
+  };
+
+  static defaultProps = {
+    insertKeyCodes: defaultInsertKeyCodes,
+    removeKeyCodes: defaultRemoveKeyCodes,
+  };
+
   state = {
     inputValue: '',
   }
@@ -20,10 +34,19 @@ class ReactTagging extends React.Component {
     this.setState({ inputValue });
   }
 
+  handleOnBlur = () => {
+    const { inputValue } = this.state;
+    const { tags, handleInsert } = this.props;
+    if (inputValue.length > 0) {
+      this.setState({ inputValue: '' });
+      handleInsert(tags, inputValue);
+    }
+  }
+
   handleOnKeyDown = (event) => {
     const { keyCode } = event;
     const { inputValue } = this.state;
-    const { tags, handleInsert, handleRemove } = this.props;
+    const { tags, handleInsert, handleRemove, insertKeyCodes, removeKeyCodes } = this.props;
 
     if (insertKeyCodes.hasOwnProperty(keyCode)) {
       if (inputValue !== '') {
@@ -33,14 +56,14 @@ class ReactTagging extends React.Component {
     }
 
     if (removeKeyCodes.hasOwnProperty(keyCode)) {
-      if (inputValue === '' && tags.length > 0) {
+      if (inputValue.length === 0 && tags.length > 0) {
         handleRemove(tags, tags.length - 1);
       }
     }
   }
 
   render() {
-    const { tags, renderTag } = this.props;
+    const { tags } = this.props;
     const { inputValue } = this.state;
     return (
       <div>
@@ -48,11 +71,13 @@ class ReactTagging extends React.Component {
           type="text"
           value={inputValue}
           onChange={this.handleOnChange}
+          onBlur={this.handleOnBlur}
           onKeyDown={this.handleOnKeyDown}
         />
         <ul>
           {tags.map((tag, index) =>
             <Tag
+              key={index}
               index={index}
               value={tag}
             />
@@ -62,12 +87,3 @@ class ReactTagging extends React.Component {
     );
   }
 }
-
-ReactTagging.propTypes = {
-  tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
-  handleInsert: React.PropTypes.func.isRequired,
-  handleRemove: React.PropTypes.func.isRequired,
-  renderTag: React.PropTypes.func,
-};
-
-export default ReactTagging;
