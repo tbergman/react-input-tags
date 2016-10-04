@@ -1,4 +1,5 @@
 import React from 'react';
+import Tag from './Tag.jsx';
 
 const insertKeyCodes = {
   13: 'enter',
@@ -25,8 +26,10 @@ class ReactTagging extends React.Component {
     const { tags, handleInsert, handleRemove } = this.props;
 
     if (insertKeyCodes.hasOwnProperty(keyCode)) {
-      this.setState({ inputValue: '' });
-      handleInsert(tags, inputValue);
+      if (inputValue !== '') {
+        this.setState({ inputValue: '' });
+        handleInsert(tags, inputValue);
+      }
     }
 
     if (removeKeyCodes.hasOwnProperty(keyCode)) {
@@ -49,9 +52,10 @@ class ReactTagging extends React.Component {
         />
         <ul>
           {tags.map((tag, index) =>
-            <div key={index}>
-              {renderTag(tag)}
-            </div>
+            <Tag
+              index={index}
+              value={tag}
+            />
           )}
         </ul>
       </div>

@@ -47,7 +47,7 @@ var Example = function (_React$Component) {
       _this.setState({ tags: newTags });
     }, _this.renderTag = function (tag) {
       return _react2.default.createElement(
-        'li',
+        'div',
         null,
         tag
       );
@@ -71,7 +71,7 @@ var Example = function (_React$Component) {
 
 (0, _reactDom.render)(_react2.default.createElement(Example, null), document.getElementById('react-app'));
 
-},{"../src/index.jsx":173,"react":172,"react-dom":29}],2:[function(require,module,exports){
+},{"../src/index.jsx":174,"react":172,"react-dom":29}],2:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -20849,6 +20849,79 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var Tag = function (_React$Component) {
+  _inherits(Tag, _React$Component);
+
+  function Tag() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, Tag);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Tag.__proto__ || Object.getPrototypeOf(Tag)).call.apply(_ref, [this].concat(args))), _this), _this.handleOnClick = function (event) {
+      console.log('clicked', event);
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(Tag, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props;
+      var index = _props.index;
+      var value = _props.value;
+
+      return _react2.default.createElement(
+        'li',
+        { key: index },
+        _react2.default.createElement(
+          'div',
+          { onClick: this.handleOnClick },
+          value
+        )
+      );
+    }
+  }]);
+
+  return Tag;
+}(_react2.default.Component);
+
+Tag.propTypes = {
+  index: _react2.default.PropTypes.number.isRequired,
+  value: _react2.default.PropTypes.any.isRequired
+};
+
+exports.default = Tag;
+
+},{"react":172}],174:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Tag = require('./Tag.jsx');
+
+var _Tag2 = _interopRequireDefault(_Tag);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var insertKeyCodes = {
   13: 'enter',
   9: 'tab'
@@ -20887,13 +20960,14 @@ var ReactTagging = function (_React$Component) {
 
 
       if (insertKeyCodes.hasOwnProperty(keyCode)) {
-        _this.setState({ inputValue: '' });
-        handleInsert(tags, inputValue);
+        if (inputValue !== '') {
+          _this.setState({ inputValue: '' });
+          handleInsert(tags, inputValue);
+        }
       }
 
       if (removeKeyCodes.hasOwnProperty(keyCode)) {
         if (inputValue === '' && tags.length > 0) {
-          console.log('removing tags');
           handleRemove(tags, tags.length - 1);
         }
       }
@@ -20921,11 +20995,10 @@ var ReactTagging = function (_React$Component) {
           'ul',
           null,
           tags.map(function (tag, index) {
-            return _react2.default.createElement(
-              'div',
-              { key: index },
-              renderTag(tag)
-            );
+            return _react2.default.createElement(_Tag2.default, {
+              index: index,
+              value: tag
+            });
           })
         )
       );
@@ -20944,4 +21017,4 @@ ReactTagging.propTypes = {
 
 exports.default = ReactTagging;
 
-},{"react":172}]},{},[1]);
+},{"./Tag.jsx":173,"react":172}]},{},[1]);

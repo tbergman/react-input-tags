@@ -21,7 +21,7 @@ class Example extends React.Component {
   }
 
   renderTag = tag => (
-    <li>{tag}</li>
+    <div>{tag}</div>
   );
 
   render() {
