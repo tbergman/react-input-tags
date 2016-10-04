@@ -15,6 +15,8 @@ var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -25,15 +27,38 @@ var Example = function (_React$Component) {
   _inherits(Example, _React$Component);
 
   function Example() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Example);
 
-    return _possibleConstructorReturn(this, (Example.__proto__ || Object.getPrototypeOf(Example)).apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Example.__proto__ || Object.getPrototypeOf(Example)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      tags: []
+    }, _this.handleInsert = function (currentTags, newTag) {
+      var newTags = [].concat(_toConsumableArray(currentTags), [newTag]);
+      _this.setState({ tags: newTags });
+    }, _this.renderTag = function (tag) {
+      return _react2.default.createElement(
+        'li',
+        null,
+        tag
+      );
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Example, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(_index2.default, null);
+      return _react2.default.createElement(_index2.default, {
+        tags: this.state.tags,
+        handleInsert: this.handleInsert,
+        renderTag: this.renderTag
+      });
     }
   }]);
 
@@ -20850,13 +20875,14 @@ var ReactTagging = function (_React$Component) {
       _this.setState({ inputValue: inputValue });
     }, _this.handleOnKeyDown = function (event) {
       var keyCode = event.keyCode;
+      var inputValue = _this.state.inputValue;
+      var _this$props = _this.props;
+      var tags = _this$props.tags;
+      var handleInsert = _this$props.handleInsert;
 
-      // check if code matches any of the ones above
-
-      // if an insert key code, then insert inputValue as a tag
 
       if (insertKeyCodes.hasOwnProperty(keyCode)) {
-        console.log('insert tag into array of tags');
+        handleInsert(tags, inputValue);
       }
 
       if (removeKeyCodes.hasOwnProperty(keyCode)) {
@@ -20868,6 +20894,10 @@ var ReactTagging = function (_React$Component) {
   _createClass(ReactTagging, [{
     key: 'render',
     value: function render() {
+      var _props = this.props;
+      var tags = _props.tags;
+      var renderTag = _props.renderTag;
+
       return _react2.default.createElement(
         'div',
         null,
@@ -20877,9 +20907,15 @@ var ReactTagging = function (_React$Component) {
           onKeyDown: this.handleOnKeyDown
         }),
         _react2.default.createElement(
-          'div',
+          'ul',
           null,
-          this.state.inputValue
+          tags.map(function (tag, index) {
+            return _react2.default.createElement(
+              'div',
+              { key: index },
+              renderTag(tag)
+            );
+          })
         )
       );
     }
@@ -20887,6 +20923,12 @@ var ReactTagging = function (_React$Component) {
 
   return ReactTagging;
 }(_react2.default.Component);
+
+ReactTagging.propTypes = {
+  tags: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.string).isRequired,
+  handleInsert: _react2.default.PropTypes.func.isRequired,
+  renderTag: _react2.default.PropTypes.func.isRequired
+};
 
 exports.default = ReactTagging;
 

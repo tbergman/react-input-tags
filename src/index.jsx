@@ -21,12 +21,11 @@ class ReactTagging extends React.Component {
 
   handleOnKeyDown = (event) => {
     const { keyCode } = event;
+    const { inputValue } = this.state;
+    const { tags, handleInsert } = this.props;
 
-    // check if code matches any of the ones above
-
-    // if an insert key code, then insert inputValue as a tag
     if (insertKeyCodes.hasOwnProperty(keyCode)) {
-      console.log('insert tag into array of tags');
+      handleInsert(tags, inputValue);
     }
 
     if (removeKeyCodes.hasOwnProperty(keyCode)) {
@@ -35,6 +34,7 @@ class ReactTagging extends React.Component {
   }
 
   render() {
+    const { tags, renderTag } = this.props;
     return (
       <div>
         <input
@@ -42,10 +42,22 @@ class ReactTagging extends React.Component {
           onChange={this.handleOnChange}
           onKeyDown={this.handleOnKeyDown}
         />
-        <div>{this.state.inputValue}</div>
+        <ul>
+          {tags.map((tag, index) =>
+            <div key={index}>
+              {renderTag(tag)}
+            </div>
+          )}
+        </ul>
       </div>
     );
   }
 }
+
+ReactTagging.propTypes = {
+  tags: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  handleInsert: React.PropTypes.func.isRequired,
+  renderTag: React.PropTypes.func.isRequired,
+};
 
 export default ReactTagging;
