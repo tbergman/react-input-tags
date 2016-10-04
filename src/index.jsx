@@ -16,8 +16,8 @@ export class TagsInput extends React.Component {
     tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleInsert: React.PropTypes.func.isRequired,
     handleRemove: React.PropTypes.func.isRequired,
-    insertKeyCodes: React.PropTypes.object,
-    removeKeyCodes: React.PropTypes.object,
+    insertKeyCodes: React.PropTypes.shape(),
+    removeKeyCodes: React.PropTypes.shape(),
   };
 
   static defaultProps = {

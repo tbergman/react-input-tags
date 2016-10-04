@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
@@ -13,48 +13,19 @@ describe('<TagsInput />', () => {
 
   beforeEach(() => {
     tags = [];
-    handleInsert = () => {};
-    handleRemove = () => {};
-    // handleInsert = sinon.stub();
-    // handleRemove = sinon.stub();
+    handleInsert = sinon.stub();
+    handleRemove = sinon.stub();
 
-    /* wrapper = shallow(
+    wrapper = shallow(
       <TagsInput
         tags={tags}
         handleInsert={handleInsert}
         handleRemove={handleRemove}
       />
-    ); */
-
-    /*
-    console.log(tags);
-    console.log(wrapper.props().tags);
-    console.log(wrapper.props());
-    */
-    // console.log(wrapper);
-    // console.log(wrapper.prop('tags'));
-  });
-
-  afterEach(() => {
-    // handleInsert.restore();
-    // handleRemove.restore();
+    );
   });
 
   describe('<input />', () => {
-    it.only('is props passing?', () => {
-      const wrapper2 = shallow(
-        React.createElement(TagsInput, { tags: ['hi'], handleInsert: () => {}, handleRemove: () => {} }, null)
-        /*
-        <TagsInput
-          tags={tags}
-          handleInsert={handleInsert}
-          handleRemove={handleRemove}
-        />
-        */
-      );
-    });
-
-    /*
     it('should render the input', () => {
       expect(wrapper.find('input')).to.have.length(1);
     });
@@ -70,7 +41,6 @@ describe('<TagsInput />', () => {
         expect(wrapper.state().inputValue).to.equal(newInputValue);
       });
     });
-    */
 
     describe('onBlur()', () => {
       context('when state `inputValue` has length greater than `0`', () => {
@@ -86,17 +56,15 @@ describe('<TagsInput />', () => {
         });
 
         it('should insert the tag', () => {
-          // expect(handleInsert).to.have.been.calledWith(tags, newInputValue);
-          // expect(handleInsert).to.have.been.called();
+          expect(handleInsert).to.have.been.calledWith(tags, newInputValue);
         });
       });
 
-      /*
       context('when state `inputValue` has length of `0`', () => {
         const emptyInputValue = '';
 
         beforeEach(() => {
-          wrapper.state().inputValue = emptyInputValue;
+          wrapper.setState({ inputValue: emptyInputValue });
           wrapper.find('input').simulate('onblur');
         });
 
@@ -108,7 +76,6 @@ describe('<TagsInput />', () => {
           expect(handleInsert).to.not.have.been.called();
         });
       });
-      */
     });
   });
 });
