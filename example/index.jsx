@@ -1,6 +1,6 @@
 import React from 'react';
-import { render } from 'react-dom';
-import ReactTagging from '../src/index.jsx';
+import ReactDOM from 'react-dom';
+import { TagsInput } from '../src/index.jsx';
 
 class Example extends React.Component {
   state = {
@@ -26,14 +26,13 @@ class Example extends React.Component {
 
   render() {
     return (
-      <ReactTagging
+      <TagsInput
         tags={this.state.tags}
         handleInsert={this.handleInsert}
         handleRemove={this.handleRemove}
-        renderTag={this.renderTag}
       />
     );
   }
 }
 
-render(<Example />, document.getElementById('react-app'));
+ReactDOM.render(<Example />, document.getElementById('react-app'));

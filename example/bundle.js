@@ -9,9 +9,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = require('react-dom');
 
-var _index = require('../src/index.jsx');
+var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _index2 = _interopRequireDefault(_index);
+var _index = require('../src/index.jsx');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -57,11 +57,10 @@ var Example = function (_React$Component) {
   _createClass(Example, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(_index2.default, {
+      return _react2.default.createElement(_index.TagsInput, {
         tags: this.state.tags,
         handleInsert: this.handleInsert,
-        handleRemove: this.handleRemove,
-        renderTag: this.renderTag
+        handleRemove: this.handleRemove
       });
     }
   }]);
@@ -69,7 +68,7 @@ var Example = function (_React$Component) {
   return Example;
 }(_react2.default.Component);
 
-(0, _reactDom.render)(_react2.default.createElement(Example, null), document.getElementById('react-app'));
+_reactDom2.default.render(_react2.default.createElement(Example, null), document.getElementById('react-app'));
 
 },{"../src/index.jsx":174,"react":172,"react-dom":29}],2:[function(require,module,exports){
 (function (process){
@@ -20834,6 +20833,7 @@ module.exports = require('./lib/React');
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.Tag = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -20849,23 +20849,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Tag = function (_React$Component) {
+var Tag = exports.Tag = function (_React$Component) {
   _inherits(Tag, _React$Component);
 
   function Tag() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
     _classCallCheck(this, Tag);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Tag.__proto__ || Object.getPrototypeOf(Tag)).call.apply(_ref, [this].concat(args))), _this), _this.handleOnClick = function (event) {
-      console.log('clicked', event);
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+    return _possibleConstructorReturn(this, (Tag.__proto__ || Object.getPrototypeOf(Tag)).apply(this, arguments));
   }
 
   _createClass(Tag, [{
@@ -20874,18 +20864,12 @@ var Tag = function (_React$Component) {
 
     // allow custom rendering of tag
     value: function render() {
-      var _props = this.props;
-      var index = _props.index;
-      var value = _props.value;
+      var value = this.props.value;
 
       return _react2.default.createElement(
         'li',
-        { key: index },
-        _react2.default.createElement(
-          'div',
-          { onClick: this.handleOnClick },
-          value
-        )
+        null,
+        value
       );
     }
   }]);
@@ -20894,11 +20878,8 @@ var Tag = function (_React$Component) {
 }(_react2.default.Component);
 
 Tag.propTypes = {
-  index: _react2.default.PropTypes.number.isRequired,
-  value: _react2.default.PropTypes.any
+  value: _react2.default.PropTypes.string
 };
-
-exports.default = Tag;
 
 },{"react":172}],174:[function(require,module,exports){
 'use strict';
@@ -20906,6 +20887,7 @@ exports.default = Tag;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.TagsInput = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -20915,8 +20897,6 @@ var _react2 = _interopRequireDefault(_react);
 
 var _Tag = require('./Tag.jsx');
 
-var _Tag2 = _interopRequireDefault(_Tag);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20925,6 +20905,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+// move to utils folder
 var defaultInsertKeyCodes = {
   13: 'enter',
   9: 'tab',
@@ -20935,62 +20916,58 @@ var defaultRemoveKeyCodes = {
   8: 'backspace / delete'
 };
 
-var ReactTagging = function (_React$Component) {
-  _inherits(ReactTagging, _React$Component);
+var TagsInput = exports.TagsInput = function (_React$Component) {
+  _inherits(TagsInput, _React$Component);
 
-  function ReactTagging() {
+  function TagsInput() {
     var _ref;
 
     var _temp, _this, _ret;
 
-    _classCallCheck(this, ReactTagging);
+    _classCallCheck(this, TagsInput);
 
     for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ReactTagging.__proto__ || Object.getPrototypeOf(ReactTagging)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = TagsInput.__proto__ || Object.getPrototypeOf(TagsInput)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       inputValue: ''
     }, _this.handleOnChange = function (event) {
       var inputValue = event.target.value;
       _this.setState({ inputValue: inputValue });
-    }, _this.handleOnKeyDown = function (event) {
-      var keyCode = event.keyCode;
+    }, _this.handleOnBlur = function () {
       var inputValue = _this.state.inputValue;
       var _this$props = _this.props;
       var tags = _this$props.tags;
       var handleInsert = _this$props.handleInsert;
-      var handleRemove = _this$props.handleRemove;
-      var insertKeyCodes = _this$props.insertKeyCodes;
-      var removeKeyCodes = _this$props.removeKeyCodes;
 
-
-      if (insertKeyCodes.hasOwnProperty(keyCode)) {
-        if (inputValue !== '') {
-          _this.setState({ inputValue: '' });
-          handleInsert(tags, inputValue);
-        }
+      if (inputValue.length > 0) {
+        _this.setState({ inputValue: '' });
+        handleInsert(tags, inputValue);
       }
-
-      if (removeKeyCodes.hasOwnProperty(keyCode)) {
-        if (inputValue === '' && tags.length > 0) {
-          handleRemove(tags, tags.length - 1);
-        }
-      }
-    }, _this.handleOnBlur = function () {
+    }, _this.handleOnKeyDown = function (event) {
+      var keyCode = event.keyCode;
       var inputValue = _this.state.inputValue;
       var _this$props2 = _this.props;
       var tags = _this$props2.tags;
       var handleInsert = _this$props2.handleInsert;
+      var handleRemove = _this$props2.handleRemove;
+      var insertKeyCodes = _this$props2.insertKeyCodes;
+      var removeKeyCodes = _this$props2.removeKeyCodes;
 
-      if (inputValue !== '') {
+
+      if (insertKeyCodes.hasOwnProperty(keyCode) && inputValue.length > 0) {
         _this.setState({ inputValue: '' });
         handleInsert(tags, inputValue);
+      }
+
+      if (removeKeyCodes.hasOwnProperty(keyCode) && inputValue.length === 0 && tags.length > 0) {
+        handleRemove(tags, tags.length - 1);
       }
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
-  _createClass(ReactTagging, [{
+  _createClass(TagsInput, [{
     key: 'render',
     value: function render() {
       var tags = this.props.tags;
@@ -21003,15 +20980,15 @@ var ReactTagging = function (_React$Component) {
           type: 'text',
           value: inputValue,
           onChange: this.handleOnChange,
-          onKeyDown: this.handleOnKeyDown,
-          onBlur: this.handleOnBlur
+          onBlur: this.handleOnBlur,
+          onKeyDown: this.handleOnKeyDown
         }),
         _react2.default.createElement(
           'ul',
           null,
           tags.map(function (tag, index) {
-            return _react2.default.createElement(_Tag2.default, {
-              index: index,
+            return _react2.default.createElement(_Tag.Tag, {
+              key: index,
               value: tag
             });
           })
@@ -21020,22 +20997,19 @@ var ReactTagging = function (_React$Component) {
     }
   }]);
 
-  return ReactTagging;
+  return TagsInput;
 }(_react2.default.Component);
 
-ReactTagging.propTypes = {
+TagsInput.propTypes = {
   tags: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.any).isRequired,
   handleInsert: _react2.default.PropTypes.func.isRequired,
   handleRemove: _react2.default.PropTypes.func.isRequired,
-  insertKeyCodes: _react2.default.PropTypes.obj,
-  removeKeyCodes: _react2.default.PropTypes.obj
+  insertKeyCodes: _react2.default.PropTypes.object,
+  removeKeyCodes: _react2.default.PropTypes.object
 };
-
-ReactTagging.defaultProps = {
+TagsInput.defaultProps = {
   insertKeyCodes: defaultInsertKeyCodes,
   removeKeyCodes: defaultRemoveKeyCodes
 };
-
-exports.default = ReactTagging;
 
 },{"./Tag.jsx":173,"react":172}]},{},[1]);

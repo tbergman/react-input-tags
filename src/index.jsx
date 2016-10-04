@@ -1,6 +1,7 @@
 import React from 'react';
-import Tag from './Tag.jsx';
+import { Tag } from './Tag.jsx';
 
+// move to utils folder
 const defaultInsertKeyCodes = {
   13: 'enter',
   9: 'tab',
@@ -16,8 +17,8 @@ export class TagsInput extends React.Component {
     tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleInsert: React.PropTypes.func.isRequired,
     handleRemove: React.PropTypes.func.isRequired,
-    insertKeyCodes: React.PropTypes.shape(),
-    removeKeyCodes: React.PropTypes.shape(),
+    insertKeyCodes: React.PropTypes.object,
+    removeKeyCodes: React.PropTypes.object,
   };
 
   static defaultProps = {
@@ -48,17 +49,13 @@ export class TagsInput extends React.Component {
     const { inputValue } = this.state;
     const { tags, handleInsert, handleRemove, insertKeyCodes, removeKeyCodes } = this.props;
 
-    if (insertKeyCodes.hasOwnProperty(keyCode)) {
-      if (inputValue !== '') {
-        this.setState({ inputValue: '' });
-        handleInsert(tags, inputValue);
-      }
+    if (insertKeyCodes.hasOwnProperty(keyCode) && inputValue.length > 0) {
+      this.setState({ inputValue: '' });
+      handleInsert(tags, inputValue);
     }
 
-    if (removeKeyCodes.hasOwnProperty(keyCode)) {
-      if (inputValue.length === 0 && tags.length > 0) {
-        handleRemove(tags, tags.length - 1);
-      }
+    if (removeKeyCodes.hasOwnProperty(keyCode) && inputValue.length === 0 && tags.length > 0) {
+      handleRemove(tags, tags.length - 1);
     }
   }
 
@@ -78,7 +75,6 @@ export class TagsInput extends React.Component {
           {tags.map((tag, index) =>
             <Tag
               key={index}
-              index={index}
               value={tag}
             />
           )}

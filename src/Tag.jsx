@@ -1,27 +1,18 @@
 import React from 'react';
 
-class Tag extends React.Component {
-
-  handleOnClick = (event) => {
-    console.log('clicked', event);
-  }
+export class Tag extends React.Component {
 
   // allow custom rendering of tag
   render() {
-    const { index, value } = this.props;
+    const { value } = this.props;
     return (
-      <li key={index}>
-        <div onClick={this.handleOnClick}>
-          {value}
-        </div>
+      <li>
+        {value}
       </li>
     );
   }
 }
 
 Tag.propTypes = {
-  index: React.PropTypes.number.isRequired,
-  value: React.PropTypes.any,
+  value: React.PropTypes.string,
 };
-
-export default Tag;
