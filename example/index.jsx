@@ -12,6 +12,14 @@ class Example extends React.Component {
     this.setState({ tags: newTags });
   }
 
+  handleRemove = (currentTags, removeTagIndex) => {
+    const newTags = [
+      ...currentTags.slice(0, removeTagIndex),
+      ...currentTags.slice(removeTagIndex + 1),
+    ];
+    this.setState({ tags: newTags });
+  }
+
   renderTag = tag => (
     <li>{tag}</li>
   );
@@ -21,6 +29,7 @@ class Example extends React.Component {
       <ReactTagging
         tags={this.state.tags}
         handleInsert={this.handleInsert}
+        handleRemove={this.handleRemove}
         renderTag={this.renderTag}
       />
     );

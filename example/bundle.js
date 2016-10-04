@@ -42,6 +42,9 @@ var Example = function (_React$Component) {
     }, _this.handleInsert = function (currentTags, newTag) {
       var newTags = [].concat(_toConsumableArray(currentTags), [newTag]);
       _this.setState({ tags: newTags });
+    }, _this.handleRemove = function (currentTags, removeTagIndex) {
+      var newTags = [].concat(_toConsumableArray(currentTags.slice(0, removeTagIndex)), _toConsumableArray(currentTags.slice(removeTagIndex + 1)));
+      _this.setState({ tags: newTags });
     }, _this.renderTag = function (tag) {
       return _react2.default.createElement(
         'li',
@@ -57,6 +60,7 @@ var Example = function (_React$Component) {
       return _react2.default.createElement(_index2.default, {
         tags: this.state.tags,
         handleInsert: this.handleInsert,
+        handleRemove: this.handleRemove,
         renderTag: this.renderTag
       });
     }
@@ -20879,14 +20883,19 @@ var ReactTagging = function (_React$Component) {
       var _this$props = _this.props;
       var tags = _this$props.tags;
       var handleInsert = _this$props.handleInsert;
+      var handleRemove = _this$props.handleRemove;
 
 
       if (insertKeyCodes.hasOwnProperty(keyCode)) {
+        _this.setState({ inputValue: '' });
         handleInsert(tags, inputValue);
       }
 
       if (removeKeyCodes.hasOwnProperty(keyCode)) {
-        console.log('remove tag from array of tags');
+        if (inputValue === '' && tags.length > 0) {
+          console.log('removing tags');
+          handleRemove(tags, tags.length - 1);
+        }
       }
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
@@ -20897,12 +20906,14 @@ var ReactTagging = function (_React$Component) {
       var _props = this.props;
       var tags = _props.tags;
       var renderTag = _props.renderTag;
+      var inputValue = this.state.inputValue;
 
       return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement('input', {
           type: 'text',
+          value: inputValue,
           onChange: this.handleOnChange,
           onKeyDown: this.handleOnKeyDown
         }),
@@ -20925,9 +20936,10 @@ var ReactTagging = function (_React$Component) {
 }(_react2.default.Component);
 
 ReactTagging.propTypes = {
-  tags: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.string).isRequired,
+  tags: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.any).isRequired,
   handleInsert: _react2.default.PropTypes.func.isRequired,
-  renderTag: _react2.default.PropTypes.func.isRequired
+  handleRemove: _react2.default.PropTypes.func.isRequired,
+  renderTag: _react2.default.PropTypes.func
 };
 
 exports.default = ReactTagging;

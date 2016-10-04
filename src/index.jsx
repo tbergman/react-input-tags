@@ -22,23 +22,28 @@ class ReactTagging extends React.Component {
   handleOnKeyDown = (event) => {
     const { keyCode } = event;
     const { inputValue } = this.state;
-    const { tags, handleInsert } = this.props;
+    const { tags, handleInsert, handleRemove } = this.props;
 
     if (insertKeyCodes.hasOwnProperty(keyCode)) {
+      this.setState({ inputValue: '' });
       handleInsert(tags, inputValue);
     }
 
     if (removeKeyCodes.hasOwnProperty(keyCode)) {
-      console.log('remove tag from array of tags');
+      if (inputValue === '' && tags.length > 0) {
+        handleRemove(tags, tags.length - 1);
+      }
     }
   }
 
   render() {
     const { tags, renderTag } = this.props;
+    const { inputValue } = this.state;
     return (
       <div>
         <input
           type="text"
+          value={inputValue}
           onChange={this.handleOnChange}
           onKeyDown={this.handleOnKeyDown}
         />
@@ -55,9 +60,10 @@ class ReactTagging extends React.Component {
 }
 
 ReactTagging.propTypes = {
-  tags: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
   handleInsert: React.PropTypes.func.isRequired,
-  renderTag: React.PropTypes.func.isRequired,
+  handleRemove: React.PropTypes.func.isRequired,
+  renderTag: React.PropTypes.func,
 };
 
 export default ReactTagging;
