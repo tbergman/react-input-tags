@@ -7,3 +7,5 @@ export const defaultInsertKeyCodes = {
 export const defaultRemoveKeyCodes = {
   8: 'backspace / delete',
 };
+
+export const defaultInputPlaceholder = '';

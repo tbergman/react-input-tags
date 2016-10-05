@@ -60,8 +60,8 @@ var Example = function (_React$Component) {
       return _react2.default.createElement(_src.TagsInput, {
         tags: this.state.tags,
         handleInsert: this.handleInsert,
-        handleRemove: this.handleRemove
-        // renderTag={this.renderTag}
+        handleRemove: this.handleRemove,
+        inputPlaceholder: 'add tag'
       });
     }
   }]);
@@ -20972,6 +20972,7 @@ var TagsInput = exports.TagsInput = function (_React$Component) {
       var _props = this.props;
       var tags = _props.tags;
       var _handleRemove = _props.handleRemove;
+      var inputPlaceholder = _props.inputPlaceholder;
       var inputValue = this.state.inputValue;
 
       return _react2.default.createElement(
@@ -20979,6 +20980,7 @@ var TagsInput = exports.TagsInput = function (_React$Component) {
         null,
         _react2.default.createElement('input', {
           type: 'text',
+          placeholder: inputPlaceholder,
           value: inputValue,
           onChange: this.handleOnChange,
           onBlur: this.handleOnBlur,
@@ -21009,11 +21011,13 @@ TagsInput.propTypes = {
   handleInsert: _react2.default.PropTypes.func.isRequired,
   handleRemove: _react2.default.PropTypes.func.isRequired,
   insertKeyCodes: _react2.default.PropTypes.object,
-  removeKeyCodes: _react2.default.PropTypes.object
+  removeKeyCodes: _react2.default.PropTypes.object,
+  inputPlaceholder: _react2.default.PropTypes.string
 };
 TagsInput.defaultProps = {
   insertKeyCodes: _util.defaultInsertKeyCodes,
-  removeKeyCodes: _util.defaultRemoveKeyCodes
+  removeKeyCodes: _util.defaultRemoveKeyCodes,
+  inputPlaceholder: _util.defaultInputPlaceholder
 };
 
 },{"./Tag.jsx":173,"./util":176,"react":172}],175:[function(require,module,exports){
@@ -21022,13 +21026,16 @@ TagsInput.defaultProps = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TagsInput = undefined;
+exports.Tag = exports.TagsInput = undefined;
 
 var _TagsInput = require('./TagsInput.jsx');
 
-exports.TagsInput = _TagsInput.TagsInput;
+var _Tag = require('./Tag.jsx');
 
-},{"./TagsInput.jsx":174}],176:[function(require,module,exports){
+exports.TagsInput = _TagsInput.TagsInput;
+exports.Tag = _Tag.Tag;
+
+},{"./Tag.jsx":173,"./TagsInput.jsx":174}],176:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21043,5 +21050,7 @@ var defaultInsertKeyCodes = exports.defaultInsertKeyCodes = {
 var defaultRemoveKeyCodes = exports.defaultRemoveKeyCodes = {
   8: 'backspace / delete'
 };
+
+var defaultInputPlaceholder = exports.defaultInputPlaceholder = '';
 
 },{}]},{},[1]);

@@ -1,6 +1,10 @@
 import React from 'react';
 import { Tag } from './Tag.jsx';
-import { defaultInsertKeyCodes, defaultRemoveKeyCodes } from './util';
+import {
+  defaultInsertKeyCodes,
+  defaultRemoveKeyCodes,
+  defaultInputPlaceholder,
+} from './util';
 
 export class TagsInput extends React.Component {
   static propTypes = {
@@ -9,11 +13,13 @@ export class TagsInput extends React.Component {
     handleRemove: React.PropTypes.func.isRequired,
     insertKeyCodes: React.PropTypes.object,
     removeKeyCodes: React.PropTypes.object,
+    inputPlaceholder: React.PropTypes.string,
   };
 
   static defaultProps = {
     insertKeyCodes: defaultInsertKeyCodes,
     removeKeyCodes: defaultRemoveKeyCodes,
+    inputPlaceholder: defaultInputPlaceholder,
   };
 
   state = {
@@ -51,12 +57,13 @@ export class TagsInput extends React.Component {
   }
 
   render() {
-    const { tags, handleRemove } = this.props;
+    const { tags, handleRemove, inputPlaceholder } = this.props;
     const { inputValue } = this.state;
     return (
       <div>
         <input
           type="text"
+          placeholder={inputPlaceholder}
           value={inputValue}
           onChange={this.handleOnChange}
           onBlur={this.handleOnBlur}
