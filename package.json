@@ -4,7 +4,7 @@
   "description": "React component for inputting tags",
   "main": "index.js",
   "scripts": {
-    "build": "browserify -t babelify example/index.jsx -o example/bundle.js",
+    "build": "browserify -t babelify example/example.jsx -o example/bundle.js",
     "test": "mocha test/* --require babel-core/register --require test/setup.js"
   },
   "repository": {

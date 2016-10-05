@@ -1,5 +1,9 @@
-export const arrayIncludes = (array, searchElement) => {
-  const indexOfElement = array.indexOf(searchElement);
-  if (indexOfElement === -1) return false;
-  return true;
+export const defaultInsertKeyCodes = {
+  13: 'enter',
+  9: 'tab',
+  188: 'comma',
+};
+
+export const defaultRemoveKeyCodes = {
+  8: 'backspace / delete',
 };

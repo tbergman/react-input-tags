@@ -1,16 +1,6 @@
 import React from 'react';
 import { Tag } from './Tag.jsx';
-
-// move to utils folder
-const defaultInsertKeyCodes = {
-  13: 'enter',
-  9: 'tab',
-  188: 'comma',
-};
-
-const defaultRemoveKeyCodes = {
-  8: 'backspace / delete',
-};
+import { defaultInsertKeyCodes, defaultRemoveKeyCodes } from './util';
 
 export class TagsInput extends React.Component {
   static propTypes = {
