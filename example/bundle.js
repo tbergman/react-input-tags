@@ -11,7 +11,7 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _index = require('../src/index.jsx');
+var _src = require('../src');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -57,7 +57,7 @@ var Example = function (_React$Component) {
   _createClass(Example, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(_index.TagsInput, {
+      return _react2.default.createElement(_src.TagsInput, {
         tags: this.state.tags,
         handleInsert: this.handleInsert,
         handleRemove: this.handleRemove
@@ -70,7 +70,7 @@ var Example = function (_React$Component) {
 
 _reactDom2.default.render(_react2.default.createElement(Example, null), document.getElementById('react-app'));
 
-},{"../src/index.jsx":174,"react":172,"react-dom":29}],2:[function(require,module,exports){
+},{"../src":175,"react":172,"react-dom":29}],2:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -21013,4 +21013,16 @@ TagsInput.defaultProps = {
   removeKeyCodes: defaultRemoveKeyCodes
 };
 
-},{"./Tag.jsx":173,"react":172}]},{},[1]);
+},{"./Tag.jsx":173,"react":172}],175:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.TagsInput = undefined;
+
+var _TagsInput = require('./TagsInput.jsx');
+
+exports.TagsInput = _TagsInput.TagsInput;
+
+},{"./TagsInput.jsx":174}]},{},[1]);
