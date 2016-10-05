@@ -2,17 +2,19 @@ import React from 'react';
 
 export class Tag extends React.Component {
 
-  // allow custom rendering of tag
   render() {
-    const { value } = this.props;
+    const { value, handleRemove } = this.props;
     return (
-      <li>
-        {value}
-      </li>
+      <div>
+        <div>
+          {value}
+        </div>
+        <button
+          onClick={handleRemove}
+        >
+          {'X'}
+        </button>
+      </div>
     );
   }
 }
-
-Tag.propTypes = {
-  value: React.PropTypes.string,
-};

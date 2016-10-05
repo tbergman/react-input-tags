@@ -30,6 +30,7 @@ class Example extends React.Component {
         tags={this.state.tags}
         handleInsert={this.handleInsert}
         handleRemove={this.handleRemove}
+        // renderTag={this.renderTag}
       />
     );
   }

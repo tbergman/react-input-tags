@@ -61,6 +61,7 @@ var Example = function (_React$Component) {
         tags: this.state.tags,
         handleInsert: this.handleInsert,
         handleRemove: this.handleRemove
+        // renderTag={this.renderTag}
       });
     }
   }]);
@@ -20860,26 +20861,32 @@ var Tag = exports.Tag = function (_React$Component) {
 
   _createClass(Tag, [{
     key: 'render',
-
-
-    // allow custom rendering of tag
     value: function render() {
-      var value = this.props.value;
+      var _props = this.props;
+      var value = _props.value;
+      var handleRemove = _props.handleRemove;
 
       return _react2.default.createElement(
-        'li',
+        'div',
         null,
-        value
+        _react2.default.createElement(
+          'div',
+          null,
+          value
+        ),
+        _react2.default.createElement(
+          'button',
+          {
+            onClick: handleRemove
+          },
+          'X'
+        )
       );
     }
   }]);
 
   return Tag;
 }(_react2.default.Component);
-
-Tag.propTypes = {
-  value: _react2.default.PropTypes.string
-};
 
 },{"react":172}],174:[function(require,module,exports){
 'use strict';
@@ -20897,6 +20904,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _Tag = require('./Tag.jsx');
 
+var _util = require('./util');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20904,17 +20913,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// move to utils folder
-var defaultInsertKeyCodes = {
-  13: 'enter',
-  9: 'tab',
-  188: 'comma'
-};
-
-var defaultRemoveKeyCodes = {
-  8: 'backspace / delete'
-};
 
 var TagsInput = exports.TagsInput = function (_React$Component) {
   _inherits(TagsInput, _React$Component);
@@ -20971,7 +20969,9 @@ var TagsInput = exports.TagsInput = function (_React$Component) {
   _createClass(TagsInput, [{
     key: 'render',
     value: function render() {
-      var tags = this.props.tags;
+      var _props = this.props;
+      var tags = _props.tags;
+      var _handleRemove = _props.handleRemove;
       var inputValue = this.state.inputValue;
 
       return _react2.default.createElement(
@@ -20985,12 +20985,15 @@ var TagsInput = exports.TagsInput = function (_React$Component) {
           onKeyDown: this.handleOnKeyDown
         }),
         _react2.default.createElement(
-          'ul',
+          'div',
           null,
           tags.map(function (tag, index) {
             return _react2.default.createElement(_Tag.Tag, {
               key: index,
-              value: tag
+              value: tag,
+              handleRemove: function handleRemove() {
+                return _handleRemove(tags, index);
+              }
             });
           })
         )
@@ -21009,11 +21012,11 @@ TagsInput.propTypes = {
   removeKeyCodes: _react2.default.PropTypes.object
 };
 TagsInput.defaultProps = {
-  insertKeyCodes: defaultInsertKeyCodes,
-  removeKeyCodes: defaultRemoveKeyCodes
+  insertKeyCodes: _util.defaultInsertKeyCodes,
+  removeKeyCodes: _util.defaultRemoveKeyCodes
 };
 
-},{"./Tag.jsx":173,"react":172}],175:[function(require,module,exports){
+},{"./Tag.jsx":173,"./util":176,"react":172}],175:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21025,4 +21028,20 @@ var _TagsInput = require('./TagsInput.jsx');
 
 exports.TagsInput = _TagsInput.TagsInput;
 
-},{"./TagsInput.jsx":174}]},{},[1]);
+},{"./TagsInput.jsx":174}],176:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var defaultInsertKeyCodes = exports.defaultInsertKeyCodes = {
+  13: 'enter',
+  9: 'tab',
+  188: 'comma'
+};
+
+var defaultRemoveKeyCodes = exports.defaultRemoveKeyCodes = {
+  8: 'backspace / delete'
+};
+
+},{}]},{},[1]);

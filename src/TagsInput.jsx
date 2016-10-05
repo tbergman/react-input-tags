@@ -51,7 +51,7 @@ export class TagsInput extends React.Component {
   }
 
   render() {
-    const { tags } = this.props;
+    const { tags, handleRemove } = this.props;
     const { inputValue } = this.state;
     return (
       <div>
@@ -62,14 +62,15 @@ export class TagsInput extends React.Component {
           onBlur={this.handleOnBlur}
           onKeyDown={this.handleOnKeyDown}
         />
-        <ul>
+        <div>
           {tags.map((tag, index) =>
             <Tag
               key={index}
               value={tag}
+              handleRemove={() => handleRemove(tags, index)}
             />
           )}
-        </ul>
+        </div>
       </div>
     );
   }
