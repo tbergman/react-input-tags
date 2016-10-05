@@ -38,6 +38,7 @@ export class TagsInput extends React.Component {
   handleOnBlur = () => {
     const { inputValue } = this.state;
     const { tags, handleInsert } = this.props;
+    
     if (inputValue.length > 0) {
       this.setState({ inputValue: '' });
       handleInsert(tags, inputValue);

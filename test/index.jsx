@@ -6,87 +6,120 @@ import sinon from 'sinon';
 import { TagsInput } from '../src';
 
 describe('<TagsInput />', () => {
-  let wrapper;
-  let tags;
-  let handleInsert;
-  let handleRemove;
-
-  beforeEach(() => {
-    tags = [];
-    handleInsert = sinon.stub();
-    handleRemove = sinon.stub();
-
-    wrapper = shallow(
-      <TagsInput
-        tags={tags}
-        handleInsert={handleInsert}
-        handleRemove={handleRemove}
-      />
-    );
-  });
-
   describe('<input />', () => {
+    let inputWrapper;
+
+    before(() => {
+      inputWrapper = shallow(
+        <TagsInput
+          tags={[]}
+          handleInsert={() => {}}
+          handleRemove={() => {}}
+        />
+      );
+    });
+
     it('should render the input', () => {
-      expect(wrapper.find('input')).to.have.length(1);
+      expect(inputWrapper.find('input')).to.have.length(1);
     });
 
     describe('onChange()', () => {
-      const newInputValue = 'a';
+      let onChangeWrapper;
+      const nonEmptyInputValue = 'a';
 
-      beforeEach(() => {
-        wrapper.find('input').simulate('change', { target: { value: newInputValue } });
+      before(() => {
+        onChangeWrapper = shallow(
+          <TagsInput
+            tags={[]}
+            handleInsert={() => {}}
+            handleRemove={() => {}}
+          />
+        );
+
+        onChangeWrapper.find('input').simulate('change', { target: { value: nonEmptyInputValue } });
       });
 
       it('should set the state `inputValue`', () => {
-        expect(wrapper.state().inputValue).to.equal(newInputValue);
+        expect(onChangeWrapper.state().inputValue).to.equal(nonEmptyInputValue);
       });
     });
 
     describe('onBlur()', () => {
       context('when state `inputValue` has length greater than `0`', () => {
-        const newInputValue = 'ken@ferguson.com';
+        let onBlurWrapper;
+        let onBlurTags;
+        let onBlurHandleInsert;
+        let onBlurHandleRemove;
+        const nonEmptyInputValue = 'ken@ferguson.com';
 
         beforeEach(() => {
-          wrapper.setState({ inputValue: newInputValue });
-          wrapper.find('input').simulate('blur');
+          onBlurTags = [];
+          onBlurHandleInsert = sinon.stub();
+          onBlurHandleRemove = sinon.stub();
+          onBlurWrapper = shallow(
+            <TagsInput
+              tags={onBlurTags}
+              handleInsert={onBlurHandleInsert}
+              handleRemove={onBlurHandleRemove}
+            />
+          );
+
+          onBlurWrapper.setState({ inputValue: nonEmptyInputValue });
+          onBlurWrapper.find('input').simulate('blur');
         });
 
         it('should clear the state `inputValue`', () => {
-          expect(wrapper.state().inputValue).to.equal('');
+          expect(onBlurWrapper.state().inputValue).to.equal('');
         });
 
         it('should insert the tag', () => {
-          expect(handleInsert).to.have.been.calledWith(tags, newInputValue);
+          expect(onBlurHandleInsert).to.have.been.calledWith(onBlurTags, nonEmptyInputValue);
         });
       });
 
       context('when state `inputValue` has length of `0`', () => {
-        const originalInputValue = '';
+        let onBlurWrapper;
+        let onBlurTags;
+        let onBlurHandleInsert;
+        let onBlurHandleRemove;
+        const emptyInputValue = '';
 
         beforeEach(() => {
-          wrapper.setState({ inputValue: originalInputValue });
-          wrapper.find('input').simulate('blur');
+          onBlurTags = [];
+          onBlurHandleInsert = sinon.stub();
+          onBlurHandleRemove = sinon.stub();
+          onBlurWrapper = shallow(
+            <TagsInput
+              tags={onBlurTags}
+              handleInsert={onBlurHandleInsert}
+              handleRemove={onBlurHandleRemove}
+            />
+          );
+
+          onBlurWrapper.setState({ inputValue: emptyInputValue });
+          onBlurWrapper.find('input').simulate('blur');
         });
 
         it('should * not * clear the state `inputValue`', () => {
-          expect(wrapper.state().inputValue).to.equal(originalInputValue);
+          expect(onBlurWrapper.state().inputValue).to.equal(emptyInputValue);
         });
 
         it('should * not * insert the tag', () => {
-          expect(handleInsert).to.not.have.been.called();
+          expect(onBlurHandleInsert).to.not.have.been.called();
         });
       });
     });
 
+    /*
     describe('onKeyDown()', () => {
       context('when event `keyCode` is in `insertKeyCodes`', () => {
         const enterKeyCode = 13;
 
         context('when state `inputValue` has length greater than `0`', () => {
-          const newInputValue = 'abraham@lincoln.gov';
+          const nonEmptyInputValue = 'abraham@lincoln.gov';
 
           beforeEach(() => {
-            wrapper.setState({ inputValue: newInputValue });
+            wrapper.setState({ inputValue: nonEmptyInputValue });
             wrapper.find('input').simulate('keydown', { keyCode: enterKeyCode });
           });
 
@@ -95,23 +128,23 @@ describe('<TagsInput />', () => {
           });
 
           it('should insert the tag', () => {
-            expect(handleInsert).to.have.been.calledWith(tags, newInputValue);
+            expect(handleInsert).to.have.been.calledWith(tags, nonEmptyInputValue);
           });
         });
 
         context('when state `inputValue` has length of `0`', () => {
-          const originalInputValue = '';
+          const emptyInputValue = '';
 
           beforeEach(() => {
-            wrapper.setState({ inputValue: originalInputValue });
+            wrapper.setState({ inputValue: emptyInputValue });
             wrapper.find('input').simulate('keydown', { keyCode: enterKeyCode });
           });
 
           it('should clear the state `inputValue`', () => {
-            expect(wrapper.state().inputValue).to.equal(originalInputValue);
+            expect(wrapper.state().inputValue).to.equal(emptyInputValue);
           });
 
-          it('should insert the tag', () => {
+          it('should * not * insert the tag', () => {
             expect(handleInsert).to.not.have.been.called();
           });
         });
@@ -121,30 +154,65 @@ describe('<TagsInput />', () => {
         const removeKeyCode = 8;
 
         context('when state `inputValue` has length of `0`', () => {
-
-          context('when ', () => {
-
-          });
-        });
-
-        /*
-        context('when state `inputValue` has length of `0`', () => {
-          const originalInputValue = '';
+          const emptyInputValue = '';
 
           beforeEach(() => {
-            wrapper.setState({ inputValue: originalInputValue });
-            wrapper.find('input').simulate('keydown', { keyCode: enterKeyCode });
+            wrapper.setState({ inputValue: emptyInputValue });
           });
 
-          it('should clear the state `inputValue`', () => {
-            expect(wrapper.state().inputValue).to.equal(originalInputValue);
+          context('when prop `tags` has length greater than `0`', () => {
+            let removeTags;
+
+            beforeEach(() => {
+              removeTags = ['one', 'two'];
+              const removeWrapper = shallow(
+                <TagsInput
+                  tags={removeTags}
+                  handleInsert={handleInsert}
+                  handleRemove={handleRemove}
+                />
+              );
+              removeWrapper.find('input').simulate('keydown', { keyCode: removeKeyCode });
+            });
+
+            it('should remove the last tag', () => {
+              expect(handleRemove).to.have.been.calledWith(removeTags, removeTags.length - 1);
+            });
           });
 
-          it('should insert the tag', () => {
-            expect(handleInsert).to.not.have.been.called();
+          context('when prop `tags` has length of `0`', () => {
+            let removeTags;
+
+            beforeEach(() => {
+              removeTags = [];
+              const removeWrapper = shallow(
+                <TagsInput
+                  tags={removeTags}
+                  handleInsert={handleInsert}
+                  handleRemove={handleRemove}
+                />
+              );
+              removeWrapper.find('input').simulate('keydown', { keyCode: removeKeyCode });
+            });
+
+            it('should * not * remove the last tag', () => {
+              expect(handleRemove).to.not.have.been.called();
+            });
           });
         });
-        */
+
+        context('when state `inputValue` has length greater than `0`', () => {
+          const nonEmptyInputValue = 'user@domain.tld';
+
+          beforeEach(() => {
+            wrapper.setState({ inputValue: nonEmptyInputValue });
+            wrapper.find('input').simulate('keydown', { keyCode: removeKeyCode });
+          });
+
+          it('should * not * remove the last tag', () => {
+            expect(handleRemove).to.not.have.been.called();
+          });
+        });
       });
 
       context('when event `keyCode` is * not * found', () => {
@@ -161,5 +229,6 @@ describe('<TagsInput />', () => {
         });
       });
     });
+    */
   });
 });
