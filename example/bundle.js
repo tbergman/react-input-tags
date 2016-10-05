@@ -20941,6 +20941,7 @@ var TagsInput = exports.TagsInput = function (_React$Component) {
       var tags = _this$props.tags;
       var handleInsert = _this$props.handleInsert;
 
+
       if (inputValue.length > 0) {
         _this.setState({ inputValue: '' });
         handleInsert(tags, inputValue);

@@ -1,7 +1,7 @@
 {
-  "name": "react-tagging",
+  "name": "react-tags-input",
   "version": "1.0.0",
-  "description": "React component for tagging inputs",
+  "description": "React component for inputting tags",
   "main": "index.js",
   "scripts": {
     "build": "browserify -t babelify example/index.jsx -o example/bundle.js",

@@ -5,6 +5,8 @@ import sinon from 'sinon';
 
 import { TagsInput } from '../src';
 
+const noop = () => {};
+
 describe('<TagsInput />', () => {
   describe('<input />', () => {
     let inputWrapper;
@@ -13,8 +15,8 @@ describe('<TagsInput />', () => {
       inputWrapper = shallow(
         <TagsInput
           tags={[]}
-          handleInsert={() => {}}
-          handleRemove={() => {}}
+          handleInsert={noop}
+          handleRemove={noop}
         />
       );
     });
@@ -24,15 +26,15 @@ describe('<TagsInput />', () => {
     });
 
     describe('onChange()', () => {
-      let onChangeWrapper;
       const nonEmptyInputValue = 'a';
+      let onChangeWrapper;
 
       before(() => {
         onChangeWrapper = shallow(
           <TagsInput
             tags={[]}
-            handleInsert={() => {}}
-            handleRemove={() => {}}
+            handleInsert={noop}
+            handleRemove={noop}
           />
         );
 
@@ -46,11 +48,11 @@ describe('<TagsInput />', () => {
 
     describe('onBlur()', () => {
       context('when state `inputValue` has length greater than `0`', () => {
+        const nonEmptyInputValue = 'ken@ferguson.com';
         let onBlurWrapper;
         let onBlurTags;
         let onBlurHandleInsert;
         let onBlurHandleRemove;
-        const nonEmptyInputValue = 'ken@ferguson.com';
 
         beforeEach(() => {
           onBlurTags = [];
@@ -78,11 +80,11 @@ describe('<TagsInput />', () => {
       });
 
       context('when state `inputValue` has length of `0`', () => {
+        const emptyInputValue = '';
         let onBlurWrapper;
         let onBlurTags;
         let onBlurHandleInsert;
         let onBlurHandleRemove;
-        const emptyInputValue = '';
 
         beforeEach(() => {
           onBlurTags = [];
@@ -110,42 +112,72 @@ describe('<TagsInput />', () => {
       });
     });
 
-    /*
-    describe('onKeyDown()', () => {
+    describe('onKeyDown', () => {
       context('when event `keyCode` is in `insertKeyCodes`', () => {
         const enterKeyCode = 13;
 
         context('when state `inputValue` has length greater than `0`', () => {
           const nonEmptyInputValue = 'abraham@lincoln.gov';
+          let onKeyDownWrapper;
+          let onKeyDownTags;
+          let onKeyDownHandleInsert;
+          let onKeyDownHandleRemove;
 
           beforeEach(() => {
-            wrapper.setState({ inputValue: nonEmptyInputValue });
-            wrapper.find('input').simulate('keydown', { keyCode: enterKeyCode });
+            onKeyDownTags = [];
+            onKeyDownHandleInsert = sinon.stub();
+            onKeyDownHandleRemove = sinon.stub();
+            onKeyDownWrapper = shallow(
+              <TagsInput
+                tags={onKeyDownTags}
+                handleInsert={onKeyDownHandleInsert}
+                handleRemove={onKeyDownHandleRemove}
+              />
+            );
+
+            onKeyDownWrapper.setState({ inputValue: nonEmptyInputValue });
+            onKeyDownWrapper.find('input').simulate('keydown', { keyCode: enterKeyCode });
           });
 
           it('should clear the state `inputValue`', () => {
-            expect(wrapper.state().inputValue).to.equal('');
+            expect(onKeyDownWrapper.state().inputValue).to.equal('');
           });
 
           it('should insert the tag', () => {
-            expect(handleInsert).to.have.been.calledWith(tags, nonEmptyInputValue);
+            expect(onKeyDownHandleInsert).to.have.been.calledWith(
+              onKeyDownTags, nonEmptyInputValue);
           });
         });
 
         context('when state `inputValue` has length of `0`', () => {
           const emptyInputValue = '';
+          let onKeyDownWrapper;
+          let onKeyDownTags;
+          let onKeyDownHandleInsert;
+          let onKeyDownHandleRemove;
 
           beforeEach(() => {
-            wrapper.setState({ inputValue: emptyInputValue });
-            wrapper.find('input').simulate('keydown', { keyCode: enterKeyCode });
+            onKeyDownTags = [];
+            onKeyDownHandleInsert = sinon.stub();
+            onKeyDownHandleRemove = sinon.stub();
+            onKeyDownWrapper = shallow(
+              <TagsInput
+                tags={onKeyDownTags}
+                handleInsert={onKeyDownHandleInsert}
+                handleRemove={onKeyDownHandleRemove}
+              />
+            );
+
+            onKeyDownWrapper.setState({ inputValue: emptyInputValue });
+            onKeyDownWrapper.find('input').simulate('keydown', { keyCode: enterKeyCode });
           });
 
-          it('should clear the state `inputValue`', () => {
-            expect(wrapper.state().inputValue).to.equal(emptyInputValue);
+          it('should * not * clear the state `inputValue`', () => {
+            expect(onKeyDownWrapper.state().inputValue).to.equal(emptyInputValue);
           });
 
           it('should * not * insert the tag', () => {
-            expect(handleInsert).to.not.have.been.called();
+            expect(onKeyDownHandleInsert).to.not.have.been.called();
           });
         });
       });
@@ -156,79 +188,121 @@ describe('<TagsInput />', () => {
         context('when state `inputValue` has length of `0`', () => {
           const emptyInputValue = '';
 
-          beforeEach(() => {
-            wrapper.setState({ inputValue: emptyInputValue });
-          });
-
           context('when prop `tags` has length greater than `0`', () => {
-            let removeTags;
+            let onKeyDownWrapper;
+            let onKeyDownTags;
+            let onKeyDownHandleInsert;
+            let onKeyDownHandleRemove;
 
             beforeEach(() => {
-              removeTags = ['one', 'two'];
-              const removeWrapper = shallow(
+              onKeyDownTags = ['one', 'two'];
+              onKeyDownHandleInsert = sinon.stub();
+              onKeyDownHandleRemove = sinon.stub();
+              onKeyDownWrapper = shallow(
                 <TagsInput
-                  tags={removeTags}
-                  handleInsert={handleInsert}
-                  handleRemove={handleRemove}
+                  tags={onKeyDownTags}
+                  handleInsert={onKeyDownHandleInsert}
+                  handleRemove={onKeyDownHandleRemove}
                 />
               );
-              removeWrapper.find('input').simulate('keydown', { keyCode: removeKeyCode });
+
+              onKeyDownWrapper.setState({ inputValue: emptyInputValue });
+              onKeyDownWrapper.find('input').simulate('keydown', { keyCode: removeKeyCode });
             });
 
             it('should remove the last tag', () => {
-              expect(handleRemove).to.have.been.calledWith(removeTags, removeTags.length - 1);
+              expect(onKeyDownHandleRemove).to.have.been.calledWith(
+                onKeyDownTags, onKeyDownTags.length - 1);
             });
           });
 
           context('when prop `tags` has length of `0`', () => {
-            let removeTags;
+            let onKeyDownWrapper;
+            let onKeyDownTags;
+            let onKeyDownHandleInsert;
+            let onKeyDownHandleRemove;
 
             beforeEach(() => {
-              removeTags = [];
-              const removeWrapper = shallow(
+              onKeyDownTags = [];
+              onKeyDownHandleInsert = sinon.stub();
+              onKeyDownHandleRemove = sinon.stub();
+              onKeyDownWrapper = shallow(
                 <TagsInput
-                  tags={removeTags}
-                  handleInsert={handleInsert}
-                  handleRemove={handleRemove}
+                  tags={onKeyDownTags}
+                  handleInsert={onKeyDownHandleInsert}
+                  handleRemove={onKeyDownHandleRemove}
                 />
               );
-              removeWrapper.find('input').simulate('keydown', { keyCode: removeKeyCode });
+
+              onKeyDownWrapper.setState({ inputValue: emptyInputValue });
+              onKeyDownWrapper.find('input').simulate('keydown', { keyCode: removeKeyCode });
             });
 
             it('should * not * remove the last tag', () => {
-              expect(handleRemove).to.not.have.been.called();
+              expect(onKeyDownHandleRemove).to.not.have.been.called();
             });
           });
         });
 
         context('when state `inputValue` has length greater than `0`', () => {
           const nonEmptyInputValue = 'user@domain.tld';
+          let onKeyDownWrapper;
+          let onKeyDownTags;
+          let onKeyDownHandleInsert;
+          let onKeyDownHandleRemove;
 
           beforeEach(() => {
-            wrapper.setState({ inputValue: nonEmptyInputValue });
-            wrapper.find('input').simulate('keydown', { keyCode: removeKeyCode });
+            onKeyDownTags = [];
+            onKeyDownHandleInsert = sinon.stub();
+            onKeyDownHandleRemove = sinon.stub();
+            onKeyDownWrapper = shallow(
+              <TagsInput
+                tags={onKeyDownTags}
+                handleInsert={onKeyDownHandleInsert}
+                handleRemove={onKeyDownHandleRemove}
+              />
+            );
+
+            onKeyDownWrapper.setState({ inputValue: nonEmptyInputValue });
+            onKeyDownWrapper.find('input').simulate('keydown', { keyCode: removeKeyCode });
           });
 
           it('should * not * remove the last tag', () => {
-            expect(handleRemove).to.not.have.been.called();
+            expect(onKeyDownHandleRemove).to.not.have.been.called();
           });
         });
       });
 
       context('when event `keyCode` is * not * found', () => {
+        const notFoundKeyCode = 65;
+        let onKeyDownWrapper;
+        let onKeyDownTags;
+        let onKeyDownHandleInsert;
+        let onKeyDownHandleRemove;
+
         beforeEach(() => {
-          wrapper.find('input').simulate('onkeydown', { keyCode: 65 });
+          onKeyDownTags = [];
+          onKeyDownHandleInsert = sinon.stub();
+          onKeyDownHandleRemove = sinon.stub();
+          onKeyDownWrapper = shallow(
+            <TagsInput
+              tags={onKeyDownTags}
+              handleInsert={onKeyDownHandleInsert}
+              handleRemove={onKeyDownHandleRemove}
+            />
+          );
+
+          onKeyDownWrapper.find('input').simulate('keydown', { keyCode: notFoundKeyCode });
         });
 
         it('should * not * insert the tag', () => {
-          expect(handleInsert).to.not.have.been.called();
+          expect(onKeyDownHandleInsert).to.not.have.been.called();
         });
 
         it('should * not * remove the tag', () => {
-          expect(handleRemove).to.not.have.been.called();
+          expect(onKeyDownHandleRemove).to.not.have.been.called();
         });
       });
     });
-    */
   });
 });
