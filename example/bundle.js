@@ -20829,7 +20829,7 @@ module.exports = validateDOMNesting;
 module.exports = require('./lib/React');
 
 },{"./lib/React":55}],173:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -20838,7 +20838,7 @@ exports.Input = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -20865,13 +20865,56 @@ var Input = exports.Input = function (_React$Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Input.__proto__ || Object.getPrototypeOf(Input)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      inputWidth: 1
+      inputWidth: 0
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Input, [{
-    key: "render",
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      // console.log('will mount');
+      // this.inputNode.style.width = '10px';
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps() {
+      /*
+      const { value } = this.props;
+      this.textNode.textContent = value;
+       const widthText = this.textNode.offsetWidth;
+      console.log('text offset width', widthText);
+      */
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.inputNode.style.width = '1px';
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      // /*
+      var value = this.props.value;
+
+      this.textNode.textContent = value;
+
+      var widthText = this.textNode.offsetWidth;
+      console.log('text offset width', widthText);
+      console.log(this.inputNode.style.width);
+      this.inputNode.style.width = widthText + 'px';
+      console.log(this.inputNode.style.width);
+      // */
+
+      // this.setState({ inputWidth: widthText });
+      // can't setState, so directly change the input DOM node
+      // this.inputNode.style.width = `#${widthText}px`;
+    }
+  }, {
+    key: 'render',
     value: function render() {
+      var _this2 = this;
+
+      var inputWidth = this.state.inputWidth;
       var _props = this.props;
       var value = _props.value;
       var onChange = _props.onChange;
@@ -20879,14 +20922,39 @@ var Input = exports.Input = function (_React$Component) {
       var onKeyDown = _props.onKeyDown;
       var placeholder = _props.placeholder;
 
-      return _react2.default.createElement("input", {
-        type: "text",
-        value: value,
-        onChange: onChange,
-        onBlur: onBlur,
-        onKeyDown: onKeyDown,
-        placeholder: placeholder
-      });
+
+      var containerStyle = {};
+      var inputStyle = {};
+      var textStyle = {
+        // visibility: 'hidden',
+        whitespace: 'pre'
+      };
+
+      return _react2.default.createElement(
+        'div',
+        {
+          style: containerStyle
+        },
+        _react2.default.createElement('span', {
+          ref: function ref(c) {
+            _this2.textNode = c;
+          },
+          style: textStyle
+        }),
+        _react2.default.createElement('hr', null),
+        _react2.default.createElement('input', {
+          ref: function ref(c) {
+            _this2.inputNode = c;
+          }
+          // style={inputStyle}
+          , type: 'text',
+          value: value,
+          onChange: onChange,
+          onBlur: onBlur,
+          onKeyDown: onKeyDown
+          // placeholder={placeholder}
+        })
+      );
     }
   }]);
 
