@@ -71,7 +71,7 @@ var Example = function (_React$Component) {
 
 _reactDom2.default.render(_react2.default.createElement(Example, null), document.getElementById('react-app'));
 
-},{"../src":175,"react":172,"react-dom":29}],2:[function(require,module,exports){
+},{"../src":176,"react":172,"react-dom":29}],2:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -20829,6 +20829,79 @@ module.exports = validateDOMNesting;
 module.exports = require('./lib/React');
 
 },{"./lib/React":55}],173:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Input = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Input = exports.Input = function (_React$Component) {
+  _inherits(Input, _React$Component);
+
+  function Input() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, Input);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Input.__proto__ || Object.getPrototypeOf(Input)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      inputWidth: 1
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(Input, [{
+    key: "render",
+    value: function render() {
+      var _props = this.props;
+      var value = _props.value;
+      var onChange = _props.onChange;
+      var onBlur = _props.onBlur;
+      var onKeyDown = _props.onKeyDown;
+      var placeholder = _props.placeholder;
+
+      return _react2.default.createElement("input", {
+        type: "text",
+        value: value,
+        onChange: onChange,
+        onBlur: onBlur,
+        onKeyDown: onKeyDown,
+        placeholder: placeholder
+      });
+    }
+  }]);
+
+  return Input;
+}(_react2.default.Component);
+
+Input.propTypes = {
+  value: _react2.default.PropTypes.string.isRequired,
+  onChange: _react2.default.PropTypes.func.isRequired,
+  onBlur: _react2.default.PropTypes.func.isRequired,
+  onKeyDown: _react2.default.PropTypes.func.isRequired,
+  placeholder: _react2.default.PropTypes.string.isRequired
+};
+
+},{"react":172}],174:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20888,7 +20961,7 @@ var Tag = exports.Tag = function (_React$Component) {
   return Tag;
 }(_react2.default.Component);
 
-},{"react":172}],174:[function(require,module,exports){
+},{"react":172}],175:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20901,6 +20974,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _Input = require('./Input.jsx');
 
 var _Tag = require('./Tag.jsx');
 
@@ -20978,13 +21053,12 @@ var TagsInput = exports.TagsInput = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement('input', {
-          type: 'text',
-          placeholder: inputPlaceholder,
+        _react2.default.createElement(_Input.Input, {
           value: inputValue,
           onChange: this.handleOnChange,
           onBlur: this.handleOnBlur,
-          onKeyDown: this.handleOnKeyDown
+          onKeyDown: this.handleOnKeyDown,
+          placeholder: inputPlaceholder
         }),
         _react2.default.createElement(
           'div',
@@ -21020,22 +21094,25 @@ TagsInput.defaultProps = {
   inputPlaceholder: _util.defaultInputPlaceholder
 };
 
-},{"./Tag.jsx":173,"./util":176,"react":172}],175:[function(require,module,exports){
+},{"./Input.jsx":173,"./Tag.jsx":174,"./util":177,"react":172}],176:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Tag = exports.TagsInput = undefined;
+exports.Tag = exports.Input = exports.TagsInput = undefined;
 
 var _TagsInput = require('./TagsInput.jsx');
+
+var _Input = require('./Input.jsx');
 
 var _Tag = require('./Tag.jsx');
 
 exports.TagsInput = _TagsInput.TagsInput;
+exports.Input = _Input.Input;
 exports.Tag = _Tag.Tag;
 
-},{"./Tag.jsx":173,"./TagsInput.jsx":174}],176:[function(require,module,exports){
+},{"./Input.jsx":173,"./Tag.jsx":174,"./TagsInput.jsx":175}],177:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

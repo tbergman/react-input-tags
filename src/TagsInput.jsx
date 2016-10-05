@@ -1,4 +1,5 @@
 import React from 'react';
+import { Input } from './Input.jsx';
 import { Tag } from './Tag.jsx';
 import {
   defaultInsertKeyCodes,
@@ -61,13 +62,12 @@ export class TagsInput extends React.Component {
     const { inputValue } = this.state;
     return (
       <div>
-        <input
-          type="text"
-          placeholder={inputPlaceholder}
+        <Input
           value={inputValue}
           onChange={this.handleOnChange}
           onBlur={this.handleOnBlur}
           onKeyDown={this.handleOnKeyDown}
+          placeholder={inputPlaceholder}
         />
         <div>
           {tags.map((tag, index) =>
