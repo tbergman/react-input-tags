@@ -4,6 +4,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { Tag } from '../src';
+import { defaultRenderTag } from '../src/default.jsx';
 
 describe('<Tag />', () => {
   describe('onClick()', () => {
@@ -16,6 +17,7 @@ describe('<Tag />', () => {
         <Tag
           value={'one'}
           handleRemove={onClickHandleRemove}
+          renderTag={defaultRenderTag}
         />
       );
 

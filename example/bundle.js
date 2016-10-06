@@ -71,7 +71,7 @@ var Example = function (_React$Component) {
 
 _reactDom2.default.render(_react2.default.createElement(Example, null), document.getElementById('react-app'));
 
-},{"../src":177,"react":172,"react-dom":29}],2:[function(require,module,exports){
+},{"../src":178,"react":172,"react-dom":29}],2:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -20854,23 +20854,21 @@ var Input = exports.Input = function (_React$Component) {
   _inherits(Input, _React$Component);
 
   function Input() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
     _classCallCheck(this, Input);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Input.__proto__ || Object.getPrototypeOf(Input)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      inputWidth: 0
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+    return _possibleConstructorReturn(this, (Input.__proto__ || Object.getPrototypeOf(Input)).apply(this, arguments));
   }
 
   _createClass(Input, [{
     key: 'componentWillMount',
+
+
+    /*
+    state = {
+      inputWidth: 0,
+    }
+    */
+
     value: function componentWillMount() {
       // console.log('will mount');
       // this.inputNode.style.width = '10px';
@@ -20882,7 +20880,7 @@ var Input = exports.Input = function (_React$Component) {
     }
   }, {
     key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps() {
+    value: function componentWillReceiveProps(nextProps) {
       /*
       const { value } = this.props;
       this.textNode.textContent = value;
@@ -20910,7 +20908,7 @@ var Input = exports.Input = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var inputWidth = this.state.inputWidth;
+      // const { inputWidth } = this.state;
       var _props = this.props;
       var value = _props.value;
       var onChange = _props.onChange;
@@ -20918,13 +20916,16 @@ var Input = exports.Input = function (_React$Component) {
       var onKeyDown = _props.onKeyDown;
       var placeholder = _props.placeholder;
 
-
-      var containerStyle = {};
-      var inputStyle = {};
-      var textStyle = {
-        // visibility: 'hidden',
-        whitespace: 'pre'
+      /*
+      const containerStyle = {
       };
+      const inputStyle = {
+      };
+      const textStyle = {
+        // visibility: 'hidden',
+        whitespace: 'pre',
+      };
+      */
 
       /*
       <div
@@ -20937,6 +20938,7 @@ var Input = exports.Input = function (_React$Component) {
       <hr />
       </div>
       */
+
       return _react2.default.createElement('input', {
         // ref={(c) => { this.inputNode = c; }}
         // style={inputStyle}
@@ -20976,34 +20978,17 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var TagStyle = {
-  display: 'flex'
-};
-
 var Tag = exports.Tag = function Tag(_ref) {
   var value = _ref.value;
   var handleRemove = _ref.handleRemove;
-  return _react2.default.createElement(
-    'div',
-    { style: TagStyle },
-    _react2.default.createElement(
-      'div',
-      null,
-      value
-    ),
-    _react2.default.createElement(
-      'button',
-      {
-        onClick: handleRemove
-      },
-      'X'
-    )
-  );
+  var renderTag = _ref.renderTag;
+  return renderTag({ value: value, handleRemove: handleRemove });
 };
 
 Tag.propTypes = {
   value: _react2.default.PropTypes.string.isRequired,
-  handleRemove: _react2.default.PropTypes.func.isRequired
+  handleRemove: _react2.default.PropTypes.func.isRequired,
+  renderTag: _react2.default.PropTypes.func.isRequired
 };
 
 },{"react":172}],175:[function(require,module,exports){
@@ -21029,6 +21014,7 @@ var TagListStyle = {
 var TagList = exports.TagList = function TagList(_ref) {
   var tags = _ref.tags;
   var _handleRemove = _ref.handleRemove;
+  var renderTag = _ref.renderTag;
   return _react2.default.createElement(
     'div',
     { style: TagListStyle },
@@ -21038,7 +21024,8 @@ var TagList = exports.TagList = function TagList(_ref) {
         value: tag,
         handleRemove: function handleRemove() {
           return _handleRemove(tags, index);
-        }
+        },
+        renderTag: renderTag
       });
     })
   );
@@ -21046,7 +21033,8 @@ var TagList = exports.TagList = function TagList(_ref) {
 
 TagList.propTypes = {
   tags: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.any).isRequired,
-  handleRemove: _react2.default.PropTypes.func.isRequired
+  handleRemove: _react2.default.PropTypes.func.isRequired,
+  renderTag: _react2.default.PropTypes.func.isRequired
 };
 
 },{"./Tag.jsx":174,"react":172}],176:[function(require,module,exports){
@@ -21067,7 +21055,7 @@ var _Input = require('./Input.jsx');
 
 var _TagList = require('./TagList.jsx');
 
-var _util = require('./util');
+var _default = require('./default.jsx');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21140,6 +21128,7 @@ var TagsInput = exports.TagsInput = function (_React$Component) {
       var tags = _props.tags;
       var handleRemove = _props.handleRemove;
       var inputPlaceholder = _props.inputPlaceholder;
+      var renderTag = _props.renderTag;
       var inputValue = this.state.inputValue;
 
       return _react2.default.createElement(
@@ -21147,7 +21136,8 @@ var TagsInput = exports.TagsInput = function (_React$Component) {
         { style: TagsInputStyle },
         _react2.default.createElement(_TagList.TagList, {
           tags: tags,
-          handleRemove: handleRemove
+          handleRemove: handleRemove,
+          renderTag: renderTag
         }),
         _react2.default.createElement(_Input.Input, {
           value: inputValue,
@@ -21169,38 +21159,30 @@ TagsInput.propTypes = {
   handleRemove: _react2.default.PropTypes.func.isRequired,
   insertKeyCodes: _react2.default.PropTypes.object,
   removeKeyCodes: _react2.default.PropTypes.object,
-  inputPlaceholder: _react2.default.PropTypes.string
+  inputPlaceholder: _react2.default.PropTypes.string,
+  renderTag: _react2.default.PropTypes.func
 };
 TagsInput.defaultProps = {
-  insertKeyCodes: _util.defaultInsertKeyCodes,
-  removeKeyCodes: _util.defaultRemoveKeyCodes,
-  inputPlaceholder: _util.defaultInputPlaceholder
+  insertKeyCodes: _default.defaultInsertKeyCodes,
+  removeKeyCodes: _default.defaultRemoveKeyCodes,
+  inputPlaceholder: _default.defaultInputPlaceholder,
+  renderTag: _default.defaultRenderTag
 };
 
-},{"./Input.jsx":173,"./TagList.jsx":175,"./util":178,"react":172}],177:[function(require,module,exports){
+},{"./Input.jsx":173,"./TagList.jsx":175,"./default.jsx":177,"react":172}],177:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Tag = exports.Input = exports.TagsInput = undefined;
+exports.defaultRenderTag = exports.defaultInputPlaceholder = exports.defaultRemoveKeyCodes = exports.defaultInsertKeyCodes = undefined;
 
-var _TagsInput = require('./TagsInput.jsx');
+var _react = require('react');
 
-var _Input = require('./Input.jsx');
+var _react2 = _interopRequireDefault(_react);
 
-var _Tag = require('./Tag.jsx');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.TagsInput = _TagsInput.TagsInput;
-exports.Input = _Input.Input;
-exports.Tag = _Tag.Tag;
-
-},{"./Input.jsx":173,"./Tag.jsx":174,"./TagsInput.jsx":176}],178:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 var defaultInsertKeyCodes = exports.defaultInsertKeyCodes = {
   13: 'enter',
   9: 'tab',
@@ -21213,4 +21195,55 @@ var defaultRemoveKeyCodes = exports.defaultRemoveKeyCodes = {
 
 var defaultInputPlaceholder = exports.defaultInputPlaceholder = '';
 
-},{}]},{},[1]);
+var TagContainerStyle = {
+  display: 'flex'
+};
+
+var defaultRenderTag = exports.defaultRenderTag = function defaultRenderTag(_ref) {
+  var value = _ref.value;
+  var handleRemove = _ref.handleRemove;
+  return _react2.default.createElement(
+    'div',
+    { style: TagContainerStyle },
+    _react2.default.createElement(
+      'span',
+      null,
+      value
+    ),
+    _react2.default.createElement(
+      'button',
+      {
+        onClick: handleRemove
+      },
+      'X'
+    )
+  );
+};
+
+defaultRenderTag.propTypes = {
+  value: _react2.default.PropTypes.string.isRequired,
+  handleRemove: _react2.default.PropTypes.func.isRequired
+};
+
+},{"react":172}],178:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Tag = exports.TagList = exports.Input = exports.TagsInput = undefined;
+
+var _TagsInput = require('./TagsInput.jsx');
+
+var _Input = require('./Input.jsx');
+
+var _TagList = require('./TagList.jsx');
+
+var _Tag = require('./Tag.jsx');
+
+exports.TagsInput = _TagsInput.TagsInput;
+exports.Input = _Input.Input;
+exports.TagList = _TagList.TagList;
+exports.Tag = _Tag.Tag;
+
+},{"./Input.jsx":173,"./Tag.jsx":174,"./TagList.jsx":175,"./TagsInput.jsx":176}]},{},[1]);

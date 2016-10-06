@@ -6,13 +6,14 @@ const TagListStyle = {
   display: 'flex',
 };
 
-export const TagList = ({ tags, handleRemove }) =>
+export const TagList = ({ tags, handleRemove, renderTag }) =>
   <div style={TagListStyle}>
     {tags.map((tag, index) =>
       <Tag
         key={index}
         value={tag}
         handleRemove={() => handleRemove(tags, index)}
+        renderTag={renderTag}
       />
     )}
   </div>;
@@ -20,4 +21,5 @@ export const TagList = ({ tags, handleRemove }) =>
 TagList.propTypes = {
   tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
   handleRemove: React.PropTypes.func.isRequired,
+  renderTag: React.PropTypes.func.isRequired,
 };

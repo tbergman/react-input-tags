@@ -9,9 +9,11 @@ export class Input extends React.Component {
     placeholder: React.PropTypes.string.isRequired,
   }
 
+  /*
   state = {
     inputWidth: 0,
   }
+  */
 
   componentWillMount() {
     // console.log('will mount');
@@ -22,7 +24,7 @@ export class Input extends React.Component {
     // this.inputNode.style.width = '1px';
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps(nextProps) {
     /*
     const { value } = this.props;
     this.textNode.textContent = value;
@@ -50,9 +52,10 @@ export class Input extends React.Component {
   }
 
   render() {
-    const { inputWidth } = this.state;
+    // const { inputWidth } = this.state;
     const { value, onChange, onBlur, onKeyDown, placeholder } = this.props;
 
+    /*
     const containerStyle = {
     };
     const inputStyle = {
@@ -61,6 +64,7 @@ export class Input extends React.Component {
       // visibility: 'hidden',
       whitespace: 'pre',
     };
+    */
 
     /*
     <div

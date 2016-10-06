@@ -8,7 +8,7 @@ React component for tagging inputs.
 - [X] input placeholder
 - [ ] input autosize while typing
 - [ ] custom styling
-- [ ] custom render of tag
+- [X] custom render of tag
 
 ### Advanced
 - [ ] list of suggestions, click one will insert as tag

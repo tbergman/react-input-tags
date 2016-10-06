@@ -7,7 +7,8 @@ import {
   defaultInsertKeyCodes,
   defaultRemoveKeyCodes,
   defaultInputPlaceholder,
-} from './util';
+  defaultRenderTag,
+} from './default.jsx';
 
 const TagsInputStyle = {
   display: 'flex',
@@ -21,12 +22,14 @@ export class TagsInput extends React.Component {
     insertKeyCodes: React.PropTypes.object,
     removeKeyCodes: React.PropTypes.object,
     inputPlaceholder: React.PropTypes.string,
+    renderTag: React.PropTypes.func,
   };
 
   static defaultProps = {
     insertKeyCodes: defaultInsertKeyCodes,
     removeKeyCodes: defaultRemoveKeyCodes,
     inputPlaceholder: defaultInputPlaceholder,
+    renderTag: defaultRenderTag,
   };
 
   state = {
@@ -64,13 +67,14 @@ export class TagsInput extends React.Component {
   }
 
   render() {
-    const { tags, handleRemove, inputPlaceholder } = this.props;
+    const { tags, handleRemove, inputPlaceholder, renderTag } = this.props;
     const { inputValue } = this.state;
     return (
       <div style={TagsInputStyle}>
         <TagList
           tags={tags}
           handleRemove={handleRemove}
+          renderTag={renderTag}
         />
         <Input
           value={inputValue}
