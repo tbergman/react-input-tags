@@ -1,23 +1,40 @@
 # react-tagging
 React component for tagging inputs.
 
-## Build
+## TODO:
+### Basic
+- [X] insert a tag on keydown (enter, tab, comma) or onblur, clear the input
+- [X] delete a tag on keydown (backspace / delete) or onclick of button
+- [X] input placeholder
+- [ ] input autosize while typing
+- [ ] custom styling
+- [ ] custom render of tag
+
+### Advanced
+- [ ] list of suggestions, click one will insert as tag
+- [ ] custom render of suggestion
+- [ ] reorder tags by dragging
+- [ ] drag tag from one component to another (onDrag?)
+
+## Dev
+### Commands
+#### Build
 ```
 npm run build
 ```
 
-## Test
+#### Test
 ```
 npm test
 ```
 
-### Dev Environment
+### Environment
 - es2015: https://babeljs.io/docs/setup/#installation
 - react: https://facebook.github.io/react/docs/package-management.html
 https://facebook.github.io/react/docs/reusable-components.html#es6-classes
 - enzyme: https://github.com/airbnb/enzyme
 
-### Component Research
+## Component Research
 - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
 - https://facebook.github.io/react/docs/forms.html
 - https://facebook.github.io/react/docs/events.html#keyboard-events
