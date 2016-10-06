@@ -1,20 +1,22 @@
 import React from 'react';
 
-export class Tag extends React.Component {
+const TagStyle = {
+  display: 'flex',
+};
 
-  render() {
-    const { value, handleRemove } = this.props;
-    return (
-      <div>
-        <div>
-          {value}
-        </div>
-        <button
-          onClick={handleRemove}
-        >
-          {'X'}
-        </button>
-      </div>
-    );
-  }
-}
+export const Tag = ({ value, handleRemove }) =>
+  <div style={TagStyle}>
+    <div>
+      {value}
+    </div>
+    <button
+      onClick={handleRemove}
+    >
+      {'X'}
+    </button>
+  </div>;
+
+Tag.propTypes = {
+  value: React.PropTypes.string.isRequired,
+  handleRemove: React.PropTypes.func.isRequired,
+};

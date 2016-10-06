@@ -2,8 +2,12 @@ import React from 'react';
 
 import { Tag } from './Tag.jsx';
 
+const TagListStyle = {
+  display: 'flex',
+};
+
 export const TagList = ({ tags, handleRemove }) =>
-  <div>
+  <div style={TagListStyle}>
     {tags.map((tag, index) =>
       <Tag
         key={index}

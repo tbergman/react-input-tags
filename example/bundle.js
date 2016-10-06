@@ -20970,57 +20970,41 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Tag = undefined;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var TagStyle = {
+  display: 'flex'
+};
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+var Tag = exports.Tag = function Tag(_ref) {
+  var value = _ref.value;
+  var handleRemove = _ref.handleRemove;
+  return _react2.default.createElement(
+    'div',
+    { style: TagStyle },
+    _react2.default.createElement(
+      'div',
+      null,
+      value
+    ),
+    _react2.default.createElement(
+      'button',
+      {
+        onClick: handleRemove
+      },
+      'X'
+    )
+  );
+};
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Tag = exports.Tag = function (_React$Component) {
-  _inherits(Tag, _React$Component);
-
-  function Tag() {
-    _classCallCheck(this, Tag);
-
-    return _possibleConstructorReturn(this, (Tag.__proto__ || Object.getPrototypeOf(Tag)).apply(this, arguments));
-  }
-
-  _createClass(Tag, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props;
-      var value = _props.value;
-      var handleRemove = _props.handleRemove;
-
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'div',
-          null,
-          value
-        ),
-        _react2.default.createElement(
-          'button',
-          {
-            onClick: handleRemove
-          },
-          'X'
-        )
-      );
-    }
-  }]);
-
-  return Tag;
-}(_react2.default.Component);
+Tag.propTypes = {
+  value: _react2.default.PropTypes.string.isRequired,
+  handleRemove: _react2.default.PropTypes.func.isRequired
+};
 
 },{"react":172}],175:[function(require,module,exports){
 'use strict';
@@ -21038,13 +21022,16 @@ var _Tag = require('./Tag.jsx');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var TagListStyle = {
+  display: 'flex'
+};
+
 var TagList = exports.TagList = function TagList(_ref) {
   var tags = _ref.tags;
   var _handleRemove = _ref.handleRemove;
-
   return _react2.default.createElement(
     'div',
-    null,
+    { style: TagListStyle },
     tags.map(function (tag, index) {
       return _react2.default.createElement(_Tag.Tag, {
         key: index,
@@ -21055,6 +21042,11 @@ var TagList = exports.TagList = function TagList(_ref) {
       });
     })
   );
+};
+
+TagList.propTypes = {
+  tags: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.any).isRequired,
+  handleRemove: _react2.default.PropTypes.func.isRequired
 };
 
 },{"./Tag.jsx":174,"react":172}],176:[function(require,module,exports){
@@ -21084,6 +21076,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var TagsInputStyle = {
+  display: 'flex'
+};
 
 var TagsInput = exports.TagsInput = function (_React$Component) {
   _inherits(TagsInput, _React$Component);
@@ -21148,7 +21144,7 @@ var TagsInput = exports.TagsInput = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        null,
+        { style: TagsInputStyle },
         _react2.default.createElement(_TagList.TagList, {
           tags: tags,
           handleRemove: handleRemove

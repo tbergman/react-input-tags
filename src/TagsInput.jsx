@@ -9,6 +9,10 @@ import {
   defaultInputPlaceholder,
 } from './util';
 
+const TagsInputStyle = {
+  display: 'flex',
+};
+
 export class TagsInput extends React.Component {
   static propTypes = {
     tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
@@ -63,7 +67,7 @@ export class TagsInput extends React.Component {
     const { tags, handleRemove, inputPlaceholder } = this.props;
     const { inputValue } = this.state;
     return (
-      <div>
+      <div style={TagsInputStyle}>
         <TagList
           tags={tags}
           handleRemove={handleRemove}
