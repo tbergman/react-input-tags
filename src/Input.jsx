@@ -18,6 +18,10 @@ export class Input extends React.Component {
     // this.inputNode.style.width = '10px';
   }
 
+  componentDidMount() {
+    // this.inputNode.style.width = '1px';
+  }
+
   componentWillReceiveProps() {
     /*
     const { value } = this.props;
@@ -28,12 +32,8 @@ export class Input extends React.Component {
     */
   }
 
-  componentDidMount() {
-    this.inputNode.style.width = '1px';
-  }
-
   componentDidUpdate(prevProps, prevState) {
-    // /*
+    /*
     const { value } = this.props;
     this.textNode.textContent = value;
 
@@ -42,7 +42,7 @@ export class Input extends React.Component {
     console.log(this.inputNode.style.width);
     this.inputNode.style.width = `${widthText}px`;
     console.log(this.inputNode.style.width);
-    // */
+    */
 
     // this.setState({ inputWidth: widthText });
     // can't setState, so directly change the input DOM node
@@ -62,26 +62,29 @@ export class Input extends React.Component {
       whitespace: 'pre',
     };
 
+    /*
+    <div
+      style={containerStyle}
+    >
+    <span
+      ref={(c) => { this.textNode = c; }}
+      style={textStyle}
+    />
+    <hr />
+    </div>
+    */
     return (
-      <div
-        style={containerStyle}
-      >
-        <span
-          ref={(c) => { this.textNode = c; }}
-          style={textStyle}
-        />
-        <hr />
-        <input
-          ref={(c) => { this.inputNode = c; }}
-          // style={inputStyle}
-          type={'text'}
-          value={value}
-          onChange={onChange}
-          onBlur={onBlur}
-          onKeyDown={onKeyDown}
-          // placeholder={placeholder}
-        />
-      </div>
+      <input
+        // ref={(c) => { this.inputNode = c; }}
+        // style={inputStyle}
+        type={'text'}
+        value={value}
+        // input={this.handleInput}
+        onChange={onChange}
+        onBlur={onBlur}
+        onKeyDown={onKeyDown}
+        placeholder={placeholder}
+      />
     );
   }
 }

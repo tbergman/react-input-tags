@@ -1,6 +1,8 @@
 import React from 'react';
+
 import { Input } from './Input.jsx';
-import { Tag } from './Tag.jsx';
+import { TagList } from './TagList.jsx';
+
 import {
   defaultInsertKeyCodes,
   defaultRemoveKeyCodes,
@@ -62,6 +64,10 @@ export class TagsInput extends React.Component {
     const { inputValue } = this.state;
     return (
       <div>
+        <TagList
+          tags={tags}
+          handleRemove={handleRemove}
+        />
         <Input
           value={inputValue}
           onChange={this.handleOnChange}
@@ -69,15 +75,6 @@ export class TagsInput extends React.Component {
           onKeyDown={this.handleOnKeyDown}
           placeholder={inputPlaceholder}
         />
-        <div>
-          {tags.map((tag, index) =>
-            <Tag
-              key={index}
-              value={tag}
-              handleRemove={() => handleRemove(tags, index)}
-            />
-          )}
-        </div>
       </div>
     );
   }

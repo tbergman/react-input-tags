@@ -36,3 +36,6 @@ https://facebook.github.io/react/docs/reusable-components.html#es6-classes
 - https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Determining_the_dimensions_of_elements
 - http://making.fiftythree.com/fluid-text-inputs/
 - http://caniuse.com/#search=textcontent
+
+- http://alistapart.com/article/expanding-text-areas-made-elegant
+- http://ngmodules.org/modules/angular-elastic-input

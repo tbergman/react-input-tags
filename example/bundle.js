@@ -71,7 +71,7 @@ var Example = function (_React$Component) {
 
 _reactDom2.default.render(_react2.default.createElement(Example, null), document.getElementById('react-app'));
 
-},{"../src":176,"react":172,"react-dom":29}],2:[function(require,module,exports){
+},{"../src":177,"react":172,"react-dom":29}],2:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -20876,6 +20876,11 @@ var Input = exports.Input = function (_React$Component) {
       // this.inputNode.style.width = '10px';
     }
   }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      // this.inputNode.style.width = '1px';
+    }
+  }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps() {
       /*
@@ -20886,24 +20891,17 @@ var Input = exports.Input = function (_React$Component) {
       */
     }
   }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.inputNode.style.width = '1px';
-    }
-  }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps, prevState) {
-      // /*
-      var value = this.props.value;
-
+      /*
+      const { value } = this.props;
       this.textNode.textContent = value;
-
-      var widthText = this.textNode.offsetWidth;
+       const widthText = this.textNode.offsetWidth;
       console.log('text offset width', widthText);
       console.log(this.inputNode.style.width);
-      this.inputNode.style.width = widthText + 'px';
+      this.inputNode.style.width = `${widthText}px`;
       console.log(this.inputNode.style.width);
-      // */
+      */
 
       // this.setState({ inputWidth: widthText });
       // can't setState, so directly change the input DOM node
@@ -20912,8 +20910,6 @@ var Input = exports.Input = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var inputWidth = this.state.inputWidth;
       var _props = this.props;
       var value = _props.value;
@@ -20930,31 +20926,28 @@ var Input = exports.Input = function (_React$Component) {
         whitespace: 'pre'
       };
 
-      return _react2.default.createElement(
-        'div',
-        {
-          style: containerStyle
-        },
-        _react2.default.createElement('span', {
-          ref: function ref(c) {
-            _this2.textNode = c;
-          },
-          style: textStyle
-        }),
-        _react2.default.createElement('hr', null),
-        _react2.default.createElement('input', {
-          ref: function ref(c) {
-            _this2.inputNode = c;
-          }
-          // style={inputStyle}
-          , type: 'text',
-          value: value,
-          onChange: onChange,
-          onBlur: onBlur,
-          onKeyDown: onKeyDown
-          // placeholder={placeholder}
-        })
-      );
+      /*
+      <div
+        style={containerStyle}
+      >
+      <span
+        ref={(c) => { this.textNode = c; }}
+        style={textStyle}
+      />
+      <hr />
+      </div>
+      */
+      return _react2.default.createElement('input', {
+        // ref={(c) => { this.inputNode = c; }}
+        // style={inputStyle}
+        type: 'text',
+        value: value
+        // input={this.handleInput}
+        , onChange: onChange,
+        onBlur: onBlur,
+        onKeyDown: onKeyDown,
+        placeholder: placeholder
+      });
     }
   }]);
 
@@ -21035,6 +21028,41 @@ var Tag = exports.Tag = function (_React$Component) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.TagList = undefined;
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Tag = require('./Tag.jsx');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TagList = exports.TagList = function TagList(_ref) {
+  var tags = _ref.tags;
+  var _handleRemove = _ref.handleRemove;
+
+  return _react2.default.createElement(
+    'div',
+    null,
+    tags.map(function (tag, index) {
+      return _react2.default.createElement(_Tag.Tag, {
+        key: index,
+        value: tag,
+        handleRemove: function handleRemove() {
+          return _handleRemove(tags, index);
+        }
+      });
+    })
+  );
+};
+
+},{"./Tag.jsx":174,"react":172}],176:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.TagsInput = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -21045,7 +21073,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _Input = require('./Input.jsx');
 
-var _Tag = require('./Tag.jsx');
+var _TagList = require('./TagList.jsx');
 
 var _util = require('./util');
 
@@ -21114,33 +21142,24 @@ var TagsInput = exports.TagsInput = function (_React$Component) {
     value: function render() {
       var _props = this.props;
       var tags = _props.tags;
-      var _handleRemove = _props.handleRemove;
+      var handleRemove = _props.handleRemove;
       var inputPlaceholder = _props.inputPlaceholder;
       var inputValue = this.state.inputValue;
 
       return _react2.default.createElement(
         'div',
         null,
+        _react2.default.createElement(_TagList.TagList, {
+          tags: tags,
+          handleRemove: handleRemove
+        }),
         _react2.default.createElement(_Input.Input, {
           value: inputValue,
           onChange: this.handleOnChange,
           onBlur: this.handleOnBlur,
           onKeyDown: this.handleOnKeyDown,
           placeholder: inputPlaceholder
-        }),
-        _react2.default.createElement(
-          'div',
-          null,
-          tags.map(function (tag, index) {
-            return _react2.default.createElement(_Tag.Tag, {
-              key: index,
-              value: tag,
-              handleRemove: function handleRemove() {
-                return _handleRemove(tags, index);
-              }
-            });
-          })
-        )
+        })
       );
     }
   }]);
@@ -21162,7 +21181,7 @@ TagsInput.defaultProps = {
   inputPlaceholder: _util.defaultInputPlaceholder
 };
 
-},{"./Input.jsx":173,"./Tag.jsx":174,"./util":177,"react":172}],176:[function(require,module,exports){
+},{"./Input.jsx":173,"./TagList.jsx":175,"./util":178,"react":172}],177:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21180,7 +21199,7 @@ exports.TagsInput = _TagsInput.TagsInput;
 exports.Input = _Input.Input;
 exports.Tag = _Tag.Tag;
 
-},{"./Input.jsx":173,"./Tag.jsx":174,"./TagsInput.jsx":175}],177:[function(require,module,exports){
+},{"./Input.jsx":173,"./Tag.jsx":174,"./TagsInput.jsx":176}],178:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
