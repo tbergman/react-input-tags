@@ -20,6 +20,10 @@ React component for tagging inputs.
 - [ ] drag tag from one component to another (onDrag?)
 - [ ] tests
 
+### Dev
+- continuous integration with tests
+- demo website
+
 ## Dev
 ### Commands
 #### Build
