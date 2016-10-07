@@ -58,3 +58,4 @@ https://facebook.github.io/react/docs/reusable-components.html#es6-classes
 - http://ngmodules.org/modules/angular-elastic-input
 
 - https://developer.mozilla.org/en-US/docs/Learn/CSS/Styling_text/Fundamentals
+- https://developer.mozilla.org/en-US/docs/Web/CSS/white-space

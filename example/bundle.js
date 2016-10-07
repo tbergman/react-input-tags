@@ -20885,6 +20885,8 @@ var Input = exports.Input = function (_React$Component) {
     key: 'updateInputWidth',
     value: function updateInputWidth() {
       var newInputWidth = this.mirrorNode.offsetWidth + 2;
+      console.log('offset width', this.mirrorNode.offsetWidth);
+      console.log('scroll width', this.mirrorNode.scrollWidth);
       this.inputNode.style.width = newInputWidth + 'px';
     }
   }, {
@@ -20902,15 +20904,15 @@ var Input = exports.Input = function (_React$Component) {
 
       var mirrorValue = value || placeholder;
       var mirrorStyle = {
-        // position: 'absolute',
-        /*
-        margin: 0,
-        padding: 0,
-        top: 0,
-        left: 0,
-        */
+        position: 'absolute',
+        whiteSpace: 'pre',
+        visibility: 'hidden',
+        // top: 0,
+        // left: 0,
+        // whiteSpace: 'pre',
+        // overflow: 'scroll',
         // visibility: 'hidden',
-        // whitespace: 'pre',
+        backgroundColor: 'red'
       };
 
       return _react2.default.createElement(
