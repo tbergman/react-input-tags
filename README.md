@@ -6,15 +6,17 @@ React component for tagging inputs.
 - [X] insert a tag on keydown (enter, tab, comma) or onblur, clear the input
 - [X] delete a tag on keydown (backspace / delete) or onclick of button
 - [X] input placeholder
-- [ ] input autosize while typing
-- [ ] custom styling
+- [X] input autosize while typing
+- [X] custom styling
 - [X] custom render of tag
+- [ ] tests
 
 ### Advanced
 - [ ] list of suggestions, click one will insert as tag
 - [ ] custom render of suggestion
 - [ ] reorder tags by dragging
 - [ ] drag tag from one component to another (onDrag?)
+- [ ] tests
 
 ## Dev
 ### Commands

@@ -12,12 +12,12 @@ export const defaultRemoveKeyCodes = {
 
 export const defaultInputPlaceholder = '';
 
-const TagContainerStyle = {
+const defaultTagStyle = {
   display: 'flex',
 };
 
 export const defaultRenderTag = ({ value, handleRemove }) =>
-  <div style={TagContainerStyle}>
+  <div style={defaultTagStyle}>
     <span>
       {value}
     </span>
@@ -31,4 +31,12 @@ export const defaultRenderTag = ({ value, handleRemove }) =>
 defaultRenderTag.propTypes = {
   value: React.PropTypes.string.isRequired,
   handleRemove: React.PropTypes.func.isRequired,
+};
+
+export const defaultTagsInputStyle = {
+  display: 'flex',
+};
+
+export const defaultTagListStyle = {
+  display: 'flex',
 };

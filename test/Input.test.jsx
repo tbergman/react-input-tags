@@ -7,6 +7,14 @@ import { Input } from '../src';
 import { noop } from './util';
 
 describe('<Input />', () => {
+  describe('componentDidMount()', () => {
+    // TODO
+  });
+
+  describe('componentDidUpdate()', () => {
+    // TODO
+  });
+
   describe('onChange()', () => {
     const newInputValue = 'a';
     let onChangeWrapper;

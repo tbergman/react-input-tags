@@ -36,9 +36,9 @@ export class Input extends React.Component {
 
   updateInputWidth() {
     const newInputWidth = this.mirrorNode.offsetWidth + 2;
-    console.log('offset width', this.mirrorNode.offsetWidth);
-    console.log('scroll width', this.mirrorNode.scrollWidth);
     this.inputNode.style.width = `${newInputWidth}px`;
+    // console.log('offset width', this.mirrorNode.offsetWidth);
+    // console.log('scroll width', this.mirrorNode.scrollWidth);
   }
 
   render() {
