@@ -20860,55 +20860,38 @@ var Input = exports.Input = function (_React$Component) {
   }
 
   _createClass(Input, [{
-    key: 'componentWillMount',
-
-
-    /*
-    state = {
-      inputWidth: 0,
-    }
-    */
-
-    value: function componentWillMount() {
-      // console.log('will mount');
-      // this.inputNode.style.width = '10px';
-    }
-  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      // this.inputNode.style.width = '1px';
-    }
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      /*
-      const { value } = this.props;
-      this.textNode.textContent = value;
-       const widthText = this.textNode.offsetWidth;
-      console.log('text offset width', widthText);
-      */
+      this.mirrorInputStyle();
+      this.updateInputWidth();
     }
   }, {
     key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps, prevState) {
-      /*
-      const { value } = this.props;
-      this.textNode.textContent = value;
-       const widthText = this.textNode.offsetWidth;
-      console.log('text offset width', widthText);
-      console.log(this.inputNode.style.width);
-      this.inputNode.style.width = `${widthText}px`;
-      console.log(this.inputNode.style.width);
-      */
+    value: function componentDidUpdate() {
+      this.updateInputWidth();
+    }
+  }, {
+    key: 'mirrorInputStyle',
+    value: function mirrorInputStyle() {
+      var _this2 = this;
 
-      // this.setState({ inputWidth: widthText });
-      // can't setState, so directly change the input DOM node
-      // this.inputNode.style.width = `#${widthText}px`;
+      var inputStyle = window.getComputedStyle(this.inputNode);
+      var mirrorStyles = ['fontFamily', 'fontSize', 'fontStyle', 'fontWeight', 'lineHeight', 'letterSpacing', 'wordSpacing'];
+      mirrorStyles.forEach(function (mStyle) {
+        _this2.mirrorNode.style[mStyle] = inputStyle[mStyle];
+      });
+    }
+  }, {
+    key: 'updateInputWidth',
+    value: function updateInputWidth() {
+      var newInputWidth = this.mirrorNode.offsetWidth + 2;
+      this.inputNode.style.width = newInputWidth + 'px';
     }
   }, {
     key: 'render',
     value: function render() {
-      // const { inputWidth } = this.state;
+      var _this3 = this;
+
       var _props = this.props;
       var value = _props.value;
       var onChange = _props.onChange;
@@ -20916,40 +20899,45 @@ var Input = exports.Input = function (_React$Component) {
       var onKeyDown = _props.onKeyDown;
       var placeholder = _props.placeholder;
 
-      /*
-      const containerStyle = {
-      };
-      const inputStyle = {
-      };
-      const textStyle = {
+
+      var mirrorValue = value || placeholder;
+      var mirrorStyle = {
+        // position: 'absolute',
+        /*
+        margin: 0,
+        padding: 0,
+        top: 0,
+        left: 0,
+        */
         // visibility: 'hidden',
-        whitespace: 'pre',
+        // whitespace: 'pre',
       };
-      */
 
-      /*
-      <div
-        style={containerStyle}
-      >
-      <span
-        ref={(c) => { this.textNode = c; }}
-        style={textStyle}
-      />
-      <hr />
-      </div>
-      */
-
-      return _react2.default.createElement('input', {
-        // ref={(c) => { this.inputNode = c; }}
-        // style={inputStyle}
-        type: 'text',
-        value: value
-        // input={this.handleInput}
-        , onChange: onChange,
-        onBlur: onBlur,
-        onKeyDown: onKeyDown,
-        placeholder: placeholder
-      });
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'span',
+          {
+            ref: function ref(c) {
+              _this3.mirrorNode = c;
+            },
+            style: mirrorStyle
+          },
+          mirrorValue
+        ),
+        _react2.default.createElement('input', {
+          ref: function ref(c) {
+            _this3.inputNode = c;
+          },
+          type: 'text',
+          value: value,
+          onChange: onChange,
+          onBlur: onBlur,
+          onKeyDown: onKeyDown,
+          placeholder: placeholder
+        })
+      );
     }
   }]);
 
