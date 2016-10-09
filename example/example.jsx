@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { TagsInput } from '../src';
+import { InputTags } from '../src';
 
 class Example extends React.Component {
   state = {
@@ -26,7 +26,7 @@ class Example extends React.Component {
 
   render() {
     return (
-      <TagsInput
+      <InputTags
         tags={this.state.tags}
         handleInsert={this.handleInsert}
         handleRemove={this.handleRemove}

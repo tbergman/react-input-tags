@@ -3,16 +3,16 @@ import { mount } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { TagsInput } from '../src';
+import { InputTags } from '../src';
 import { noop } from './util';
 
-describe('<TagsInput />', () => {
+describe('<InputTags />', () => {
   describe('<Input />', () => {
     let inputWrapper;
 
     before(() => {
       inputWrapper = mount(
-        <TagsInput
+        <InputTags
           tags={[]}
           handleInsert={noop}
           handleRemove={noop}
@@ -30,7 +30,7 @@ describe('<TagsInput />', () => {
 
       before(() => {
         onChangeWrapper = mount(
-          <TagsInput
+          <InputTags
             tags={[]}
             handleInsert={noop}
             handleRemove={noop}
@@ -58,7 +58,7 @@ describe('<TagsInput />', () => {
           onBlurHandleInsert = sinon.stub();
           onBlurHandleRemove = sinon.stub();
           onBlurWrapper = mount(
-            <TagsInput
+            <InputTags
               tags={onBlurTags}
               handleInsert={onBlurHandleInsert}
               handleRemove={onBlurHandleRemove}
@@ -90,7 +90,7 @@ describe('<TagsInput />', () => {
           onBlurHandleInsert = sinon.stub();
           onBlurHandleRemove = sinon.stub();
           onBlurWrapper = mount(
-            <TagsInput
+            <InputTags
               tags={onBlurTags}
               handleInsert={onBlurHandleInsert}
               handleRemove={onBlurHandleRemove}
@@ -127,7 +127,7 @@ describe('<TagsInput />', () => {
             onKeyDownHandleInsert = sinon.stub();
             onKeyDownHandleRemove = sinon.stub();
             onKeyDownWrapper = mount(
-              <TagsInput
+              <InputTags
                 tags={onKeyDownTags}
                 handleInsert={onKeyDownHandleInsert}
                 handleRemove={onKeyDownHandleRemove}
@@ -160,7 +160,7 @@ describe('<TagsInput />', () => {
             onKeyDownHandleInsert = sinon.stub();
             onKeyDownHandleRemove = sinon.stub();
             onKeyDownWrapper = mount(
-              <TagsInput
+              <InputTags
                 tags={onKeyDownTags}
                 handleInsert={onKeyDownHandleInsert}
                 handleRemove={onKeyDownHandleRemove}
@@ -198,7 +198,7 @@ describe('<TagsInput />', () => {
               onKeyDownHandleInsert = sinon.stub();
               onKeyDownHandleRemove = sinon.stub();
               onKeyDownWrapper = mount(
-                <TagsInput
+                <InputTags
                   tags={onKeyDownTags}
                   handleInsert={onKeyDownHandleInsert}
                   handleRemove={onKeyDownHandleRemove}
@@ -226,7 +226,7 @@ describe('<TagsInput />', () => {
               onKeyDownHandleInsert = sinon.stub();
               onKeyDownHandleRemove = sinon.stub();
               onKeyDownWrapper = mount(
-                <TagsInput
+                <InputTags
                   tags={onKeyDownTags}
                   handleInsert={onKeyDownHandleInsert}
                   handleRemove={onKeyDownHandleRemove}
@@ -255,7 +255,7 @@ describe('<TagsInput />', () => {
             onKeyDownHandleInsert = sinon.stub();
             onKeyDownHandleRemove = sinon.stub();
             onKeyDownWrapper = mount(
-              <TagsInput
+              <InputTags
                 tags={onKeyDownTags}
                 handleInsert={onKeyDownHandleInsert}
                 handleRemove={onKeyDownHandleRemove}
@@ -284,7 +284,7 @@ describe('<TagsInput />', () => {
           onKeyDownHandleInsert = sinon.stub();
           onKeyDownHandleRemove = sinon.stub();
           onKeyDownWrapper = mount(
-            <TagsInput
+            <InputTags
               tags={onKeyDownTags}
               handleInsert={onKeyDownHandleInsert}
               handleRemove={onKeyDownHandleRemove}

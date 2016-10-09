@@ -57,7 +57,7 @@ var Example = function (_React$Component) {
   _createClass(Example, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(_src.TagsInput, {
+      return _react2.default.createElement(_src.InputTags, {
         tags: this.state.tags,
         handleInsert: this.handleInsert,
         handleRemove: this.handleRemove,
@@ -20954,6 +20954,141 @@ Input.propTypes = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.InputTags = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Input = require('./Input.jsx');
+
+var _TagList = require('./TagList.jsx');
+
+var _default = require('./default.jsx');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var InputTags = exports.InputTags = function (_React$Component) {
+  _inherits(InputTags, _React$Component);
+
+  function InputTags() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, InputTags);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = InputTags.__proto__ || Object.getPrototypeOf(InputTags)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      inputValue: ''
+    }, _this.handleOnChange = function (event) {
+      var inputValue = event.target.value;
+      _this.setState({ inputValue: inputValue });
+    }, _this.handleOnBlur = function () {
+      var inputValue = _this.state.inputValue;
+      var _this$props = _this.props;
+      var tags = _this$props.tags;
+      var handleInsert = _this$props.handleInsert;
+
+
+      if (inputValue.length > 0) {
+        _this.setState({ inputValue: '' });
+        handleInsert(tags, inputValue);
+      }
+    }, _this.handleOnKeyDown = function (event) {
+      var keyCode = event.keyCode;
+      var inputValue = _this.state.inputValue;
+      var _this$props2 = _this.props;
+      var tags = _this$props2.tags;
+      var handleInsert = _this$props2.handleInsert;
+      var handleRemove = _this$props2.handleRemove;
+      var insertKeyCodes = _this$props2.insertKeyCodes;
+      var removeKeyCodes = _this$props2.removeKeyCodes;
+
+
+      if (insertKeyCodes.hasOwnProperty(keyCode) && inputValue.length > 0) {
+        _this.setState({ inputValue: '' });
+        handleInsert(tags, inputValue);
+      }
+
+      if (removeKeyCodes.hasOwnProperty(keyCode) && inputValue.length === 0 && tags.length > 0) {
+        handleRemove(tags, tags.length - 1);
+      }
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(InputTags, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props;
+      var tags = _props.tags;
+      var handleRemove = _props.handleRemove;
+      var inputPlaceholder = _props.inputPlaceholder;
+      var renderTag = _props.renderTag;
+      var InputTagsStyle = _props.InputTagsStyle;
+      var tagListStyle = _props.tagListStyle;
+      var inputValue = this.state.inputValue;
+
+      return _react2.default.createElement(
+        'div',
+        { style: InputTagsStyle },
+        _react2.default.createElement(_TagList.TagList, {
+          tags: tags,
+          handleRemove: handleRemove,
+          renderTag: renderTag,
+          tagListStyle: tagListStyle
+        }),
+        _react2.default.createElement(_Input.Input, {
+          value: inputValue,
+          onChange: this.handleOnChange,
+          onBlur: this.handleOnBlur,
+          onKeyDown: this.handleOnKeyDown,
+          placeholder: inputPlaceholder
+        })
+      );
+    }
+  }]);
+
+  return InputTags;
+}(_react2.default.Component);
+
+InputTags.propTypes = {
+  tags: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.any).isRequired,
+  handleInsert: _react2.default.PropTypes.func.isRequired,
+  handleRemove: _react2.default.PropTypes.func.isRequired,
+  insertKeyCodes: _react2.default.PropTypes.object,
+  removeKeyCodes: _react2.default.PropTypes.object,
+  inputPlaceholder: _react2.default.PropTypes.string,
+  renderTag: _react2.default.PropTypes.func,
+  InputTagsStyle: _react2.default.PropTypes.object,
+  tagListStyle: _react2.default.PropTypes.object
+};
+InputTags.defaultProps = {
+  insertKeyCodes: _default.defaultInsertKeyCodes,
+  removeKeyCodes: _default.defaultRemoveKeyCodes,
+  inputPlaceholder: _default.defaultInputPlaceholder,
+  renderTag: _default.defaultRenderTag,
+  InputTagsStyle: _default.defaultInputTagsStyle,
+  tagListStyle: _default.defaultTagListStyle
+};
+
+},{"./Input.jsx":173,"./TagList.jsx":176,"./default.jsx":177,"react":172}],175:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.Tag = undefined;
 
 var _react = require('react');
@@ -20975,7 +21110,7 @@ Tag.propTypes = {
   renderTag: _react2.default.PropTypes.func.isRequired
 };
 
-},{"react":172}],175:[function(require,module,exports){
+},{"react":172}],176:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21019,148 +21154,13 @@ TagList.propTypes = {
   tagListStyle: _react2.default.PropTypes.object.isRequired
 };
 
-},{"./Tag.jsx":174,"react":172}],176:[function(require,module,exports){
+},{"./Tag.jsx":175,"react":172}],177:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TagsInput = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Input = require('./Input.jsx');
-
-var _TagList = require('./TagList.jsx');
-
-var _default = require('./default.jsx');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var TagsInput = exports.TagsInput = function (_React$Component) {
-  _inherits(TagsInput, _React$Component);
-
-  function TagsInput() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
-    _classCallCheck(this, TagsInput);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = TagsInput.__proto__ || Object.getPrototypeOf(TagsInput)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      inputValue: ''
-    }, _this.handleOnChange = function (event) {
-      var inputValue = event.target.value;
-      _this.setState({ inputValue: inputValue });
-    }, _this.handleOnBlur = function () {
-      var inputValue = _this.state.inputValue;
-      var _this$props = _this.props;
-      var tags = _this$props.tags;
-      var handleInsert = _this$props.handleInsert;
-
-
-      if (inputValue.length > 0) {
-        _this.setState({ inputValue: '' });
-        handleInsert(tags, inputValue);
-      }
-    }, _this.handleOnKeyDown = function (event) {
-      var keyCode = event.keyCode;
-      var inputValue = _this.state.inputValue;
-      var _this$props2 = _this.props;
-      var tags = _this$props2.tags;
-      var handleInsert = _this$props2.handleInsert;
-      var handleRemove = _this$props2.handleRemove;
-      var insertKeyCodes = _this$props2.insertKeyCodes;
-      var removeKeyCodes = _this$props2.removeKeyCodes;
-
-
-      if (insertKeyCodes.hasOwnProperty(keyCode) && inputValue.length > 0) {
-        _this.setState({ inputValue: '' });
-        handleInsert(tags, inputValue);
-      }
-
-      if (removeKeyCodes.hasOwnProperty(keyCode) && inputValue.length === 0 && tags.length > 0) {
-        handleRemove(tags, tags.length - 1);
-      }
-    }, _temp), _possibleConstructorReturn(_this, _ret);
-  }
-
-  _createClass(TagsInput, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props;
-      var tags = _props.tags;
-      var handleRemove = _props.handleRemove;
-      var inputPlaceholder = _props.inputPlaceholder;
-      var renderTag = _props.renderTag;
-      var tagsInputStyle = _props.tagsInputStyle;
-      var tagListStyle = _props.tagListStyle;
-      var inputValue = this.state.inputValue;
-
-      return _react2.default.createElement(
-        'div',
-        { style: tagsInputStyle },
-        _react2.default.createElement(_TagList.TagList, {
-          tags: tags,
-          handleRemove: handleRemove,
-          renderTag: renderTag,
-          tagListStyle: tagListStyle
-        }),
-        _react2.default.createElement(_Input.Input, {
-          value: inputValue,
-          onChange: this.handleOnChange,
-          onBlur: this.handleOnBlur,
-          onKeyDown: this.handleOnKeyDown,
-          placeholder: inputPlaceholder
-        })
-      );
-    }
-  }]);
-
-  return TagsInput;
-}(_react2.default.Component);
-
-TagsInput.propTypes = {
-  tags: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.any).isRequired,
-  handleInsert: _react2.default.PropTypes.func.isRequired,
-  handleRemove: _react2.default.PropTypes.func.isRequired,
-  insertKeyCodes: _react2.default.PropTypes.object,
-  removeKeyCodes: _react2.default.PropTypes.object,
-  inputPlaceholder: _react2.default.PropTypes.string,
-  renderTag: _react2.default.PropTypes.func,
-  tagsInputStyle: _react2.default.PropTypes.object,
-  tagListStyle: _react2.default.PropTypes.object
-};
-TagsInput.defaultProps = {
-  insertKeyCodes: _default.defaultInsertKeyCodes,
-  removeKeyCodes: _default.defaultRemoveKeyCodes,
-  inputPlaceholder: _default.defaultInputPlaceholder,
-  renderTag: _default.defaultRenderTag,
-  tagsInputStyle: _default.defaultTagsInputStyle,
-  tagListStyle: _default.defaultTagListStyle
-};
-
-},{"./Input.jsx":173,"./TagList.jsx":175,"./default.jsx":177,"react":172}],177:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.defaultTagListStyle = exports.defaultTagsInputStyle = exports.defaultRenderTag = exports.defaultInputPlaceholder = exports.defaultRemoveKeyCodes = exports.defaultInsertKeyCodes = undefined;
+exports.defaultTagListStyle = exports.defaultInputTagsStyle = exports.defaultRenderTag = exports.defaultInputPlaceholder = exports.defaultRemoveKeyCodes = exports.defaultInsertKeyCodes = undefined;
 
 var _react = require('react');
 
@@ -21210,7 +21210,7 @@ defaultRenderTag.propTypes = {
   handleRemove: _react2.default.PropTypes.func.isRequired
 };
 
-var defaultTagsInputStyle = exports.defaultTagsInputStyle = {
+var defaultInputTagsStyle = exports.defaultInputTagsStyle = {
   display: 'flex'
 };
 
@@ -21224,9 +21224,9 @@ var defaultTagListStyle = exports.defaultTagListStyle = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Tag = exports.TagList = exports.Input = exports.TagsInput = undefined;
+exports.Tag = exports.TagList = exports.Input = exports.InputTags = undefined;
 
-var _TagsInput = require('./TagsInput.jsx');
+var _InputTags = require('./InputTags.jsx');
 
 var _Input = require('./Input.jsx');
 
@@ -21234,9 +21234,9 @@ var _TagList = require('./TagList.jsx');
 
 var _Tag = require('./Tag.jsx');
 
-exports.TagsInput = _TagsInput.TagsInput;
+exports.InputTags = _InputTags.InputTags;
 exports.Input = _Input.Input;
 exports.TagList = _TagList.TagList;
 exports.Tag = _Tag.Tag;
 
-},{"./Input.jsx":173,"./Tag.jsx":174,"./TagList.jsx":175,"./TagsInput.jsx":176}]},{},[1]);
+},{"./Input.jsx":173,"./InputTags.jsx":174,"./Tag.jsx":175,"./TagList.jsx":176}]},{},[1]);

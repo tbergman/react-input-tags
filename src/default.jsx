@@ -33,7 +33,7 @@ defaultRenderTag.propTypes = {
   handleRemove: React.PropTypes.func.isRequired,
 };
 
-export const defaultTagsInputStyle = {
+export const defaultInputTagsStyle = {
   display: 'flex',
 };
 

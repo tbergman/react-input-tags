@@ -8,11 +8,11 @@ import {
   defaultRemoveKeyCodes,
   defaultInputPlaceholder,
   defaultRenderTag,
-  defaultTagsInputStyle,
+  defaultInputTagsStyle,
   defaultTagListStyle,
 } from './default.jsx';
 
-export class TagsInput extends React.Component {
+export class InputTags extends React.Component {
   static propTypes = {
     tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleInsert: React.PropTypes.func.isRequired,
@@ -21,7 +21,7 @@ export class TagsInput extends React.Component {
     removeKeyCodes: React.PropTypes.object,
     inputPlaceholder: React.PropTypes.string,
     renderTag: React.PropTypes.func,
-    tagsInputStyle: React.PropTypes.object,
+    InputTagsStyle: React.PropTypes.object,
     tagListStyle: React.PropTypes.object,
   };
 
@@ -30,7 +30,7 @@ export class TagsInput extends React.Component {
     removeKeyCodes: defaultRemoveKeyCodes,
     inputPlaceholder: defaultInputPlaceholder,
     renderTag: defaultRenderTag,
-    tagsInputStyle: defaultTagsInputStyle,
+    InputTagsStyle: defaultInputTagsStyle,
     tagListStyle: defaultTagListStyle,
   };
 
@@ -74,12 +74,12 @@ export class TagsInput extends React.Component {
       handleRemove,
       inputPlaceholder,
       renderTag,
-      tagsInputStyle,
+      InputTagsStyle,
       tagListStyle,
     } = this.props;
     const { inputValue } = this.state;
     return (
-      <div style={tagsInputStyle}>
+      <div style={InputTagsStyle}>
         <TagList
           tags={tags}
           handleRemove={handleRemove}
