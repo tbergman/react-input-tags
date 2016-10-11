@@ -22,4 +22,5 @@ React component for tagging inputs.
 
 ### Dev
 - [ ] continuous integration with tests
+- [ ] reduce the number of dependencies now that building to es5 anyway
 - [ ] demo website
