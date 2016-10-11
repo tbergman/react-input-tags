@@ -2,7 +2,7 @@
   "name": "react-input-tags",
   "version": "1.0.1",
   "description": "React component for inputting tags",
-  "main": "dist/react-input-tags.js",
+  "main": "./dist/react-input-tags.js",
   "scripts": {
     "example": "browserify -t babelify example/example.jsx -o example/bundle.js",
     "build": "browserify -t babelify src/index.js -o dist/react-input-tags.js",
