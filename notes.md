@@ -10,6 +10,14 @@ npm run build
 npm test
 ```
 
+### Publishing
+```
+npm version patch / minor / major
+```
+```
+npm publish
+```
+
 ### Environment
 - es2015: https://babeljs.io/docs/setup/#installation
 - react: https://facebook.github.io/react/docs/package-management.html
