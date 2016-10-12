@@ -3,16 +3,19 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { Input } from '../src';
+import { Input } from '../src/Input.jsx';
 import { noop } from './util';
 
 describe('<Input />', () => {
   describe('componentDidMount()', () => {
     // TODO
+    // test that styles are copied to mirrored element
+    // and that width is updated
   });
 
   describe('componentDidUpdate()', () => {
     // TODO
+    // test that when the component updates, the width is updated
   });
 
   describe('onChange()', () => {

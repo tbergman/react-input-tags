@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { Tag } from '../src';
+import { Tag } from '../src/Tag.jsx';
 import { defaultRenderTag } from '../src/default.jsx';
 
 describe('<Tag />', () => {

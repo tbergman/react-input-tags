@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { InputTags } from '../src';
+import { InputTags } from '../src/InputTags.jsx';
 import { noop } from './util';
 
 describe('<InputTags />', () => {

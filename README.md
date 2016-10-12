@@ -18,6 +18,7 @@ React component for tagging inputs.
 - [ ] edit tag by clicking
 - [ ] reorder tags by dragging
 - [ ] drag tag from one component to another (onDrag?)
+- [ ] inline styling vs classNames?
 - [ ] tests
 
 ### Dev

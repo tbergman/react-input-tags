@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { InputTags } from '../src';
+import { InputTags } from '../src/InputTags.jsx';
 
 class Example extends React.Component {
   state = {
