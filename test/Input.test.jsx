@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
@@ -8,14 +8,31 @@ import { noop } from './util';
 
 describe('<Input />', () => {
   describe('componentDidMount()', () => {
-    // TODO
-    // test that styles are copied to mirrored element
-    // and that width is updated
+    let componentDidMountWrapper;
+
+    beforeEach(() => {
+      componentDidMountWrapper = mount(
+        <Input
+          value={''}
+          onChange={noop}
+          onBlur={noop}
+          onKeyDown={noop}
+          placeholder={''}
+        />
+      );
+    });
+
+    // TODO: test that style attributes copied to mirrorNode
+    // TODO: test that width is updated
+    it('should copy the styling to the mirror element', () => {
+      // console.log(componentDidMountWrapper.ref('inputNode'));
+      // console.log(componentDidMountWrapper.ref('inputNode').render());
+      // console.log(componentDidMountWrapper.ref('mirrorNode').render().css('width'));
+    });
   });
 
   describe('componentDidUpdate()', () => {
-    // TODO
-    // test that when the component updates, the width is updated
+    // TODO: test that when the component updates, the width is updated
   });
 
   describe('onChange()', () => {

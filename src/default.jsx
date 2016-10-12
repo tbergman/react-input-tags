@@ -40,3 +40,5 @@ export const defaultInputTagsStyle = {
 export const defaultTagListStyle = {
   display: 'flex',
 };
+
+export const defaultClassName = '';

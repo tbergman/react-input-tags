@@ -7,6 +7,8 @@ import { InputTags } from '../src/InputTags.jsx';
 import { noop } from './util';
 
 describe('<InputTags />', () => {
+  // TODO: test that classname appears
+  // TODO: test that style appears
   describe('<Input />', () => {
     let inputWrapper;
 

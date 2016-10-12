@@ -10,6 +10,7 @@ React component for tagging inputs.
   - [ ] is mirrored node always on one line? scrolling? changing browser width?
 - [X] custom styling
 - [X] custom render of tag
+- [ ] allow classname prop
 - [ ] tests
 
 ### Advanced

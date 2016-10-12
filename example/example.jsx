@@ -31,6 +31,7 @@ class Example extends React.Component {
         handleInsert={this.handleInsert}
         handleRemove={this.handleRemove}
         inputPlaceholder={'add tag'}
+        // className={'inputtags'}
       />
     );
   }
