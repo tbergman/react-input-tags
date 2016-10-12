@@ -1,6 +1,6 @@
 {
   "name": "react-input-tags",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "React component for inputting tags",
   "main": "src/index.js",
   "scripts": {
