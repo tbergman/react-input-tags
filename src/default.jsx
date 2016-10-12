@@ -1,5 +1,6 @@
 import React from 'react';
 
+/* InputTags */
 export const defaultInsertKeyCodes = {
   13: 'enter',
   9: 'tab',
@@ -10,35 +11,33 @@ export const defaultRemoveKeyCodes = {
   8: 'backspace / delete',
 };
 
+export const defaultInputTagsClassName = 'react-input-tags';
+
+/* Input */
 export const defaultInputPlaceholder = '';
 
-const defaultTagStyle = {
-  display: 'flex',
-};
+/* TagList */
+export const defaultTagListClassName = 'react-input-tags-taglist';
+
+/* Tag */
+export const defaultTagClassName = 'react-input-tags-tag';
 
 export const defaultRenderTag = ({ value, handleRemove }) =>
-  <div style={defaultTagStyle}>
+  <span
+    className={defaultTagClassName}
+  >
     <span>
       {value}
     </span>
     <button
+      type={'button'}
       onClick={handleRemove}
     >
-      {'X'}
+      {'x'}
     </button>
-  </div>;
+  </span>;
 
 defaultRenderTag.propTypes = {
   value: React.PropTypes.string.isRequired,
   handleRemove: React.PropTypes.func.isRequired,
 };
-
-export const defaultInputTagsStyle = {
-  display: 'flex',
-};
-
-export const defaultTagListStyle = {
-  display: 'flex',
-};
-
-export const defaultClassName = '';

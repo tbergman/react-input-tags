@@ -7,10 +7,10 @@ React component for tagging inputs.
 - [X] delete a tag on keydown (backspace / delete) or onclick of button
 - [X] input placeholder
 - [X] input autosize while typing
+  - [ ] tags should stay within container, instead of going over
   - [ ] is mirrored node always on one line? scrolling? changing browser width?
-- [X] custom styling
-- [X] custom render of tag
-- [ ] allow classname prop
+  - [ ] tags should be the same font-size / styling as input when typed
+- [ ] on tab, set focus back to input
 - [ ] tests
 
 ### Advanced
@@ -24,5 +24,4 @@ React component for tagging inputs.
 
 ### Dev
 - [ ] continuous integration with tests
-- [ ] reduce the number of dependencies now that building to es5 anyway
 - [ ] demo website

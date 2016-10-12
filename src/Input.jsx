@@ -30,6 +30,7 @@ export class Input extends React.Component {
       'wordSpacing',
     ];
     mirrorStyles.forEach((mStyle) => {
+      console.log(mStyle, inputStyle[mStyle]);
       this.mirrorNode.style[mStyle] = inputStyle[mStyle];
     });
   }
@@ -37,8 +38,6 @@ export class Input extends React.Component {
   updateInputWidth() {
     const newInputWidth = this.mirrorNode.offsetWidth + 2;
     this.inputNode.style.width = `${newInputWidth}px`;
-    // console.log('offset width', this.mirrorNode.offsetWidth);
-    // console.log('scroll width', this.mirrorNode.scrollWidth);
   }
 
   render() {
@@ -48,12 +47,12 @@ export class Input extends React.Component {
     const mirrorStyle = {
       position: 'absolute',
       whiteSpace: 'pre',
+      overflow: 'scroll',
       visibility: 'hidden',
-      // overflow: 'scroll',
     };
 
     return (
-      <div>
+      <span>
         <span
           ref={(c) => { this.mirrorNode = c; }}
           style={mirrorStyle}
@@ -69,7 +68,7 @@ export class Input extends React.Component {
           onKeyDown={onKeyDown}
           placeholder={placeholder}
         />
-      </div>
+      </span>
     );
   }
 }

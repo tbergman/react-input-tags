@@ -45,25 +45,24 @@ var Example = function (_React$Component) {
     }, _this.handleRemove = function (currentTags, removeTagIndex) {
       var newTags = [].concat(_toConsumableArray(currentTags.slice(0, removeTagIndex)), _toConsumableArray(currentTags.slice(removeTagIndex + 1)));
       _this.setState({ tags: newTags });
-    }, _this.renderTag = function (tag) {
-      return _react2.default.createElement(
-        'div',
-        null,
-        tag
-      );
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Example, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(_InputTags.InputTags, {
-        tags: this.state.tags,
-        handleInsert: this.handleInsert,
-        handleRemove: this.handleRemove,
-        inputPlaceholder: 'add tag'
-        // className={'inputtags'}
-      });
+      return _react2.default.createElement(
+        'div',
+        {
+          className: 'container'
+        },
+        _react2.default.createElement(_InputTags.InputTags, {
+          tags: this.state.tags,
+          handleInsert: this.handleInsert,
+          handleRemove: this.handleRemove,
+          inputPlaceholder: 'add tag'
+        })
+      );
     }
   }]);
 
@@ -20879,6 +20878,7 @@ var Input = exports.Input = function (_React$Component) {
       var inputStyle = window.getComputedStyle(this.inputNode);
       var mirrorStyles = ['fontFamily', 'fontSize', 'fontStyle', 'fontWeight', 'lineHeight', 'letterSpacing', 'wordSpacing'];
       mirrorStyles.forEach(function (mStyle) {
+        console.log(mStyle, inputStyle[mStyle]);
         _this2.mirrorNode.style[mStyle] = inputStyle[mStyle];
       });
     }
@@ -20887,8 +20887,6 @@ var Input = exports.Input = function (_React$Component) {
     value: function updateInputWidth() {
       var newInputWidth = this.mirrorNode.offsetWidth + 2;
       this.inputNode.style.width = newInputWidth + 'px';
-      // console.log('offset width', this.mirrorNode.offsetWidth);
-      // console.log('scroll width', this.mirrorNode.scrollWidth);
     }
   }, {
     key: 'render',
@@ -20907,11 +20905,12 @@ var Input = exports.Input = function (_React$Component) {
       var mirrorStyle = {
         position: 'absolute',
         whiteSpace: 'pre',
+        overflow: 'scroll',
         visibility: 'hidden'
       };
 
       return _react2.default.createElement(
-        'div',
+        'span',
         null,
         _react2.default.createElement(
           'span',
@@ -21035,24 +21034,22 @@ var InputTags = exports.InputTags = function (_React$Component) {
       var _props = this.props;
       var tags = _props.tags;
       var handleRemove = _props.handleRemove;
-      var inputPlaceholder = _props.inputPlaceholder;
       var renderTag = _props.renderTag;
-      var inputTagsStyle = _props.inputTagsStyle;
-      var tagListStyle = _props.tagListStyle;
+      var inputPlaceholder = _props.inputPlaceholder;
       var className = _props.className;
+      var tagListClassName = _props.tagListClassName;
       var inputValue = this.state.inputValue;
 
       return _react2.default.createElement(
         'div',
         {
-          className: className,
-          style: inputTagsStyle
+          className: className
         },
         _react2.default.createElement(_TagList.TagList, {
           tags: tags,
           handleRemove: handleRemove,
           renderTag: renderTag,
-          tagListStyle: tagListStyle
+          className: tagListClassName
         }),
         _react2.default.createElement(_Input.Input, {
           value: inputValue,
@@ -21074,20 +21071,18 @@ InputTags.propTypes = {
   handleRemove: _react2.default.PropTypes.func.isRequired,
   insertKeyCodes: _react2.default.PropTypes.object,
   removeKeyCodes: _react2.default.PropTypes.object,
-  inputPlaceholder: _react2.default.PropTypes.string,
   renderTag: _react2.default.PropTypes.func,
-  inputTagsStyle: _react2.default.PropTypes.object,
-  tagListStyle: _react2.default.PropTypes.object,
-  className: _react2.default.PropTypes.string
+  inputPlaceholder: _react2.default.PropTypes.string,
+  className: _react2.default.PropTypes.string,
+  tagListClassName: _react2.default.PropTypes.string
 };
 InputTags.defaultProps = {
   insertKeyCodes: _default.defaultInsertKeyCodes,
   removeKeyCodes: _default.defaultRemoveKeyCodes,
-  inputPlaceholder: _default.defaultInputPlaceholder,
   renderTag: _default.defaultRenderTag,
-  inputTagsStyle: _default.defaultInputTagsStyle,
-  tagListStyle: _default.defaultTagListStyle,
-  className: _default.defaultClassName
+  inputPlaceholder: _default.defaultInputPlaceholder,
+  className: _default.defaultInputTagsClassName,
+  tagListClassName: _default.defaultTagListClassName
 };
 
 },{"./Input.jsx":173,"./TagList.jsx":176,"./default.jsx":177,"react":172}],175:[function(require,module,exports){
@@ -21137,10 +21132,12 @@ var TagList = exports.TagList = function TagList(_ref) {
   var tags = _ref.tags;
   var _handleRemove = _ref.handleRemove;
   var renderTag = _ref.renderTag;
-  var tagListStyle = _ref.tagListStyle;
+  var className = _ref.className;
   return _react2.default.createElement(
     'div',
-    { style: tagListStyle },
+    {
+      className: className
+    },
     tags.map(function (tag, index) {
       return _react2.default.createElement(_Tag.Tag, {
         key: index,
@@ -21158,7 +21155,7 @@ TagList.propTypes = {
   tags: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.any).isRequired,
   handleRemove: _react2.default.PropTypes.func.isRequired,
   renderTag: _react2.default.PropTypes.func.isRequired,
-  tagListStyle: _react2.default.PropTypes.object.isRequired
+  className: _react2.default.PropTypes.string.isRequired
 };
 
 },{"./Tag.jsx":175,"react":172}],177:[function(require,module,exports){
@@ -21167,7 +21164,7 @@ TagList.propTypes = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.defaultClassName = exports.defaultTagListStyle = exports.defaultInputTagsStyle = exports.defaultRenderTag = exports.defaultInputPlaceholder = exports.defaultRemoveKeyCodes = exports.defaultInsertKeyCodes = undefined;
+exports.defaultRenderTag = exports.defaultTagClassName = exports.defaultTagListClassName = exports.defaultInputPlaceholder = exports.defaultInputTagsClassName = exports.defaultRemoveKeyCodes = exports.defaultInsertKeyCodes = undefined;
 
 var _react = require('react');
 
@@ -21175,6 +21172,7 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/* InputTags */
 var defaultInsertKeyCodes = exports.defaultInsertKeyCodes = {
   13: 'enter',
   9: 'tab',
@@ -21185,18 +21183,25 @@ var defaultRemoveKeyCodes = exports.defaultRemoveKeyCodes = {
   8: 'backspace / delete'
 };
 
+var defaultInputTagsClassName = exports.defaultInputTagsClassName = 'react-input-tags';
+
+/* Input */
 var defaultInputPlaceholder = exports.defaultInputPlaceholder = '';
 
-var defaultTagStyle = {
-  display: 'flex'
-};
+/* TagList */
+var defaultTagListClassName = exports.defaultTagListClassName = 'react-input-tags-taglist';
+
+/* Tag */
+var defaultTagClassName = exports.defaultTagClassName = 'react-input-tags-tag';
 
 var defaultRenderTag = exports.defaultRenderTag = function defaultRenderTag(_ref) {
   var value = _ref.value;
   var handleRemove = _ref.handleRemove;
   return _react2.default.createElement(
-    'div',
-    { style: defaultTagStyle },
+    'span',
+    {
+      className: defaultTagClassName
+    },
     _react2.default.createElement(
       'span',
       null,
@@ -21205,9 +21210,10 @@ var defaultRenderTag = exports.defaultRenderTag = function defaultRenderTag(_ref
     _react2.default.createElement(
       'button',
       {
+        type: 'button',
         onClick: handleRemove
       },
-      'X'
+      'x'
     )
   );
 };
@@ -21216,15 +21222,5 @@ defaultRenderTag.propTypes = {
   value: _react2.default.PropTypes.string.isRequired,
   handleRemove: _react2.default.PropTypes.func.isRequired
 };
-
-var defaultInputTagsStyle = exports.defaultInputTagsStyle = {
-  display: 'flex'
-};
-
-var defaultTagListStyle = exports.defaultTagListStyle = {
-  display: 'flex'
-};
-
-var defaultClassName = exports.defaultClassName = '';
 
 },{"react":172}]},{},[1]);

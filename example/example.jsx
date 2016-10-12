@@ -20,19 +20,18 @@ class Example extends React.Component {
     this.setState({ tags: newTags });
   }
 
-  renderTag = tag => (
-    <div>{tag}</div>
-  );
-
   render() {
     return (
-      <InputTags
-        tags={this.state.tags}
-        handleInsert={this.handleInsert}
-        handleRemove={this.handleRemove}
-        inputPlaceholder={'add tag'}
-        // className={'inputtags'}
-      />
+      <div
+        className={'container'}
+      >
+        <InputTags
+          tags={this.state.tags}
+          handleInsert={this.handleInsert}
+          handleRemove={this.handleRemove}
+          inputPlaceholder={'add tag'}
+        />
+      </div>
     );
   }
 }
