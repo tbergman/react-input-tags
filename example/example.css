@@ -1,22 +1,25 @@
 .container {
+  width: 250px;
   margin: 50px auto;
-  width: 200px;
   background-color: #ff9;
   border: 2px solid black;
+  font-family: BlinkMacSystemFont;
+  font-size: 14px;
 }
 
 .react-input-tags {
-
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .react-input-tags input {
   border-style: none;
   outline: none;
-}
-
-.react-input-tags-taglist {
-  /* flex-wrap ? */
+  /* input element does * not * inherit font styling by default */
+  font-family: inherit;
+  font-size: inherit;
 }
 
 .react-input-tags-tag {
+  background-color: #fdf;
 }

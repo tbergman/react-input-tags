@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Input } from './Input.jsx';
-import { TagList } from './TagList.jsx';
+import { Tag } from './Tag.jsx';
 
 import {
   defaultInsertKeyCodes,
@@ -9,7 +9,6 @@ import {
   defaultInputPlaceholder,
   defaultRenderTag,
   defaultInputTagsClassName,
-  defaultTagListClassName,
 } from './default.jsx';
 
 export class InputTags extends React.Component {
@@ -22,7 +21,6 @@ export class InputTags extends React.Component {
     renderTag: React.PropTypes.func,
     inputPlaceholder: React.PropTypes.string,
     className: React.PropTypes.string,
-    tagListClassName: React.PropTypes.string,
   };
 
   static defaultProps = {
@@ -31,11 +29,21 @@ export class InputTags extends React.Component {
     renderTag: defaultRenderTag,
     inputPlaceholder: defaultInputPlaceholder,
     className: defaultInputTagsClassName,
-    tagListClassName: defaultTagListClassName,
   };
 
   state = {
     inputValue: '',
+  }
+
+  insertTag = (tags, inputValue) => {
+    const { handleInsert } = this.props;
+    this.setState({ inputValue: '' });
+    handleInsert(tags, inputValue);
+  }
+
+  removeTag = (tags, removeTagIndex) => {
+    const { handleRemove } = this.props;
+    handleRemove(tags, removeTagIndex);
   }
 
   handleOnChange = (event) => {
@@ -45,26 +53,25 @@ export class InputTags extends React.Component {
 
   handleOnBlur = () => {
     const { inputValue } = this.state;
-    const { tags, handleInsert } = this.props;
+    const { tags } = this.props;
 
     if (inputValue.length > 0) {
-      this.setState({ inputValue: '' });
-      handleInsert(tags, inputValue);
+      this.insertTag(tags, inputValue);
     }
   }
 
   handleOnKeyDown = (event) => {
     const { keyCode } = event;
     const { inputValue } = this.state;
-    const { tags, handleInsert, handleRemove, insertKeyCodes, removeKeyCodes } = this.props;
+    const { tags, insertKeyCodes, removeKeyCodes } = this.props;
 
     if (insertKeyCodes.hasOwnProperty(keyCode) && inputValue.length > 0) {
-      this.setState({ inputValue: '' });
-      handleInsert(tags, inputValue);
+      event.preventDefault();
+      this.insertTag(tags, inputValue);
     }
 
     if (removeKeyCodes.hasOwnProperty(keyCode) && inputValue.length === 0 && tags.length > 0) {
-      handleRemove(tags, tags.length - 1);
+      this.removeTag(tags, tags.length - 1);
     }
   }
 
@@ -75,19 +82,20 @@ export class InputTags extends React.Component {
       renderTag,
       inputPlaceholder,
       className,
-      tagListClassName,
     } = this.props;
     const { inputValue } = this.state;
     return (
       <div
         className={className}
       >
-        <TagList
-          tags={tags}
-          handleRemove={handleRemove}
-          renderTag={renderTag}
-          className={tagListClassName}
-        />
+        {tags.map((tag, index) =>
+          <Tag
+            key={index}
+            value={tag}
+            handleRemove={() => handleRemove(tags, index)}
+            renderTag={renderTag}
+          />
+        )}
         <Input
           value={inputValue}
           onChange={this.handleOnChange}

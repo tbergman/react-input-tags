@@ -20878,7 +20878,6 @@ var Input = exports.Input = function (_React$Component) {
       var inputStyle = window.getComputedStyle(this.inputNode);
       var mirrorStyles = ['fontFamily', 'fontSize', 'fontStyle', 'fontWeight', 'lineHeight', 'letterSpacing', 'wordSpacing'];
       mirrorStyles.forEach(function (mStyle) {
-        console.log(mStyle, inputStyle[mStyle]);
         _this2.mirrorNode.style[mStyle] = inputStyle[mStyle];
       });
     }
@@ -20964,7 +20963,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _Input = require('./Input.jsx');
 
-var _TagList = require('./TagList.jsx');
+var _Tag = require('./Tag.jsx');
 
 var _default = require('./default.jsx');
 
@@ -20992,38 +20991,42 @@ var InputTags = exports.InputTags = function (_React$Component) {
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = InputTags.__proto__ || Object.getPrototypeOf(InputTags)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       inputValue: ''
+    }, _this.insertTag = function (tags, inputValue) {
+      var handleInsert = _this.props.handleInsert;
+
+      _this.setState({ inputValue: '' });
+      handleInsert(tags, inputValue);
+    }, _this.removeTag = function (tags, removeTagIndex) {
+      var handleRemove = _this.props.handleRemove;
+
+      handleRemove(tags, removeTagIndex);
     }, _this.handleOnChange = function (event) {
       var inputValue = event.target.value;
       _this.setState({ inputValue: inputValue });
     }, _this.handleOnBlur = function () {
       var inputValue = _this.state.inputValue;
-      var _this$props = _this.props;
-      var tags = _this$props.tags;
-      var handleInsert = _this$props.handleInsert;
+      var tags = _this.props.tags;
 
 
       if (inputValue.length > 0) {
-        _this.setState({ inputValue: '' });
-        handleInsert(tags, inputValue);
+        _this.insertTag(tags, inputValue);
       }
     }, _this.handleOnKeyDown = function (event) {
       var keyCode = event.keyCode;
       var inputValue = _this.state.inputValue;
-      var _this$props2 = _this.props;
-      var tags = _this$props2.tags;
-      var handleInsert = _this$props2.handleInsert;
-      var handleRemove = _this$props2.handleRemove;
-      var insertKeyCodes = _this$props2.insertKeyCodes;
-      var removeKeyCodes = _this$props2.removeKeyCodes;
+      var _this$props = _this.props;
+      var tags = _this$props.tags;
+      var insertKeyCodes = _this$props.insertKeyCodes;
+      var removeKeyCodes = _this$props.removeKeyCodes;
 
 
       if (insertKeyCodes.hasOwnProperty(keyCode) && inputValue.length > 0) {
-        _this.setState({ inputValue: '' });
-        handleInsert(tags, inputValue);
+        event.preventDefault();
+        _this.insertTag(tags, inputValue);
       }
 
       if (removeKeyCodes.hasOwnProperty(keyCode) && inputValue.length === 0 && tags.length > 0) {
-        handleRemove(tags, tags.length - 1);
+        _this.removeTag(tags, tags.length - 1);
       }
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
@@ -21033,11 +21036,10 @@ var InputTags = exports.InputTags = function (_React$Component) {
     value: function render() {
       var _props = this.props;
       var tags = _props.tags;
-      var handleRemove = _props.handleRemove;
+      var _handleRemove = _props.handleRemove;
       var renderTag = _props.renderTag;
       var inputPlaceholder = _props.inputPlaceholder;
       var className = _props.className;
-      var tagListClassName = _props.tagListClassName;
       var inputValue = this.state.inputValue;
 
       return _react2.default.createElement(
@@ -21045,11 +21047,15 @@ var InputTags = exports.InputTags = function (_React$Component) {
         {
           className: className
         },
-        _react2.default.createElement(_TagList.TagList, {
-          tags: tags,
-          handleRemove: handleRemove,
-          renderTag: renderTag,
-          className: tagListClassName
+        tags.map(function (tag, index) {
+          return _react2.default.createElement(_Tag.Tag, {
+            key: index,
+            value: tag,
+            handleRemove: function handleRemove() {
+              return _handleRemove(tags, index);
+            },
+            renderTag: renderTag
+          });
         }),
         _react2.default.createElement(_Input.Input, {
           value: inputValue,
@@ -21073,19 +21079,17 @@ InputTags.propTypes = {
   removeKeyCodes: _react2.default.PropTypes.object,
   renderTag: _react2.default.PropTypes.func,
   inputPlaceholder: _react2.default.PropTypes.string,
-  className: _react2.default.PropTypes.string,
-  tagListClassName: _react2.default.PropTypes.string
+  className: _react2.default.PropTypes.string
 };
 InputTags.defaultProps = {
   insertKeyCodes: _default.defaultInsertKeyCodes,
   removeKeyCodes: _default.defaultRemoveKeyCodes,
   renderTag: _default.defaultRenderTag,
   inputPlaceholder: _default.defaultInputPlaceholder,
-  className: _default.defaultInputTagsClassName,
-  tagListClassName: _default.defaultTagListClassName
+  className: _default.defaultInputTagsClassName
 };
 
-},{"./Input.jsx":173,"./TagList.jsx":176,"./default.jsx":177,"react":172}],175:[function(require,module,exports){
+},{"./Input.jsx":173,"./Tag.jsx":175,"./default.jsx":176,"react":172}],175:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21113,52 +21117,6 @@ Tag.propTypes = {
 };
 
 },{"react":172}],176:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.TagList = undefined;
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Tag = require('./Tag.jsx');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var TagList = exports.TagList = function TagList(_ref) {
-  var tags = _ref.tags;
-  var _handleRemove = _ref.handleRemove;
-  var renderTag = _ref.renderTag;
-  var className = _ref.className;
-  return _react2.default.createElement(
-    'div',
-    {
-      className: className
-    },
-    tags.map(function (tag, index) {
-      return _react2.default.createElement(_Tag.Tag, {
-        key: index,
-        value: tag,
-        handleRemove: function handleRemove() {
-          return _handleRemove(tags, index);
-        },
-        renderTag: renderTag
-      });
-    })
-  );
-};
-
-TagList.propTypes = {
-  tags: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.any).isRequired,
-  handleRemove: _react2.default.PropTypes.func.isRequired,
-  renderTag: _react2.default.PropTypes.func.isRequired,
-  className: _react2.default.PropTypes.string.isRequired
-};
-
-},{"./Tag.jsx":175,"react":172}],177:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

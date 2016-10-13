@@ -30,7 +30,6 @@ export class Input extends React.Component {
       'wordSpacing',
     ];
     mirrorStyles.forEach((mStyle) => {
-      console.log(mStyle, inputStyle[mStyle]);
       this.mirrorNode.style[mStyle] = inputStyle[mStyle];
     });
   }

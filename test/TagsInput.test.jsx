@@ -9,6 +9,7 @@ import { noop } from './util';
 describe('<InputTags />', () => {
   // TODO: test that classname appears
   // TODO: test that style appears
+
   describe('<Input />', () => {
     let inputWrapper;
 
@@ -114,6 +115,9 @@ describe('<InputTags />', () => {
     });
 
     describe('onKeyDown', () => {
+      // TODO: test that insert prevents default event from propagating (bubbling up)
+      // comma should not type a comma
+      // tab should not reset focus on browser url
       context('when event `keyCode` is in `insertKeyCodes`', () => {
         const enterKeyCode = 13;
 

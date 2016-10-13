@@ -24,11 +24,9 @@ describe('<Input />', () => {
 
     // TODO: test that style attributes copied to mirrorNode
     // TODO: test that width is updated
-    it('should copy the styling to the mirror element', () => {
       // console.log(componentDidMountWrapper.ref('inputNode'));
       // console.log(componentDidMountWrapper.ref('inputNode').render());
       // console.log(componentDidMountWrapper.ref('mirrorNode').render().css('width'));
-    });
   });
 
   describe('componentDidUpdate()', () => {
