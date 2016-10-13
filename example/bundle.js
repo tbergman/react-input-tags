@@ -21049,31 +21049,35 @@ var InputTags = exports.InputTags = function (_React$Component) {
   _createClass(InputTags, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var _props = this.props;
       var tags = _props.tags;
-      var _handleRemove = _props.handleRemove;
       var renderTag = _props.renderTag;
       var inputPlaceholder = _props.inputPlaceholder;
       var suggestions = _props.suggestions;
       var renderSuggestion = _props.renderSuggestion;
       var className = _props.className;
+      var tagsInputClassName = _props.tagsInputClassName;
       var suggestionListClassName = _props.suggestionListClassName;
       var inputValue = this.state.inputValue;
 
       return _react2.default.createElement(
         'div',
-        null,
+        {
+          className: className
+        },
         _react2.default.createElement(
           'div',
           {
-            className: className
+            className: tagsInputClassName
           },
           tags.map(function (tag, index) {
             return _react2.default.createElement(_Tag.Tag, {
               key: index,
               value: tag,
               handleRemove: function handleRemove() {
-                return _handleRemove(tags, index);
+                return _this2.removeTag(tags, index);
               },
               renderTag: renderTag
             });
@@ -21110,6 +21114,7 @@ InputTags.propTypes = {
   renderSuggestion: _react2.default.PropTypes.func,
   handleInputChange: _react2.default.PropTypes.func,
   className: _react2.default.PropTypes.string,
+  tagsInputClassName: _react2.default.PropTypes.string,
   suggestionListClassName: _react2.default.PropTypes.string
 };
 InputTags.defaultProps = {
@@ -21121,6 +21126,7 @@ InputTags.defaultProps = {
   renderSuggestion: _default.defaultRenderSuggestion,
   handleInputChange: _default.defaultHandleInputChange,
   className: _default.defaultInputTagsClassName,
+  tagsInputClassName: _default.defaultTagsInputClassName,
   suggestionListClassName: _default.defaultSuggestionListClassName
 };
 
@@ -21221,7 +21227,7 @@ Tag.propTypes = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.defaultRenderSuggestion = exports.defaultSuggestionClassName = exports.defaultSuggestionListClassName = exports.defaultRenderTag = exports.defaultTagClassName = exports.defaultTagListClassName = exports.defaultInputPlaceholder = exports.defaultInputTagsClassName = exports.defaultHandleInputChange = exports.defaultSuggestions = exports.defaultRemoveKeyCodes = exports.defaultInsertKeyCodes = undefined;
+exports.defaultRenderSuggestion = exports.defaultSuggestionClassName = exports.defaultSuggestionListClassName = exports.defaultRenderTag = exports.defaultTagClassName = exports.defaultInputPlaceholder = exports.defaultTagsInputClassName = exports.defaultInputTagsClassName = exports.defaultHandleInputChange = exports.defaultSuggestions = exports.defaultRemoveKeyCodes = exports.defaultInsertKeyCodes = undefined;
 
 var _react = require('react');
 
@@ -21246,11 +21252,10 @@ var defaultHandleInputChange = exports.defaultHandleInputChange = function defau
 
 var defaultInputTagsClassName = exports.defaultInputTagsClassName = 'react-input-tags';
 
+var defaultTagsInputClassName = exports.defaultTagsInputClassName = 'react-input-tags-tagsinput';
+
 /* Input */
 var defaultInputPlaceholder = exports.defaultInputPlaceholder = '';
-
-/* TagList */
-var defaultTagListClassName = exports.defaultTagListClassName = 'react-input-tags-taglist';
 
 /* Tag */
 var defaultTagClassName = exports.defaultTagClassName = 'react-input-tags-tag';
@@ -21290,7 +21295,6 @@ var defaultSuggestionListClassName = exports.defaultSuggestionListClassName = 'r
 /* Suggestion */
 var defaultSuggestionClassName = exports.defaultSuggestionClassName = 'react-input-tags-suggestion';
 
-// TODO: add onClick handler that adds the value as a tag
 var defaultRenderSuggestion = exports.defaultRenderSuggestion = function defaultRenderSuggestion(_ref2) {
   var value = _ref2.value;
   return _react2.default.createElement(

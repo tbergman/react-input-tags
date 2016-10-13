@@ -13,6 +13,7 @@ import {
   defaultRenderSuggestion,
   defaultHandleInputChange,
   defaultInputTagsClassName,
+  defaultTagsInputClassName,
   defaultSuggestionListClassName,
 } from './default.jsx';
 
@@ -29,6 +30,7 @@ export class InputTags extends React.Component {
     renderSuggestion: React.PropTypes.func,
     handleInputChange: React.PropTypes.func,
     className: React.PropTypes.string,
+    tagsInputClassName: React.PropTypes.string,
     suggestionListClassName: React.PropTypes.string,
   };
 
@@ -41,6 +43,7 @@ export class InputTags extends React.Component {
     renderSuggestion: defaultRenderSuggestion,
     handleInputChange: defaultHandleInputChange,
     className: defaultInputTagsClassName,
+    tagsInputClassName: defaultTagsInputClassName,
     suggestionListClassName: defaultSuggestionListClassName,
   };
 
@@ -93,25 +96,27 @@ export class InputTags extends React.Component {
   render() {
     const {
       tags,
-      handleRemove,
       renderTag,
       inputPlaceholder,
       suggestions,
       renderSuggestion,
       className,
+      tagsInputClassName,
       suggestionListClassName,
     } = this.props;
     const { inputValue } = this.state;
     return (
-      <div>
+      <div
+        className={className}
+      >
         <div
-          className={className}
+          className={tagsInputClassName}
         >
           {tags.map((tag, index) =>
             <Tag
               key={index}
               value={tag}
-              handleRemove={() => handleRemove(tags, index)}
+              handleRemove={() => this.removeTag(tags, index)}
               renderTag={renderTag}
             />
           )}

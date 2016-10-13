@@ -17,11 +17,10 @@ export const defaultHandleInputChange = () => {};
 
 export const defaultInputTagsClassName = 'react-input-tags';
 
+export const defaultTagsInputClassName = 'react-input-tags-tagsinput';
+
 /* Input */
 export const defaultInputPlaceholder = '';
-
-/* TagList */
-export const defaultTagListClassName = 'react-input-tags-taglist';
 
 /* Tag */
 export const defaultTagClassName = 'react-input-tags-tag';
@@ -52,7 +51,6 @@ export const defaultSuggestionListClassName = 'react-input-tags-suggestionlist';
 /* Suggestion */
 export const defaultSuggestionClassName = 'react-input-tags-suggestion';
 
-// TODO: add onClick handler that adds the value as a tag
 export const defaultRenderSuggestion = ({ value }) =>
   <div
     className={defaultSuggestionClassName}
