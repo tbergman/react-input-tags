@@ -23,3 +23,11 @@
 .react-input-tags-tag {
   background-color: #fdf;
 }
+
+.react-input-tags-suggestionlist {
+  position: absolute;
+}
+
+.react-input-tags-suggestion {
+  padding: 5px;
+}

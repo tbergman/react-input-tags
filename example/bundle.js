@@ -23,6 +23,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var data = ['apple', 'banana', 'cherry'];
+
 var Example = function (_React$Component) {
   _inherits(Example, _React$Component);
 
@@ -38,13 +40,20 @@ var Example = function (_React$Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Example.__proto__ || Object.getPrototypeOf(Example)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      tags: []
+      tags: [],
+      suggestions: []
     }, _this.handleInsert = function (currentTags, newTag) {
       var newTags = [].concat(_toConsumableArray(currentTags), [newTag]);
       _this.setState({ tags: newTags });
+      _this.setState({ suggestions: [] });
     }, _this.handleRemove = function (currentTags, removeTagIndex) {
       var newTags = [].concat(_toConsumableArray(currentTags.slice(0, removeTagIndex)), _toConsumableArray(currentTags.slice(removeTagIndex + 1)));
       _this.setState({ tags: newTags });
+    }, _this.handleInputChange = function (inputValue) {
+      var newSuggestions = data.filter(function (datum) {
+        return datum.indexOf(inputValue) !== -1;
+      });
+      _this.setState({ suggestions: newSuggestions });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -60,6 +69,8 @@ var Example = function (_React$Component) {
           tags: this.state.tags,
           handleInsert: this.handleInsert,
           handleRemove: this.handleRemove,
+          suggestions: this.state.suggestions,
+          handleInputChange: this.handleInputChange,
           inputPlaceholder: 'add tag'
         })
       );
@@ -20965,6 +20976,8 @@ var _Input = require('./Input.jsx');
 
 var _Tag = require('./Tag.jsx');
 
+var _SuggestionList = require('./SuggestionList.jsx');
+
 var _default = require('./default.jsx');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -21001,8 +21014,11 @@ var InputTags = exports.InputTags = function (_React$Component) {
 
       handleRemove(tags, removeTagIndex);
     }, _this.handleOnChange = function (event) {
+      var handleInputChange = _this.props.handleInputChange;
+
       var inputValue = event.target.value;
       _this.setState({ inputValue: inputValue });
+      handleInputChange(inputValue);
     }, _this.handleOnBlur = function () {
       var inputValue = _this.state.inputValue;
       var tags = _this.props.tags;
@@ -21039,30 +21055,42 @@ var InputTags = exports.InputTags = function (_React$Component) {
       var _handleRemove = _props.handleRemove;
       var renderTag = _props.renderTag;
       var inputPlaceholder = _props.inputPlaceholder;
+      var suggestions = _props.suggestions;
+      var renderSuggestion = _props.renderSuggestion;
       var className = _props.className;
+      var suggestionListClassName = _props.suggestionListClassName;
       var inputValue = this.state.inputValue;
 
       return _react2.default.createElement(
         'div',
-        {
-          className: className
-        },
-        tags.map(function (tag, index) {
-          return _react2.default.createElement(_Tag.Tag, {
-            key: index,
-            value: tag,
-            handleRemove: function handleRemove() {
-              return _handleRemove(tags, index);
-            },
-            renderTag: renderTag
-          });
-        }),
-        _react2.default.createElement(_Input.Input, {
-          value: inputValue,
-          onChange: this.handleOnChange,
-          onBlur: this.handleOnBlur,
-          onKeyDown: this.handleOnKeyDown,
-          placeholder: inputPlaceholder
+        null,
+        _react2.default.createElement(
+          'div',
+          {
+            className: className
+          },
+          tags.map(function (tag, index) {
+            return _react2.default.createElement(_Tag.Tag, {
+              key: index,
+              value: tag,
+              handleRemove: function handleRemove() {
+                return _handleRemove(tags, index);
+              },
+              renderTag: renderTag
+            });
+          }),
+          _react2.default.createElement(_Input.Input, {
+            value: inputValue,
+            onChange: this.handleOnChange,
+            onBlur: this.handleOnBlur,
+            onKeyDown: this.handleOnKeyDown,
+            placeholder: inputPlaceholder
+          })
+        ),
+        _react2.default.createElement(_SuggestionList.SuggestionList, {
+          className: suggestionListClassName,
+          suggestions: suggestions,
+          renderSuggestion: renderSuggestion
         })
       );
     }
@@ -21079,17 +21107,89 @@ InputTags.propTypes = {
   removeKeyCodes: _react2.default.PropTypes.object,
   renderTag: _react2.default.PropTypes.func,
   inputPlaceholder: _react2.default.PropTypes.string,
-  className: _react2.default.PropTypes.string
+  suggestions: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.any),
+  renderSuggestion: _react2.default.PropTypes.func,
+  handleInputChange: _react2.default.PropTypes.func,
+  className: _react2.default.PropTypes.string,
+  suggestionListClassName: _react2.default.PropTypes.string
 };
 InputTags.defaultProps = {
   insertKeyCodes: _default.defaultInsertKeyCodes,
   removeKeyCodes: _default.defaultRemoveKeyCodes,
   renderTag: _default.defaultRenderTag,
   inputPlaceholder: _default.defaultInputPlaceholder,
-  className: _default.defaultInputTagsClassName
+  suggestions: _default.defaultSuggestions,
+  renderSuggestion: _default.defaultRenderSuggestion,
+  handleInputChange: _default.defaultHandleInputChange,
+  className: _default.defaultInputTagsClassName,
+  suggestionListClassName: _default.defaultSuggestionListClassName
 };
 
-},{"./Input.jsx":173,"./Tag.jsx":175,"./default.jsx":176,"react":172}],175:[function(require,module,exports){
+},{"./Input.jsx":173,"./SuggestionList.jsx":176,"./Tag.jsx":177,"./default.jsx":178,"react":172}],175:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Suggestion = undefined;
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Suggestion = exports.Suggestion = function Suggestion(_ref) {
+  var value = _ref.value;
+  var renderSuggestion = _ref.renderSuggestion;
+  return renderSuggestion({ value: value });
+};
+
+Suggestion.propTypes = {
+  value: _react2.default.PropTypes.string.isRequired,
+  renderSuggestion: _react2.default.PropTypes.func.isRequired
+};
+
+},{"react":172}],176:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.SuggestionList = undefined;
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Suggestion = require('./Suggestion.jsx');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var SuggestionList = exports.SuggestionList = function SuggestionList(_ref) {
+  var suggestions = _ref.suggestions;
+  var renderSuggestion = _ref.renderSuggestion;
+  var className = _ref.className;
+  return _react2.default.createElement(
+    'div',
+    { className: className },
+    suggestions.map(function (suggestion, index) {
+      return _react2.default.createElement(_Suggestion.Suggestion, {
+        key: index,
+        value: suggestion,
+        renderSuggestion: renderSuggestion
+      });
+    })
+  );
+};
+
+SuggestionList.propTypes = {
+  suggestions: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.any).isRequired,
+  renderSuggestion: _react2.default.PropTypes.func.isRequired,
+  className: _react2.default.PropTypes.string.isRequired
+};
+
+},{"./Suggestion.jsx":175,"react":172}],177:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21116,13 +21216,13 @@ Tag.propTypes = {
   renderTag: _react2.default.PropTypes.func.isRequired
 };
 
-},{"react":172}],176:[function(require,module,exports){
+},{"react":172}],178:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.defaultRenderTag = exports.defaultTagClassName = exports.defaultTagListClassName = exports.defaultInputPlaceholder = exports.defaultInputTagsClassName = exports.defaultRemoveKeyCodes = exports.defaultInsertKeyCodes = undefined;
+exports.defaultRenderSuggestion = exports.defaultSuggestionClassName = exports.defaultSuggestionListClassName = exports.defaultRenderTag = exports.defaultTagClassName = exports.defaultTagListClassName = exports.defaultInputPlaceholder = exports.defaultInputTagsClassName = exports.defaultHandleInputChange = exports.defaultSuggestions = exports.defaultRemoveKeyCodes = exports.defaultInsertKeyCodes = undefined;
 
 var _react = require('react');
 
@@ -21140,6 +21240,10 @@ var defaultInsertKeyCodes = exports.defaultInsertKeyCodes = {
 var defaultRemoveKeyCodes = exports.defaultRemoveKeyCodes = {
   8: 'backspace / delete'
 };
+
+var defaultSuggestions = exports.defaultSuggestions = [];
+
+var defaultHandleInputChange = exports.defaultHandleInputChange = function defaultHandleInputChange() {};
 
 var defaultInputTagsClassName = exports.defaultInputTagsClassName = 'react-input-tags';
 
@@ -21179,6 +21283,28 @@ var defaultRenderTag = exports.defaultRenderTag = function defaultRenderTag(_ref
 defaultRenderTag.propTypes = {
   value: _react2.default.PropTypes.string.isRequired,
   handleRemove: _react2.default.PropTypes.func.isRequired
+};
+
+/* SuggestionList */
+var defaultSuggestionListClassName = exports.defaultSuggestionListClassName = 'react-input-tags-suggestionlist';
+
+/* Suggestion */
+var defaultSuggestionClassName = exports.defaultSuggestionClassName = 'react-input-tags-suggestion';
+
+// TODO: add onClick handler that adds the value as a tag
+var defaultRenderSuggestion = exports.defaultRenderSuggestion = function defaultRenderSuggestion(_ref2) {
+  var value = _ref2.value;
+  return _react2.default.createElement(
+    'span',
+    {
+      className: defaultSuggestionClassName
+    },
+    value
+  );
+};
+
+defaultRenderSuggestion.propTypes = {
+  value: _react2.default.PropTypes.string.isRequired
 };
 
 },{"react":172}]},{},[1]);

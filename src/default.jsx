@@ -11,6 +11,10 @@ export const defaultRemoveKeyCodes = {
   8: 'backspace / delete',
 };
 
+export const defaultSuggestions = [];
+
+export const defaultHandleInputChange = () => {};
+
 export const defaultInputTagsClassName = 'react-input-tags';
 
 /* Input */
@@ -40,4 +44,22 @@ export const defaultRenderTag = ({ value, handleRemove }) =>
 defaultRenderTag.propTypes = {
   value: React.PropTypes.string.isRequired,
   handleRemove: React.PropTypes.func.isRequired,
+};
+
+/* SuggestionList */
+export const defaultSuggestionListClassName = 'react-input-tags-suggestionlist';
+
+/* Suggestion */
+export const defaultSuggestionClassName = 'react-input-tags-suggestion';
+
+// TODO: add onClick handler that adds the value as a tag
+export const defaultRenderSuggestion = ({ value }) =>
+  <span
+    className={defaultSuggestionClassName}
+  >
+    {value}
+  </span>;
+
+defaultRenderSuggestion.propTypes = {
+  value: React.PropTypes.string.isRequired,
 };

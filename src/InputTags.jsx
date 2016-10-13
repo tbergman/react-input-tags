@@ -2,13 +2,18 @@ import React from 'react';
 
 import { Input } from './Input.jsx';
 import { Tag } from './Tag.jsx';
+import { SuggestionList } from './SuggestionList.jsx';
 
 import {
   defaultInsertKeyCodes,
   defaultRemoveKeyCodes,
-  defaultInputPlaceholder,
   defaultRenderTag,
+  defaultInputPlaceholder,
+  defaultSuggestions,
+  defaultRenderSuggestion,
+  defaultHandleInputChange,
   defaultInputTagsClassName,
+  defaultSuggestionListClassName,
 } from './default.jsx';
 
 export class InputTags extends React.Component {
@@ -20,7 +25,11 @@ export class InputTags extends React.Component {
     removeKeyCodes: React.PropTypes.object,
     renderTag: React.PropTypes.func,
     inputPlaceholder: React.PropTypes.string,
+    suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
+    renderSuggestion: React.PropTypes.func,
+    handleInputChange: React.PropTypes.func,
     className: React.PropTypes.string,
+    suggestionListClassName: React.PropTypes.string,
   };
 
   static defaultProps = {
@@ -28,7 +37,11 @@ export class InputTags extends React.Component {
     removeKeyCodes: defaultRemoveKeyCodes,
     renderTag: defaultRenderTag,
     inputPlaceholder: defaultInputPlaceholder,
+    suggestions: defaultSuggestions,
+    renderSuggestion: defaultRenderSuggestion,
+    handleInputChange: defaultHandleInputChange,
     className: defaultInputTagsClassName,
+    suggestionListClassName: defaultSuggestionListClassName,
   };
 
   state = {
@@ -47,8 +60,10 @@ export class InputTags extends React.Component {
   }
 
   handleOnChange = (event) => {
+    const { handleInputChange } = this.props;
     const inputValue = event.target.value;
     this.setState({ inputValue });
+    handleInputChange(inputValue);
   }
 
   handleOnBlur = () => {
@@ -81,27 +96,37 @@ export class InputTags extends React.Component {
       handleRemove,
       renderTag,
       inputPlaceholder,
+      suggestions,
+      renderSuggestion,
       className,
+      suggestionListClassName,
     } = this.props;
     const { inputValue } = this.state;
     return (
-      <div
-        className={className}
-      >
-        {tags.map((tag, index) =>
-          <Tag
-            key={index}
-            value={tag}
-            handleRemove={() => handleRemove(tags, index)}
-            renderTag={renderTag}
+      <div>
+        <div
+          className={className}
+        >
+          {tags.map((tag, index) =>
+            <Tag
+              key={index}
+              value={tag}
+              handleRemove={() => handleRemove(tags, index)}
+              renderTag={renderTag}
+            />
+          )}
+          <Input
+            value={inputValue}
+            onChange={this.handleOnChange}
+            onBlur={this.handleOnBlur}
+            onKeyDown={this.handleOnKeyDown}
+            placeholder={inputPlaceholder}
           />
-        )}
-        <Input
-          value={inputValue}
-          onChange={this.handleOnChange}
-          onBlur={this.handleOnBlur}
-          onKeyDown={this.handleOnKeyDown}
-          placeholder={inputPlaceholder}
+        </div>
+        <SuggestionList
+          className={suggestionListClassName}
+          suggestions={suggestions}
+          renderSuggestion={renderSuggestion}
         />
       </div>
     );

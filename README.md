@@ -10,8 +10,8 @@ React component for tagging inputs.
 - [ ] tests
 
 ### Advanced
-- [ ] list of suggestions, click one will insert as tag
-- [ ] custom render of suggestion
+- [ ] display list of suggestions onInputChange
+- [ ] select suggestion, insert as tag
 - [ ] edit tag by clicking
 - [ ] reorder tags by dragging
 - [ ] drag tag from one component to another (onDrag?)
