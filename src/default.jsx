@@ -54,11 +54,11 @@ export const defaultSuggestionClassName = 'react-input-tags-suggestion';
 
 // TODO: add onClick handler that adds the value as a tag
 export const defaultRenderSuggestion = ({ value }) =>
-  <span
+  <div
     className={defaultSuggestionClassName}
   >
     {value}
-  </span>;
+  </div>;
 
 defaultRenderSuggestion.propTypes = {
   value: React.PropTypes.string.isRequired,

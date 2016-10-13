@@ -25,7 +25,8 @@ class Example extends React.Component {
   }
 
   handleInputChange = (inputValue) => {
-    const newSuggestions = data.filter(datum => datum.indexOf(inputValue) !== -1);
+    // const newSuggestions = data.filter(datum => datum.indexOf(inputValue) !== -1);
+    const newSuggestions = [];
     this.setState({ suggestions: newSuggestions });
   }
 

@@ -50,9 +50,8 @@ var Example = function (_React$Component) {
       var newTags = [].concat(_toConsumableArray(currentTags.slice(0, removeTagIndex)), _toConsumableArray(currentTags.slice(removeTagIndex + 1)));
       _this.setState({ tags: newTags });
     }, _this.handleInputChange = function (inputValue) {
-      var newSuggestions = data.filter(function (datum) {
-        return datum.indexOf(inputValue) !== -1;
-      });
+      // const newSuggestions = data.filter(datum => datum.indexOf(inputValue) !== -1);
+      var newSuggestions = [];
       _this.setState({ suggestions: newSuggestions });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
@@ -21295,7 +21294,7 @@ var defaultSuggestionClassName = exports.defaultSuggestionClassName = 'react-inp
 var defaultRenderSuggestion = exports.defaultRenderSuggestion = function defaultRenderSuggestion(_ref2) {
   var value = _ref2.value;
   return _react2.default.createElement(
-    'span',
+    'div',
     {
       className: defaultSuggestionClassName
     },
