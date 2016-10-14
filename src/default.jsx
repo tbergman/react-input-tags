@@ -54,7 +54,7 @@ export const defaultRenderSuggestion = ({ value, handleInsert }) =>
   <div
     className={defaultSuggestionClassName}
     onClick={handleInsert}
-    onMouseDown={(event) => { console.log('suggestion mousedown', event); event.preventDefault(); }}
+    onMouseDown={event => event.preventDefault()}
   >
     {value}
   </div>;

@@ -14,8 +14,7 @@ export const SuggestionList = ({
       <Suggestion
         key={index}
         value={suggestion}
-        // handleInsert={() => handleInsert(tags, suggestion)}
-        handleInsert={() => { console.log('suggestion insert'); handleInsert(tags, suggestion); }}
+        handleInsert={() => handleInsert(tags, suggestion)}
         renderSuggestion={renderSuggestion}
       />
     )}

@@ -69,12 +69,7 @@ export class InputTags extends React.Component {
     handleInputChange(inputValue);
   }
 
-  handleOnBlur = (event) => {
-    // if suggestion inserted, prevent default
-    // if suggestion element clicked, prevent default (aka onblur?)
-    // or maybe just use as an if statement
-    console.log('input onblur', event);
-
+  handleOnBlur = () => {
     const { inputValue } = this.state;
     const { tags } = this.props;
 

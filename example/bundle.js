@@ -21019,12 +21019,7 @@ var InputTags = exports.InputTags = function (_React$Component) {
       var inputValue = event.target.value;
       _this.setState({ inputValue: inputValue });
       handleInputChange(inputValue);
-    }, _this.handleOnBlur = function (event) {
-      // if suggestion inserted, prevent default
-      // if suggestion element clicked, prevent default (aka onblur?)
-      // or maybe just use as an if statement
-      console.log('input onblur', event);
-
+    }, _this.handleOnBlur = function () {
       var inputValue = _this.state.inputValue;
       var tags = _this.props.tags;
 
@@ -21194,10 +21189,9 @@ var SuggestionList = exports.SuggestionList = function SuggestionList(_ref) {
     suggestions.map(function (suggestion, index) {
       return _react2.default.createElement(_Suggestion.Suggestion, {
         key: index,
-        value: suggestion
-        // handleInsert={() => handleInsert(tags, suggestion)}
-        , handleInsert: function handleInsert() {
-          console.log('suggestion insert');_handleInsert(tags, suggestion);
+        value: suggestion,
+        handleInsert: function handleInsert() {
+          return _handleInsert(tags, suggestion);
         },
         renderSuggestion: renderSuggestion
       });
@@ -21322,7 +21316,7 @@ var defaultRenderSuggestion = exports.defaultRenderSuggestion = function default
       className: defaultSuggestionClassName,
       onClick: handleInsert,
       onMouseDown: function onMouseDown(event) {
-        console.log('suggestion mousedown', event);event.preventDefault();
+        return event.preventDefault();
       }
     },
     value
