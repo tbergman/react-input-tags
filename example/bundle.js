@@ -50,8 +50,9 @@ var Example = function (_React$Component) {
       var newTags = [].concat(_toConsumableArray(currentTags.slice(0, removeTagIndex)), _toConsumableArray(currentTags.slice(removeTagIndex + 1)));
       _this.setState({ tags: newTags });
     }, _this.handleInputChange = function (inputValue) {
-      // const newSuggestions = data.filter(datum => datum.indexOf(inputValue) !== -1);
-      var newSuggestions = [];
+      var newSuggestions = data.filter(function (datum) {
+        return datum.indexOf(inputValue) !== -1;
+      });
       _this.setState({ suggestions: newSuggestions });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
@@ -21018,7 +21019,12 @@ var InputTags = exports.InputTags = function (_React$Component) {
       var inputValue = event.target.value;
       _this.setState({ inputValue: inputValue });
       handleInputChange(inputValue);
-    }, _this.handleOnBlur = function () {
+    }, _this.handleOnBlur = function (event) {
+      // if suggestion inserted, prevent default
+      // if suggestion element clicked, prevent default (aka onblur?)
+      // or maybe just use as an if statement
+      console.log('input onblur', event);
+
       var inputValue = _this.state.inputValue;
       var tags = _this.props.tags;
 
@@ -21062,6 +21068,13 @@ var InputTags = exports.InputTags = function (_React$Component) {
       var suggestionListClassName = _props.suggestionListClassName;
       var inputValue = this.state.inputValue;
 
+      var suggestionsElement = inputValue.length > 0 ? _react2.default.createElement(_SuggestionList.SuggestionList, {
+        className: suggestionListClassName,
+        tags: tags,
+        suggestions: suggestions,
+        handleInsert: this.insertTag,
+        renderSuggestion: renderSuggestion
+      }) : null;
       return _react2.default.createElement(
         'div',
         {
@@ -21090,11 +21103,7 @@ var InputTags = exports.InputTags = function (_React$Component) {
             placeholder: inputPlaceholder
           })
         ),
-        _react2.default.createElement(_SuggestionList.SuggestionList, {
-          className: suggestionListClassName,
-          suggestions: suggestions,
-          renderSuggestion: renderSuggestion
-        })
+        suggestionsElement
       );
     }
   }]);
@@ -21146,12 +21155,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Suggestion = exports.Suggestion = function Suggestion(_ref) {
   var value = _ref.value;
+  var handleInsert = _ref.handleInsert;
   var renderSuggestion = _ref.renderSuggestion;
-  return renderSuggestion({ value: value });
+  return renderSuggestion({ value: value, handleInsert: handleInsert });
 };
 
 Suggestion.propTypes = {
   value: _react2.default.PropTypes.string.isRequired,
+  handleInsert: _react2.default.PropTypes.func.isRequired,
   renderSuggestion: _react2.default.PropTypes.func.isRequired
 };
 
@@ -21172,16 +21183,22 @@ var _Suggestion = require('./Suggestion.jsx');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SuggestionList = exports.SuggestionList = function SuggestionList(_ref) {
-  var suggestions = _ref.suggestions;
-  var renderSuggestion = _ref.renderSuggestion;
   var className = _ref.className;
+  var tags = _ref.tags;
+  var suggestions = _ref.suggestions;
+  var _handleInsert = _ref.handleInsert;
+  var renderSuggestion = _ref.renderSuggestion;
   return _react2.default.createElement(
     'div',
     { className: className },
     suggestions.map(function (suggestion, index) {
       return _react2.default.createElement(_Suggestion.Suggestion, {
         key: index,
-        value: suggestion,
+        value: suggestion
+        // handleInsert={() => handleInsert(tags, suggestion)}
+        , handleInsert: function handleInsert() {
+          console.log('suggestion insert');_handleInsert(tags, suggestion);
+        },
         renderSuggestion: renderSuggestion
       });
     })
@@ -21189,7 +21206,9 @@ var SuggestionList = exports.SuggestionList = function SuggestionList(_ref) {
 };
 
 SuggestionList.propTypes = {
+  tags: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.any).isRequired,
   suggestions: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.any).isRequired,
+  handleInsert: _react2.default.PropTypes.func.isRequired,
   renderSuggestion: _react2.default.PropTypes.func.isRequired,
   className: _react2.default.PropTypes.string.isRequired
 };
@@ -21276,7 +21295,6 @@ var defaultRenderTag = exports.defaultRenderTag = function defaultRenderTag(_ref
     _react2.default.createElement(
       'button',
       {
-        type: 'button',
         onClick: handleRemove
       },
       'x'
@@ -21297,17 +21315,23 @@ var defaultSuggestionClassName = exports.defaultSuggestionClassName = 'react-inp
 
 var defaultRenderSuggestion = exports.defaultRenderSuggestion = function defaultRenderSuggestion(_ref2) {
   var value = _ref2.value;
+  var handleInsert = _ref2.handleInsert;
   return _react2.default.createElement(
     'div',
     {
-      className: defaultSuggestionClassName
+      className: defaultSuggestionClassName,
+      onClick: handleInsert,
+      onMouseDown: function onMouseDown(event) {
+        console.log('suggestion mousedown', event);event.preventDefault();
+      }
     },
     value
   );
 };
 
 defaultRenderSuggestion.propTypes = {
-  value: _react2.default.PropTypes.string.isRequired
+  value: _react2.default.PropTypes.string.isRequired,
+  handleInsert: _react2.default.PropTypes.func.isRequired
 };
 
 },{"react":172}]},{},[1]);

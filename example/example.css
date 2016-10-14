@@ -30,4 +30,5 @@
 
 .react-input-tags-suggestion {
   padding: 5px;
+  cursor: pointer;
 }

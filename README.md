@@ -12,10 +12,11 @@ React component for tagging inputs.
 
 ### Suggestions
 - [X] display list of suggestions onInputChange
-  - [ ] only display list of suggestions when there is text typed
   - [ ] container? tagsinput component? tagsinput seems like it should be separated from suggestions
-- [ ] select suggestion, insert as tag
-  - [ ] if click a suggestion, onblur shouldn't insert the typed text as tag (prevent default?)
+- [X] select suggestion, insert as tag
+- [ ] navigate through list of suggestions using keyboard arrows
+  - [ ] up and down to move through list
+  - [ ] enter to add a suggestion as a tag
 
 ### Advanced
 - [ ] edit tag by clicking

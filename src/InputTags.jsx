@@ -69,7 +69,12 @@ export class InputTags extends React.Component {
     handleInputChange(inputValue);
   }
 
-  handleOnBlur = () => {
+  handleOnBlur = (event) => {
+    // if suggestion inserted, prevent default
+    // if suggestion element clicked, prevent default (aka onblur?)
+    // or maybe just use as an if statement
+    console.log('input onblur', event);
+
     const { inputValue } = this.state;
     const { tags } = this.props;
 
@@ -105,6 +110,14 @@ export class InputTags extends React.Component {
       suggestionListClassName,
     } = this.props;
     const { inputValue } = this.state;
+    const suggestionsElement = inputValue.length > 0 ?
+      <SuggestionList
+        className={suggestionListClassName}
+        tags={tags}
+        suggestions={suggestions}
+        handleInsert={this.insertTag}
+        renderSuggestion={renderSuggestion}
+      /> : null;
     return (
       <div
         className={className}
@@ -128,11 +141,7 @@ export class InputTags extends React.Component {
             placeholder={inputPlaceholder}
           />
         </div>
-        <SuggestionList
-          className={suggestionListClassName}
-          suggestions={suggestions}
-          renderSuggestion={renderSuggestion}
-        />
+        {suggestionsElement}
       </div>
     );
   }

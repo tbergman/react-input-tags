@@ -1,9 +1,10 @@
 import React from 'react';
 
-export const Suggestion = ({ value, renderSuggestion }) =>
-  renderSuggestion({ value });
+export const Suggestion = ({ value, handleInsert, renderSuggestion }) =>
+  renderSuggestion({ value, handleInsert });
 
 Suggestion.propTypes = {
   value: React.PropTypes.string.isRequired,
+  handleInsert: React.PropTypes.func.isRequired,
   renderSuggestion: React.PropTypes.func.isRequired,
 };

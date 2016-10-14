@@ -10,6 +10,9 @@ describe('<InputTags />', () => {
   // TODO: test that classname appears
   // TODO: test that style appears
 
+  // TODO: test that when input value is empty string, suggestions shoudl * not * show
+  // TODO: when input value is non empty string, suggestions should show (empty array of suggestions?)
+
   describe('<Input />', () => {
     let inputWrapper;
 
@@ -49,6 +52,8 @@ describe('<InputTags />', () => {
     });
 
     describe('onBlur()', () => {
+      // TODO: when suggestion is clicked, onBlur should * not * be called
+      // TODO: create suggestion test file
       context('when state `inputValue` has length greater than `0`', () => {
         const nonEmptyInputValue = 'ken@ferguson.com';
         let onBlurWrapper;

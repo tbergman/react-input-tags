@@ -33,7 +33,6 @@ export const defaultRenderTag = ({ value, handleRemove }) =>
       {value}
     </span>
     <button
-      type={'button'}
       onClick={handleRemove}
     >
       {'x'}
@@ -51,13 +50,16 @@ export const defaultSuggestionListClassName = 'react-input-tags-suggestionlist';
 /* Suggestion */
 export const defaultSuggestionClassName = 'react-input-tags-suggestion';
 
-export const defaultRenderSuggestion = ({ value }) =>
+export const defaultRenderSuggestion = ({ value, handleInsert }) =>
   <div
     className={defaultSuggestionClassName}
+    onClick={handleInsert}
+    onMouseDown={(event) => { console.log('suggestion mousedown', event); event.preventDefault(); }}
   >
     {value}
   </div>;
 
 defaultRenderSuggestion.propTypes = {
   value: React.PropTypes.string.isRequired,
+  handleInsert: React.PropTypes.func.isRequired,
 };
