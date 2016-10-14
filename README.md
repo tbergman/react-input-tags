@@ -20,6 +20,7 @@ React component for tagging inputs.
 - [ ] navigate through list of suggestions using keyboard arrows
   - [ ] up and down to move through list
   - [ ] enter to add a suggestion as a tag
+- [ ] highlight suggestions when move through them with keys, over them with mouse
 
 ### Advanced
 - [ ] edit tag by clicking
