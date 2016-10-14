@@ -21152,11 +21152,13 @@ var Suggestion = exports.Suggestion = function Suggestion(_ref) {
   var value = _ref.value;
   var handleInsert = _ref.handleInsert;
   var renderSuggestion = _ref.renderSuggestion;
-  return renderSuggestion({ value: value, handleInsert: handleInsert });
+
+  console.log(handleInsert);
+  renderSuggestion({ value: value, handleInsert: handleInsert });
 };
 
 Suggestion.propTypes = {
-  value: _react2.default.PropTypes.string.isRequired,
+  value: _react2.default.PropTypes.any.isRequired,
   handleInsert: _react2.default.PropTypes.func.isRequired,
   renderSuggestion: _react2.default.PropTypes.func.isRequired
 };
