@@ -56,7 +56,7 @@ export const defaultRenderSuggestion = ({ value, handleInsert }) =>
   <div
     className={defaultSuggestionClassName}
     onClick={handleInsert}
-    onMouseDown={() => { console.log('suggestion mouse down'); }}
+    onMouseDown={event => event.preventDefault()}
     // cancels the event since clicking a suggestion can lead to undesired behavior
     // for example, clicking on a suggestion after typing in the input causes an onblur event
     // onMouseDown={event => event.preventDefault()}
