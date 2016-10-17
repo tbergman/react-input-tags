@@ -3,7 +3,7 @@ import { shallow, mount } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { Input } from '../src/Input.jsx';
+import { Input, MIRROR_STYLES } from '../src/Input.jsx';
 import { noop } from './util';
 
 describe('<Input />', () => {
@@ -17,21 +17,42 @@ describe('<Input />', () => {
           onChange={noop}
           onBlur={noop}
           onKeyDown={noop}
-          placeholder={''}
+          placeholder={'type here'}
         />
       );
     });
 
-    // TODO: test that style attributes copied to mirrorNode
-    // TODO: test that width is updated
-      // console.log(componentDidMountWrapper.ref('inputNode'));
-      // console.log(componentDidMountWrapper.ref('inputNode').render());
-      // console.log(componentDidMountWrapper.ref('mirrorNode').render().css('width'));
+    it('should copy the font styling from the input to the mirror element', () => {
+      const inputStyles = window.getComputedStyle(componentDidMountWrapper.find('#inputNode').node);
+      const mirrorStyles = componentDidMountWrapper.find('#mirrorNode').node.style;
+      MIRROR_STYLES.forEach((mStyle) => {
+        expect(mirrorStyles[mStyle]).to.equal(inputStyles[mStyle]);
+      });
+    });
+
+    /*
+    Note: jsdom does not implement browser box model so we can * not * test the following
+
+    it('should set the input width with the mirror width', () => {
+      const inputWidth = wrapper.find('#inputNode').node.style.width;
+      const mirrorWidth = wrapper.find('#mirrorNode').node.style.width;
+      expect(inputWidth).to.equal(mirrorWidth);
+    });
+    */
   });
 
+  /*
+  Note: jsdom does not implement browser box model so we can * not * test the following
+
   describe('componentDidUpdate()', () => {
-    // TODO: test that when the component updates, the width is updated
+    it('should update the input width with the mirror width', () => {
+      wrapper.find('input').simulate('change', { target: { value: 'a' }})
+      const inputWidth = wrapper.find('#inputNode').node.style.width;
+      const mirrorWidth = wrapper.find('#mirrorNode').node.style.width;
+      expect(inputWidth).to.equal(mirrorWidth);
+    });
   });
+  */
 
   describe('onChange()', () => {
     const newInputValue = 'a';

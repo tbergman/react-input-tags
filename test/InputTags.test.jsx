@@ -5,14 +5,9 @@ import sinon from 'sinon';
 
 import { InputTags } from '../src/InputTags.jsx';
 import { noop } from './util';
+import { defaultSuggestionListClassName } from '../src/default.jsx';
 
 describe('<InputTags />', () => {
-  // TODO: test that classname appears
-  // TODO: test that style appears
-
-  // TODO: test that when input value is empty string, suggestions shoudl * not * show
-  // TODO: when input value is non empty string, suggestions should show (empty array of suggestions?)
-
   describe('<Input />', () => {
     let inputWrapper;
 
@@ -53,23 +48,20 @@ describe('<InputTags />', () => {
 
     describe('onBlur()', () => {
       // TODO: when suggestion is clicked, onBlur should * not * be called
-      // TODO: create suggestion test file
       context('when state `inputValue` has length greater than `0`', () => {
         const nonEmptyInputValue = 'ken@ferguson.com';
         let onBlurWrapper;
         let onBlurTags;
         let onBlurHandleInsert;
-        let onBlurHandleRemove;
 
         beforeEach(() => {
           onBlurTags = [];
           onBlurHandleInsert = sinon.stub();
-          onBlurHandleRemove = sinon.stub();
           onBlurWrapper = mount(
             <InputTags
               tags={onBlurTags}
               handleInsert={onBlurHandleInsert}
-              handleRemove={onBlurHandleRemove}
+              handleRemove={noop}
             />
           );
 
@@ -91,17 +83,15 @@ describe('<InputTags />', () => {
         let onBlurWrapper;
         let onBlurTags;
         let onBlurHandleInsert;
-        let onBlurHandleRemove;
 
         beforeEach(() => {
           onBlurTags = [];
           onBlurHandleInsert = sinon.stub();
-          onBlurHandleRemove = sinon.stub();
           onBlurWrapper = mount(
             <InputTags
               tags={onBlurTags}
               handleInsert={onBlurHandleInsert}
-              handleRemove={onBlurHandleRemove}
+              handleRemove={noop}
             />
           );
 
@@ -312,6 +302,49 @@ describe('<InputTags />', () => {
         it('should * not * remove the tag', () => {
           expect(onKeyDownHandleRemove).to.not.have.been.called();
         });
+      });
+    });
+  });
+
+  describe('<SuggestionList />', () => {
+    context('when input value is empty string', () => {
+      const emptyInputValue = '';
+      let suggestionListWrapper;
+
+      beforeEach(() => {
+        suggestionListWrapper = mount(
+          <InputTags
+            tags={[]}
+            handleInsert={noop}
+            handleRemove={noop}
+          />
+        );
+
+        suggestionListWrapper.find('input').simulate('change', { target: { value: emptyInputValue } });
+      });
+
+      it('should * not * be displayed', () => {
+        expect(suggestionListWrapper.find(`.${defaultSuggestionListClassName}`)).to.have.length(0);
+      });
+    });
+    context('when input value is * not * an empty string', () => {
+      const nonEmptyInputValue = 'a';
+      let suggestionListWrapper;
+
+      beforeEach(() => {
+        suggestionListWrapper = mount(
+          <InputTags
+            tags={[]}
+            handleInsert={noop}
+            handleRemove={noop}
+          />
+        );
+
+        suggestionListWrapper.find('input').simulate('change', { target: { value: nonEmptyInputValue } });
+      });
+
+      it('should be displayed', () => {
+        expect(suggestionListWrapper.find(`.${defaultSuggestionListClassName}`)).to.have.length(1);
       });
     });
   });

@@ -13,6 +13,7 @@ React component for tagging inputs.
 ### Suggestions
 - [X] display list of suggestions onInputChange
 - [X] select suggestion, insert as tag
+- [ ] allow handling of what actually gets inserted as a tag using a suggestion (a property of an object, a string, etc.)
 - [ ] container? tagsinput component? tagsinput seems like it should be separated from suggestions
 - [ ] tests
 - [ ] autoselect the first item in suggestions list so enter will enter it
@@ -31,5 +32,5 @@ React component for tagging inputs.
 
 ### Dev
 - [ ] watchify, browserify hot module reload, dev server
-- [ ] continuous integration with tests with Jenkins
-- [ ] demo website using github pages
+- [ ] continuous deployment when push to github master and tests pass, publish npm module
+- [ ] on deploy, update the demo website using github pages

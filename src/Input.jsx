@@ -1,5 +1,17 @@
 import React from 'react';
 
+export const MIRROR_STYLES = [
+  'fontFamily',
+  'fontSize',
+  'fontStyle',
+  'fontWeight',
+  'lineHeight',
+  'letterSpacing',
+  'wordSpacing',
+];
+
+export const INPUT_WIDTH_EXTRA = 2;
+
 export class Input extends React.Component {
   static propTypes = {
     value: React.PropTypes.string.isRequired,
@@ -20,22 +32,13 @@ export class Input extends React.Component {
 
   mirrorInputStyle() {
     const inputStyle = window.getComputedStyle(this.inputNode);
-    const mirrorStyles = [
-      'fontFamily',
-      'fontSize',
-      'fontStyle',
-      'fontWeight',
-      'lineHeight',
-      'letterSpacing',
-      'wordSpacing',
-    ];
-    mirrorStyles.forEach((mStyle) => {
+    MIRROR_STYLES.forEach((mStyle) => {
       this.mirrorNode.style[mStyle] = inputStyle[mStyle];
     });
   }
 
   updateInputWidth() {
-    const newInputWidth = this.mirrorNode.offsetWidth + 2;
+    const newInputWidth = this.mirrorNode.offsetWidth + INPUT_WIDTH_EXTRA;
     this.inputNode.style.width = `${newInputWidth}px`;
   }
 
@@ -53,12 +56,14 @@ export class Input extends React.Component {
     return (
       <span>
         <span
+          id={'mirrorNode'}
           ref={(c) => { this.mirrorNode = c; }}
           style={mirrorStyle}
         >
           {mirrorValue}
         </span>
         <input
+          id={'inputNode'}
           ref={(c) => { this.inputNode = c; }}
           type={'text'}
           value={value}
