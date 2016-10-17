@@ -47,7 +47,6 @@ describe('<InputTags />', () => {
     });
 
     describe('onBlur()', () => {
-      // TODO: when suggestion is clicked, onBlur should * not * be called
       context('when state `inputValue` has length greater than `0`', () => {
         const nonEmptyInputValue = 'ken@ferguson.com';
         let onBlurWrapper;
@@ -110,9 +109,6 @@ describe('<InputTags />', () => {
     });
 
     describe('onKeyDown', () => {
-      // TODO: test that insert prevents default event from propagating (bubbling up)
-      // comma should not type a comma
-      // tab should not reset focus on browser url
       context('when event `keyCode` is in `insertKeyCodes`', () => {
         const enterKeyCode = 13;
 
@@ -137,6 +133,11 @@ describe('<InputTags />', () => {
 
             onKeyDownWrapper.setState({ inputValue: nonEmptyInputValue });
             onKeyDownWrapper.find('input').simulate('keydown', { keyCode: enterKeyCode });
+          });
+
+          it('should cancel the event by calling preventDefault()', () => {
+            // TODO
+            // find input, props, onKeyDown
           });
 
           it('should clear the state `inputValue`', () => {

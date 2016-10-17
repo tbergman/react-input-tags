@@ -20845,7 +20845,7 @@ module.exports = require('./lib/React');
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Input = undefined;
+exports.Input = exports.INPUT_WIDTH_EXTRA = exports.MIRROR_STYLES = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -20860,6 +20860,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MIRROR_STYLES = exports.MIRROR_STYLES = ['fontFamily', 'fontSize', 'fontStyle', 'fontWeight', 'lineHeight', 'letterSpacing', 'wordSpacing'];
+
+var INPUT_WIDTH_EXTRA = exports.INPUT_WIDTH_EXTRA = 2;
 
 var Input = exports.Input = function (_React$Component) {
   _inherits(Input, _React$Component);
@@ -20887,15 +20891,14 @@ var Input = exports.Input = function (_React$Component) {
       var _this2 = this;
 
       var inputStyle = window.getComputedStyle(this.inputNode);
-      var mirrorStyles = ['fontFamily', 'fontSize', 'fontStyle', 'fontWeight', 'lineHeight', 'letterSpacing', 'wordSpacing'];
-      mirrorStyles.forEach(function (mStyle) {
+      MIRROR_STYLES.forEach(function (mStyle) {
         _this2.mirrorNode.style[mStyle] = inputStyle[mStyle];
       });
     }
   }, {
     key: 'updateInputWidth',
     value: function updateInputWidth() {
-      var newInputWidth = this.mirrorNode.offsetWidth + 2;
+      var newInputWidth = this.mirrorNode.offsetWidth + INPUT_WIDTH_EXTRA;
       this.inputNode.style.width = newInputWidth + 'px';
     }
   }, {
@@ -20925,6 +20928,7 @@ var Input = exports.Input = function (_React$Component) {
         _react2.default.createElement(
           'span',
           {
+            id: 'mirrorNode',
             ref: function ref(c) {
               _this3.mirrorNode = c;
             },
@@ -20933,6 +20937,7 @@ var Input = exports.Input = function (_React$Component) {
           mirrorValue
         ),
         _react2.default.createElement('input', {
+          id: 'inputNode',
           ref: function ref(c) {
             _this3.inputNode = c;
           },
@@ -21020,6 +21025,7 @@ var InputTags = exports.InputTags = function (_React$Component) {
       _this.setState({ inputValue: inputValue });
       handleInputChange(inputValue);
     }, _this.handleOnBlur = function () {
+      console.log('input tags on blur');
       var inputValue = _this.state.inputValue;
       var tags = _this.props.tags;
 
@@ -21037,6 +21043,9 @@ var InputTags = exports.InputTags = function (_React$Component) {
 
 
       if (insertKeyCodes.hasOwnProperty(keyCode) && inputValue.length > 0) {
+        // cancels the event since insert key codes can cause undesired default behavior
+        // for example, typing `,` would enter a comma in the input
+        // or typing `tab` would set the focus not on the input
         event.preventDefault();
         _this.insertTag(tags, inputValue);
       }
@@ -21058,6 +21067,7 @@ var InputTags = exports.InputTags = function (_React$Component) {
       var inputPlaceholder = _props.inputPlaceholder;
       var suggestions = _props.suggestions;
       var renderSuggestion = _props.renderSuggestion;
+      var getSuggestionValue = _props.getSuggestionValue;
       var className = _props.className;
       var tagsInputClassName = _props.tagsInputClassName;
       var suggestionListClassName = _props.suggestionListClassName;
@@ -21068,7 +21078,8 @@ var InputTags = exports.InputTags = function (_React$Component) {
         tags: tags,
         suggestions: suggestions,
         handleInsert: this.insertTag,
-        renderSuggestion: renderSuggestion
+        renderSuggestion: renderSuggestion,
+        getSuggestionValue: getSuggestionValue
       }) : null;
       return _react2.default.createElement(
         'div',
@@ -21116,6 +21127,7 @@ InputTags.propTypes = {
   inputPlaceholder: _react2.default.PropTypes.string,
   suggestions: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.any),
   renderSuggestion: _react2.default.PropTypes.func,
+  getSuggestionValue: _react2.default.PropTypes.func,
   handleInputChange: _react2.default.PropTypes.func,
   className: _react2.default.PropTypes.string,
   tagsInputClassName: _react2.default.PropTypes.string,
@@ -21128,6 +21140,7 @@ InputTags.defaultProps = {
   inputPlaceholder: _default.defaultInputPlaceholder,
   suggestions: _default.defaultSuggestions,
   renderSuggestion: _default.defaultRenderSuggestion,
+  getSuggestionValue: _default.defaultGetSuggestionValue,
   handleInputChange: _default.defaultHandleInputChange,
   className: _default.defaultInputTagsClassName,
   tagsInputClassName: _default.defaultTagsInputClassName,
@@ -21148,13 +21161,20 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// TODO: add classname to suggestion, but not controlling the rendering
 var Suggestion = exports.Suggestion = function Suggestion(_ref) {
   var value = _ref.value;
   var handleInsert = _ref.handleInsert;
   var renderSuggestion = _ref.renderSuggestion;
-
-  console.log(handleInsert);
-  renderSuggestion({ value: value, handleInsert: handleInsert });
+  return _react2.default.createElement(
+    'div',
+    {
+      onMouseDown: function onMouseDown(event) {
+        return event.preventDefault();
+      }
+    },
+    renderSuggestion({ value: value, handleInsert: handleInsert })
+  );
 };
 
 Suggestion.propTypes = {
@@ -21185,6 +21205,7 @@ var SuggestionList = exports.SuggestionList = function SuggestionList(_ref) {
   var suggestions = _ref.suggestions;
   var _handleInsert = _ref.handleInsert;
   var renderSuggestion = _ref.renderSuggestion;
+  var getSuggestionValue = _ref.getSuggestionValue;
   return _react2.default.createElement(
     'div',
     { className: className },
@@ -21193,7 +21214,7 @@ var SuggestionList = exports.SuggestionList = function SuggestionList(_ref) {
         key: index,
         value: suggestion,
         handleInsert: function handleInsert() {
-          return _handleInsert(tags, suggestion);
+          return _handleInsert(tags, getSuggestionValue(suggestion));
         },
         renderSuggestion: renderSuggestion
       });
@@ -21206,6 +21227,7 @@ SuggestionList.propTypes = {
   suggestions: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.any).isRequired,
   handleInsert: _react2.default.PropTypes.func.isRequired,
   renderSuggestion: _react2.default.PropTypes.func.isRequired,
+  getSuggestionValue: _react2.default.PropTypes.func.isRequired,
   className: _react2.default.PropTypes.string.isRequired
 };
 
@@ -21242,7 +21264,7 @@ Tag.propTypes = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.defaultRenderSuggestion = exports.defaultSuggestionClassName = exports.defaultSuggestionListClassName = exports.defaultRenderTag = exports.defaultTagClassName = exports.defaultInputPlaceholder = exports.defaultTagsInputClassName = exports.defaultInputTagsClassName = exports.defaultHandleInputChange = exports.defaultSuggestions = exports.defaultRemoveKeyCodes = exports.defaultInsertKeyCodes = undefined;
+exports.defaultRenderSuggestion = exports.defaultSuggestionClassName = exports.defaultGetSuggestionValue = exports.defaultSuggestionListClassName = exports.defaultRenderTag = exports.defaultTagClassName = exports.defaultInputPlaceholder = exports.defaultTagsInputClassName = exports.defaultInputTagsClassName = exports.defaultHandleInputChange = exports.defaultSuggestions = exports.defaultRemoveKeyCodes = exports.defaultInsertKeyCodes = undefined;
 
 var _react = require('react');
 
@@ -21306,6 +21328,10 @@ defaultRenderTag.propTypes = {
 /* SuggestionList */
 var defaultSuggestionListClassName = exports.defaultSuggestionListClassName = 'react-input-tags-suggestionlist';
 
+var defaultGetSuggestionValue = exports.defaultGetSuggestionValue = function defaultGetSuggestionValue(suggestion) {
+  return suggestion;
+};
+
 /* Suggestion */
 var defaultSuggestionClassName = exports.defaultSuggestionClassName = 'react-input-tags-suggestion';
 
@@ -21317,9 +21343,12 @@ var defaultRenderSuggestion = exports.defaultRenderSuggestion = function default
     {
       className: defaultSuggestionClassName,
       onClick: handleInsert,
-      onMouseDown: function onMouseDown(event) {
-        return event.preventDefault();
+      onMouseDown: function onMouseDown() {
+        console.log('suggestion mouse down');
       }
+      // cancels the event since clicking a suggestion can lead to undesired behavior
+      // for example, clicking on a suggestion after typing in the input causes an onblur event
+      // onMouseDown={event => event.preventDefault()}
     },
     value
   );

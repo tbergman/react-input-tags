@@ -12,6 +12,7 @@ import {
   defaultSuggestions,
   defaultRenderSuggestion,
   defaultHandleInputChange,
+  defaultGetSuggestionValue,
   defaultInputTagsClassName,
   defaultTagsInputClassName,
   defaultSuggestionListClassName,
@@ -28,6 +29,7 @@ export class InputTags extends React.Component {
     inputPlaceholder: React.PropTypes.string,
     suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
     renderSuggestion: React.PropTypes.func,
+    getSuggestionValue: React.PropTypes.func,
     handleInputChange: React.PropTypes.func,
     className: React.PropTypes.string,
     tagsInputClassName: React.PropTypes.string,
@@ -41,6 +43,7 @@ export class InputTags extends React.Component {
     inputPlaceholder: defaultInputPlaceholder,
     suggestions: defaultSuggestions,
     renderSuggestion: defaultRenderSuggestion,
+    getSuggestionValue: defaultGetSuggestionValue,
     handleInputChange: defaultHandleInputChange,
     className: defaultInputTagsClassName,
     tagsInputClassName: defaultTagsInputClassName,
@@ -70,6 +73,7 @@ export class InputTags extends React.Component {
   }
 
   handleOnBlur = () => {
+    console.log('input tags on blur');
     const { inputValue } = this.state;
     const { tags } = this.props;
 
@@ -84,6 +88,9 @@ export class InputTags extends React.Component {
     const { tags, insertKeyCodes, removeKeyCodes } = this.props;
 
     if (insertKeyCodes.hasOwnProperty(keyCode) && inputValue.length > 0) {
+      // cancels the event since insert key codes can cause undesired default behavior
+      // for example, typing `,` would enter a comma in the input
+      // or typing `tab` would set the focus not on the input
       event.preventDefault();
       this.insertTag(tags, inputValue);
     }
@@ -100,6 +107,7 @@ export class InputTags extends React.Component {
       inputPlaceholder,
       suggestions,
       renderSuggestion,
+      getSuggestionValue,
       className,
       tagsInputClassName,
       suggestionListClassName,
@@ -112,6 +120,7 @@ export class InputTags extends React.Component {
         suggestions={suggestions}
         handleInsert={this.insertTag}
         renderSuggestion={renderSuggestion}
+        getSuggestionValue={getSuggestionValue}
       /> : null;
     return (
       <div

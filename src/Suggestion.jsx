@@ -1,7 +1,12 @@
 import React from 'react';
 
+// TODO: add classname to suggestion, but not controlling the rendering
 export const Suggestion = ({ value, handleInsert, renderSuggestion }) =>
-  renderSuggestion({ value, handleInsert });
+  <div
+    onMouseDown={event => event.preventDefault()}
+  >
+    {renderSuggestion({ value, handleInsert })}
+  </div>;
 
 Suggestion.propTypes = {
   value: React.PropTypes.any.isRequired,

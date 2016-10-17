@@ -24,6 +24,10 @@ describe('<Suggestion />', () => {
       onClickWrapper.find(`.${defaultSuggestionClassName}`).simulate('click');
     });
 
+    it('should cancel the event by calling preventDefault()', () => {
+      // TODO
+    });
+
     it('should insert the tag', () => {
       expect(onClickHandleInsert).to.have.been.called();
     });
