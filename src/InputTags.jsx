@@ -73,7 +73,6 @@ export class InputTags extends React.Component {
   }
 
   handleOnBlur = () => {
-    console.log('input tags on blur');
     const { inputValue } = this.state;
     const { tags } = this.props;
 

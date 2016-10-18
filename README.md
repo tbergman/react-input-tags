@@ -13,7 +13,6 @@ React component for tagging inputs.
 ### Suggestions
 - [X] display list of suggestions onInputChange
 - [X] select suggestion, insert as tag
-- [ ] allow handling of what actually gets inserted as a tag using a suggestion (a property of an object, a string, etc.)
 - [ ] tests
 - [ ] container? tagsinput component? tagsinput seems like it should be separated from suggestions
 - [ ] reasearch using children instead of passing in render functions
