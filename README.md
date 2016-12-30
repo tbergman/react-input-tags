@@ -25,6 +25,7 @@ React component for tagging inputs.
 - [ ] highlight suggestions when move through them with keys, over them with mouse
 
 ### Advanced
+- [ ] loading state for fetching suggestions
 - [ ] edit tag by clicking
 - [ ] reorder tags by dragging
 - [ ] drag tag from one component to another (onDrag?)
