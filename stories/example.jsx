@@ -1,10 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { InputTags } from '../src/InputTags.jsx';
+import InputTags from '../src/index.js';
 
 const data = ['apple', 'banana', 'cherry'];
 
-class Example extends React.Component {
+export class Example extends React.Component {
   state = {
     tags: [],
     suggestions: [],
@@ -46,5 +45,3 @@ class Example extends React.Component {
     );
   }
 }
-
-ReactDOM.render(<Example />, document.getElementById('react-app'));
