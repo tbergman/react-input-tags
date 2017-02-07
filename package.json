@@ -5,7 +5,7 @@
   "main": "dist/react-input-tags.js",
   "scripts": {
     "dev": "start-storybook -p 9001 -c .storybook",
-    "lint": "",
+    "lint": "eslint src/*",
     "pretest": "npm run lint",
     "test": "npm run test-mocha && npm run test-storyshots",
     "test-mocha": "mocha test/* --require babel-core/register --require test/setup.js",
@@ -25,7 +25,6 @@
     "url": "https://github.com/baldwmic/react-input-tags/issues"
   },
   "homepage": "https://github.com/baldwmic/react-input-tags#readme",
-  "dependencies": {},
   "devDependencies": {
     "@kadira/storybook": "^2.35.3",
     "@kadira/storyshots": "^2.1.0",

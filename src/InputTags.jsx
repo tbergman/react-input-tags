@@ -113,6 +113,7 @@ export class InputTags extends React.Component {
     } = this.props;
     const { inputValue } = this.state;
     const suggestionsElement = inputValue.length > 0 ?
+    (
       <SuggestionList
         className={suggestionListClassName}
         tags={tags}
@@ -120,7 +121,8 @@ export class InputTags extends React.Component {
         handleInsert={this.insertTag}
         renderSuggestion={renderSuggestion}
         getSuggestionValue={getSuggestionValue}
-      /> : null;
+      />
+    ) : null;
     return (
       <div
         className={className}
