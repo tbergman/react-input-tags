@@ -5,10 +5,15 @@
   "main": "dist/react-input-tags.js",
   "scripts": {
     "dev": "start-storybook -p 9001 -c .storybook",
-    "build": "browserify -s InputTags -t babelify src/index.js -o dist/react-input-tags.js",
+    "lint": "",
+    "pretest": "npm run lint",
     "test": "npm run test-mocha && npm run test-storyshots",
     "test-mocha": "mocha test/* --require babel-core/register --require test/setup.js",
-    "test-storyshots": "storyshots"
+    "test-storyshots": "storyshots",
+    "prebuild": "npm run test",
+    "build": "browserify -s InputTags -t babelify src/index.js -o dist/react-input-tags.js",
+    "prepublish": "npm run build",
+    "publish": "npm version patch && npm run publish && git push --follow-tags"
   },
   "repository": {
     "type": "git",
