@@ -5,8 +5,19 @@ import InputTags from '../src/index.js';
 import { Example } from './example.jsx';
 import './example.css';
 
+storiesOf('InputTags', module)
+  .add('create token manually', () => (
+    <div className='container'>
+      <InputTags
+        tags={[]}
+        handleInsert={action('handleInsert')}
+        handleRemove={action('handleRemove')}
+      />
+    </div>
+  ));
+
 storiesOf('ExampleTags', module)
-  .addDecorator((story) => (
+  .addDecorator(() => (
     <Example
       handleInsert={action('handleInsert')}
       handleRemove={action('handleRemove')}
@@ -14,9 +25,5 @@ storiesOf('ExampleTags', module)
     />
   ))
   .add('blank', () => (
-    <ExampleTags />
-  ))
-  .add('suggestions', () => (
-    // pass in list of suggestions
     <ExampleTags />
   ))
