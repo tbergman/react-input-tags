@@ -32,7 +32,6 @@ React component for tagging inputs.
 - [ ] tests
 
 ### Dev
-- [ ] continuous deployment when push to github master and tests pass, publish npm module
 - [ ] on deploy, update the demo website using github pages
 
 ### WAI ARIA Compliance
