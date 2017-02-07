@@ -8,8 +8,10 @@
 }
 
 .react-input-tags-tagsinput {
+  /*
   display: flex;
   flex-wrap: wrap;
+  */
 }
 
 .react-input-tags input {
@@ -18,9 +20,11 @@
   /* input element does * not * inherit font styling by default */
   font-family: inherit;
   font-size: inherit;
+  /* TODO: make this not overflow, textarea? */
 }
 
 .react-input-tags-tag {
+  word-wrap: break-word;
   background-color: #fdf;
 }
 
