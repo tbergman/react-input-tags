@@ -7,7 +7,11 @@ import './example.css';
 
 storiesOf('ExampleTags', module)
   .addDecorator((story) => (
-    <Example />
+    <Example
+      handleInsert={action('handleInsert')}
+      handleRemove={action('handleRemove')}
+      handleInputChange={action('handleInputChange')}
+    />
   ))
   .add('blank', () => (
     <ExampleTags />
@@ -16,4 +20,3 @@ storiesOf('ExampleTags', module)
     // pass in list of suggestions
     <ExampleTags />
   ))
- 
