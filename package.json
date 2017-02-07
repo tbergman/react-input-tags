@@ -4,12 +4,11 @@
   "description": "React component for inputting tags",
   "main": "dist/react-input-tags.js",
   "scripts": {
-    "example": "browserify -t babelify example/example.jsx -o example/bundle.js",
+    "dev": "start-storybook -p 9001 -c .storybook",
     "build": "browserify -s InputTags -t babelify src/index.js -o dist/react-input-tags.js",
-    "test": "mocha test/* --require babel-core/register --require test/setup.js",
-    "version": "npm run build",
-    "storybook": "start-storybook -p 9001 -c .storybook",
-    "test-storybook": "storyshots"
+    "test": "npm run test-mocha && npm run test-storyshots",
+    "test-mocha": "mocha test/* --require babel-core/register --require test/setup.js",
+    "test-storyshots": "storyshots"
   },
   "repository": {
     "type": "git",
