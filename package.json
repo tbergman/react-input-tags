@@ -11,7 +11,7 @@
     "test-mocha": "mocha test/* --require babel-core/register --require test/setup.js",
     "test-storyshots": "storyshots",
     "prebuild": "npm run test && npm run clean",
-    "clean": "rm -r dist/*",
+    "clean": "rm -rf dist/*",
     "build": "browserify -s InputTags -t babelify src/index.js -o dist/react-input-tags.js",
     "prepublish": "npm run build",
     "publish": "npm version patch && npm publish && git push --follow-tags"
