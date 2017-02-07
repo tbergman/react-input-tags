@@ -1,5 +1,6 @@
 node_modules
 src
 test
-example
+stories
 notes.md
+TODO.md

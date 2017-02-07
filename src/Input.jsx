@@ -31,6 +31,7 @@ export class Input extends React.Component {
   }
 
   mirrorInputStyle() {
+    if (!this.inputNode) return;
     const inputStyle = window.getComputedStyle(this.inputNode);
     MIRROR_STYLES.forEach((mStyle) => {
       this.mirrorNode.style[mStyle] = inputStyle[mStyle];
@@ -38,6 +39,7 @@ export class Input extends React.Component {
   }
 
   updateInputWidth() {
+    if (!this.mirrorNode) return;
     const newInputWidth = this.mirrorNode.offsetWidth + INPUT_WIDTH_EXTRA;
     this.inputNode.style.width = `${newInputWidth}px`;
   }

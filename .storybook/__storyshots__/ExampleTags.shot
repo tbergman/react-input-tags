@@ -1,0 +1,67 @@
+exports[`blank`] = `
+<div
+  className="container">
+  <div
+    className="react-input-tags">
+    <div
+      className="react-input-tags-tagsinput">
+      <span>
+        <span
+          id="mirrorNode"
+          style={
+            Object {
+              "overflow": "scroll",
+              "position": "absolute",
+              "visibility": "hidden",
+              "whiteSpace": "pre",
+            }
+          }>
+          add tag
+        </span>
+        <input
+          id="inputNode"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onKeyDown={[Function]}
+          placeholder="add tag"
+          type="text"
+          value="" />
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`suggestions`] = `
+<div
+  className="container">
+  <div
+    className="react-input-tags">
+    <div
+      className="react-input-tags-tagsinput">
+      <span>
+        <span
+          id="mirrorNode"
+          style={
+            Object {
+              "overflow": "scroll",
+              "position": "absolute",
+              "visibility": "hidden",
+              "whiteSpace": "pre",
+            }
+          }>
+          add tag
+        </span>
+        <input
+          id="inputNode"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onKeyDown={[Function]}
+          placeholder="add tag"
+          type="text"
+          value="" />
+      </span>
+    </div>
+  </div>
+</div>
+`;
