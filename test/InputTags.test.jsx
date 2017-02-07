@@ -7,6 +7,18 @@ import { InputTags } from '../src/InputTags.jsx';
 import { noop } from './util';
 import { defaultSuggestionListClassName } from '../src/default.jsx';
 
+describe('InputTags', () => {
+  describe('create token manually', () => {
+    context('when user types in input field', () => {
+      context('when focus leaves container');
+
+      context('when `tab` key is pressed');
+
+      context('when `comma` key is pressed');
+    });
+  });
+});
+
 describe('<InputTags />', () => {
   describe('<Input />', () => {
     let inputWrapper;
