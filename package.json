@@ -13,7 +13,8 @@
     "prebuild": "npm run test && npm run clean",
     "clean": "rm -r dist/*",
     "build": "browserify -s InputTags -t babelify src/index.js -o dist/react-input-tags.js",
-    "publish": "npm version patch && npm run publish && git push --follow-tags"
+    "publish": "npm run publish",
+    "publish2": "npm version patch && npm run publish && git push --follow-tags"
   },
   "repository": {
     "type": "git",
