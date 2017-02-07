@@ -14,8 +14,8 @@
     "remove-dir": "rm -rf dist",
     "create-dir": "mkdir -p dist",
     "build": "browserify -s InputTags -t babelify src/index.js -o dist/react-input-tags.js",
-    "prepublish": "npm run build",
-    "publish": "npm publish && git push --follow-tags"
+    "predeploy": "npm run build",
+    "deploy": "npm publish && git push --follow-tags"
   },
   "repository": {
     "type": "git",
