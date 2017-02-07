@@ -5,10 +5,17 @@
   "main": "dist/react-input-tags.js",
   "scripts": {
     "dev": "start-storybook -p 9001 -c .storybook",
-    "build": "browserify -s InputTags -t babelify src/index.js -o dist/react-input-tags.js",
+    "lint": "eslint src/*",
+    "pretest": "npm run lint",
     "test": "npm run test-mocha && npm run test-storyshots",
     "test-mocha": "mocha test/* --require babel-core/register --require test/setup.js",
-    "test-storyshots": "storyshots"
+    "test-storyshots": "storyshots",
+    "prebuild": "npm run test && npm run remove-dir && npm run create-dir",
+    "remove-dir": "rm -rf dist",
+    "create-dir": "mkdir -p dist",
+    "build": "browserify -s InputTags -t babelify src/index.js -o dist/react-input-tags.js",
+    "prepublish": "npm run build",
+    "publish": "npm version patch && npm publish && git push --follow-tags"
   },
   "repository": {
     "type": "git",
@@ -20,7 +27,6 @@
     "url": "https://github.com/baldwmic/react-input-tags/issues"
   },
   "homepage": "https://github.com/baldwmic/react-input-tags#readme",
-  "dependencies": {},
   "devDependencies": {
     "@kadira/storybook": "^2.35.3",
     "@kadira/storyshots": "^2.1.0",

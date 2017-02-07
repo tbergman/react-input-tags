@@ -52,6 +52,7 @@ export const defaultGetSuggestionValue = suggestion => suggestion;
 /* Suggestion */
 export const defaultSuggestionClassName = 'react-input-tags-suggestion';
 
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 export const defaultRenderSuggestion = ({ value, handleInsert }) =>
   <div
     className={defaultSuggestionClassName}
