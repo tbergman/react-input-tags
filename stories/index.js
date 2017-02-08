@@ -10,7 +10,16 @@ storiesOf('InputTags', module)
   .add('create token manually', () => {
     return (
       <InputTags
-        tags={[]}
+        tags={['insert another']}
+        handleInsert={action('handleInsert')}
+        handleRemove={action('handleRemove')}
+      />
+    )
+  })
+  .add('delete token', () => {
+    return (
+      <InputTags
+        tags={['delete me']}
         handleInsert={action('handleInsert')}
         handleRemove={action('handleRemove')}
       />

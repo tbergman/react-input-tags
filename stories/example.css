@@ -1,3 +1,4 @@
+/*
 .container {
   max-width: 300px;
   margin: 50px auto;
@@ -6,27 +7,26 @@
   font-family: BlinkMacSystemFont;
   font-size: 14px;
 }
+*/
 
 .react-input-tags-tagsinput {
   max-width: 300px;
-  margin: 50px auto;
   background-color: lightblue;
+  border: 2px solid black;
 }
 
+/* TODO: make this not overflow, textarea? */
 .react-input-tags input {
-  /*
   border-style: none;
   outline: none;
-  */
   /* input element does * not * inherit font styling by default */
   font-family: inherit;
   font-size: inherit;
-  /* TODO: make this not overflow, textarea? */
 }
 
 .react-input-tags-tag {
   word-wrap: break-word;
-  background-color: #fdf;
+  background-color: lightpink;
 }
 
 .react-input-tags-suggestionlist {
