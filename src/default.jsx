@@ -2,7 +2,6 @@ import React from 'react';
 
 /* InputTags */
 export const defaultInsertKeyCodes = {
-  13: 'enter',
   9: 'tab',
   188: 'comma',
 };
