@@ -4,10 +4,10 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { InputTags } from '../src/InputTags.jsx';
-import { noop, tabKeyCode, commaKeyCode, backspaceKeyCode, emptyString, nonEmptyString } from './util';
+import { noop, tabKeyCode, commaKeyCode, backspaceKeyCode, aKeyCode, emptyString, nonEmptyString } from './util';
 import { defaultSuggestionListClassName } from '../src/default.jsx';
 
-describe.only('InputTags', () => {
+describe('InputTags', () => {
   let inputTagsWrapper;
   let tags;
   let handleInsert;
@@ -15,7 +15,7 @@ describe.only('InputTags', () => {
 
   describe('create token manually', () => {
     beforeEach(() => {
-      tags = ['insert another'];
+      tags = [];
       handleInsert = sinon.stub();
       handleRemove = sinon.stub();
 
@@ -30,6 +30,7 @@ describe.only('InputTags', () => {
 
     context('when input field is changed to non empty string', () => {
       const inputValue = nonEmptyString;
+
       beforeEach(() => {
         inputTagsWrapper.find('input').simulate('change', { target: { value: inputValue } });
       });
@@ -63,10 +64,21 @@ describe.only('InputTags', () => {
           expect(handleInsert).to.have.been.calledWith(tags, inputValue);
         });
       });
+
+      context('when `a` key is pressed', () => {
+        beforeEach(() => {
+          inputTagsWrapper.find('input').simulate('keydown', { keyCode: aKeyCode });
+        });
+
+        it('should *not* insert typed string as token', () => {
+          expect(handleInsert).to.not.have.been.called();
+        });
+      });
     });
 
     context('when input field is changed to empty string', () => {
       const inputValue = emptyString;
+
       beforeEach(() => {
         inputTagsWrapper.find('input').simulate('change', { target: { value: inputValue } });
       });
@@ -104,34 +116,24 @@ describe.only('InputTags', () => {
   });
 
   describe('delete token', () => {
-    beforeEach(() => {
-      tags = ['delete me'];
-      handleInsert = sinon.stub();
-      handleRemove = sinon.stub();
-
-      inputTagsWrapper = mount(
-        <InputTags
-          tags={tags}
-          handleInsert={handleInsert}
-          handleRemove={handleRemove}
-        />
-      );
-    });
-
-    context('when `x` button is clicked', () => {
+    context('when there is at least one tag', () => {
       beforeEach(() => {
-        inputTagsWrapper.find('button').simulate('click');
+        tags = ['delete me'];
+        handleInsert = sinon.stub();
+        handleRemove = sinon.stub();
+
+        inputTagsWrapper = mount(
+          <InputTags
+            tags={tags}
+            handleInsert={handleInsert}
+            handleRemove={handleRemove}
+          />
+        );
       });
 
-      it('should remove the token', () => {
-        expect(handleRemove).to.have.been.calledWith(tags, tags.length - 1);
-      });
-    });
-
-    context('when `backspace` key is pressed', () => {
-      context('when input field has not been changed', () => {
+      context('when `x` button is clicked', () => {
         beforeEach(() => {
-          inputTagsWrapper.find('input').simulate('keydown', { keyCode: backspaceKeyCode });
+          inputTagsWrapper.find('button').simulate('click');
         });
 
         it('should remove token', () => {
@@ -139,10 +141,62 @@ describe.only('InputTags', () => {
         });
       });
 
-      context('when input field has been changed to non empty string', () => {
-        beforeEach(() => {
+      context('when `backspace` key is pressed', () => {
+        context('when input field has not been changed', () => {
+          beforeEach(() => {
+            inputTagsWrapper.find('input').simulate('keydown', { keyCode: backspaceKeyCode });
+          });
+
+          it('should remove token', () => {
+            expect(handleRemove).to.have.been.calledWith(tags, tags.length - 1);
+          });
+        });
+
+        context('when input field has been changed to empty string', () => {
+          const inputValue = emptyString;
+
+          beforeEach(() => {
+            inputTagsWrapper.find('input').simulate('change', { target: { value: inputValue } });
+            inputTagsWrapper.find('input').simulate('keydown', { keyCode: backspaceKeyCode });
+          });
+
+          it('should remove token', () => {
+            expect(handleRemove).to.have.been.calledWith(tags, tags.length - 1);
+          });
+        });
+
+        context('when input field has been changed to non empty string', () => {
           const inputValue = nonEmptyString;
-          inputTagsWrapper.find('input').simulate('change', { target: { value: inputValue } });
+
+          beforeEach(() => {
+            inputTagsWrapper.find('input').simulate('change', { target: { value: inputValue } });
+            inputTagsWrapper.find('input').simulate('keydown', { keyCode: backspaceKeyCode });
+          });
+
+          it('should *not* remove token', () => {
+            expect(handleRemove).to.not.have.been.called();
+          });
+        });
+      });
+    });
+
+    context('when there are no tags', () => {
+      beforeEach(() => {
+        tags = [];
+        handleInsert = sinon.stub();
+        handleRemove = sinon.stub();
+
+        inputTagsWrapper = mount(
+          <InputTags
+            tags={tags}
+            handleInsert={handleInsert}
+            handleRemove={handleRemove}
+          />
+        );
+      });
+
+      context('when `backspace` key is pressed', () => {
+        beforeEach(() => {
           inputTagsWrapper.find('input').simulate('keydown', { keyCode: backspaceKeyCode });
         });
 
@@ -257,8 +311,6 @@ describe('<InputTags />', () => {
 
     describe('onKeyDown', () => {
       context('when event `keyCode` is in `insertKeyCodes`', () => {
-        const tabKeyCode = 9;
-
         context('when state `inputValue` has length greater than `0`', () => {
           const nonEmptyInputValue = 'abraham@lincoln.gov';
           let onKeyDownWrapper;

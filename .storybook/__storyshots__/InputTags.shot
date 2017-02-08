@@ -3,6 +3,58 @@ exports[`create token manually`] = `
   className="react-input-tags">
   <div
     className="react-input-tags-tagsinput">
+    <span
+      className="react-input-tags-tag">
+      <span>
+        insert another
+      </span>
+      <button
+        onClick={[Function]}>
+        x
+      </button>
+    </span>
+    <span>
+      <span
+        id="mirrorNode"
+        style={
+          Object {
+            "overflow": "scroll",
+            "position": "absolute",
+            "visibility": "hidden",
+            "whiteSpace": "pre",
+          }
+        }>
+        
+      </span>
+      <input
+        id="inputNode"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        placeholder=""
+        type="text"
+        value="" />
+    </span>
+  </div>
+</div>
+`;
+
+exports[`delete token`] = `
+<div
+  className="react-input-tags">
+  <div
+    className="react-input-tags-tagsinput">
+    <span
+      className="react-input-tags-tag">
+      <span>
+        delete me
+      </span>
+      <button
+        onClick={[Function]}>
+        x
+      </button>
+    </span>
     <span>
       <span
         id="mirrorNode"
