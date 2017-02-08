@@ -1,20 +1,21 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 
-import InputTags from '../src/index.js';
+import InputTags from '../src/index';
 import { Example } from './example.jsx';
 import './example.css';
+import { handleInsert, handleRemove } from 'util';
 
 storiesOf('InputTags', module)
-  .add('create token manually', () => (
-    <div className='container'>
+  .add('create token manually', () => {
+    return (
       <InputTags
         tags={[]}
         handleInsert={action('handleInsert')}
         handleRemove={action('handleRemove')}
       />
-    </div>
-  ));
+    )
+  });
 
 storiesOf('ExampleTags', module)
   .add('blank', () => (

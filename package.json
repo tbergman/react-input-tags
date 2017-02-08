@@ -10,6 +10,7 @@
     "test": "npm run test-mocha && npm run test-storyshots",
     "test-mocha": "mocha test/* --require babel-core/register --require test/setup.js",
     "test-storyshots": "storyshots",
+    "test-storyshots-update": "storyshots -u",
     "prebuild": "npm run test && npm run remove-dir && npm run create-dir",
     "remove-dir": "rm -rf dist",
     "create-dir": "mkdir -p dist",

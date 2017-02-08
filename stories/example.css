@@ -1,5 +1,5 @@
 .container {
-  width: 250px;
+  max-width: 300px;
   margin: 50px auto;
   background-color: #ff9;
   border: 2px solid black;
@@ -8,15 +8,16 @@
 }
 
 .react-input-tags-tagsinput {
-  /*
-  display: flex;
-  flex-wrap: wrap;
-  */
+  max-width: 300px;
+  margin: 50px auto;
+  background-color: lightblue;
 }
 
 .react-input-tags input {
+  /*
   border-style: none;
   outline: none;
+  */
   /* input element does * not * inherit font styling by default */
   font-family: inherit;
   font-size: inherit;

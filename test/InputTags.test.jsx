@@ -7,6 +7,107 @@ import { InputTags } from '../src/InputTags.jsx';
 import { noop } from './util';
 import { defaultSuggestionListClassName } from '../src/default.jsx';
 
+describe('InputTags', () => {
+  let inputTagsWrapper;
+  let tags;
+  let handleInsert;
+  let handleRemove;
+
+  beforeEach(() => {
+    tags = [];
+    handleInsert = sinon.stub();
+    handleRemove = sinon.stub();
+
+    inputTagsWrapper = mount(
+      <InputTags
+        tags={tags}
+        handleInsert={handleInsert}
+        handleRemove={handleRemove}
+      />
+    );
+  });
+
+  describe('create token manually', () => {
+    context('when user types non empty string in input field', () => {
+      const inputValue = 'm';
+      beforeEach(() => {
+        inputTagsWrapper.find('input').simulate('change', { target: { value: inputValue } });
+      });
+
+      context('when focus leaves input field', () => {
+        beforeEach(() => {
+          inputTagsWrapper.find('input').simulate('blur');
+        });
+
+        it('should insert typed string as token', () => {
+          expect(handleInsert).to.have.been.calledWith(tags, inputValue);
+        });
+      });
+
+      context('when `tab` key is pressed', () => {
+        beforeEach(() => {
+          const tabKeyCode = 9;
+          inputTagsWrapper.find('input').simulate('keydown', { keyCode: tabKeyCode });
+        });
+
+        it('should insert typed string as token', () => {
+          expect(handleInsert).to.have.been.calledWith(tags, inputValue);
+        });
+      });
+
+      context('when `comma` key is pressed', () => {
+        beforeEach(() => {
+          const commaKeyCode = 188;
+          inputTagsWrapper.find('input').simulate('keydown', { keyCode: commaKeyCode });
+        });
+
+        it('should insert typed string as token', () => {
+          expect(handleInsert).to.have.been.calledWith(tags, inputValue);
+        });
+      });
+    });
+
+    context('when user types empty string in input field', () => {
+      const inputValue = '';
+      beforeEach(() => {
+        inputTagsWrapper.find('input').simulate('change', { target: { value: inputValue } });
+      });
+
+      context('when focus leaves input field', () => {
+        beforeEach(() => {
+          inputTagsWrapper.find('input').simulate('blur');
+        });
+
+        it('should *not* insert typed string as token', () => {
+          expect(handleInsert).to.not.have.been.called();
+        });
+      });
+
+      context('when `tab` key is pressed', () => {
+        beforeEach(() => {
+          const tabKeyCode = 9;
+          inputTagsWrapper.find('input').simulate('keydown', { keyCode: tabKeyCode });
+        });
+
+        it('should *not* insert typed string as token', () => {
+          expect(handleInsert).to.not.have.been.called();
+        });
+      });
+
+      context('when `comma` key is pressed', () => {
+        beforeEach(() => {
+          const commaKeyCode = 188;
+          inputTagsWrapper.find('input').simulate('keydown', { keyCode: commaKeyCode });
+        });
+
+        it('should *not* insert typed string as token', () => {
+          expect(handleInsert).to.not.have.been.called();
+        });
+      });
+    });
+  });
+});
+
 describe('<InputTags />', () => {
   describe('<Input />', () => {
     let inputWrapper;
@@ -110,7 +211,7 @@ describe('<InputTags />', () => {
 
     describe('onKeyDown', () => {
       context('when event `keyCode` is in `insertKeyCodes`', () => {
-        const enterKeyCode = 13;
+        const tabKeyCode = 9;
 
         context('when state `inputValue` has length greater than `0`', () => {
           const nonEmptyInputValue = 'abraham@lincoln.gov';
@@ -132,13 +233,12 @@ describe('<InputTags />', () => {
             );
 
             onKeyDownWrapper.setState({ inputValue: nonEmptyInputValue });
-            onKeyDownWrapper.find('input').simulate('keydown', { keyCode: enterKeyCode });
+            onKeyDownWrapper.find('input').simulate('keydown', { keyCode: tabKeyCode });
           });
 
-          it('should cancel the event by calling preventDefault()', () => {
-            // TODO
-            // find input, props, onKeyDown
-          });
+          // TODO
+          // find input, props, onKeyDown
+          it('should cancel the event by calling preventDefault()');
 
           it('should clear the state `inputValue`', () => {
             expect(onKeyDownWrapper.state().inputValue).to.equal('');
@@ -170,7 +270,7 @@ describe('<InputTags />', () => {
             );
 
             onKeyDownWrapper.setState({ inputValue: emptyInputValue });
-            onKeyDownWrapper.find('input').simulate('keydown', { keyCode: enterKeyCode });
+            onKeyDownWrapper.find('input').simulate('keydown', { keyCode: tabKeyCode });
           });
 
           it('should * not * clear the state `inputValue`', () => {
