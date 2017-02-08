@@ -27,6 +27,7 @@ export const defaultTagClassName = 'react-input-tags-tag';
 export const defaultRenderTag = ({ value, handleRemove }) =>
   <span
     className={defaultTagClassName}
+    onDoubleClick={() => { console.log('double clicked'); }}
   >
     <span>
       {value}

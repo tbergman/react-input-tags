@@ -24,6 +24,15 @@ storiesOf('InputTags', module)
         handleRemove={action('handleRemove')}
       />
     )
+  })
+  .add('edit token', () => {
+    return (
+      <InputTags
+        tags={['edit me']}
+        handleInsert={action('handleInsert')}
+        handleRemove={action('handleRemove')}
+      />
+    )
   });
 
 storiesOf('ExampleTags', module)

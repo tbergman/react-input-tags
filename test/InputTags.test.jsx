@@ -206,6 +206,36 @@ describe('InputTags', () => {
       });
     });
   });
+
+  describe.only('edit token', () => {
+    context('when there is at least one tag', () => {
+      beforeEach(() => {
+        tags = ['edit me'];
+        handleInsert = sinon.stub();
+        handleRemove = sinon.stub();
+
+        inputTagsWrapper = mount(
+          <InputTags
+            tags={tags}
+            handleInsert={handleInsert}
+            handleRemove={handleRemove}
+          />
+        );
+      });
+
+      context('when token is double clicked', () => {
+        beforeEach(() => {
+          inputTagsWrapper.find('button').simulate('dblclick');
+        });
+
+        it('should remove the token', () => {
+          expect(handleRemove).to.have.been.called();
+        });
+
+        it('should set the state of the input to equal the previous token');
+      });
+    });
+  });
 });
 
 describe('<InputTags />', () => {
