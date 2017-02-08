@@ -30,10 +30,11 @@ describe('<Input />', () => {
       });
     });
 
+    // TODO:
+    // Note: jsdom does not implement browser box model so we can * not * test the following
+    it('should set the input width with the mirror width');
     /*
-    Note: jsdom does not implement browser box model so we can * not * test the following
-
-    it('should set the input width with the mirror width', () => {
+    () => {
       const inputWidth = wrapper.find('#inputNode').node.style.width;
       const mirrorWidth = wrapper.find('#mirrorNode').node.style.width;
       expect(inputWidth).to.equal(mirrorWidth);
@@ -41,18 +42,19 @@ describe('<Input />', () => {
     */
   });
 
-  /*
-  Note: jsdom does not implement browser box model so we can * not * test the following
+  // Note: jsdom does not implement browser box model so we can * not * test the following
 
   describe('componentDidUpdate()', () => {
-    it('should update the input width with the mirror width', () => {
+    it('should update the input width with the mirror width');
+    /*
+    , () => {
       wrapper.find('input').simulate('change', { target: { value: 'a' }})
       const inputWidth = wrapper.find('#inputNode').node.style.width;
       const mirrorWidth = wrapper.find('#mirrorNode').node.style.width;
       expect(inputWidth).to.equal(mirrorWidth);
     });
+    */
   });
-  */
 
   describe('onChange()', () => {
     const newInputValue = 'a';
