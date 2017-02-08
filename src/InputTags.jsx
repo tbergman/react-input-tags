@@ -31,6 +31,8 @@ export class InputTags extends React.Component {
     renderSuggestion: React.PropTypes.func,
     getSuggestionValue: React.PropTypes.func,
     handleInputChange: React.PropTypes.func,
+    onFocus: React.PropTypes.func,
+    onBlur: React.PropTypes.func,
     className: React.PropTypes.string,
     tagsInputClassName: React.PropTypes.string,
     suggestionListClassName: React.PropTypes.string,
@@ -141,7 +143,13 @@ export class InputTags extends React.Component {
           <Input
             value={inputValue}
             onChange={this.handleOnChange}
-            onBlur={this.handleOnBlur}
+            onFocus={this.props.onFocus}
+            onBlur={(event) => {
+              this.handleOnBlur(event);
+              if (this.props.onBlur) {
+                this.props.onBlur();
+              }
+            }}
             onKeyDown={this.handleOnKeyDown}
             placeholder={inputPlaceholder}
           />
