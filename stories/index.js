@@ -17,16 +17,24 @@ storiesOf('InputTags', module)
     )
   });
 
-/*
 storiesOf('ExampleTags', module)
-  .addDecorator(() => (
+  .add('blank', () => (
     <Example
       handleInsert={action('handleInsert')}
       handleRemove={action('handleRemove')}
       handleInputChange={action('handleInputChange')}
     />
   ))
-  .add('blank', () => (
-    <ExampleTags />
-  ))
-*/
+  .add('with onFocus and onBlur', () => (
+    <Example
+      handleInsert={action('handleInsert')}
+      handleRemove={action('handleRemove')}
+      handleInputChange={action('handleInputChange')}
+      onFocus={() => {
+        console.log('onFocus');
+      }}
+      onBlur={() => {
+        console.log('onBlur');
+      }}
+    />
+  ));

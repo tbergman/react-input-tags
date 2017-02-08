@@ -8,6 +8,8 @@ export class Example extends React.Component {
     handleInsert: React.PropTypes.func.isRequired,
     handleRemove: React.PropTypes.func.isRequired,
     handleInputChange: React.PropTypes.func.isRequired,
+    onFocus: React.PropTypes.func,
+    onBlur: React.PropTypes.func,
   }
 
   static defaultProps = {
@@ -54,6 +56,8 @@ export class Example extends React.Component {
           handleRemove={this.handleRemove}
           suggestions={this.state.suggestions}
           handleInputChange={this.handleInputChange}
+          onFocus={this.props.onFocus}
+          onBlur={this.props.onBlur}
           inputPlaceholder={'add tag'}
         />
       </div>
