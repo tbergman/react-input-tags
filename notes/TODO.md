@@ -1,7 +1,7 @@
 # react-tagging
 React component for tagging inputs.
 
-## TODO:
+## todo
 ### Basic
 - [X] insert a tag on keydown (enter, tab, comma) or onblur, clear the input
 - [X] delete a tag on keydown (backspace / delete) or onclick of button
@@ -16,23 +16,20 @@ React component for tagging inputs.
 - [ ] tests
 - [ ] container? tagsinput component? tagsinput seems like it should be separated from suggestions
 - [ ] reasearch using children instead of passing in render functions
-- [ ] maybe even split up input, tags, suggestions
 - [ ] autoselect the first item in suggestions list so enter will enter it
 - [ ] enter, tab, comma should preventDefault to enter suggestion and not typed text in input
 - [ ] navigate through list of suggestions using keyboard arrows
   - [ ] up and down to move through list
   - [ ] enter to add a suggestion as a tag
 - [ ] highlight suggestions when move through them with keys, over them with mouse
+- [ ] show loader for loading suggestions asynchronously
 
 ### Advanced
-- [ ] edit tag by clicking
+- [X] edit tag by clicking
 - [ ] reorder tags by dragging
 - [ ] drag tag from one component to another (onDrag?)
 - [ ] validate tags
 - [ ] tests
-
-### Dev
-- [ ] on deploy, update the demo website using github pages
 
 ### WAI ARIA Compliance
 - https://www.w3.org/TR/wai-aria-practices/#autocomplete
