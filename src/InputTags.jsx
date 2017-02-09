@@ -7,7 +7,7 @@ import { SuggestionList } from './SuggestionList.jsx';
 import {
   defaultInsertKeyCodes,
   defaultRemoveKeyCodes,
-  defaultRenderTag,
+  DefaultRenderTag,
   defaultInputPlaceholder,
   defaultSuggestions,
   defaultRenderSuggestion,
@@ -26,7 +26,8 @@ export class InputTags extends React.Component {
     handleRemove: React.PropTypes.func.isRequired,
     insertKeyCodes: React.PropTypes.object,
     removeKeyCodes: React.PropTypes.object,
-    renderTag: React.PropTypes.func,
+    RenderTag: React.PropTypes.element,
+    // renderTag: React.PropTypes.func,
     inputPlaceholder: React.PropTypes.string,
     suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
     renderSuggestion: React.PropTypes.func,
@@ -43,7 +44,7 @@ export class InputTags extends React.Component {
   static defaultProps = {
     insertKeyCodes: defaultInsertKeyCodes,
     removeKeyCodes: defaultRemoveKeyCodes,
-    renderTag: defaultRenderTag,
+    RenderTag: DefaultRenderTag,
     inputPlaceholder: defaultInputPlaceholder,
     suggestions: defaultSuggestions,
     renderSuggestion: defaultRenderSuggestion,
@@ -111,7 +112,7 @@ export class InputTags extends React.Component {
   render() {
     const {
       tags,
-      renderTag,
+      RenderTag,
       inputPlaceholder,
       suggestions,
       renderSuggestion,
@@ -145,7 +146,7 @@ export class InputTags extends React.Component {
               value={tag}
               handleEdit={newValue => this.editTag(tags, index, newValue)}
               handleRemove={() => this.removeTag(tags, index)}
-              renderTag={renderTag}
+              RenderTag={RenderTag}
             />
           )}
           <Input

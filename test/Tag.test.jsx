@@ -1,11 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { Tag } from '../src/Tag.jsx';
 import { nonEmptyString, emptyString } from './util';
-import { defaultRenderTag } from '../src/default.jsx';
+import { DefaultRenderTag } from '../src/default.jsx';
 
 describe('<Tag />', () => {
   let tagWrapper;
@@ -16,12 +16,12 @@ describe('<Tag />', () => {
     handleEdit = sinon.stub();
     handleRemove = sinon.stub();
 
-    tagWrapper = shallow(
+    tagWrapper = mount(
       <Tag
         value={'one'}
         handleEdit={handleEdit}
         handleRemove={handleRemove}
-        renderTag={defaultRenderTag}
+        RenderTag={DefaultRenderTag}
       />
     );
   });
