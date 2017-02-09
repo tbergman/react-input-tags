@@ -37,7 +37,7 @@ describe('InputTags', () => {
       });
 
       it('should set the state `inputValue`', () => {
-        expect(inputTagsWrapper.state().inputValue).to.equal('');
+        expect(inputTagsWrapper.state().inputValue).to.equal(inputValue);
       });
 
       context('when focus leaves input field', () => {
@@ -50,7 +50,7 @@ describe('InputTags', () => {
         });
 
         it('should clear the state `inputValue`', () => {
-          expect(inputTagsWrapper.state().inputValue).to.equal(nonEmptyString);
+          expect(inputTagsWrapper.state().inputValue).to.equal(emptyString);
         });
       });
 
@@ -64,7 +64,7 @@ describe('InputTags', () => {
         });
 
         it('should clear the state `inputValue`', () => {
-          expect(inputTagsWrapper.state().inputValue).to.equal(nonEmptyString);
+          expect(inputTagsWrapper.state().inputValue).to.equal(emptyString);
         });
       });
 
@@ -78,7 +78,7 @@ describe('InputTags', () => {
         });
 
         it('should clear the state `inputValue`', () => {
-          expect(inputTagsWrapper.state().inputValue).to.equal(nonEmptyString);
+          expect(inputTagsWrapper.state().inputValue).to.equal(emptyString);
         });
       });
 
@@ -92,7 +92,7 @@ describe('InputTags', () => {
         });
 
         it('should *not* clear the state `inputValue`', () => {
-          expect(inputTagsWrapper.state().inputValue).to.equal('');
+          expect(inputTagsWrapper.state().inputValue).to.equal(inputValue);
         });
       });
     });
@@ -105,7 +105,7 @@ describe('InputTags', () => {
       });
 
       it('should set the state `inputValue`', () => {
-        expect(inputTagsWrapper.state().inputValue).to.equal('a');
+        expect(inputTagsWrapper.state().inputValue).to.equal(inputValue);
       });
 
       context('when focus leaves input field', () => {
@@ -115,10 +115,6 @@ describe('InputTags', () => {
 
         it('should *not* insert typed string as token', () => {
           expect(handleInsert).to.not.have.been.called();
-        });
-
-        it('should *not* clear the state `inputValue`', () => {
-          expect(inputTagsWrapper.state().inputValue).to.equal('');
         });
       });
 
@@ -130,10 +126,6 @@ describe('InputTags', () => {
         it('should *not* insert typed string as token', () => {
           expect(handleInsert).to.not.have.been.called();
         });
-
-        it('should *not* clear the state `inputValue`', () => {
-          expect(inputTagsWrapper.state().inputValue).to.equal('');
-        });
       });
 
       context('when `comma` key is pressed', () => {
@@ -143,10 +135,6 @@ describe('InputTags', () => {
 
         it('should *not* insert typed string as token', () => {
           expect(handleInsert).to.not.have.been.called();
-        });
-
-        it('should *not* clear the state `inputValue`', () => {
-          expect(inputTagsWrapper.state().inputValue).to.equal('');
         });
       });
     });
