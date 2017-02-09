@@ -48,6 +48,8 @@ describe('<Tag />', () => {
         expect(tagWrapper.state().isEditing).to.equal(true);
       });
 
+      it('focus should be set to the tag');
+
       context('when textarea is changed to non empty string', () => {
         const inputValue = nonEmptyString;
 
