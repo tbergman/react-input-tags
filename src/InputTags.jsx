@@ -153,14 +153,17 @@ export class InputTags extends React.Component {
             // TODO: should this be a textarea?
             value={inputValue}
             onChange={this.handleOnChange}
-            onFocus={this.props.onFocus}
+            // onFocus={this.props.onFocus}
+            /*
             onBlur={(event) => {
               this.handleOnBlur(event);
               if (this.props.onBlur) {
                 this.props.onBlur();
               }
             }}
+            */
             onKeyDown={this.handleOnKeyDown}
+            onBlur={this.handleOnBlur}
             placeholder={inputPlaceholder}
           />
         </div>
