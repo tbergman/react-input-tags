@@ -12,6 +12,7 @@ storiesOf('InputTags', module)
       <InputTags
         tags={['insert another']}
         handleInsert={action('handleInsert')}
+        handleEdit={action('handleEdit')}
         handleRemove={action('handleRemove')}
       />
     )
@@ -21,6 +22,7 @@ storiesOf('InputTags', module)
       <InputTags
         tags={['delete me']}
         handleInsert={action('handleInsert')}
+        handleEdit={action('handleEdit')}
         handleRemove={action('handleRemove')}
       />
     )
@@ -30,11 +32,13 @@ storiesOf('InputTags', module)
       <InputTags
         tags={['edit me']}
         handleInsert={action('handleInsert')}
+        handleEdit={action('handleEdit')}
         handleRemove={action('handleRemove')}
       />
     )
   });
 
+// TODO: better stories, use util functions for insert, edit, remove, etc.
 storiesOf('ExampleTags', module)
   .add('blank', () => (
     <Example

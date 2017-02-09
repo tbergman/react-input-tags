@@ -22,6 +22,7 @@ export class InputTags extends React.Component {
   static propTypes = {
     tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleInsert: React.PropTypes.func.isRequired,
+    handleEdit: React.PropTypes.func.isRequired,
     handleRemove: React.PropTypes.func.isRequired,
     insertKeyCodes: React.PropTypes.object,
     removeKeyCodes: React.PropTypes.object,
@@ -31,6 +32,7 @@ export class InputTags extends React.Component {
     renderSuggestion: React.PropTypes.func,
     getSuggestionValue: React.PropTypes.func,
     handleInputChange: React.PropTypes.func,
+    // TODO: better naming? better solution with event delegation
     onFocus: React.PropTypes.func,
     onBlur: React.PropTypes.func,
     className: React.PropTypes.string,
@@ -60,6 +62,11 @@ export class InputTags extends React.Component {
     const { handleInsert } = this.props;
     this.setState({ inputValue: '' });
     handleInsert(tags, inputValue);
+  }
+
+  editTag = (tags, editTagIndex, newValue) => {
+    const { handleEdit } = this.props;
+    handleEdit(tags, editTagIndex, newValue);
   }
 
   removeTag = (tags, removeTagIndex) => {
@@ -136,11 +143,13 @@ export class InputTags extends React.Component {
             <Tag
               key={index}
               value={tag}
+              handleEdit={newValue => this.editTag(tags, index, newValue)}
               handleRemove={() => this.removeTag(tags, index)}
               renderTag={renderTag}
             />
           )}
           <Input
+            // TODO: should this be a textarea?
             value={inputValue}
             onChange={this.handleOnChange}
             onFocus={this.props.onFocus}

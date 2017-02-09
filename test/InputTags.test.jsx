@@ -11,19 +11,20 @@ describe('InputTags', () => {
   let inputTagsWrapper;
   let tags;
   let handleInsert;
+  let handleEdit;
   let handleRemove;
 
   describe('create token manually', () => {
     beforeEach(() => {
       tags = [];
       handleInsert = sinon.stub();
-      handleRemove = sinon.stub();
 
       inputTagsWrapper = mount(
         <InputTags
           tags={tags}
           handleInsert={handleInsert}
-          handleRemove={handleRemove}
+          handleEdit={noop}
+          handleRemove={noop}
         />
       );
     });
@@ -115,17 +116,80 @@ describe('InputTags', () => {
     });
   });
 
-  describe('delete token', () => {
+  describe('edit token', () => {
     context('when there is at least one tag', () => {
       beforeEach(() => {
-        tags = ['delete me'];
-        handleInsert = sinon.stub();
+        tags = ['edit me'];
+        handleEdit = sinon.stub();
         handleRemove = sinon.stub();
 
         inputTagsWrapper = mount(
           <InputTags
             tags={tags}
-            handleInsert={handleInsert}
+            handleInsert={noop}
+            handleEdit={handleEdit}
+            handleRemove={handleRemove}
+          />
+        );
+      });
+
+      context('when token is double clicked', () => {
+        beforeEach(() => {
+          inputTagsWrapper.find('button').simulate('dblclick');
+        });
+
+        it('should render a textarea', () => {
+          expect(inputTagsWrapper.find('textarea')).to.have.length(1);
+        });
+
+        context('when textarea is changed to non empty string', () => {
+          const inputValue = nonEmptyString;
+
+          beforeEach(() => {
+            inputTagsWrapper.find('textarea').simulate('change', { target: { value: inputValue } });
+          });
+
+          it('should edit the token', () => {
+            expect(handleEdit).to.have.been.calledWith(tags, tags.length - 1, nonEmptyString);
+          });
+        });
+
+        context('when textarea is changed to empty string', () => {
+          const inputValue = emptyString;
+
+          beforeEach(() => {
+            inputTagsWrapper.find('textarea').simulate('change', { target: { value: inputValue } });
+          });
+
+          it('should remove the token', () => {
+            expect(handleRemove).to.have.been.calledWith(tags, tags.length - 1);
+          });
+        });
+
+        context('when focus leaves textarea', () => {
+          beforeEach(() => {
+            inputTagsWrapper.find('textarea').simulate('blur');
+          });
+
+          it('should *not* render a textarea', () => {
+            expect(inputTagsWrapper.find('textarea')).to.have.length(0);
+          });
+        });
+      });
+    });
+  });
+
+  describe('delete token', () => {
+    context('when there is at least one tag', () => {
+      beforeEach(() => {
+        tags = ['delete me'];
+        handleRemove = sinon.stub();
+
+        inputTagsWrapper = mount(
+          <InputTags
+            tags={tags}
+            handleInsert={noop}
+            handleEdit={noop}
             handleRemove={handleRemove}
           />
         );
@@ -183,13 +247,13 @@ describe('InputTags', () => {
     context('when there are no tags', () => {
       beforeEach(() => {
         tags = [];
-        handleInsert = sinon.stub();
         handleRemove = sinon.stub();
 
         inputTagsWrapper = mount(
           <InputTags
             tags={tags}
-            handleInsert={handleInsert}
+            handleInsert={noop}
+            handleEdit={noop}
             handleRemove={handleRemove}
           />
         );
@@ -203,36 +267,6 @@ describe('InputTags', () => {
         it('should *not* remove token', () => {
           expect(handleRemove).to.not.have.been.called();
         });
-      });
-    });
-  });
-
-  describe.only('edit token', () => {
-    context('when there is at least one tag', () => {
-      beforeEach(() => {
-        tags = ['edit me'];
-        handleInsert = sinon.stub();
-        handleRemove = sinon.stub();
-
-        inputTagsWrapper = mount(
-          <InputTags
-            tags={tags}
-            handleInsert={handleInsert}
-            handleRemove={handleRemove}
-          />
-        );
-      });
-
-      context('when token is double clicked', () => {
-        beforeEach(() => {
-          inputTagsWrapper.find('button').simulate('dblclick');
-        });
-
-        it('should remove the token', () => {
-          expect(handleRemove).to.have.been.called();
-        });
-
-        it('should set the state of the input to equal the previous token');
       });
     });
   });
