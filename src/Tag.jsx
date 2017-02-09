@@ -8,7 +8,6 @@ export class Tag extends React.Component {
     renderTag: React.PropTypes.func.isRequired,
   }
 
-  // TODO: test setting state, calling callbacks
   state = {
     isEditing: false,
   }
