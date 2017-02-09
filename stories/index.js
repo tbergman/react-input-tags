@@ -4,15 +4,26 @@ import { storiesOf, action } from '@kadira/storybook';
 import InputTags from '../src/index';
 import { Example } from './example.jsx';
 import './example.css';
-import { handleInsert, handleRemove } from 'util';
+import { noop } from './util';
 
 storiesOf('InputTags', module)
-  .add('create token manually', () => {
+  .add('create token', () => {
     return (
       <InputTags
         tags={['insert another']}
         handleInsert={action('handleInsert')}
-        handleRemove={action('handleRemove')}
+        handleEdit={noop}
+        handleRemove={noop}
+      />
+    )
+  })
+  .add('edit token', () => {
+    return (
+      <InputTags
+        tags={['edit me']}
+        handleInsert={noop}
+        handleEdit={action('handleEdit')}
+        handleRemove={noop}
       />
     )
   })
@@ -20,30 +31,26 @@ storiesOf('InputTags', module)
     return (
       <InputTags
         tags={['delete me']}
-        handleInsert={action('handleInsert')}
+        handleInsert={noop}
+        handleEdit={noop}
         handleRemove={action('handleRemove')}
       />
     )
   });
 
 storiesOf('ExampleTags', module)
-  .add('blank', () => (
-    <Example
-      handleInsert={action('handleInsert')}
-      handleRemove={action('handleRemove')}
-      handleInputChange={action('handleInputChange')}
-    />
+  .add('tags', () => (
+    // TODO: disbale suggestions
+    <Example />
   ))
-  .add('with onFocus and onBlur', () => (
-    <Example
-      handleInsert={action('handleInsert')}
-      handleRemove={action('handleRemove')}
-      handleInputChange={action('handleInputChange')}
-      onFocus={() => {
-        console.log('onFocus');
-      }}
-      onBlur={() => {
-        console.log('onBlur');
-      }}
-    />
+  .add('local suggestions', () => (
+    // TODO: enable suggestions
+    // enable local
+    <Example />
+  ))
+  .add('fetching suggestions', () => (
+    // TODO: enable suggestions
+    // enable fetching asynchronously
+    // show a loader
+    <Example />
   ));

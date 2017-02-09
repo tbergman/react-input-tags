@@ -1,21 +1,14 @@
 import React from 'react';
-import InputTags from '../src/index.js';
+import InputTags from '../src/index';
+
+import { handleInsert, handleEdit, handleRemove } from './util';
 
 const data = ['apple', 'banana', 'cherry'];
 
 export class Example extends React.Component {
   static propTypes = {
-    handleInsert: React.PropTypes.func.isRequired,
-    handleRemove: React.PropTypes.func.isRequired,
-    handleInputChange: React.PropTypes.func.isRequired,
     onFocus: React.PropTypes.func,
     onBlur: React.PropTypes.func,
-  }
-
-  static defaultProps = {
-    handleInsert: () => {},
-    handleRemove: () => {},
-    handleInputChange: () => {},
   }
 
   state = {
@@ -24,23 +17,22 @@ export class Example extends React.Component {
   }
 
   handleInsert = (currentTags, newTag) => {
-    this.props.handleInsert();
-    const newTags = [...currentTags, newTag];
+    const newTags = handleInsert(currentTags, newTag);
     this.setState({ tags: newTags });
     this.setState({ suggestions: [] });
   }
 
+  handleEdit = (currentTags, editTagIndex, newValue) => {
+    const newTags = handleEdit(currentTags, editTagIndex, newValue);
+    this.setState({ tags: newTags });
+  }
+
   handleRemove = (currentTags, removeTagIndex) => {
-    this.props.handleRemove();
-    const newTags = [
-      ...currentTags.slice(0, removeTagIndex),
-      ...currentTags.slice(removeTagIndex + 1),
-    ];
+    const newTags = handleRemove(currentTags, removeTagIndex);
     this.setState({ tags: newTags });
   }
 
   handleInputChange = (inputValue) => {
-    this.props.handleInputChange();
     const newSuggestions = data.filter(datum => datum.indexOf(inputValue) !== -1);
     this.setState({ suggestions: newSuggestions });
   }
@@ -53,6 +45,7 @@ export class Example extends React.Component {
         <InputTags
           tags={this.state.tags}
           handleInsert={this.handleInsert}
+          handleEdit={this.handleEdit}
           handleRemove={this.handleRemove}
           suggestions={this.state.suggestions}
           handleInputChange={this.handleInputChange}

@@ -1,10 +1,54 @@
+exports[`create token`] = `
+<div
+  className="react-input-tags">
+  <div
+    className="react-input-tags-tagsinput">
+    <span
+      className="react-input-tags-tag"
+      onDoubleClick={[Function]}>
+      <span>
+        insert another
+      </span>
+      <button
+        onClick={[Function]}>
+        x
+      </button>
+    </span>
+    <span>
+      <span
+        id="mirrorNode"
+        style={
+          Object {
+            "overflow": "scroll",
+            "position": "absolute",
+            "visibility": "hidden",
+            "whiteSpace": "pre",
+          }
+        }>
+        
+      </span>
+      <input
+        id="inputNode"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        placeholder=""
+        type="text"
+        value="" />
+    </span>
+  </div>
+</div>
+`;
+
 exports[`create token manually`] = `
 <div
   className="react-input-tags">
   <div
     className="react-input-tags-tagsinput">
     <span
-      className="react-input-tags-tag">
+      className="react-input-tags-tag"
+      onDoubleClick={[Function]}>
       <span>
         insert another
       </span>
@@ -46,9 +90,53 @@ exports[`delete token`] = `
   <div
     className="react-input-tags-tagsinput">
     <span
-      className="react-input-tags-tag">
+      className="react-input-tags-tag"
+      onDoubleClick={[Function]}>
       <span>
         delete me
+      </span>
+      <button
+        onClick={[Function]}>
+        x
+      </button>
+    </span>
+    <span>
+      <span
+        id="mirrorNode"
+        style={
+          Object {
+            "overflow": "scroll",
+            "position": "absolute",
+            "visibility": "hidden",
+            "whiteSpace": "pre",
+          }
+        }>
+        
+      </span>
+      <input
+        id="inputNode"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        placeholder=""
+        type="text"
+        value="" />
+    </span>
+  </div>
+</div>
+`;
+
+exports[`edit token`] = `
+<div
+  className="react-input-tags">
+  <div
+    className="react-input-tags-tagsinput">
+    <span
+      className="react-input-tags-tag"
+      onDoubleClick={[Function]}>
+      <span>
+        edit me
       </span>
       <button
         onClick={[Function]}>

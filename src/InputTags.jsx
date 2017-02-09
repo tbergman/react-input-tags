@@ -7,7 +7,7 @@ import { SuggestionList } from './SuggestionList.jsx';
 import {
   defaultInsertKeyCodes,
   defaultRemoveKeyCodes,
-  defaultRenderTag,
+  DefaultRenderTag,
   defaultInputPlaceholder,
   defaultSuggestions,
   defaultRenderSuggestion,
@@ -22,15 +22,18 @@ export class InputTags extends React.Component {
   static propTypes = {
     tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleInsert: React.PropTypes.func.isRequired,
+    handleEdit: React.PropTypes.func.isRequired,
     handleRemove: React.PropTypes.func.isRequired,
     insertKeyCodes: React.PropTypes.object,
     removeKeyCodes: React.PropTypes.object,
-    renderTag: React.PropTypes.func,
+    RenderTag: React.PropTypes.element,
+    // renderTag: React.PropTypes.func,
     inputPlaceholder: React.PropTypes.string,
     suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
     renderSuggestion: React.PropTypes.func,
     getSuggestionValue: React.PropTypes.func,
     handleInputChange: React.PropTypes.func,
+    // TODO: better naming? better solution with event delegation
     onFocus: React.PropTypes.func,
     onBlur: React.PropTypes.func,
     className: React.PropTypes.string,
@@ -41,7 +44,7 @@ export class InputTags extends React.Component {
   static defaultProps = {
     insertKeyCodes: defaultInsertKeyCodes,
     removeKeyCodes: defaultRemoveKeyCodes,
-    renderTag: defaultRenderTag,
+    RenderTag: DefaultRenderTag,
     inputPlaceholder: defaultInputPlaceholder,
     suggestions: defaultSuggestions,
     renderSuggestion: defaultRenderSuggestion,
@@ -60,6 +63,11 @@ export class InputTags extends React.Component {
     const { handleInsert } = this.props;
     this.setState({ inputValue: '' });
     handleInsert(tags, inputValue);
+  }
+
+  editTag = (tags, editTagIndex, newValue) => {
+    const { handleEdit } = this.props;
+    handleEdit(tags, editTagIndex, newValue);
   }
 
   removeTag = (tags, removeTagIndex) => {
@@ -104,7 +112,7 @@ export class InputTags extends React.Component {
   render() {
     const {
       tags,
-      renderTag,
+      RenderTag,
       inputPlaceholder,
       suggestions,
       renderSuggestion,
@@ -136,11 +144,13 @@ export class InputTags extends React.Component {
             <Tag
               key={index}
               value={tag}
+              handleEdit={newValue => this.editTag(tags, index, newValue)}
               handleRemove={() => this.removeTag(tags, index)}
-              renderTag={renderTag}
+              RenderTag={RenderTag}
             />
           )}
           <Input
+            // TODO: should this be a textarea?
             value={inputValue}
             onChange={this.handleOnChange}
             onFocus={this.props.onFocus}
