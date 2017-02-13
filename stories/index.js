@@ -5,6 +5,7 @@ import InputTags from '../src/index';
 import { Example } from './example.jsx';
 import './example.css';
 import { noop } from './util';
+import { List } from '../src/List.jsx';
 
 storiesOf('InputTags', module)
   .add('create token', () => {
@@ -40,7 +41,7 @@ storiesOf('InputTags', module)
 
 storiesOf('ExampleTags', module)
   .add('tags', () => (
-    // TODO: disbale suggestions
+    // TODO: disable suggestions
     <Example />
   ))
   .add('local suggestions', () => (
@@ -53,4 +54,9 @@ storiesOf('ExampleTags', module)
     // enable fetching asynchronously
     // show a loader
     <Example />
+  ));
+
+storiesOf('List', module)
+  .add('blank', () => (
+    <List />
   ));

@@ -1,5 +1,7 @@
 import React from 'react';
 
+/* TODO: split up these defaults into a defaul folder with components */
+
 /* InputTags */
 export const defaultInsertKeyCodes = {
   9: 'tab',
@@ -148,4 +150,23 @@ export const defaultRenderSuggestion = ({ value, handleInsert }) =>
 defaultRenderSuggestion.propTypes = {
   value: React.PropTypes.string.isRequired,
   handleInsert: React.PropTypes.func.isRequired,
+};
+
+/* List */
+export const defaultNextKeyCodes = {
+  40: 'down',
+};
+
+export const defaultPreviousKeyCodes = {
+  38: 'up',
+};
+
+export const defaultSelectKeyCodes = {
+  13: 'enter',
+  9: 'tab',
+  188: 'comma',
+};
+
+export const defaultCloseKeyCodes = {
+  27: 'escape',
 };
