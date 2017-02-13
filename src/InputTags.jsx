@@ -39,6 +39,7 @@ export class InputTags extends React.Component {
     className: React.PropTypes.string,
     tagsInputClassName: React.PropTypes.string,
     suggestionListClassName: React.PropTypes.string,
+    tabIndex: React.PropTypes.number,
   };
 
   static defaultProps = {
@@ -120,6 +121,7 @@ export class InputTags extends React.Component {
       className,
       tagsInputClassName,
       suggestionListClassName,
+      tabIndex,
     } = this.props;
     const { inputValue } = this.state;
     const suggestionsElement = inputValue.length > 0 ?
@@ -162,6 +164,7 @@ export class InputTags extends React.Component {
             }}
             onKeyDown={this.handleOnKeyDown}
             placeholder={inputPlaceholder}
+            tabIndex={tabIndex}
           />
         </div>
         {suggestionsElement}

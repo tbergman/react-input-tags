@@ -64,6 +64,7 @@ export class DefaultRenderTag extends React.Component {
         </span>
         <button
           onClick={handleRemove}
+          tabIndex="-1"
         >
           {'x'}
         </button>
