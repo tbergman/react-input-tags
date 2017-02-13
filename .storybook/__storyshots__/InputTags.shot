@@ -10,7 +10,8 @@ exports[`create token`] = `
         insert another
       </span>
       <button
-        onClick={[Function]}>
+        onClick={[Function]}
+        tabIndex="-1">
         x
       </button>
     </span>
@@ -34,49 +35,7 @@ exports[`create token`] = `
         onFocus={[Function]}
         onKeyDown={[Function]}
         placeholder=""
-        type="text"
-        value="" />
-    </span>
-  </div>
-</div>
-`;
-
-exports[`create token manually`] = `
-<div
-  className="react-input-tags">
-  <div
-    className="react-input-tags-tagsinput">
-    <span
-      className="react-input-tags-tag"
-      onDoubleClick={[Function]}>
-      <span>
-        insert another
-      </span>
-      <button
-        onClick={[Function]}>
-        x
-      </button>
-    </span>
-    <span>
-      <span
-        id="mirrorNode"
-        style={
-          Object {
-            "overflow": "scroll",
-            "position": "absolute",
-            "visibility": "hidden",
-            "whiteSpace": "pre",
-          }
-        }>
-        
-      </span>
-      <input
-        id="inputNode"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        placeholder=""
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>
@@ -96,7 +55,8 @@ exports[`delete token`] = `
         delete me
       </span>
       <button
-        onClick={[Function]}>
+        onClick={[Function]}
+        tabIndex="-1">
         x
       </button>
     </span>
@@ -120,6 +80,7 @@ exports[`delete token`] = `
         onFocus={[Function]}
         onKeyDown={[Function]}
         placeholder=""
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>
@@ -139,7 +100,8 @@ exports[`edit token`] = `
         edit me
       </span>
       <button
-        onClick={[Function]}>
+        onClick={[Function]}
+        tabIndex="-1">
         x
       </button>
     </span>
@@ -163,6 +125,7 @@ exports[`edit token`] = `
         onFocus={[Function]}
         onKeyDown={[Function]}
         placeholder=""
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>

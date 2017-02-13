@@ -20,6 +20,7 @@ export class Input extends React.Component {
     onBlur: React.PropTypes.func,
     onKeyDown: React.PropTypes.func.isRequired,
     placeholder: React.PropTypes.string.isRequired,
+    tabIndex: React.PropTypes.number,
   }
 
   componentDidMount() {
@@ -46,7 +47,7 @@ export class Input extends React.Component {
   }
 
   render() {
-    const { value, onChange, onFocus, onBlur, onKeyDown, placeholder } = this.props;
+    const { value, onChange, onFocus, onBlur, onKeyDown, placeholder, tabIndex } = this.props;
 
     const mirrorValue = value || placeholder;
     const mirrorStyle = {
@@ -83,6 +84,7 @@ export class Input extends React.Component {
           }}
           onKeyDown={onKeyDown}
           placeholder={placeholder}
+          tabIndex={tabIndex}
         />
       </span>
     );
