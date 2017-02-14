@@ -5,6 +5,7 @@ import { defaultNextKeyCodes, defaultPreviousKeyCodes } from './default.jsx';
 
 export class List extends React.Component {
   static defaultProps = {
+    // TODO: pass in a list of objects
     items: ['apple', 'banana', 'cherry'],
     nextKeyCodes: defaultNextKeyCodes,
     previousKeyCodes: defaultPreviousKeyCodes,
@@ -31,22 +32,26 @@ export class List extends React.Component {
     const { focusedIndex } = this.state;
 
     if (nextKeyCodes.hasOwnProperty(keyCode)) {
-      event.preventDefault();
+      // event.preventDefault();
       // TODO: unit test this function
       const newFocusedIndex = (focusedIndex + 1) % items.length;
+      // test
       this.setState({ focusedIndex: newFocusedIndex });
     }
 
     if (previousKeyCodes.hasOwnProperty(keyCode)) {
-      event.preventDefault();
+      // event.preventDefault();
       // TODO: unit test this function
       const newFocusedIndex = ((focusedIndex - 1) + items.length) % items.length;
+      // test
       this.setState({ focusedIndex: newFocusedIndex });
     }
 
     // TODO: select the element
+    // test that callback gets called
 
-    // TODO: close list, call callback?
+    // TODO: close list
+    // test that callback gets called
   }
 
   render() {

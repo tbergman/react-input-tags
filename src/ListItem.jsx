@@ -7,6 +7,8 @@ import React from 'react';
 
 onMouseOver to focus / highlight an item
 onClick should select the item
+
+// TODO: test that these get called
 */
 
 export const ListItem = ({ value, isFocused, onMouseOver }) => {
@@ -14,7 +16,7 @@ export const ListItem = ({ value, isFocused, onMouseOver }) => {
   return (
     <li
       className={focusClass}
-      // onMouseOver={onMouseOver}
+      onMouseOver={onMouseOver}
     >
       {value}
     </li>
