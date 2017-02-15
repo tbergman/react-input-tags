@@ -40,6 +40,6 @@
 
 
 /* list item */
-li.focused {
+li.highlighted {
   background-color: red;
 }

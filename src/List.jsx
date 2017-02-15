@@ -9,80 +9,66 @@ export class List extends React.Component {
     previousKeyCodes: defaultPreviousKeyCodes,
   };
 
+  // TODO: props for
+  // selectItem
+  // closeList
+
   state = {
-    focusedIndex: 0,
+    highlightedIndex: 0,
   }
-
-  componentWillMount() {
-    // TODO: if element exists, find it and call .focus()
-    // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus
-
-    // add listener to list component if don't use tabindex
-  }
-
-  componentWillUpdate() {
-
-  }
-
-  componentWillUnmount() {
-    // remove listener
-  }
-
-  // when component updates
-  // try to focus
-
-  // method to find element of focusedIndex
-  // if element exists call .focus() method
 
   // TODO: test
   handleOnKeyDown = (event) => {
     const { keyCode } = event;
     const { nextKeyCodes, previousKeyCodes, items } = this.props;
-    const { focusedIndex } = this.state;
+    const { highlightedIndex } = this.state;
 
+    // TODO: test this
     if (nextKeyCodes.hasOwnProperty(keyCode)) {
       // TODO: unit test this function
-      const newFocusedIndex = (focusedIndex + 1) % items.length;
+      const newHighlightedIndex = (highlightedIndex + 1) % items.length;
       // test
-      this.setState({ focusedIndex: newFocusedIndex });
+      this.setState({ highlightedIndex: newHighlightedIndex });
     }
 
+    // TODO: test this
     if (previousKeyCodes.hasOwnProperty(keyCode)) {
       // TODO: unit test this function
-      const newFocusedIndex = ((focusedIndex - 1) + items.length) % items.length;
+      const newHighlightedIndex = ((highlightedIndex - 1) + items.length) % items.length;
       // test
-      this.setState({ focusedIndex: newFocusedIndex });
+      this.setState({ highlightedIndex: newHighlightedIndex });
     }
 
     // TODO: select item
     // test that callback gets called
+    if (keyCode === 13) {
+      console.log(`selected item: ${this.props.items[this.state.highlightedIndex].value}`);
+    }
 
     // TODO: close list
     // test that callback gets called
+    if (keyCode === 27) {
+      console.log('close list');
+    }
   }
 
   render() {
-    const { focusedIndex } = this.state;
+    const { highlightedIndex } = this.state;
     const { items } = this.props;
     return (
       <ul
-        tabIndex="0"
-        // tabIndex lets us listen to key events
-        // but is there a better way to detect when we have focus on this element
-        // so only listen when we have focus, then stopping listening when we don't have focus
+        tabIndex="-1" // allows us to listen to keyDown events
         onKeyDown={this.handleOnKeyDown}
       >
         {items.map((item, index) => {
-          const isFocused = focusedIndex === index;
+          const isHighlighted = highlightedIndex === index;
           return (
             <ListItem
               key={index}
               item={item}
-              isFocused={isFocused}
-              onMouseOver={(event) => {
-                event.preventDefault();
-                this.setState({ focusedIndex: index });
-              }}
+              isHighlighted={isHighlighted}
+              highlightItem={() => this.setState({ highlightedIndex: index })}
+              selectItem={() => { console.log(`selected: ${item.value}`); }}
             />
           );
         }
