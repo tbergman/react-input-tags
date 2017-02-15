@@ -38,6 +38,35 @@ storiesOf('InputTags', module)
       />
     )
   });
+  // TODO: show suggestions list when input value greater than zero
+
+const items = [{ value: 'apple'}, { value: 'banana' }, { value: 'cherry' }];
+storiesOf('List', module)
+  .add('auto focus first item', () => (
+    <List
+      items={items}
+    />
+  ))
+  .add('navigate items', () => (
+    <List
+      items={items}
+    />
+  ))
+  .add('highlight item', () => (
+    <List
+      items={items}
+    />
+  ))
+  .add('select item', () => (
+    <List
+      items={items}
+    />
+  ))
+  .add('close list', () => (
+    <List
+      items={items}
+    />
+  ));
 
 storiesOf('ExampleTags', module)
   .add('tags', () => (
@@ -54,9 +83,4 @@ storiesOf('ExampleTags', module)
     // enable fetching asynchronously
     // show a loader
     <Example />
-  ));
-
-storiesOf('List', module)
-  .add('blank', () => (
-    <List />
   ));
