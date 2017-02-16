@@ -1,18 +1,8 @@
 import React from 'react';
 
 import { ListItem } from './interface/ListItem.jsx';
-import { defaultNextKeyCodes, defaultPreviousKeyCodes } from './default.jsx';
 
 export class List extends React.Component {
-  static defaultProps = {
-    nextKeyCodes: defaultNextKeyCodes,
-    previousKeyCodes: defaultPreviousKeyCodes,
-  };
-
-  // TODO: props for
-  // selectItem
-  // closeList
-
   state = {
     highlightedIndex: 0,
   }

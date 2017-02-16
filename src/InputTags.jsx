@@ -127,6 +127,7 @@ export class InputTags extends React.Component {
     const { inputValue } = this.state;
     const suggestionsElement = inputValue.length > 0 ?
     (
+      // TODO: use List instead
       <SuggestionList
         className={suggestionListClassName}
         tags={tags}

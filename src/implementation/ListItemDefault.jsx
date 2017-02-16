@@ -37,18 +37,14 @@ export class ListItemDefault extends React.Component {
     const { value, isHighlighted, handleHighlight, handleSelect } = this.props;
     const highlightClass = (isHighlighted) ? 'highlighted' : '';
     return (
-      <li
+      <li // eslint-disable-line jsx-a11y/no-static-element-interactions
         ref={(c) => { this.listItem = c; }}
         tabIndex={-1}
         className={highlightClass}
+        onMouseOver={handleHighlight}
+        onClick={handleSelect}
       >
-        <a
-          tabIndex={-1}
-          onMouseOver={handleHighlight}
-          onClick={handleSelect}
-        >
-          {value}
-        </a>
+        {value}
       </li>
     );
   }

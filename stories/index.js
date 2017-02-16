@@ -5,7 +5,6 @@ import InputTags from '../src/index';
 import { Example } from './example.jsx';
 import './example.css';
 import { noop } from './util';
-import { List } from '../src/List.jsx';
 
 // TODO: import stories from files representing other files
 
@@ -41,34 +40,6 @@ storiesOf('InputTags', module)
     )
   });
   // TODO: show suggestions list when input value greater than zero
-
-const items = ['apple', 'banana', 'cherry'];
-storiesOf('List', module)
-  .add('auto focus first item', () => (
-    <List
-      items={items}
-    />
-  ))
-  .add('navigate items', () => (
-    <List
-      items={items}
-    />
-  ))
-  .add('highlight item', () => (
-    <List
-      items={items}
-    />
-  ))
-  .add('select item', () => (
-    <List
-      items={items}
-    />
-  ))
-  .add('close list', () => (
-    <List
-      items={items}
-    />
-  ));
 
 storiesOf('ExampleTags', module)
   .add('tags', () => (

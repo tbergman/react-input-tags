@@ -30,7 +30,7 @@ describe('<ListItemDefault />', () => {
 
     context('when item is moused over', () => {
       beforeEach(() => {
-        listItemWrapper.find('a').simulate('mouseover');
+        listItemWrapper.find('li').simulate('mouseover');
       });
 
       it('should highlight the item', () => {
@@ -55,7 +55,7 @@ describe('<ListItemDefault />', () => {
 
     context('when item is clicked', () => {
       beforeEach(() => {
-        listItemWrapper.find('a').simulate('click');
+        listItemWrapper.find('li').simulate('click');
       });
 
       it('should select the item', () => {
@@ -112,20 +112,24 @@ describe('<ListItemDefault />', () => {
     });
 
     context('when item receives new props', () => {
+      const isHighlighted = false;
+
+      beforeEach(() => {
+        focusElement = sinon.stub();
+
+        listItemWrapper = shallow(
+          <ListItemDefault
+            value={item}
+            isHighlighted={isHighlighted}
+            handleHighlight={noop}
+            handleSelect={noop}
+            focusElement={focusElement}
+          />
+        );
+      })
+
       context('when prop `isHighlighted` is `true`', () => {
         beforeEach(() => {
-          focusElement = sinon.stub();
-
-          listItemWrapper = shallow(
-            <ListItemDefault
-              value={item}
-              isHighlighted={false}
-              handleHighlight={noop}
-              handleSelect={noop}
-              focusElement={focusElement}
-            />
-          );
-
           listItemWrapper.setProps({ isHighlighted: true });
         });
 
@@ -136,18 +140,6 @@ describe('<ListItemDefault />', () => {
 
       context('when prop `isHighlighted` is `false`', () => {
         beforeEach(() => {
-          focusElement = sinon.stub();
-
-          listItemWrapper = shallow(
-            <ListItemDefault
-              value={item}
-              isHighlighted={false}
-              handleHighlight={noop}
-              handleSelect={noop}
-              focusElement={focusElement}
-            />
-          );
-
           listItemWrapper.setProps({ isHighlighted: false });
         });
 
