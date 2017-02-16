@@ -1,5 +1,7 @@
 import React from 'react';
 
+/* TODO: split up these defaults into a defaul folder with components */
+
 /* InputTags */
 export const defaultInsertKeyCodes = {
   9: 'tab',
@@ -72,55 +74,6 @@ export class DefaultRenderTag extends React.Component {
     );
   }
 }
-
-/*
-export const defaultRenderTag = ({ value, handleEdit, handleRemove, isEditing, setIsEditing }) => {
-  if (isEditing) {
-    return (
-      <textarea
-        ref={(textarea) => { this.tagTextArea = textarea; }}
-        rows={1}
-        onFocus={() => { this.tagTextArea.select(); }}
-        onBlur={() => setIsEditing(false)}
-        onChange={(event) => {
-          const newValue = event.target.value;
-          if (newValue.length > 0) {
-            handleEdit(newValue);
-          } else {
-            handleRemove();
-          }
-        }}
-        value={value}
-      />
-    );
-  }
-  return (
-    <span
-      className={defaultTagClassName}
-      onDoubleClick={() => setIsEditing(true)}
-    >
-      <span>
-        {value}
-      </span>
-      <button
-        onClick={handleRemove}
-      >
-        {'x'}
-      </button>
-    </span>
-  );
-};
-*/
-
-/*
-defaultRenderTag.propTypes = {
-  value: React.PropTypes.string.isRequired,
-  handleEdit: React.PropTypes.func.isRequired,
-  handleRemove: React.PropTypes.func.isRequired,
-  isEditing: React.PropTypes.bool.isRequired,
-  setIsEditing: React.PropTypes.func.isRequired,
-};
-*/
 
 /* SuggestionList */
 // TODO: loader for async suggestions

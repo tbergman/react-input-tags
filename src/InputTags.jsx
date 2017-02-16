@@ -2,7 +2,8 @@ import React from 'react';
 
 import { Input } from './Input.jsx';
 import { Tag } from './Tag.jsx';
-import { SuggestionList } from './SuggestionList.jsx';
+// import { SuggestionList } from './SuggestionList.jsx';
+import { List } from './interface/List.jsx';
 
 import {
   defaultInsertKeyCodes,
@@ -22,23 +23,24 @@ export class InputTags extends React.Component {
   static propTypes = {
     tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleInsert: React.PropTypes.func.isRequired,
+    // TODO: make editing optional
     handleEdit: React.PropTypes.func.isRequired,
     handleRemove: React.PropTypes.func.isRequired,
     insertKeyCodes: React.PropTypes.object,
     removeKeyCodes: React.PropTypes.object,
+    // TODO: fix propTypes error
     RenderTag: React.PropTypes.element,
-    // renderTag: React.PropTypes.func,
     inputPlaceholder: React.PropTypes.string,
     suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
-    renderSuggestion: React.PropTypes.func,
-    getSuggestionValue: React.PropTypes.func,
+    // renderSuggestion: React.PropTypes.func,
+    // getSuggestionValue: React.PropTypes.func,
     handleInputChange: React.PropTypes.func,
     // TODO: better naming? better solution with event delegation
     onFocus: React.PropTypes.func,
     onBlur: React.PropTypes.func,
     className: React.PropTypes.string,
     tagsInputClassName: React.PropTypes.string,
-    suggestionListClassName: React.PropTypes.string,
+    // suggestionListClassName: React.PropTypes.string,
     tabIndex: React.PropTypes.number,
   };
 
@@ -116,16 +118,18 @@ export class InputTags extends React.Component {
       RenderTag,
       inputPlaceholder,
       suggestions,
-      renderSuggestion,
-      getSuggestionValue,
+      // renderSuggestion,
+      // getSuggestionValue,
       className,
       tagsInputClassName,
-      suggestionListClassName,
+      // suggestionListClassName,
       tabIndex,
     } = this.props;
     const { inputValue } = this.state;
     const suggestionsElement = inputValue.length > 0 ?
     (
+      // TODO: use List instead
+      /*
       <SuggestionList
         className={suggestionListClassName}
         tags={tags}
@@ -133,6 +137,12 @@ export class InputTags extends React.Component {
         handleInsert={this.insertTag}
         renderSuggestion={renderSuggestion}
         getSuggestionValue={getSuggestionValue}
+      />
+      */
+      <List
+        items={suggestions}
+        handleSelect={(suggestion) => { console.log(suggestion); }}
+        handleClose={() => { console.log('close'); }}
       />
     ) : null;
     return (

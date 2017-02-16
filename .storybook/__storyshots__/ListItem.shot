@@ -1,0 +1,29 @@
+exports[`focus item`] = `
+<li
+  className="highlighted"
+  onClick={[Function]}
+  onMouseOver={[Function]}
+  tabIndex={-1}>
+  apple
+</li>
+`;
+
+exports[`highlight item`] = `
+<li
+  className=""
+  onClick={[Function]}
+  onMouseOver={[Function]}
+  tabIndex={-1}>
+  apple
+</li>
+`;
+
+exports[`select item`] = `
+<li
+  className="highlighted"
+  onClick={[Function]}
+  onMouseOver={[Function]}
+  tabIndex={-1}>
+  apple
+</li>
+`;

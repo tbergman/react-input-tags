@@ -52,5 +52,9 @@ https://facebook.github.io/react/docs/reusable-components.html#es6-classes
 
 - https://simonsmith.io/handling-props-and-classnames-in-react/
 
+- https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
+
+- https://hawkrives.github.io/react-list-select/
+
 ### Development Environment
 - Webpack: https://webpack.js.org/guides/get-started/

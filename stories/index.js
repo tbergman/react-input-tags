@@ -6,6 +6,8 @@ import { Example } from './example.jsx';
 import './example.css';
 import { noop } from './util';
 
+// TODO: import stories from files representing other files
+
 storiesOf('InputTags', module)
   .add('create token', () => {
     return (
@@ -37,10 +39,11 @@ storiesOf('InputTags', module)
       />
     )
   });
+  // TODO: show suggestions list when input value greater than zero
 
 storiesOf('ExampleTags', module)
   .add('tags', () => (
-    // TODO: disbale suggestions
+    // TODO: disable suggestions
     <Example />
   ))
   .add('local suggestions', () => (
