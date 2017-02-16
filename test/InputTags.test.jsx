@@ -7,7 +7,7 @@ import { InputTags } from '../src/InputTags.jsx';
 import { noop, tabKeyCode, commaKeyCode, backspaceKeyCode, aKeyCode, emptyString, nonEmptyString } from './util';
 import { defaultSuggestionListClassName } from '../src/default.jsx';
 
-describe('InputTags', () => {
+describe('<InputTags />', () => {
   let inputTagsWrapper;
   let tags;
   let handleInsert;

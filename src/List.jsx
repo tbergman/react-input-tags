@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ListItem } from './ListItem.jsx';
+import { ListItem } from './interface/ListItem.jsx';
 import { defaultNextKeyCodes, defaultPreviousKeyCodes } from './default.jsx';
 
 export class List extends React.Component {
@@ -65,10 +65,10 @@ export class List extends React.Component {
           return (
             <ListItem
               key={index}
-              item={item}
+              value={item}
               isHighlighted={isHighlighted}
-              highlightItem={() => this.setState({ highlightedIndex: index })}
-              selectItem={() => { console.log(`selected: ${item.value}`); }}
+              handleHighlight={() => this.setState({ highlightedIndex: index })}
+              handleSelect={() => { console.log(`selected: ${item.value}`); }}
             />
           );
         }

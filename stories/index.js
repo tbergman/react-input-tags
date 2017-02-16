@@ -7,6 +7,8 @@ import './example.css';
 import { noop } from './util';
 import { List } from '../src/List.jsx';
 
+// TODO: import stories from files representing other files
+
 storiesOf('InputTags', module)
   .add('create token', () => {
     return (
@@ -40,7 +42,7 @@ storiesOf('InputTags', module)
   });
   // TODO: show suggestions list when input value greater than zero
 
-const items = [{ value: 'apple'}, { value: 'banana' }, { value: 'cherry' }];
+const items = ['apple', 'banana', 'cherry'];
 storiesOf('List', module)
   .add('auto focus first item', () => (
     <List

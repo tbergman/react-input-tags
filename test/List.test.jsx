@@ -24,4 +24,12 @@ describe('List', () => {
       it('should auto focus the first item');
     });
   });
+
+  describe('select item', () => {
+    context('when item is highlighted', () => {
+      context('when enter key is pressed', () => {
+        it('should select the item');
+      });
+    });
+  });
 });
