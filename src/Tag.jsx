@@ -5,7 +5,7 @@ export class Tag extends React.Component {
     value: React.PropTypes.string.isRequired,
     handleEdit: React.PropTypes.func.isRequired,
     handleRemove: React.PropTypes.func.isRequired,
-    RenderTag: React.PropTypes.element.isRequired,
+    RenderTag: React.PropTypes.func.isRequired,
   }
 
   state = {

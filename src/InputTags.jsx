@@ -28,8 +28,7 @@ export class InputTags extends React.Component {
     handleRemove: React.PropTypes.func.isRequired,
     insertKeyCodes: React.PropTypes.object,
     removeKeyCodes: React.PropTypes.object,
-    // TODO: fix propTypes error
-    RenderTag: React.PropTypes.element,
+    RenderTag: React.PropTypes.func,
     inputPlaceholder: React.PropTypes.string,
     suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
     // renderSuggestion: React.PropTypes.func,
