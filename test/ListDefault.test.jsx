@@ -111,7 +111,7 @@ describe('<ListDefault />', () => {
     beforeEach(() => {
       handleSelect = sinon.stub();
 
-      listWrapper = shallow(
+      listWrapper = mount(
         <ListDefault
           items={items}
           handleSelect={handleSelect}
@@ -123,12 +123,21 @@ describe('<ListDefault />', () => {
     context('when list has focus', () => {
       context('when item is highlighted', () => {
         const highlightedIndex = 0; // first item is highlighted by default
+        const value = getListItemValueDefault(items[highlightedIndex]);
 
         context('when enter key is pressed', () => {
-          const value = getListItemValueDefault(items[highlightedIndex]);
-
           beforeEach(() => {
             listWrapper.find('ul').simulate('keydown', { keyCode: enterKeyCode });
+          });
+
+          it('should select the item', () => {
+            expect(handleSelect).to.have.been.calledWith(value);
+          });
+        });
+
+        context('when item is clicked', () => {
+          beforeEach(() => {
+            listWrapper.find('ul').childAt(highlightedIndex).simulate('click');
           });
 
           it('should select the item', () => {

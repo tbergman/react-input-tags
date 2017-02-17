@@ -49,8 +49,6 @@ export class Example extends React.Component {
           handleRemove={this.handleRemove}
           suggestions={this.state.suggestions}
           handleInputChange={this.handleInputChange}
-          onFocus={this.props.onFocus}
-          onBlur={this.props.onBlur}
           inputPlaceholder={'add tag'}
         />
       </div>

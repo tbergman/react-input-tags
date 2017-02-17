@@ -20,5 +20,4 @@ export const handleRemove = (currentTags, removeTagIndex) => {
   return newTags;
 }
 
-// TODO: remove
 export const noop = () => {};

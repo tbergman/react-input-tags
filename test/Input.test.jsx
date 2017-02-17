@@ -15,7 +15,6 @@ describe('<Input />', () => {
         <Input
           value={''}
           onChange={noop}
-          onBlur={noop}
           onKeyDown={noop}
           placeholder={'type here'}
         />
@@ -30,7 +29,6 @@ describe('<Input />', () => {
       });
     });
 
-    // TODO:
     // Note: jsdom does not implement browser box model so we can * not * test the following
     it('should set the input width with the mirror width');
     /*
@@ -67,7 +65,6 @@ describe('<Input />', () => {
         <Input
           value={''}
           onChange={handleOnChange}
-          onBlur={noop}
           onKeyDown={noop}
           placeholder={''}
         />
@@ -78,30 +75,6 @@ describe('<Input />', () => {
 
     it('should handle the change', () => {
       expect(handleOnChange).to.have.been.called();
-    });
-  });
-
-  describe('onBlur()', () => {
-    let onBlurWrapper;
-    let handleOnBlur;
-
-    beforeEach(() => {
-      handleOnBlur = sinon.stub();
-      onBlurWrapper = shallow(
-        <Input
-          value={''}
-          onChange={noop}
-          onBlur={handleOnBlur}
-          onKeyDown={noop}
-          placeholder={''}
-        />
-      );
-
-      onBlurWrapper.find('input').simulate('blur');
-    });
-
-    it('should handle the blur', () => {
-      expect(handleOnBlur).to.have.been.called();
     });
   });
 
@@ -116,7 +89,6 @@ describe('<Input />', () => {
         <Input
           value={''}
           onChange={noop}
-          onBlur={noop}
           onKeyDown={handleOnKeyDown}
           placeholder={''}
         />

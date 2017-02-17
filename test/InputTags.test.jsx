@@ -296,7 +296,6 @@ describe('<InputTags />', () => {
   });
 });
 
-/* TODO: make this a story */
 describe('<SuggestionList />', () => {
   context('when input value is empty string', () => {
     const emptyInputValue = '';
