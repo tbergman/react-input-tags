@@ -19,6 +19,7 @@ storiesOf('InputTags', module)
       />
     )
   })
+  // .add('remove item by deleting all text in edit mode', () => {
   .add('edit token', () => {
     return (
       <InputTags

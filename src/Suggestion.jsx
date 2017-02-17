@@ -1,5 +1,7 @@
 import React from 'react';
 
+// TODO: remove
+
 export const Suggestion = ({ value, handleInsert, renderSuggestion }) =>
   renderSuggestion({ value, handleInsert });
 

@@ -1,14 +1,12 @@
 import React from 'react';
 
 import { Input } from './Input.jsx';
-import { Tag } from './Tag.jsx';
-// import { SuggestionList } from './SuggestionList.jsx';
+import { Tag } from './interface/Tag.jsx';
 import { List } from './interface/List.jsx';
 
 import {
   defaultInsertKeyCodes,
   defaultRemoveKeyCodes,
-  DefaultRenderTag,
   defaultInputPlaceholder,
   defaultSuggestions,
   defaultRenderSuggestion,
@@ -19,6 +17,7 @@ import {
   defaultSuggestionListClassName,
 } from './default.jsx';
 
+// TODO: interface
 export class InputTags extends React.Component {
   static propTypes = {
     tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
@@ -28,15 +27,12 @@ export class InputTags extends React.Component {
     handleRemove: React.PropTypes.func.isRequired,
     insertKeyCodes: React.PropTypes.object,
     removeKeyCodes: React.PropTypes.object,
-    RenderTag: React.PropTypes.func,
     inputPlaceholder: React.PropTypes.string,
     suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
     // renderSuggestion: React.PropTypes.func,
     // getSuggestionValue: React.PropTypes.func,
     handleInputChange: React.PropTypes.func,
     // TODO: better naming? better solution with event delegation
-    onFocus: React.PropTypes.func,
-    onBlur: React.PropTypes.func,
     className: React.PropTypes.string,
     tagsInputClassName: React.PropTypes.string,
     // suggestionListClassName: React.PropTypes.string,
@@ -46,7 +42,6 @@ export class InputTags extends React.Component {
   static defaultProps = {
     insertKeyCodes: defaultInsertKeyCodes,
     removeKeyCodes: defaultRemoveKeyCodes,
-    RenderTag: DefaultRenderTag,
     inputPlaceholder: defaultInputPlaceholder,
     suggestions: defaultSuggestions,
     renderSuggestion: defaultRenderSuggestion,
@@ -114,7 +109,6 @@ export class InputTags extends React.Component {
   render() {
     const {
       tags,
-      RenderTag,
       inputPlaceholder,
       suggestions,
       // renderSuggestion,
@@ -157,20 +151,13 @@ export class InputTags extends React.Component {
               value={tag}
               handleEdit={newValue => this.editTag(tags, index, newValue)}
               handleRemove={() => this.removeTag(tags, index)}
-              RenderTag={RenderTag}
             />
           )}
           <Input
             // TODO: should this be a textarea?
             value={inputValue}
             onChange={this.handleOnChange}
-            onFocus={this.props.onFocus}
-            onBlur={(event) => {
-              this.handleOnBlur(event);
-              if (this.props.onBlur) {
-                this.props.onBlur();
-              }
-            }}
+            onBlur={this.handleOnBlur}
             onKeyDown={this.handleOnKeyDown}
             placeholder={inputPlaceholder}
             tabIndex={tabIndex}

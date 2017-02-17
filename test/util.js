@@ -1,5 +1,6 @@
 export const noop = () => {};
 
+// TODO: import from keyCodes.js instead
 export const backspaceKeyCode = 8;
 export const tabKeyCode = 9;
 export const enterKeyCode = 13;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import sinon from 'sinon';
 import { expect } from 'chai';
 
@@ -72,7 +72,7 @@ describe('<ListItemDefault />', () => {
         beforeEach(() => {
           focusElement = sinon.stub();
 
-          listItemWrapper = shallow(
+          listItemWrapper = mount(
             <ListItemDefault
               value={item}
               isHighlighted={isHighlighted}
@@ -94,7 +94,7 @@ describe('<ListItemDefault />', () => {
         beforeEach(() => {
           focusElement = sinon.stub();
 
-          listItemWrapper = shallow(
+          listItemWrapper = mount(
             <ListItemDefault
               value={item}
               isHighlighted={isHighlighted}

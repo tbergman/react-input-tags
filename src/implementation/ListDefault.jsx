@@ -65,6 +65,10 @@ export class ListDefault extends React.Component {
     highlightedIndex: 0,
   }
 
+  setHighlightedIndex = (index) => {
+    this.setState({ highlightedIndex: index });
+  }
+
   handleOnKeyDown = (event) => {
     const { keyCode } = event;
     const {
@@ -94,17 +98,13 @@ export class ListDefault extends React.Component {
 
     if (nextKeyCodes.includes(keyCode)) {
       const newHighlightedIndex = calcNextIndex(oldHighlightedIndex, numItems);
-      this.handleHighlight(newHighlightedIndex);
+      this.setHighlightedIndex(newHighlightedIndex);
     }
 
     if (previousKeyCodes.includes(keyCode)) {
       const newHighlightedIndex = calcPreviousIndex(oldHighlightedIndex, numItems);
-      this.handleHighlight(newHighlightedIndex);
+      this.setHighlightedIndex(newHighlightedIndex);
     }
-  }
-
-  handleHighlight = (index) => {
-    this.setState({ highlightedIndex: index });
   }
 
   render() {
@@ -122,7 +122,7 @@ export class ListDefault extends React.Component {
               key={index}
               value={item}
               isHighlighted={isHighlighted}
-              handleHighlight={() => this.handleHighlight(index)}
+              handleHighlight={() => this.setHighlightedIndex(index)}
               handleSelect={handleSelect}
             />
           );

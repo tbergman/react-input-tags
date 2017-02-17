@@ -6,7 +6,7 @@ import { noop } from '../test/util';
 import { item } from '../test/mock';
 
 storiesOf('ListItem', module)
-  .add('focus item', () => {
+  .add('auto focus highlighted item by rendering', () => {
     return (
       <ListItem
         value={item}
@@ -16,7 +16,7 @@ storiesOf('ListItem', module)
       />
     )
   })
-  .add('highlight item', () => {
+  .add('highlight item by mousing over item', () => {
     return (
       <ListItem
         value={item}
@@ -26,7 +26,7 @@ storiesOf('ListItem', module)
       />
     )
   })
-  .add('select item', () => {
+  .add('select item by clicking item', () => {
     return (
       <ListItem
         value={item}

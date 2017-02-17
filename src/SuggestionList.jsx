@@ -1,5 +1,7 @@
 import React from 'react';
 
+// TODO: remove
+
 import { Suggestion } from './Suggestion.jsx';
 
 export const SuggestionList = ({
