@@ -19,7 +19,6 @@ export class TagEdit extends React.Component {
 
   componentDidMount() {
     const element = this.tagTextArea;
-    // TODO: test
     this.props.focusElement(element);
     this.props.selectElement(element);
   }

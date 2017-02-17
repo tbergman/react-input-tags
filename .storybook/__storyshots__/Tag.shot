@@ -1,0 +1,38 @@
+exports[`auto focus and select text by double clicking to enter edit mode`] = `
+<span
+  onDoubleClick={[Function]}>
+  <span>
+    apple
+  </span>
+  <button
+    onClick={[Function]}>
+    x
+  </button>
+</span>
+`;
+
+exports[`edit item by double clicking and typing`] = `
+<span
+  onDoubleClick={[Function]}>
+  <span>
+    apple
+  </span>
+  <button
+    onClick={[Function]}>
+    x
+  </button>
+</span>
+`;
+
+exports[`remove item by clicking button`] = `
+<span
+  onDoubleClick={[Function]}>
+  <span>
+    apple
+  </span>
+  <button
+    onClick={[Function]}>
+    x
+  </button>
+</span>
+`;

@@ -1,4 +1,4 @@
-exports[`auto focus first item`] = `
+exports[`auto focus first item by rendering`] = `
 <ul
   onKeyDown={[Function]}
   tabIndex="-1">
@@ -26,7 +26,7 @@ exports[`auto focus first item`] = `
 </ul>
 `;
 
-exports[`close list`] = `
+exports[`close list by pressing escape`] = `
 <ul
   onKeyDown={[Function]}
   tabIndex="-1">
@@ -54,7 +54,7 @@ exports[`close list`] = `
 </ul>
 `;
 
-exports[`highlight item`] = `
+exports[`highlight item by mousing over`] = `
 <ul
   onKeyDown={[Function]}
   tabIndex="-1">
@@ -82,7 +82,7 @@ exports[`highlight item`] = `
 </ul>
 `;
 
-exports[`highlight next item`] = `
+exports[`highlight next item by pressing down`] = `
 <ul
   onKeyDown={[Function]}
   tabIndex="-1">
@@ -110,7 +110,7 @@ exports[`highlight next item`] = `
 </ul>
 `;
 
-exports[`highlight previous item`] = `
+exports[`highlight previous item by pressing up`] = `
 <ul
   onKeyDown={[Function]}
   tabIndex="-1">
@@ -138,7 +138,7 @@ exports[`highlight previous item`] = `
 </ul>
 `;
 
-exports[`select item`] = `
+exports[`select item by pressing enter when item is highlighted`] = `
 <ul
   onKeyDown={[Function]}
   tabIndex="-1">

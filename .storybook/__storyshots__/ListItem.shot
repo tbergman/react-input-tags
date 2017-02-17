@@ -1,4 +1,4 @@
-exports[`focus item`] = `
+exports[`auto focus highlighted item by rendering`] = `
 <li
   className="highlighted"
   onClick={[Function]}
@@ -8,7 +8,7 @@ exports[`focus item`] = `
 </li>
 `;
 
-exports[`highlight item`] = `
+exports[`highlight item by mousing over item`] = `
 <li
   className=""
   onClick={[Function]}
@@ -18,7 +18,7 @@ exports[`highlight item`] = `
 </li>
 `;
 
-exports[`select item`] = `
+exports[`select item by clicking item`] = `
 <li
   className="highlighted"
   onClick={[Function]}
