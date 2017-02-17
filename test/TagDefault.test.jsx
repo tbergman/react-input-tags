@@ -3,11 +3,11 @@ import { mount } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { Tag } from '../src/Tag.jsx';
+import { TagDefault } from '../src/implementation/TagDefault.jsx';
 import { nonEmptyString, emptyString } from './util';
-import { DefaultRenderTag } from '../src/default.jsx';
 
-describe('<Tag />', () => {
+// TODO: split into TagDefault, TagRead, TagEdit
+describe('<TagDefault />', () => {
   let tagWrapper;
   let handleEdit;
   let handleRemove;
@@ -17,11 +17,10 @@ describe('<Tag />', () => {
     handleRemove = sinon.stub();
 
     tagWrapper = mount(
-      <Tag
+      <TagDefault
         value={'one'}
         handleEdit={handleEdit}
         handleRemove={handleRemove}
-        RenderTag={DefaultRenderTag}
       />
     );
   });
@@ -48,7 +47,10 @@ describe('<Tag />', () => {
         expect(tagWrapper.state().isEditing).to.equal(true);
       });
 
-      it('focus should be set to the tag');
+      // TODO:
+      it('textarea should be focused');
+
+      it('textarea should be selected');
 
       context('when textarea is changed to non empty string', () => {
         const inputValue = nonEmptyString;

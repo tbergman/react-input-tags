@@ -12,6 +12,7 @@ export const MIRROR_STYLES = [
 
 export const INPUT_WIDTH_EXTRA = 2;
 
+// TODO: interface
 export class Input extends React.Component {
   static propTypes = {
     value: React.PropTypes.string.isRequired,

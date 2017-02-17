@@ -23,61 +23,8 @@ export const defaultTagsInputClassName = 'react-input-tags-tagsinput';
 /* Input */
 export const defaultInputPlaceholder = '';
 
-/* Tag */
-export const defaultTagClassName = 'react-input-tags-tag';
-
-export class DefaultRenderTag extends React.Component {
-  static propTypes = {
-    value: React.PropTypes.string.isRequired,
-    handleEdit: React.PropTypes.func.isRequired,
-    handleRemove: React.PropTypes.func.isRequired,
-    isEditing: React.PropTypes.bool.isRequired,
-    setIsEditing: React.PropTypes.func.isRequired,
-  }
-
-  render() {
-    const { value, handleEdit, handleRemove, isEditing, setIsEditing } = this.props;
-    if (isEditing) {
-      return (
-        <textarea
-          ref={(textarea) => { this.tagTextArea = textarea; }}
-          rows={1}
-          onFocus={() => { this.tagTextArea.select(); }}
-          onBlur={() => setIsEditing(false)}
-          onChange={(event) => {
-            const newValue = event.target.value;
-            if (newValue.length > 0) {
-              handleEdit(newValue);
-            } else {
-              handleRemove();
-            }
-          }}
-          value={value}
-        />
-      );
-    }
-    return (
-      <span
-        className={defaultTagClassName}
-        onDoubleClick={() => setIsEditing(true)}
-      >
-        <span>
-          {value}
-        </span>
-        <button
-          onClick={handleRemove}
-          tabIndex="-1"
-        >
-          {'x'}
-        </button>
-      </span>
-    );
-  }
-}
-
 /* SuggestionList */
-// TODO: loader for async suggestions
-// TODO: keyboard navigation for selecting suggestion
+// TODO: remove this
 export const defaultSuggestionListClassName = 'react-input-tags-suggestionlist';
 
 export const defaultGetSuggestionValue = suggestion => suggestion;

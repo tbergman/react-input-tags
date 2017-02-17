@@ -1,9 +1,6 @@
 import React from 'react';
 
-export const focusElement = (element) => {
-  if (!element) return;
-  element.focus();
-};
+import { focusElement } from './util';
 
 export class ListItemDefault extends React.Component {
   static propTypes = {
@@ -18,7 +15,7 @@ export class ListItemDefault extends React.Component {
     focusElement,
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { isHighlighted } = this.props;
     this.checkFocusElement(isHighlighted);
   }

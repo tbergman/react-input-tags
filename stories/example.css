@@ -38,6 +38,15 @@
   cursor: pointer;
 }
 
+/* TODO: text area */
+textarea {
+  resize: none;
+  /*
+  white-space: nowrap;
+  overflow-x: hidden;
+  */
+}
+
 
 /* list item */
 li.highlighted {
