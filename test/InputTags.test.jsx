@@ -4,7 +4,9 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { InputTags } from '../src/InputTags.jsx';
-import { noop, tabKeyCode, commaKeyCode, backspaceKeyCode, aKeyCode, emptyString, nonEmptyString } from './util';
+import { noop } from './util';
+import { emptyString, nonEmptyString } from './mock';
+import { tabKeyCode, commaKeyCode, backspaceKeyCode, aKeyCode } from '../src/keyCodes';
 import { defaultSuggestionListClassName } from '../src/default.jsx';
 
 describe('<InputTags />', () => {

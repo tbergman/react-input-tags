@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Input } from './Input.jsx';
+import { Input } from './interface/Input.jsx';
 import { Tag } from './interface/Tag.jsx';
 import { List } from './interface/List.jsx';
 
@@ -27,7 +27,6 @@ export class InputTags extends React.Component {
     handleInputChange: React.PropTypes.func,
     className: React.PropTypes.string,
     tagsInputClassName: React.PropTypes.string,
-    tabIndex: React.PropTypes.number,
   };
 
   static defaultProps = {
@@ -101,7 +100,6 @@ export class InputTags extends React.Component {
       suggestions,
       className,
       tagsInputClassName,
-      tabIndex,
     } = this.props;
     const { inputValue } = this.state;
     const suggestionsElement = inputValue.length > 0 ?
@@ -133,11 +131,10 @@ export class InputTags extends React.Component {
           )}
           <Input
             value={inputValue}
-            onChange={this.handleOnChange}
-            onBlur={this.handleOnBlur}
-            onKeyDown={this.handleOnKeyDown}
             placeholder={inputPlaceholder}
-            tabIndex={tabIndex}
+            handleOnChange={this.handleOnChange}
+            handleOnBlur={this.handleOnBlur}
+            handleOnKeyDown={this.handleOnKeyDown}
           />
         </div>
         {suggestionsElement}

@@ -12,15 +12,13 @@ export const MIRROR_STYLES = [
 
 export const INPUT_WIDTH_EXTRA = 2;
 
-// TODO: interface
-export class Input extends React.Component {
+export class InputDefault extends React.Component {
   static propTypes = {
     value: React.PropTypes.string.isRequired,
-    onChange: React.PropTypes.func.isRequired,
-    onBlur: React.PropTypes.func.isRequired,
-    onKeyDown: React.PropTypes.func.isRequired,
     placeholder: React.PropTypes.string.isRequired,
-    tabIndex: React.PropTypes.number,
+    handleOnChange: React.PropTypes.func.isRequired,
+    handleOnBlur: React.PropTypes.func.isRequired,
+    handleOnKeyDown: React.PropTypes.func.isRequired,
   }
 
   componentDidMount() {
@@ -47,7 +45,7 @@ export class Input extends React.Component {
   }
 
   render() {
-    const { value, onChange, onBlur, onKeyDown, placeholder, tabIndex } = this.props;
+    const { value, placeholder, handleOnChange, handleOnBlur, handleOnKeyDown } = this.props;
 
     const mirrorValue = value || placeholder;
     const mirrorStyle = {
@@ -71,11 +69,10 @@ export class Input extends React.Component {
           ref={(c) => { this.inputNode = c; }}
           type={'text'}
           value={value}
-          onChange={onChange}
-          onBlur={onBlur}
-          onKeyDown={onKeyDown}
           placeholder={placeholder}
-          tabIndex={tabIndex}
+          onChange={handleOnChange}
+          onBlur={handleOnBlur}
+          onKeyDown={handleOnKeyDown}
         />
       </span>
     );
