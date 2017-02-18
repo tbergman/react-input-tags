@@ -18,7 +18,7 @@ import {
 import { noop } from './util';
 import { emptyString, nonEmptyString, items } from './mock';
 
-describe.only('<InputTagsDefault />', () => {
+describe('<InputTagsDefault />', () => {
   let inputTagsWrapper;
   let tags;
   let handleInsert;

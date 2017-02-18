@@ -1,0 +1,155 @@
+exports[`show placeholder by rendering`] = `
+<div>
+  <div>
+    <span>
+      <span
+        id="mirrorNode"
+        style={
+          Object {
+            "overflow": "scroll",
+            "position": "absolute",
+            "visibility": "hidden",
+            "whiteSpace": "pre",
+          }
+        }>
+        Add Tag
+      </span>
+      <input
+        id="inputNode"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder="Add Tag"
+        type="text"
+        value="" />
+    </span>
+  </div>
+</div>
+`;
+
+exports[`show tags by rendering`] = `
+<div>
+  <div>
+    <span
+      onDoubleClick={[Function]}>
+      <span>
+        apple
+      </span>
+      <button
+        onClick={[Function]}>
+        x
+      </button>
+    </span>
+    <span
+      onDoubleClick={[Function]}>
+      <span>
+        banana
+      </span>
+      <button
+        onClick={[Function]}>
+        x
+      </button>
+    </span>
+    <span
+      onDoubleClick={[Function]}>
+      <span>
+        cherry
+      </span>
+      <button
+        onClick={[Function]}>
+        x
+      </button>
+    </span>
+    <span>
+      <span
+        id="mirrorNode"
+        style={
+          Object {
+            "overflow": "scroll",
+            "position": "absolute",
+            "visibility": "hidden",
+            "whiteSpace": "pre",
+          }
+        }>
+        
+      </span>
+      <input
+        id="inputNode"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder=""
+        type="text"
+        value="" />
+    </span>
+  </div>
+</div>
+`;
+
+exports[`update suggestions by typing in input`] = `
+<div>
+  <div>
+    <span>
+      <span
+        id="mirrorNode"
+        style={
+          Object {
+            "overflow": "scroll",
+            "position": "absolute",
+            "visibility": "hidden",
+            "whiteSpace": "pre",
+          }
+        }>
+        
+      </span>
+      <input
+        id="inputNode"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder=""
+        type="text"
+        value="" />
+    </span>
+  </div>
+</div>
+`;
+
+exports[`update tags by creating, editing and deleting`] = `
+<div>
+  <div>
+    <span
+      onDoubleClick={[Function]}>
+      <span>
+        apple
+      </span>
+      <button
+        onClick={[Function]}>
+        x
+      </button>
+    </span>
+    <span>
+      <span
+        id="mirrorNode"
+        style={
+          Object {
+            "overflow": "scroll",
+            "position": "absolute",
+            "visibility": "hidden",
+            "whiteSpace": "pre",
+          }
+        }>
+        
+      </span>
+      <input
+        id="inputNode"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder=""
+        type="text"
+        value="" />
+    </span>
+  </div>
+</div>
+`;

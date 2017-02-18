@@ -1,0 +1,63 @@
+exports[`local suggestions`] = `
+<div>
+  <div>
+    <span>
+      <span
+        id="mirrorNode"
+        style={
+          Object {
+            "overflow": "scroll",
+            "position": "absolute",
+            "visibility": "hidden",
+            "whiteSpace": "pre",
+          }
+        }>
+        Add tag
+      </span>
+      <input
+        id="inputNode"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder="Add tag"
+        type="text"
+        value="" />
+    </span>
+  </div>
+</div>
+`;
+
+exports[`no suggestions`] = `
+<div>
+  <div>
+    <span>
+      <span
+        id="mirrorNode"
+        style={
+          Object {
+            "overflow": "scroll",
+            "position": "absolute",
+            "visibility": "hidden",
+            "whiteSpace": "pre",
+          }
+        }>
+        Add tag
+      </span>
+      <input
+        id="inputNode"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder="Add tag"
+        type="text"
+        value="" />
+    </span>
+  </div>
+</div>
+`;
+
+exports[`remote suggestions`] = `
+<div>
+  TODO
+</div>
+`;
