@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 
-import { InputTags } from '../src/interface/InputTags.jsx';
+import { InputTags } from '../src/index';
 
 import { noop } from '../test/util';
 import { items, emptyString } from '../test/mock';
