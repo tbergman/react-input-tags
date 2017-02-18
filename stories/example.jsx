@@ -5,13 +5,18 @@ import { TagsExample } from '../src/example/TagsExample.jsx';
 import { LocalSuggestionsExample } from '../src/example/LocalSuggestionsExample.jsx';
 
 storiesOf('Example', module)
-  .add('no suggestions', () => (
-    <TagsExample />
-  ))
-  .add('local suggestions', () => (
-    <LocalSuggestionsExample />
-  ))
-  .add('remote suggestions', () => (
-    // TODO: RemoteSuggestionsExample
-    <LocalSuggestionsExample />
-  ));
+  .add('no suggestions', () => {
+    return (
+      <TagsExample />
+    )
+  })
+  .add('local suggestions', () => {
+    return (
+      <LocalSuggestionsExample />
+    )
+  })
+  .add('remote suggestions', () => {
+    return (
+      <div>{'TODO'}</div>
+    )
+  });
