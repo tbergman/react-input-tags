@@ -1,17 +1,17 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 
-import { Example } from '../src/implementation/Example.jsx';
-
-import { items } from '../test/mock';
+import { TagsExample } from '../src/example/TagsExample.jsx';
+import { LocalSuggestionsExample } from '../src/example/LocalSuggestionsExample.jsx';
 
 storiesOf('Example', module)
   .add('no suggestions', () => (
-    <Example />
+    <TagsExample />
   ))
   .add('local suggestions', () => (
-    <Example />
+    <LocalSuggestionsExample />
   ))
   .add('remote suggestions', () => (
-    <Example />
+    // TODO: RemoteSuggestionsExample
+    <LocalSuggestionsExample />
   ));

@@ -5,26 +5,26 @@ import { InputTagsContainerDefault } from '../implementation/InputTagsContainerD
 export const InputTagsContainer = ({
   InputTagsContainerImplementation,
   tags,
-  onChange,
+  handleUpdateTags,
   inputPlaceholder,
   suggestions,
-  filter,
+  handleUpdateSuggestions,
 }) =>
   <InputTagsContainerImplementation
     tags={tags}
-    onChange={onChange}
+    handleUpdateTags={handleUpdateTags}
     inputPlaceholder={inputPlaceholder}
     suggestions={suggestions}
-    filter={filter}
+    handleUpdateSuggestions={handleUpdateSuggestions}
   />;
 
 InputTagsContainer.propTypes = {
   InputTagsContainerImplementation: React.PropTypes.func.isRequired,
   tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
-  onChange: React.PropTypes.func.isRequired,
+  handleUpdateTags: React.PropTypes.func.isRequired,
   inputPlaceholder: React.PropTypes.string,
   suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
-  filter: React.PropTypes.func,
+  handleUpdateSuggestions: React.PropTypes.func,
 };
 
 InputTagsContainer.defaultProps = {
