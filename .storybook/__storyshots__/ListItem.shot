@@ -2,6 +2,7 @@ exports[`highlight item by mousing over item`] = `
 <li
   className=""
   onClick={[Function]}
+  onMouseDown={[Function]}
   onMouseOver={[Function]}>
   apple
 </li>
@@ -11,6 +12,7 @@ exports[`select item by clicking item`] = `
 <li
   className="highlighted"
   onClick={[Function]}
+  onMouseDown={[Function]}
   onMouseOver={[Function]}>
   apple
 </li>

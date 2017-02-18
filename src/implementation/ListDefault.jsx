@@ -2,6 +2,7 @@ import React from 'react';
 
 import { ListItem } from '../interface/ListItem.jsx';
 
+/* eslint-disable react/prefer-stateless-function */
 export class ListDefault extends React.Component {
   static propTypes = {
     items: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,

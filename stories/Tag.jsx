@@ -6,7 +6,7 @@ import { noop } from '../test/util';
 import { item } from '../test/mock';
 
 storiesOf('Tag', module)
-  .add('auto focus and select text by double clicking to enter edit mode', () => {
+  .add('focus and select text by double clicking to enter edit mode', () => {
     return (
       <Tag
         value={item}

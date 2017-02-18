@@ -1,4 +1,4 @@
-exports[`auto focus and select text by double clicking to enter edit mode`] = `
+exports[`edit item by double clicking and typing`] = `
 <span
   onDoubleClick={[Function]}>
   <span>
@@ -11,7 +11,7 @@ exports[`auto focus and select text by double clicking to enter edit mode`] = `
 </span>
 `;
 
-exports[`edit item by double clicking and typing`] = `
+exports[`focus and select text by double clicking to enter edit mode`] = `
 <span
   onDoubleClick={[Function]}>
   <span>
