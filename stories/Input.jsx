@@ -4,10 +4,10 @@ import { storiesOf, action } from '@kadira/storybook';
 import { Input } from '../src/interface/Input.jsx';
 
 import { noop } from '../test/util';
-import { emptyString, nonEmptyPlaceholder } from '../test/mock';
+import { emptyString, nonEmptyString } from '../test/mock';
 
 storiesOf('Input', module)
-  .add('with empty placeholder', () => {
+  .add('show empty placeholder by rendering', () => {
     return (
       <Input
         value={emptyString}
@@ -18,11 +18,11 @@ storiesOf('Input', module)
       />
     )
   })
-  .add('with non empty placeholder', () => {
+  .add('show non empty placeholder by rendering', () => {
     return (
       <Input
         value={emptyString}
-        placeholder={nonEmptyPlaceholder}
+        placeholder={nonEmptyString}
         handleOnChange={noop}
         handleOnBlur={noop}
         handleOnKeyDown={noop}

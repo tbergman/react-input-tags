@@ -1,10 +1,8 @@
 exports[`fetching suggestions`] = `
 <div
   className="container">
-  <div
-    className="react-input-tags">
-    <div
-      className="react-input-tags-tagsinput">
+  <div>
+    <div>
       <span>
         <span
           id="mirrorNode"
@@ -22,10 +20,40 @@ exports[`fetching suggestions`] = `
           id="inputNode"
           onBlur={[Function]}
           onChange={[Function]}
-          onFocus={[Function]}
           onKeyDown={[Function]}
           placeholder="add tag"
-          tabIndex={undefined}
+          type="text"
+          value="" />
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`hide suggestions list when escape is pressed`] = `
+<div
+  className="container">
+  <div>
+    <div>
+      <span>
+        <span
+          id="mirrorNode"
+          style={
+            Object {
+              "overflow": "scroll",
+              "position": "absolute",
+              "visibility": "hidden",
+              "whiteSpace": "pre",
+            }
+          }>
+          add tag
+        </span>
+        <input
+          id="inputNode"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onKeyDown={[Function]}
+          placeholder="add tag"
           type="text"
           value="" />
       </span>
@@ -37,10 +65,8 @@ exports[`fetching suggestions`] = `
 exports[`local suggestions`] = `
 <div
   className="container">
-  <div
-    className="react-input-tags">
-    <div
-      className="react-input-tags-tagsinput">
+  <div>
+    <div>
       <span>
         <span
           id="mirrorNode"
@@ -58,10 +84,8 @@ exports[`local suggestions`] = `
           id="inputNode"
           onBlur={[Function]}
           onChange={[Function]}
-          onFocus={[Function]}
           onKeyDown={[Function]}
           placeholder="add tag"
-          tabIndex={undefined}
           type="text"
           value="" />
       </span>
@@ -73,10 +97,8 @@ exports[`local suggestions`] = `
 exports[`tags`] = `
 <div
   className="container">
-  <div
-    className="react-input-tags">
-    <div
-      className="react-input-tags-tagsinput">
+  <div>
+    <div>
       <span>
         <span
           id="mirrorNode"
@@ -94,10 +116,8 @@ exports[`tags`] = `
           id="inputNode"
           onBlur={[Function]}
           onChange={[Function]}
-          onFocus={[Function]}
           onKeyDown={[Function]}
           placeholder="add tag"
-          tabIndex={undefined}
           type="text"
           value="" />
       </span>

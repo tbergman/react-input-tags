@@ -27,7 +27,7 @@ export class ListItemDefault extends React.Component {
 
   checkFocusElement(isHighlighted) {
     if (!isHighlighted) return;
-    this.props.focusElement(this.listItem);
+    // this.props.focusElement(this.listItem);
   }
 
   render() {

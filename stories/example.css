@@ -29,10 +29,6 @@
   background-color: lightpink;
 }
 
-.react-input-tags-suggestionlist {
-  position: absolute;
-}
-
 .react-input-tags-suggestion {
   padding: 5px;
   cursor: pointer;
@@ -46,6 +42,10 @@ textarea {
   */
 }
 
+/* list */
+ul {
+  position: absolute;
+}
 
 /* list item */
 li.highlighted {
