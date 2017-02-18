@@ -2,7 +2,7 @@
 React component for tagging inputs.
 
 [![npm version](https://badge.fury.io/js/react-input-tags.svg)](https://badge.fury.io/js/react-input-tags)
-[![dependencies](https://david-dm.org/baldwmic/react-input-tags.svg)]
+![dependencies](https://david-dm.org/baldwmic/react-input-tags.svg)
 [![travis-ci status](https://travis-ci.org/baldwmic/react-input-tags.png?branch=master)](https://travis-ci.org/baldwmic/react-input-tags)
 
 ## Getting Started
@@ -45,8 +45,8 @@ Both the high-level `InputTagsContainer` component or low-level `InputTags` comp
 |`tags`|Array|✓|An array of data that represents the value of the tags|
 |`handleUpdateTags`|Function|✓|A function called when the value of tags changes, passes the tags value as an argument.|
 |`inputPlaceholder`|String||The placeholder to populate the input with|
-|`suggestions`|Array|✓|An array of data that represents the value of the suggestions|
-|`handleUpdateSuggestions`|Function|✓|A function called when the value of input changes, passes the input value as an argument.|
+|`suggestions`|Array||An array of data that represents the value of the suggestions|
+|`handleUpdateSuggestions`|Function||A function called when the value of input changes, passes the input value as an argument.|
 
 ### [InputTags](src/interface/InputTags.jsx)
 |Property|Type|Required|Description|
@@ -56,5 +56,5 @@ Both the high-level `InputTagsContainer` component or low-level `InputTags` comp
 |`handleEdit`|Function|✓|A function called when a tag will be edited, passes the current tags value, index of the tag to be edited, and the new tag value as arguments.|
 |`handleRemove`|Function|✓|A function called when a tag will be removed, passes the current tags value and index of the tag to be removed as arguments.|
 |`inputPlaceholder`|String||The placeholder to populate the input with|
-|`suggestions`|Array|✓|An array of data that represents the value of the suggestions|
-|`handleUpdateSuggestions`|Function|✓|A function called when the value of input changes, passes the input value as an argument.|
+|`suggestions`|Array||An array of data that represents the value of the suggestions|
+|`handleUpdateSuggestions`|Function||A function called when the value of input changes, passes the input value as an argument.|
