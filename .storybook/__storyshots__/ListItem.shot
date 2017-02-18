@@ -1,19 +1,9 @@
-exports[`auto focus highlighted item by rendering`] = `
-<li
-  className="highlighted"
-  onClick={[Function]}
-  onMouseOver={[Function]}
-  tabIndex={-1}>
-  apple
-</li>
-`;
-
 exports[`highlight item by mousing over item`] = `
 <li
   className=""
   onClick={[Function]}
-  onMouseOver={[Function]}
-  tabIndex={-1}>
+  onMouseDown={[Function]}
+  onMouseOver={[Function]}>
   apple
 </li>
 `;
@@ -22,8 +12,8 @@ exports[`select item by clicking item`] = `
 <li
   className="highlighted"
   onClick={[Function]}
-  onMouseOver={[Function]}
-  tabIndex={-1}>
+  onMouseDown={[Function]}
+  onMouseOver={[Function]}>
   apple
 </li>
 `;

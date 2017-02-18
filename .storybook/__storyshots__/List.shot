@@ -1,166 +1,76 @@
-exports[`auto focus first item by rendering`] = `
-<ul
-  onKeyDown={[Function]}
-  tabIndex="-1">
+exports[`highlight item by mousing over item`] = `
+<ul>
   <li
     className="highlighted"
     onClick={[Function]}
-    onMouseOver={[Function]}
-    tabIndex={-1}>
+    onMouseDown={[Function]}
+    onMouseOver={[Function]}>
     apple
   </li>
   <li
     className=""
     onClick={[Function]}
-    onMouseOver={[Function]}
-    tabIndex={-1}>
+    onMouseDown={[Function]}
+    onMouseOver={[Function]}>
     banana
   </li>
   <li
     className=""
     onClick={[Function]}
-    onMouseOver={[Function]}
-    tabIndex={-1}>
+    onMouseDown={[Function]}
+    onMouseOver={[Function]}>
     cherry
   </li>
 </ul>
 `;
 
-exports[`close list by pressing escape`] = `
-<ul
-  onKeyDown={[Function]}
-  tabIndex="-1">
+exports[`select item by clicking item`] = `
+<ul>
   <li
     className="highlighted"
     onClick={[Function]}
-    onMouseOver={[Function]}
-    tabIndex={-1}>
+    onMouseDown={[Function]}
+    onMouseOver={[Function]}>
     apple
   </li>
   <li
     className=""
     onClick={[Function]}
-    onMouseOver={[Function]}
-    tabIndex={-1}>
+    onMouseDown={[Function]}
+    onMouseOver={[Function]}>
     banana
   </li>
   <li
     className=""
     onClick={[Function]}
-    onMouseOver={[Function]}
-    tabIndex={-1}>
+    onMouseDown={[Function]}
+    onMouseOver={[Function]}>
     cherry
   </li>
 </ul>
 `;
 
-exports[`highlight item by mousing over`] = `
-<ul
-  onKeyDown={[Function]}
-  tabIndex="-1">
+exports[`show highlighted item by rendering`] = `
+<ul>
   <li
     className="highlighted"
     onClick={[Function]}
-    onMouseOver={[Function]}
-    tabIndex={-1}>
+    onMouseDown={[Function]}
+    onMouseOver={[Function]}>
     apple
   </li>
   <li
     className=""
     onClick={[Function]}
-    onMouseOver={[Function]}
-    tabIndex={-1}>
+    onMouseDown={[Function]}
+    onMouseOver={[Function]}>
     banana
   </li>
   <li
     className=""
     onClick={[Function]}
-    onMouseOver={[Function]}
-    tabIndex={-1}>
-    cherry
-  </li>
-</ul>
-`;
-
-exports[`highlight next item by pressing down`] = `
-<ul
-  onKeyDown={[Function]}
-  tabIndex="-1">
-  <li
-    className="highlighted"
-    onClick={[Function]}
-    onMouseOver={[Function]}
-    tabIndex={-1}>
-    apple
-  </li>
-  <li
-    className=""
-    onClick={[Function]}
-    onMouseOver={[Function]}
-    tabIndex={-1}>
-    banana
-  </li>
-  <li
-    className=""
-    onClick={[Function]}
-    onMouseOver={[Function]}
-    tabIndex={-1}>
-    cherry
-  </li>
-</ul>
-`;
-
-exports[`highlight previous item by pressing up`] = `
-<ul
-  onKeyDown={[Function]}
-  tabIndex="-1">
-  <li
-    className="highlighted"
-    onClick={[Function]}
-    onMouseOver={[Function]}
-    tabIndex={-1}>
-    apple
-  </li>
-  <li
-    className=""
-    onClick={[Function]}
-    onMouseOver={[Function]}
-    tabIndex={-1}>
-    banana
-  </li>
-  <li
-    className=""
-    onClick={[Function]}
-    onMouseOver={[Function]}
-    tabIndex={-1}>
-    cherry
-  </li>
-</ul>
-`;
-
-exports[`select item by pressing enter when item is highlighted`] = `
-<ul
-  onKeyDown={[Function]}
-  tabIndex="-1">
-  <li
-    className="highlighted"
-    onClick={[Function]}
-    onMouseOver={[Function]}
-    tabIndex={-1}>
-    apple
-  </li>
-  <li
-    className=""
-    onClick={[Function]}
-    onMouseOver={[Function]}
-    tabIndex={-1}>
-    banana
-  </li>
-  <li
-    className=""
-    onClick={[Function]}
-    onMouseOver={[Function]}
-    tabIndex={-1}>
+    onMouseDown={[Function]}
+    onMouseOver={[Function]}>
     cherry
   </li>
 </ul>

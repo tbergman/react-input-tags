@@ -3,19 +3,29 @@ import { mount } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { InputTagsDefault, SuggestionList } from '../src/implementation/InputTagsDefault.jsx';
-import { tabKeyCode, commaKeyCode, backspaceKeyCode, aKeyCode, escapeKeyCode, enterKeyCode } from '../src/keyCodes';
+import { InputTagsDefault, SuggestionList, calcNextIndexDefault, calcPreviousIndexDefault } from '../src/implementation/InputTagsDefault.jsx';
+import {
+  enterKeyCode,
+  tabKeyCode,
+  commaKeyCode,
+  backspaceKeyCode,
+  downKeyCode,
+  upKeyCode,
+  escapeKeyCode,
+  aKeyCode,
+} from '../src/keyCodes';
 
 import { noop } from './util';
 import { emptyString, nonEmptyString, items } from './mock';
 
-describe('<InputTagsDefault />', () => {
+describe.only('<InputTagsDefault />', () => {
   let inputTagsWrapper;
   let tags;
   let handleInsert;
   let handleEdit;
   let handleRemove;
   let suggestions;
+  let getSuggestionValue;
 
   describe('create token manually', () => {
     beforeEach(() => {
@@ -50,6 +60,24 @@ describe('<InputTagsDefault />', () => {
       context('when focus leaves input field', () => {
         beforeEach(() => {
           inputTagsWrapper.find('input').simulate('blur');
+        });
+
+        it('should insert typed string as token', () => {
+          expect(handleInsert).to.have.been.calledWith(tags, inputValue);
+        });
+
+        it('should clear the state `inputValue`', () => {
+          expect(inputTagsWrapper.state().inputValue).to.equal(emptyString);
+        });
+
+        it('should set the state `showSuggestions` to be false', () => {
+          expect(inputTagsWrapper.state().showSuggestions).to.equal(false);
+        });
+      });
+
+      context('when `enter` key is pressed', () => {
+        beforeEach(() => {
+          inputTagsWrapper.find('input').simulate('keydown', { keyCode: enterKeyCode });
         });
 
         it('should insert typed string as token', () => {
@@ -138,6 +166,16 @@ describe('<InputTagsDefault />', () => {
       context('when focus leaves input field', () => {
         beforeEach(() => {
           inputTagsWrapper.find('input').simulate('blur');
+        });
+
+        it('should *not* insert typed string as token', () => {
+          expect(handleInsert).to.not.have.been.called();
+        });
+      });
+
+      context('when `enter` key is pressed', () => {
+        beforeEach(() => {
+          inputTagsWrapper.find('input').simulate('keydown', { keyCode: enterKeyCode });
         });
 
         it('should *not* insert typed string as token', () => {
@@ -327,6 +365,7 @@ describe('<InputTagsDefault />', () => {
       tags = [];
       handleInsert = sinon.stub();
       suggestions = items;
+      getSuggestionValue = sinon.stub();
 
       inputTagsWrapper = mount(
         <InputTagsDefault
@@ -335,8 +374,61 @@ describe('<InputTagsDefault />', () => {
           handleEdit={noop}
           handleRemove={noop}
           suggestions={suggestions}
+          getSuggestionValue={getSuggestionValue}
         />
       );
+    });
+
+    describe('highlight suggestion', () => {
+      context('when inputValue is non empty string', () => {
+        beforeEach(() => {
+          inputTagsWrapper.find('input').simulate('change', { target: { value: nonEmptyString }});
+        });
+
+        it('first item should be highlighted', () => {
+          expect(inputTagsWrapper.state().highlightedSuggestionIndex).to.equal(0);
+        });
+
+        context('when suggestion is moused over', () => {
+          const newHighlightedIndex = 1;
+
+          beforeEach(() => {
+            inputTagsWrapper.find('ul').childAt(newHighlightedIndex).simulate('mouseover');
+          });
+
+          it('should highlight the item', () => {
+            expect(inputTagsWrapper.state().highlightedSuggestionIndex).to.equal(newHighlightedIndex);
+          });
+        });
+
+        context('when down key is pressed', () => {
+          const oldHighlightedIndex = 0; // first item is highlighted by default
+          const numItems = items.length;
+          const newHighlightedIndex = calcNextIndexDefault(oldHighlightedIndex, numItems);
+
+          beforeEach(() => {
+            inputTagsWrapper.find('input').simulate('keydown', { keyCode: downKeyCode });
+          });
+
+          it('should highlight the next item', () => {
+            expect(inputTagsWrapper.state().highlightedSuggestionIndex).to.equal(newHighlightedIndex);
+          });
+        });
+
+        context('when up key is pressed', () => {
+          const oldHighlightedIndex = 0; // first item is highlighted by default
+          const numItems = items.length;
+          const newHighlightedIndex = calcPreviousIndexDefault(oldHighlightedIndex, numItems);
+
+          beforeEach(() => {
+            inputTagsWrapper.find('input').simulate('keydown', { keyCode: upKeyCode });
+          });
+
+          it('should highlight the previous item', () => {
+            expect(inputTagsWrapper.state().highlightedSuggestionIndex).to.equal(newHighlightedIndex);
+          });
+        });
+      });
     });
 
     describe('select suggestion', () => {
@@ -352,8 +444,12 @@ describe('<InputTagsDefault />', () => {
             inputTagsWrapper.find('ul').childAt(suggestionsIndex).simulate('click');
           });
 
+          it('should get the suggestion value', () => {
+            expect(getSuggestionValue).to.have.been.calledWith(suggestions[suggestionsIndex]);
+          });
+
           it('should insert the suggestion as token', () => {
-            expect(handleInsert).to.have.been.calledWith(tags, suggestions[suggestionsIndex]);
+            expect(handleInsert).to.have.been.calledWith(tags, getSuggestionValue(suggestions[suggestionsIndex]));
           });
         });
 
@@ -361,11 +457,15 @@ describe('<InputTagsDefault />', () => {
           const suggestionsIndex = 0; // first suggestion is highlighted by default
 
           beforeEach(() => {
-            inputTagsWrapper.find('ul').simulate('keydown', { keyCode: enterKeyCode });
+            inputTagsWrapper.find('input').simulate('keydown', { keyCode: enterKeyCode });
+          });
+
+          it('should get the suggestion value', () => {
+            expect(getSuggestionValue).to.have.been.calledWith(suggestions[suggestionsIndex]);
           });
 
           it('should insert the suggestion as token', () => {
-            expect(handleInsert).to.have.been.calledWith(tags, suggestions[suggestionsIndex]);
+            expect(handleInsert).to.have.been.calledWith(tags, getSuggestionValue(suggestions[suggestionsIndex]));
           });
         });
 
@@ -373,11 +473,15 @@ describe('<InputTagsDefault />', () => {
           const suggestionsIndex = 0; // first suggestion is highlighted by default
 
           beforeEach(() => {
-            inputTagsWrapper.find('ul').simulate('keydown', { keyCode: tabKeyCode });
+            inputTagsWrapper.find('input').simulate('keydown', { keyCode: tabKeyCode });
+          });
+
+          it('should get the suggestion value', () => {
+            expect(getSuggestionValue).to.have.been.calledWith(suggestions[suggestionsIndex]);
           });
 
           it('should insert the suggestion as token', () => {
-            expect(handleInsert).to.have.been.calledWith(tags, suggestions[suggestionsIndex]);
+            expect(handleInsert).to.have.been.calledWith(tags, getSuggestionValue(suggestions[suggestionsIndex]));
           });
         });
 
@@ -385,11 +489,15 @@ describe('<InputTagsDefault />', () => {
           const suggestionsIndex = 0; // first suggestion is highlighted by default
 
           beforeEach(() => {
-            inputTagsWrapper.find('ul').simulate('keydown', { keyCode: commaKeyCode });
+            inputTagsWrapper.find('input').simulate('keydown', { keyCode: commaKeyCode });
+          });
+
+          it('should get the suggestion value', () => {
+            expect(getSuggestionValue).to.have.been.calledWith(suggestions[suggestionsIndex]);
           });
 
           it('should insert the suggestion as token', () => {
-            expect(handleInsert).to.have.been.calledWith(tags, suggestions[suggestionsIndex]);
+            expect(handleInsert).to.have.been.calledWith(tags, getSuggestionValue(suggestions[suggestionsIndex]));
           });
         });
       });
@@ -403,13 +511,81 @@ describe('<InputTagsDefault />', () => {
 
         context('when escape key is pressed', () => {
           beforeEach(() => {
-            inputTagsWrapper.find('ul').simulate('keydown', { keyCode: escapeKeyCode });
+            inputTagsWrapper.find('input').simulate('keydown', { keyCode: escapeKeyCode });
           });
 
           it('should close the suggestion list', () => {
             expect(inputTagsWrapper.state().showSuggestions).to.equal(false);
           });
         });
+      });
+    });
+  });
+});
+
+describe('calcNextIndexDefault()', () => {
+  context('when numItems is one', () => {
+    const numItems = 1;
+
+    context('when oldIndex is start of list', () => {
+      const oldIndex = 0;
+
+      it('should return oldIndex', () => {
+        expect(calcNextIndexDefault(oldIndex, numItems)).to.equal(oldIndex);
+      });
+    });
+  });
+
+  context('when numItems is greater than one', () => {
+    const numItems = 2;
+
+    context('when oldIndex is start of list', () => {
+      const oldIndex = 0;
+
+      it('should return oldIndex + 1', () => {
+        expect(calcNextIndexDefault(oldIndex, numItems)).to.equal(oldIndex + 1);
+      });
+    });
+
+    context('when oldIndex is end of list', () => {
+      const oldIndex = numItems - 1;
+
+      it('should return start of list', () => {
+        expect(calcNextIndexDefault(oldIndex, numItems)).to.equal(0);
+      });
+    });
+  });
+});
+
+describe('calcPreviousIndexDefault()', () => {
+  context('when numItems is one', () => {
+    const numItems = 1;
+
+    context('when oldIndex is start of list', () => {
+      const oldIndex = 0;
+
+      it('should return oldIndex', () => {
+        expect(calcPreviousIndexDefault(oldIndex, numItems)).to.equal(oldIndex);
+      });
+    });
+  });
+
+  context('when numItems is greater than one', () => {
+    const numItems = 2;
+
+    context('when oldIndex is start of list', () => {
+      const oldIndex = 0;
+
+      it('should return end of list', () => {
+        expect(calcPreviousIndexDefault(oldIndex, numItems)).to.equal(numItems - 1);
+      });
+    });
+
+    context('when oldIndex is end of list', () => {
+      const oldIndex = numItems - 1;
+
+      it('should return oldIndex - 1', () => {
+        expect(calcNextIndexDefault(oldIndex, numItems)).to.equal(oldIndex - 1);
       });
     });
   });

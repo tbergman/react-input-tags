@@ -290,7 +290,65 @@ exports[`edit token by double clicking on tag and typing`] = `
 </div>
 `;
 
-exports[`hide suggestions list by pressing escape`] = `
+exports[`hide suggestions list by typing non empty string and pressing escape`] = `
+<div>
+  <div>
+    <span>
+      <span
+        id="mirrorNode"
+        style={
+          Object {
+            "overflow": "scroll",
+            "position": "absolute",
+            "visibility": "hidden",
+            "whiteSpace": "pre",
+          }
+        }>
+        
+      </span>
+      <input
+        id="inputNode"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder=""
+        type="text"
+        value="" />
+    </span>
+  </div>
+</div>
+`;
+
+exports[`highlight next suggestion by typing non empty string and pressing down`] = `
+<div>
+  <div>
+    <span>
+      <span
+        id="mirrorNode"
+        style={
+          Object {
+            "overflow": "scroll",
+            "position": "absolute",
+            "visibility": "hidden",
+            "whiteSpace": "pre",
+          }
+        }>
+        
+      </span>
+      <input
+        id="inputNode"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder=""
+        type="text"
+        value="" />
+    </span>
+  </div>
+</div>
+`;
+
+exports[`highlight previous suggestion by typing non empty string and pressing up`] = `
 <div>
   <div>
     <span>

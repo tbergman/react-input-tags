@@ -1,53 +1,28 @@
-/*
-.container {
-  max-width: 300px;
-  margin: 50px auto;
-  background-color: #ff9;
-  border: 2px solid black;
-  font-family: BlinkMacSystemFont;
-  font-size: 14px;
-}
-*/
-
-.react-input-tags-tagsinput {
-  max-width: 300px;
-  background-color: lightblue;
-  border: 2px solid black;
-}
-
-/* TODO: make this not overflow, textarea? */
-.react-input-tags input {
-  border-style: none;
-  outline: none;
+input {
   /* input element does * not * inherit font styling by default */
   font-family: inherit;
   font-size: inherit;
 }
 
-.react-input-tags-tag {
+span {
   word-wrap: break-word;
-  background-color: lightpink;
-}
-
-.react-input-tags-suggestion {
-  padding: 5px;
-  cursor: pointer;
+  background-color: darkgrey;
+  color: black;
 }
 
 textarea {
   resize: none;
-  /*
-  white-space: nowrap;
-  overflow-x: hidden;
-  */
 }
 
-/* list */
 ul {
   position: absolute;
 }
 
-/* list item */
+li {
+  cursor: pointer;
+}
+
 li.highlighted {
-  background-color: red;
+  background-color: lightgray;
+  color: black;
 }

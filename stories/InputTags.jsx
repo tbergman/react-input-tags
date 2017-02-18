@@ -4,7 +4,7 @@ import { storiesOf, action } from '@kadira/storybook';
 import { InputTags } from '../src/interface/InputTags.jsx';
 
 import { noop } from '../test/util';
-import { items } from '../test/mock';
+import { items, emptyString } from '../test/mock';
 
 storiesOf('InputTags', module)
   .add('create token by typing non empty string and pressing tab', () => {
@@ -14,6 +14,9 @@ storiesOf('InputTags', module)
         handleInsert={action('handleInsert')}
         handleEdit={noop}
         handleRemove={noop}
+        inputPlaceholder={emptyString}
+        suggestions={[]}
+        handleUpdateSuggestions={noop}
       />
     )
   })
@@ -24,6 +27,9 @@ storiesOf('InputTags', module)
         handleInsert={action('handleInsert')}
         handleEdit={noop}
         handleRemove={noop}
+        inputPlaceholder={emptyString}
+        suggestions={[]}
+        handleUpdateSuggestions={noop}
       />
     )
   })
@@ -34,6 +40,9 @@ storiesOf('InputTags', module)
         handleInsert={action('handleInsert')}
         handleEdit={noop}
         handleRemove={noop}
+        inputPlaceholder={emptyString}
+        suggestions={[]}
+        handleUpdateSuggestions={noop}
       />
     )
   })
@@ -44,6 +53,9 @@ storiesOf('InputTags', module)
         handleInsert={noop}
         handleEdit={action('handleEdit')}
         handleRemove={noop}
+        inputPlaceholder={emptyString}
+        suggestions={[]}
+        handleUpdateSuggestions={noop}
       />
     )
   })
@@ -54,6 +66,9 @@ storiesOf('InputTags', module)
         handleInsert={noop}
         handleEdit={noop}
         handleRemove={action('handleRemove')}
+        inputPlaceholder={emptyString}
+        suggestions={[]}
+        handleUpdateSuggestions={noop}
       />
     )
   })
@@ -64,6 +79,9 @@ storiesOf('InputTags', module)
         handleInsert={noop}
         handleEdit={noop}
         handleRemove={action('handleRemove')}
+        inputPlaceholder={emptyString}
+        suggestions={[]}
+        handleUpdateSuggestions={noop}
       />
     )
   })
@@ -75,6 +93,8 @@ storiesOf('InputTags', module)
         handleEdit={noop}
         handleRemove={noop}
         inputPlaceholder={'Add Tag'}
+        suggestions={[]}
+        handleUpdateSuggestions={noop}
       />
     )
   })
@@ -82,10 +102,12 @@ storiesOf('InputTags', module)
     return (
       <InputTags
         tags={[]}
-        handleInsert={action('insert')}
+        handleInsert={noop}
         handleEdit={noop}
         handleRemove={noop}
+        inputPlaceholder={emptyString}
         suggestions={items}
+        handleUpdateSuggestions={noop}
       />
     )
   })
@@ -96,7 +118,9 @@ storiesOf('InputTags', module)
         handleInsert={action('handleInsert')}
         handleEdit={noop}
         handleRemove={noop}
+        inputPlaceholder={emptyString}
         suggestions={items}
+        handleUpdateSuggestions={noop}
       />
     )
   })
@@ -107,18 +131,48 @@ storiesOf('InputTags', module)
         handleInsert={action('handleInsert')}
         handleEdit={noop}
         handleRemove={noop}
+        inputPlaceholder={emptyString}
         suggestions={items}
+        handleUpdateSuggestions={noop}
       />
     )
   })
-  .add('hide suggestions list by pressing escape', () => {
+  .add('highlight next suggestion by typing non empty string and pressing down', () => {
     return (
       <InputTags
         tags={[]}
         handleInsert={noop}
         handleEdit={noop}
         handleRemove={noop}
+        inputPlaceholder={emptyString}
         suggestions={items}
+        handleUpdateSuggestions={noop}
+      />
+    )
+  })
+  .add('highlight previous suggestion by typing non empty string and pressing up', () => {
+    return (
+      <InputTags
+        tags={[]}
+        handleInsert={noop}
+        handleEdit={noop}
+        handleRemove={noop}
+        inputPlaceholder={emptyString}
+        suggestions={items}
+        handleUpdateSuggestions={noop}
+      />
+    )
+  })
+  .add('hide suggestions list by typing non empty string and pressing escape', () => {
+    return (
+      <InputTags
+        tags={[]}
+        handleInsert={noop}
+        handleEdit={noop}
+        handleRemove={noop}
+        inputPlaceholder={emptyString}
+        suggestions={items}
+        handleUpdateSuggestions={noop}
       />
     )
   });
