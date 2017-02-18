@@ -171,7 +171,6 @@ export class InputTagsDefault extends React.Component {
       // prevents typing comma from entering `,` in the input
       // prevent typing tab from setting the focus not on the input
       event.preventDefault();
-      // TODO: test
       if (showSuggestions && suggestions.length > 0) {
         this.insertTag(tags, getSuggestionValue(suggestions[highlightedSuggestionIndex]));
       } else {
@@ -183,7 +182,6 @@ export class InputTagsDefault extends React.Component {
       this.removeTag(tags, tags.length - 1);
     }
 
-    // TODO: test
     if (closeKeyCodes.includes(keyCode)) {
       this.setShowSuggestions(false);
     }
@@ -191,13 +189,11 @@ export class InputTagsDefault extends React.Component {
     const oldHighlightedIndex = highlightedSuggestionIndex;
     const numSuggestions = suggestions.length;
 
-    // TODO: test
     if (nextKeyCodes.includes(keyCode)) {
       const newHighlightedIndex = calcNextIndex(oldHighlightedIndex, numSuggestions);
       this.setHighlightedSuggestionIndex(newHighlightedIndex);
     }
 
-    // TODO: test
     if (previousKeyCodes.includes(keyCode)) {
       const newHighlightedIndex = calcPreviousIndex(oldHighlightedIndex, numSuggestions);
       this.setHighlightedSuggestionIndex(newHighlightedIndex);
