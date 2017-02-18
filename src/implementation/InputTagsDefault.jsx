@@ -9,29 +9,38 @@ import {
   enterKeyCode,
   commaKeyCode,
   backspaceKeyCode,
+  downKeyCode,
+  upKeyCode,
+  escapeKeyCode,
 } from '../keyCodes';
 
 export const SuggestionList = ({
   suggestions,
-  handleSelect,
-  handleClose,
   showSuggestions,
+  highlightedSuggestionIndex,
+  getSuggestionValue,
+  handleHighlight,
+  handleSelect,
 }) => {
   if (!showSuggestions) return null;
   return (
     <List
       items={suggestions}
       handleSelect={handleSelect}
-      handleClose={handleClose}
+      getListItemValue={getSuggestionValue}
+      highlightedIndex={highlightedSuggestionIndex}
+      handleHighlight={handleHighlight}
     />
   );
 };
 
 SuggestionList.propTypes = {
   suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
-  handleSelect: React.PropTypes.func.isRequired,
-  handleClose: React.PropTypes.func.isRequired,
   showSuggestions: React.PropTypes.bool.isRequired,
+  highlightedSuggestionIndex: React.PropTypes.number.isRequired,
+  getSuggestionValue: React.PropTypes.func.isRequired,
+  handleHighlight: React.PropTypes.func.isRequired,
+  handleSelect: React.PropTypes.func.isRequired,
 };
 
 export const inputPlaceholderDefault = '';
@@ -40,6 +49,13 @@ export const suggestionsDefault = [];
 
 export const handleUpdateSuggestionsDefault = () => {};
 
+export const getSuggestionValueDefault = suggestion => suggestion;
+
+export const calcNextIndexDefault = (oldIndex, numItems) =>
+  (oldIndex + 1) % numItems;
+
+export const calcPreviousIndexDefault = (oldIndex, numItems) =>
+  ((oldIndex - 1) + numItems) % numItems;
 
 export const insertKeyCodesDefault = [
   tabKeyCode,
@@ -51,6 +67,18 @@ export const removeKeyCodesDefault = [
   backspaceKeyCode,
 ];
 
+export const nextKeyCodesDefault = [
+  downKeyCode,
+];
+
+export const previousKeyCodesDefault = [
+  upKeyCode,
+];
+
+export const closeKeyCodesDefault = [
+  escapeKeyCode,
+];
+
 export class InputTagsDefault extends React.Component {
   static propTypes = {
     tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
@@ -60,21 +88,34 @@ export class InputTagsDefault extends React.Component {
     inputPlaceholder: React.PropTypes.string.isRequired,
     suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleUpdateSuggestions: React.PropTypes.func.isRequired,
+    getSuggestionValue: React.PropTypes.func.isRequired,
+    calcNextIndex: React.PropTypes.func.isRequired,
+    calcPreviousIndex: React.PropTypes.func.isRequired,
     insertKeyCodes: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
     removeKeyCodes: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
+    nextKeyCodes: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
+    previousKeyCodes: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
+    closeKeyCodes: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
   };
 
   static defaultProps = {
     inputPlaceholder: inputPlaceholderDefault,
     suggestions: suggestionsDefault,
     handleUpdateSuggestions: handleUpdateSuggestionsDefault,
+    getSuggestionValue: getSuggestionValueDefault,
+    calcNextIndex: calcNextIndexDefault,
+    calcPreviousIndex: calcPreviousIndexDefault,
     insertKeyCodes: insertKeyCodesDefault,
     removeKeyCodes: removeKeyCodesDefault,
+    nextKeyCodes: nextKeyCodesDefault,
+    previousKeyCodes: previousKeyCodesDefault,
+    closeKeyCodes: closeKeyCodesDefault,
   };
 
   state = {
     inputValue: '',
     showSuggestions: false,
+    highlightedSuggestionIndex: 0,
   }
 
   insertTag = (tags, inputValue) => {
@@ -112,19 +153,54 @@ export class InputTagsDefault extends React.Component {
 
   handleInputOnKeyDown = (event) => {
     const { keyCode } = event;
-    const { inputValue } = this.state;
-    const { tags, insertKeyCodes, removeKeyCodes } = this.props;
+    const { inputValue, showSuggestions, highlightedSuggestionIndex } = this.state;
+    const {
+      tags,
+      suggestions,
+      getSuggestionValue,
+      calcNextIndex,
+      calcPreviousIndex,
+      insertKeyCodes,
+      removeKeyCodes,
+      nextKeyCodes,
+      previousKeyCodes,
+      closeKeyCodes,
+    } = this.props;
 
     if (insertKeyCodes.includes(keyCode) && inputValue.length > 0) {
-      // cancels the event since insert key codes can cause undesired default behavior
-      // for example, typing `,` would enter a comma in the input
-      // or typing `tab` would set the focus not on the input
+      // prevents typing comma from entering `,` in the input
+      // prevent typing tab from setting the focus not on the input
       event.preventDefault();
-      this.insertTag(tags, inputValue);
+      // TODO: test
+      if (showSuggestions && suggestions.length > 0) {
+        this.insertTag(tags, getSuggestionValue(suggestions[highlightedSuggestionIndex]));
+      } else {
+        this.insertTag(tags, inputValue);
+      }
     }
 
     if (removeKeyCodes.includes(keyCode) && inputValue.length === 0 && tags.length > 0) {
       this.removeTag(tags, tags.length - 1);
+    }
+
+    // TODO: test
+    if (closeKeyCodes.includes(keyCode)) {
+      this.setShowSuggestions(false);
+    }
+
+    const oldHighlightedIndex = highlightedSuggestionIndex;
+    const numSuggestions = suggestions.length;
+
+    // TODO: test
+    if (nextKeyCodes.includes(keyCode)) {
+      const newHighlightedIndex = calcNextIndex(oldHighlightedIndex, numSuggestions);
+      this.setHighlightedSuggestionIndex(newHighlightedIndex);
+    }
+
+    // TODO: test
+    if (previousKeyCodes.includes(keyCode)) {
+      const newHighlightedIndex = calcPreviousIndex(oldHighlightedIndex, numSuggestions);
+      this.setHighlightedSuggestionIndex(newHighlightedIndex);
     }
   }
 
@@ -132,13 +208,18 @@ export class InputTagsDefault extends React.Component {
     this.setState({ showSuggestions });
   }
 
+  setHighlightedSuggestionIndex = (highlightedSuggestionIndex) => {
+    this.setState({ highlightedSuggestionIndex });
+  }
+
   render() {
     const {
       tags,
       inputPlaceholder,
       suggestions,
+      getSuggestionValue,
     } = this.props;
-    const { inputValue, showSuggestions } = this.state;
+    const { inputValue, showSuggestions, highlightedSuggestionIndex } = this.state;
     return (
       <div>
         <div>
@@ -160,9 +241,11 @@ export class InputTagsDefault extends React.Component {
         </div>
         <SuggestionList
           suggestions={suggestions}
-          handleSelect={suggestion => this.insertTag(tags, suggestion)} // TODO: test
-          handleClose={() => this.setShowSuggestions(false)} // TODO: test
           showSuggestions={showSuggestions}
+          highlightedSuggestionIndex={highlightedSuggestionIndex}
+          getSuggestionValue={getSuggestionValue}
+          handleHighlight={this.setHighlightedSuggestionIndex}
+          handleSelect={suggestion => this.insertTag(tags, suggestion)}
         />
       </div>
     );

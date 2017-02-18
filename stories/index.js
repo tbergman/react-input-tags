@@ -5,15 +5,12 @@ import InputTags from '../src/index';
 import { Example } from './example.jsx';
 import './example.css';
 
-// TODO: import stories from files representing other files
 storiesOf('ExampleTags', module)
   // .add('remove item by deleting all text in edit mode', () => {
   .add('tags', () => (
-    // TODO: disable suggestions
     <Example />
   ))
   .add('local suggestions', () => (
-    // TODO: enable suggestions
     // enable local
     <Example />
   ))
@@ -21,7 +18,6 @@ storiesOf('ExampleTags', module)
     <Example />
   ))
   .add('fetching suggestions', () => (
-    // TODO: enable suggestions
     // enable fetching asynchronously
     // show a loader
     <Example />

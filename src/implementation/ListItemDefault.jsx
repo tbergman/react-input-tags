@@ -16,6 +16,7 @@ export class ListItemDefault extends React.Component {
         ref={(c) => { this.listItem = c; }}
         className={highlightClass}
         onMouseOver={handleHighlight}
+        onMouseDown={event => event.preventDefault()} // prevents onBlur from inserting inputValue
         onClick={handleSelect}
       >
         {value}
