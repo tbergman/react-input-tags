@@ -6,13 +6,6 @@ import { noop } from '../test/util';
 import { items } from '../test/mock';
 
 storiesOf('List', module)
-  .add('auto focus first item by rendering', () => (
-    <List
-      items={items}
-      handleSelect={noop}
-      handleClose={noop}
-    />
-  ))
   .add('highlight next item by pressing down', () => (
     <List
       items={items}
