@@ -83,8 +83,9 @@ describe('<ListItemDefault />', () => {
           );
         });
 
+        // TODO: remove
         it('should call focusElement', () => {
-          expect(focusElement).to.have.been.called();
+          expect(focusElement).to.not.have.been.called();
         });
       });
 
@@ -133,8 +134,9 @@ describe('<ListItemDefault />', () => {
           listItemWrapper.setProps({ isHighlighted: true });
         });
 
+        // TODO: remove
         it('should call focusElement', () => {
-          expect(focusElement).to.have.been.called();
+          expect(focusElement).to.not.have.been.called();
         });
       });
 

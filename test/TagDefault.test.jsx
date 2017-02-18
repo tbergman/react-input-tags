@@ -5,8 +5,8 @@ import sinon from 'sinon';
 
 import { TagDefault, TagEdit, TagRead } from '../src/implementation/TagDefault.jsx';
 
-import { noop, nonEmptyString, emptyString } from './util';
-import { item } from './mock';
+import { noop } from './util';
+import { item, nonEmptyString, emptyString } from './mock';
 
 describe('<TagDefault />', () => {
   let tagWrapper;

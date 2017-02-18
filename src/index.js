@@ -1,3 +1,3 @@
-import { InputTags } from './InputTags.jsx';
+import { InputTags } from './interface/InputTags.jsx';
 
-export default InputTags;
+export { InputTags };

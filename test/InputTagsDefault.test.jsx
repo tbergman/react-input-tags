@@ -3,16 +3,19 @@ import { mount } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { InputTags } from '../src/InputTags.jsx';
-import { noop, tabKeyCode, commaKeyCode, backspaceKeyCode, aKeyCode, emptyString, nonEmptyString } from './util';
-import { defaultSuggestionListClassName } from '../src/default.jsx';
+import { InputTagsDefault, SuggestionList } from '../src/implementation/InputTagsDefault.jsx';
+import { tabKeyCode, commaKeyCode, backspaceKeyCode, aKeyCode, escapeKeyCode, enterKeyCode } from '../src/keyCodes';
 
-describe('<InputTags />', () => {
+import { noop } from './util';
+import { emptyString, nonEmptyString, items } from './mock';
+
+describe('<InputTagsDefault />', () => {
   let inputTagsWrapper;
   let tags;
   let handleInsert;
   let handleEdit;
   let handleRemove;
+  let suggestions;
 
   describe('create token manually', () => {
     beforeEach(() => {
@@ -20,7 +23,7 @@ describe('<InputTags />', () => {
       handleInsert = sinon.stub();
 
       inputTagsWrapper = mount(
-        <InputTags
+        <InputTagsDefault
           tags={tags}
           handleInsert={handleInsert}
           handleEdit={noop}
@@ -40,6 +43,10 @@ describe('<InputTags />', () => {
         expect(inputTagsWrapper.state().inputValue).to.equal(inputValue);
       });
 
+      it('should set the state `showSuggestions` to be true', () => {
+        expect(inputTagsWrapper.state().showSuggestions).to.equal(true);
+      });
+
       context('when focus leaves input field', () => {
         beforeEach(() => {
           inputTagsWrapper.find('input').simulate('blur');
@@ -51,6 +58,10 @@ describe('<InputTags />', () => {
 
         it('should clear the state `inputValue`', () => {
           expect(inputTagsWrapper.state().inputValue).to.equal(emptyString);
+        });
+
+        it('should set the state `showSuggestions` to be false', () => {
+          expect(inputTagsWrapper.state().showSuggestions).to.equal(false);
         });
       });
 
@@ -66,6 +77,10 @@ describe('<InputTags />', () => {
         it('should clear the state `inputValue`', () => {
           expect(inputTagsWrapper.state().inputValue).to.equal(emptyString);
         });
+
+        it('should set the state `showSuggestions` to be false', () => {
+          expect(inputTagsWrapper.state().showSuggestions).to.equal(false);
+        });
       });
 
       context('when `comma` key is pressed', () => {
@@ -79,6 +94,10 @@ describe('<InputTags />', () => {
 
         it('should clear the state `inputValue`', () => {
           expect(inputTagsWrapper.state().inputValue).to.equal(emptyString);
+        });
+
+        it('should set the state `showSuggestions` to be false', () => {
+          expect(inputTagsWrapper.state().showSuggestions).to.equal(false);
         });
       });
 
@@ -94,6 +113,10 @@ describe('<InputTags />', () => {
         it('should *not* clear the state `inputValue`', () => {
           expect(inputTagsWrapper.state().inputValue).to.equal(inputValue);
         });
+
+        it('should *not* set the state `showSuggestions` to be false', () => {
+          expect(inputTagsWrapper.state().showSuggestions).to.not.equal(false);
+        });
       });
     });
 
@@ -107,6 +130,10 @@ describe('<InputTags />', () => {
       it('should set the state `inputValue`', () => {
         expect(inputTagsWrapper.state().inputValue).to.equal(inputValue);
       });
+
+      it('should set the state `showSuggestions` to false', () => {
+        expect(inputTagsWrapper.state().showSuggestions).to.equal(false);
+      })
 
       context('when focus leaves input field', () => {
         beforeEach(() => {
@@ -148,7 +175,7 @@ describe('<InputTags />', () => {
         handleRemove = sinon.stub();
 
         inputTagsWrapper = mount(
-          <InputTags
+          <InputTagsDefault
             tags={tags}
             handleInsert={noop}
             handleEdit={handleEdit}
@@ -210,7 +237,7 @@ describe('<InputTags />', () => {
         handleRemove = sinon.stub();
 
         inputTagsWrapper = mount(
-          <InputTags
+          <InputTagsDefault
             tags={tags}
             handleInsert={noop}
             handleEdit={noop}
@@ -274,7 +301,7 @@ describe('<InputTags />', () => {
         handleRemove = sinon.stub();
 
         inputTagsWrapper = mount(
-          <InputTags
+          <InputTagsDefault
             tags={tags}
             handleInsert={noop}
             handleEdit={noop}
@@ -294,56 +321,96 @@ describe('<InputTags />', () => {
       });
     });
   });
-});
 
-/* TODO: make this a story */
-describe('<SuggestionList />', () => {
-  context('when input value is empty string', () => {
-    const emptyInputValue = '';
-    let suggestionListWrapper;
-
+  describe('suggestions', () => {
     beforeEach(() => {
-      suggestionListWrapper = mount(
-        <InputTags
-          tags={[]}
-          handleInsert={noop}
+      tags = [];
+      handleInsert = sinon.stub();
+      suggestions = items;
+
+      inputTagsWrapper = mount(
+        <InputTagsDefault
+          tags={tags}
+          handleInsert={handleInsert}
           handleEdit={noop}
           handleRemove={noop}
+          suggestions={suggestions}
         />
       );
-
-      suggestionListWrapper.find('input').simulate('change', { target: { value: emptyInputValue } });
     });
 
-    it('should *not* be displayed');
-    /*
-    it('should * not * be displayed', () => {
-      expect(suggestionListWrapper.find(`.${defaultSuggestionListClassName}`)).to.have.length(0);
-    });
-    */
-  });
-  context('when input value is * not * an empty string', () => {
-    const nonEmptyInputValue = 'a';
-    let suggestionListWrapper;
+    describe('select suggestion', () => {
+      context('when inputValue is non empty string', () => {
+        beforeEach(() => {
+          inputTagsWrapper.find('input').simulate('change', { target: { value: nonEmptyString }});
+        });
 
-    beforeEach(() => {
-      suggestionListWrapper = mount(
-        <InputTags
-          tags={[]}
-          handleInsert={noop}
-          handleEdit={noop}
-          handleRemove={noop}
-        />
-      );
+        context('when suggestion is clicked', () => {
+          const suggestionsIndex = 0;
 
-      suggestionListWrapper.find('input').simulate('change', { target: { value: nonEmptyInputValue } });
+          beforeEach(() => {
+            inputTagsWrapper.find('ul').childAt(suggestionsIndex).simulate('click');
+          });
+
+          it('should insert the suggestion as token', () => {
+            expect(handleInsert).to.have.been.calledWith(tags, suggestions[suggestionsIndex]);
+          });
+        });
+
+        context('when suggestion is highlighted and enter key is pressed', () => {
+          const suggestionsIndex = 0; // first suggestion is highlighted by default
+
+          beforeEach(() => {
+            inputTagsWrapper.find('ul').simulate('keydown', { keyCode: enterKeyCode });
+          });
+
+          it('should insert the suggestion as token', () => {
+            expect(handleInsert).to.have.been.calledWith(tags, suggestions[suggestionsIndex]);
+          });
+        });
+
+        context('when suggestion is highlighted and tab key is pressed', () => {
+          const suggestionsIndex = 0; // first suggestion is highlighted by default
+
+          beforeEach(() => {
+            inputTagsWrapper.find('ul').simulate('keydown', { keyCode: tabKeyCode });
+          });
+
+          it('should insert the suggestion as token', () => {
+            expect(handleInsert).to.have.been.calledWith(tags, suggestions[suggestionsIndex]);
+          });
+        });
+
+        context('when suggestion is highlighted and comma key is pressed', () => {
+          const suggestionsIndex = 0; // first suggestion is highlighted by default
+
+          beforeEach(() => {
+            inputTagsWrapper.find('ul').simulate('keydown', { keyCode: commaKeyCode });
+          });
+
+          it('should insert the suggestion as token', () => {
+            expect(handleInsert).to.have.been.calledWith(tags, suggestions[suggestionsIndex]);
+          });
+        });
+      });
     });
 
-    it('should be displayed');
-    /*
-    it('should be displayed', () => {
-      expect(suggestionListWrapper.find(`.${defaultSuggestionListClassName}`)).to.have.length(1);
+    describe('close suggestions', () => {
+      context('when inputValue is non empty string', () => {
+        beforeEach(() => {
+          inputTagsWrapper.find('input').simulate('change', { target: { value: nonEmptyString }});
+        });
+
+        context('when escape key is pressed', () => {
+          beforeEach(() => {
+            inputTagsWrapper.find('ul').simulate('keydown', { keyCode: escapeKeyCode });
+          });
+
+          it('should close the suggestion list', () => {
+            expect(inputTagsWrapper.state().showSuggestions).to.equal(false);
+          });
+        });
+      });
     });
-    */
   });
 });

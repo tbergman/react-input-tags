@@ -1,7 +1,27 @@
 import React from 'react';
-import InputTags from '../src/index';
+import { InputTags } from '../src/index';
 
-import { handleInsert, handleEdit, handleRemove } from './util';
+export const handleInsert = (currentTags, newTag) => {
+  const newTags = [...currentTags, newTag];
+  return newTags;
+}
+
+export const handleEdit = (currentTags, editTagIndex, newValue) => {
+  const newTags = [
+    ...currentTags.slice(0, editTagIndex),
+    newValue,
+    ...currentTags.slice(editTagIndex + 1),
+  ];
+  return newTags;
+}
+
+export const handleRemove = (currentTags, removeTagIndex) => {
+  const newTags = [
+    ...currentTags.slice(0, removeTagIndex),
+    ...currentTags.slice(removeTagIndex + 1),
+  ];
+  return newTags;
+}
 
 const data = ['apple', 'banana', 'cherry'];
 
@@ -49,8 +69,6 @@ export class Example extends React.Component {
           handleRemove={this.handleRemove}
           suggestions={this.state.suggestions}
           handleInputChange={this.handleInputChange}
-          onFocus={this.props.onFocus}
-          onBlur={this.props.onBlur}
           inputPlaceholder={'add tag'}
         />
       </div>

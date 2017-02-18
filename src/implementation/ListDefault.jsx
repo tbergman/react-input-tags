@@ -34,8 +34,7 @@ export const calcNextIndexDefault = (oldIndex, numItems) =>
 export const calcPreviousIndexDefault = (oldIndex, numItems) =>
   ((oldIndex - 1) + numItems) % numItems;
 
-export const getListItemValueDefault = listItem =>
-  listItem;
+export const getListItemValueDefault = listItem => listItem;
 
 export class ListDefault extends React.Component {
   static propTypes = {
@@ -108,7 +107,7 @@ export class ListDefault extends React.Component {
   }
 
   render() {
-    const { items, handleSelect } = this.props;
+    const { items, handleSelect, getListItemValue } = this.props;
     const { highlightedIndex } = this.state;
     return (
       <ul // eslint-disable-line jsx-a11y/no-static-element-interactions
@@ -123,7 +122,7 @@ export class ListDefault extends React.Component {
               value={item}
               isHighlighted={isHighlighted}
               handleHighlight={() => this.setHighlightedIndex(index)}
-              handleSelect={handleSelect}
+              handleSelect={() => handleSelect(getListItemValue(item))}
             />
           );
         })}

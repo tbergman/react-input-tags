@@ -1,0 +1,124 @@
+exports[`handle blur by clicking on input and clicking something else`] = `
+<span>
+  <span
+    id="mirrorNode"
+    style={
+      Object {
+        "overflow": "scroll",
+        "position": "absolute",
+        "visibility": "hidden",
+        "whiteSpace": "pre",
+      }
+    }>
+    
+  </span>
+  <input
+    id="inputNode"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onKeyDown={[Function]}
+    placeholder=""
+    type="text"
+    value="" />
+</span>
+`;
+
+exports[`handle change by typing in input`] = `
+<span>
+  <span
+    id="mirrorNode"
+    style={
+      Object {
+        "overflow": "scroll",
+        "position": "absolute",
+        "visibility": "hidden",
+        "whiteSpace": "pre",
+      }
+    }>
+    
+  </span>
+  <input
+    id="inputNode"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onKeyDown={[Function]}
+    placeholder=""
+    type="text"
+    value="" />
+</span>
+`;
+
+exports[`handle keydown by typing in input`] = `
+<span>
+  <span
+    id="mirrorNode"
+    style={
+      Object {
+        "overflow": "scroll",
+        "position": "absolute",
+        "visibility": "hidden",
+        "whiteSpace": "pre",
+      }
+    }>
+    
+  </span>
+  <input
+    id="inputNode"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onKeyDown={[Function]}
+    placeholder=""
+    type="text"
+    value="" />
+</span>
+`;
+
+exports[`show empty placeholder by rendering`] = `
+<span>
+  <span
+    id="mirrorNode"
+    style={
+      Object {
+        "overflow": "scroll",
+        "position": "absolute",
+        "visibility": "hidden",
+        "whiteSpace": "pre",
+      }
+    }>
+    
+  </span>
+  <input
+    id="inputNode"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onKeyDown={[Function]}
+    placeholder=""
+    type="text"
+    value="" />
+</span>
+`;
+
+exports[`show non empty placeholder by rendering`] = `
+<span>
+  <span
+    id="mirrorNode"
+    style={
+      Object {
+        "overflow": "scroll",
+        "position": "absolute",
+        "visibility": "hidden",
+        "whiteSpace": "pre",
+      }
+    }>
+    m
+  </span>
+  <input
+    id="inputNode"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onKeyDown={[Function]}
+    placeholder="m"
+    type="text"
+    value="" />
+</span>
+`;
