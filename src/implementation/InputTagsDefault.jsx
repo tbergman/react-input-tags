@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Input } from '../interface/Input.jsx';
 import { Tag } from '../interface/Tag.jsx';
-import { List } from '../interface/List.jsx';
+import { SuggestionList } from '../interface/SuggestionList.jsx';
 
 import {
   tabKeyCode,
@@ -14,7 +14,7 @@ import {
   escapeKeyCode,
 } from '../keyCodes';
 
-export const SuggestionList = ({
+export const SuggestionListContainer = ({
   suggestions,
   showSuggestions,
   highlightedSuggestionIndex,
@@ -24,17 +24,17 @@ export const SuggestionList = ({
 }) => {
   if (!showSuggestions) return null;
   return (
-    <List
-      items={suggestions}
+    <SuggestionList
+      suggestions={suggestions}
       handleSelect={handleSelect}
-      getListItemValue={getSuggestionValue}
+      getSuggestionValue={getSuggestionValue}
       highlightedIndex={highlightedSuggestionIndex}
       handleHighlight={handleHighlight}
     />
   );
 };
 
-SuggestionList.propTypes = {
+SuggestionListContainer.propTypes = {
   suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
   showSuggestions: React.PropTypes.bool.isRequired,
   highlightedSuggestionIndex: React.PropTypes.number.isRequired,
@@ -235,7 +235,7 @@ export class InputTagsDefault extends React.Component {
             handleOnKeyDown={this.handleInputOnKeyDown}
           />
         </div>
-        <SuggestionList
+        <SuggestionListContainer
           suggestions={suggestions}
           showSuggestions={showSuggestions}
           highlightedSuggestionIndex={highlightedSuggestionIndex}

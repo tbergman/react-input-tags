@@ -7,7 +7,7 @@ function loadStories() {
   require('../stories/InputTags.jsx');
   require('../stories/Input.jsx');
   require('../stories/Tag.jsx');
-  require('../stories/List.jsx');
+  require('../stories/SuggestionList.jsx');
   require('../stories/Suggestion.jsx');
 }
 

@@ -3,7 +3,9 @@ exports[`highlight suggestion by mousing over suggestion`] = `
   className=""
   onClick={[Function]}
   onMouseDown={[Function]}
-  onMouseOver={[Function]} />
+  onMouseOver={[Function]}>
+  apple
+</li>
 `;
 
 exports[`select suggestion by clicking suggestion`] = `
@@ -11,5 +13,7 @@ exports[`select suggestion by clicking suggestion`] = `
   className="highlighted"
   onClick={[Function]}
   onMouseDown={[Function]}
-  onMouseOver={[Function]} />
+  onMouseOver={[Function]}>
+  apple
+</li>
 `;
