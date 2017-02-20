@@ -4,6 +4,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { TagDefault, TagEdit, TagRead } from '../src/implementation/TagDefault.jsx';
+import { enterKeyCode, tabKeyCode } from '../src/keyCodes';
 
 import { noop } from './util';
 import { item, nonEmptyString, emptyString } from './mock';
@@ -121,6 +122,26 @@ describe('<TagEdit />', () => {
     context('when focus leaves textarea', () => {
       beforeEach(() => {
         tagEditWrapper.find('textarea').simulate('blur');
+      });
+
+      it('should set isEditing state to false', () => {
+        expect(setIsEditing).to.have.been.calledWith(false);
+      });
+    });
+
+    context('when enter is pressed', () => {
+      beforeEach(() => {
+        tagEditWrapper.find('textarea').simulate('keydown', { keyCode: enterKeyCode });
+      });
+
+      it('should set isEditing state to false', () => {
+        expect(setIsEditing).to.have.been.calledWith(false);
+      });
+    });
+
+    context('when tab is pressed', () => {
+      beforeEach(() => {
+        tagEditWrapper.find('textarea').simulate('keydown', { keyCode: tabKeyCode });
       });
 
       it('should set isEditing state to false', () => {

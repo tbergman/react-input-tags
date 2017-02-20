@@ -11,6 +11,45 @@ exports[`edit item by double clicking and typing`] = `
 </span>
 `;
 
+exports[`exit edit mode by focus leaving textarea`] = `
+<span
+  onDoubleClick={[Function]}>
+  <span>
+    apple
+  </span>
+  <button
+    onClick={[Function]}>
+    x
+  </button>
+</span>
+`;
+
+exports[`exit edit mode by pressing enter`] = `
+<span
+  onDoubleClick={[Function]}>
+  <span>
+    apple
+  </span>
+  <button
+    onClick={[Function]}>
+    x
+  </button>
+</span>
+`;
+
+exports[`exit edit mode by pressing tab`] = `
+<span
+  onDoubleClick={[Function]}>
+  <span>
+    apple
+  </span>
+  <button
+    onClick={[Function]}>
+    x
+  </button>
+</span>
+`;
+
 exports[`focus and select text by double clicking to enter edit mode`] = `
 <span
   onDoubleClick={[Function]}>

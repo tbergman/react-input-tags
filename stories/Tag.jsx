@@ -32,4 +32,31 @@ storiesOf('Tag', module)
         handleRemove={action('handleRemove')}
       />
     )
+  })
+  .add('exit edit mode by focus leaving textarea', () => {
+    return (
+      <Tag
+        value={item}
+        handleEdit={noop}
+        handleRemove={noop}
+      />
+    )
+  })
+  .add('exit edit mode by pressing enter', () => {
+    return (
+      <Tag
+        value={item}
+        handleEdit={noop}
+        handleRemove={noop}
+      />
+    )
+  })
+  .add('exit edit mode by pressing tab', () => {
+    return (
+      <Tag
+        value={item}
+        handleEdit={noop}
+        handleRemove={noop}
+      />
+    )
   });
