@@ -1,4 +1,4 @@
-# react-input-tags
+# [react-input-tags](https://www.npmjs.com/package/react-input-tags) | [demo](https://baldwmic.github.io/react-input-tags/)
 React component for tagging inputs.
 
 [![npm version](https://badge.fury.io/js/react-input-tags.svg)](https://badge.fury.io/js/react-input-tags)
@@ -37,7 +37,7 @@ export class TagsExample extends React.Component {
 ```
 
 ## API
-Both the high-level `InputTagsContainer` component or low-level `InputTags` component are exported for use.
+Both the high-level `InputTagsContainer` component or the low-level `InputTags` component are exported for use.
 
 ### [InputTagsContainer](src/interface/InputTagsContainer.jsx)
 |Property|Type|Required|Description|
