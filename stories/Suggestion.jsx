@@ -1,28 +1,28 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 
-import { ListItem } from '../src/interface/ListItem.jsx';
+import { Suggestion } from '../src/interface/Suggestion.jsx';
 import { noop } from '../test/util';
 import { item } from '../test/mock';
 
-storiesOf('ListItem', module)
-  .add('highlight item by mousing over item', () => {
+storiesOf('Suggestion', module)
+  .add('highlight suggestion by mousing over suggestion', () => {
     return (
-      <ListItem
+      <Suggestion
         value={item}
         isHighlighted={false}
-        handleHighlight={action('handleHighlightItem')}
+        handleHighlight={action('handleHighlight')}
         handleSelect={noop}
       />
     )
   })
-  .add('select item by clicking item', () => {
+  .add('select suggestion by clicking suggestion', () => {
     return (
-      <ListItem
+      <Suggestion
         value={item}
         isHighlighted={true}
         handleHighlight={noop}
-        handleSelect={action('handleSelectItem')}
+        handleSelect={action('handleSelect')}
       />
     )
   });

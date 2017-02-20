@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ListItem } from '../interface/ListItem.jsx';
+import { Suggestion } from '../interface/Suggestion.jsx';
 
 /* eslint-disable react/prefer-stateless-function */
 export class ListDefault extends React.Component {
@@ -19,7 +19,7 @@ export class ListDefault extends React.Component {
         {items.map((item, index) => {
           const isHighlighted = highlightedIndex === index;
           return (
-            <ListItem
+            <Suggestion
               key={index}
               value={item}
               isHighlighted={isHighlighted}

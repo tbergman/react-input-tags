@@ -1,0 +1,15 @@
+exports[`highlight suggestion by mousing over suggestion`] = `
+<li
+  className=""
+  onClick={[Function]}
+  onMouseDown={[Function]}
+  onMouseOver={[Function]} />
+`;
+
+exports[`select suggestion by clicking suggestion`] = `
+<li
+  className="highlighted"
+  onClick={[Function]}
+  onMouseDown={[Function]}
+  onMouseOver={[Function]} />
+`;

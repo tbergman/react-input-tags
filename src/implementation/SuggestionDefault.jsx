@@ -1,6 +1,7 @@
 import React from 'react';
 
-export class ListItemDefault extends React.Component {
+/* eslint-disable react/prefer-stateless-function */
+export class SuggestionDefault extends React.Component {
   static propTypes = {
     value: React.PropTypes.string.isRequired,
     isHighlighted: React.PropTypes.bool.isRequired,
@@ -13,7 +14,6 @@ export class ListItemDefault extends React.Component {
     const highlightClass = (isHighlighted) ? 'highlighted' : '';
     return (
       <li // eslint-disable-line jsx-a11y/no-static-element-interactions
-        ref={(c) => { this.listItem = c; }}
         className={highlightClass}
         onMouseOver={handleHighlight}
         onMouseDown={event => event.preventDefault()} // prevents onBlur from inserting inputValue
