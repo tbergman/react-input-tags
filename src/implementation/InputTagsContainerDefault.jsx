@@ -27,18 +27,16 @@ export class InputTagsContainerDefault extends React.Component {
   static propTypes = {
     tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleUpdateTags: React.PropTypes.func.isRequired,
-    inputPlaceholder: React.PropTypes.string.isRequired,
-    suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
-    handleUpdateSuggestions: React.PropTypes.func.isRequired,
+    inputPlaceholder: React.PropTypes.string,
+    suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
+    handleUpdateSuggestions: React.PropTypes.func,
+    getSuggestionValue: React.PropTypes.func,
     handleInsert: React.PropTypes.func.isRequired,
     handleEdit: React.PropTypes.func.isRequired,
     handleRemove: React.PropTypes.func.isRequired,
   }
 
   static defaultProps = {
-    inputPlaceholder: '',
-    suggestions: [],
-    handleUpdateSuggestions: () => {},
     handleInsert: handleInsertDefault,
     handleEdit: handleEditDefault,
     handleRemove: handleRemoveDefault,
@@ -63,7 +61,13 @@ export class InputTagsContainerDefault extends React.Component {
   }
 
   render() {
-    const { tags, inputPlaceholder, suggestions, handleUpdateSuggestions } = this.props;
+    const {
+      tags,
+      inputPlaceholder,
+      suggestions,
+      handleUpdateSuggestions,
+      getSuggestionValue,
+    } = this.props;
     return (
       <InputTags
         tags={tags}
@@ -73,6 +77,7 @@ export class InputTagsContainerDefault extends React.Component {
         inputPlaceholder={inputPlaceholder}
         suggestions={suggestions}
         handleUpdateSuggestions={handleUpdateSuggestions}
+        getSuggestionValue={getSuggestionValue}
       />
     );
   }

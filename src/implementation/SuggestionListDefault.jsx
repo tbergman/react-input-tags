@@ -2,6 +2,10 @@ import React from 'react';
 
 import { Suggestion } from '../interface/Suggestion.jsx';
 
+export const suggestionsDefault = [];
+
+export const getSuggestionValueDefault = suggestion => suggestion;
+
 /* eslint-disable react/prefer-stateless-function */
 export class SuggestionListDefault extends React.Component {
   static propTypes = {
@@ -10,6 +14,11 @@ export class SuggestionListDefault extends React.Component {
     getSuggestionValue: React.PropTypes.func.isRequired,
     handleHighlight: React.PropTypes.func.isRequired,
     handleSelect: React.PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    suggestions: suggestionsDefault,
+    getSuggestionValue: getSuggestionValueDefault,
   }
 
   render() {

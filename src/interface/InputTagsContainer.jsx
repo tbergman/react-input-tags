@@ -9,6 +9,7 @@ export const InputTagsContainer = ({
   inputPlaceholder,
   suggestions,
   handleUpdateSuggestions,
+  getSuggestionValue,
 }) =>
   <InputTagsContainerImplementation
     tags={tags}
@@ -16,6 +17,7 @@ export const InputTagsContainer = ({
     inputPlaceholder={inputPlaceholder}
     suggestions={suggestions}
     handleUpdateSuggestions={handleUpdateSuggestions}
+    getSuggestionValue={getSuggestionValue}
   />;
 
 InputTagsContainer.propTypes = {
@@ -25,6 +27,7 @@ InputTagsContainer.propTypes = {
   inputPlaceholder: React.PropTypes.string,
   suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
   handleUpdateSuggestions: React.PropTypes.func,
+  getSuggestionValue: React.PropTypes.func,
 };
 
 InputTagsContainer.defaultProps = {

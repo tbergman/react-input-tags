@@ -47,6 +47,7 @@ Both the high-level `InputTagsContainer` component or the low-level `InputTags` 
 |`inputPlaceholder`|String||The placeholder to populate the input with|
 |`suggestions`|Array||An array of data that represents the value of the suggestions|
 |`handleUpdateSuggestions`|Function||A function called when the value of input changes, passes the input value as an argument.|
+|`getSuggestionValue`|Function||A function called when a suggestion is selected, passes the suggestion value as an argument.|
 
 ### [InputTags](src/interface/InputTags.jsx)
 |Property|Type|Required|Description|
@@ -58,3 +59,4 @@ Both the high-level `InputTagsContainer` component or the low-level `InputTags` 
 |`inputPlaceholder`|String||The placeholder to populate the input with|
 |`suggestions`|Array||An array of data that represents the value of the suggestions|
 |`handleUpdateSuggestions`|Function||A function called when the value of input changes, passes the input value as an argument.|
+|`getSuggestionValue`|Function||A function called when a suggestion is selected, passes the suggestion value as an argument.|

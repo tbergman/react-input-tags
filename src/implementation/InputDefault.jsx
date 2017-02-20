@@ -1,5 +1,7 @@
 import React from 'react';
 
+export const placeholderDefault = '';
+
 export const MIRROR_STYLES = [
   'fontFamily',
   'fontSize',
@@ -15,10 +17,14 @@ export const INPUT_WIDTH_EXTRA = 2;
 export class InputDefault extends React.Component {
   static propTypes = {
     value: React.PropTypes.string.isRequired,
-    placeholder: React.PropTypes.string.isRequired,
     handleOnChange: React.PropTypes.func.isRequired,
     handleOnBlur: React.PropTypes.func.isRequired,
     handleOnKeyDown: React.PropTypes.func.isRequired,
+    placeholder: React.PropTypes.string,
+  }
+
+  static defaultProps = {
+    placeholder: placeholderDefault,
   }
 
   componentDidMount() {
