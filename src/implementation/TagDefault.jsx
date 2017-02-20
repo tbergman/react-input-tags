@@ -1,6 +1,12 @@
 import React from 'react';
 
 import { focusElement, selectElement } from './util';
+import { enterKeyCode, tabKeyCode } from '../keyCodes';
+
+const exitKeyCodesDefault = [
+  enterKeyCode,
+  tabKeyCode,
+];
 
 export class TagEdit extends React.Component {
   static propTypes = {
@@ -10,11 +16,13 @@ export class TagEdit extends React.Component {
     setIsEditing: React.PropTypes.func.isRequired,
     focusElement: React.PropTypes.func.isRequired,
     selectElement: React.PropTypes.func.isRequired,
+    exitKeyCodes: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
   }
 
   static defaultProps = {
     focusElement,
     selectElement,
+    exitKeyCodes: exitKeyCodesDefault,
   }
 
   componentDidMount() {
@@ -33,6 +41,14 @@ export class TagEdit extends React.Component {
     }
   }
 
+  handleOnKeyDown = (event) => {
+    const { keyCode } = event;
+    const { exitKeyCodes, setIsEditing } = this.props;
+    if (exitKeyCodes.includes(keyCode)) {
+      setIsEditing(false);
+    }
+  }
+
   render() {
     const { value, setIsEditing } = this.props;
     return (
@@ -41,6 +57,7 @@ export class TagEdit extends React.Component {
         value={value}
         onBlur={() => setIsEditing(false)}
         onChange={this.handleOnChange}
+        onKeyDown={this.handleOnKeyDown}
       />
     );
   }
