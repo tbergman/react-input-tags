@@ -4,6 +4,10 @@ import { InputTagsDefault } from '../implementation/InputTagsDefault.jsx';
 
 export const InputTags = ({
   InputTagsImplementation,
+  InputImplementation,
+  TagImplementation,
+  SuggestionListImplementation,
+  SuggestionImplementation,
   tags,
   handleInsert,
   handleEdit,
@@ -12,9 +16,12 @@ export const InputTags = ({
   suggestions,
   handleUpdateSuggestions,
   getSuggestionValue,
-  Tag,
 }) =>
   <InputTagsImplementation
+    InputImplementation={InputImplementation}
+    TagImplementation={TagImplementation}
+    SuggestionListImplementation={SuggestionListImplementation}
+    SuggestionImplementation={SuggestionImplementation}
     tags={tags}
     handleInsert={handleInsert}
     handleEdit={handleEdit}
@@ -23,11 +30,14 @@ export const InputTags = ({
     suggestions={suggestions}
     handleUpdateSuggestions={handleUpdateSuggestions}
     getSuggestionValue={getSuggestionValue}
-    Tag={Tag}
   />;
 
 InputTags.propTypes = {
   InputTagsImplementation: React.PropTypes.func.isRequired,
+  InputImplementation: React.PropTypes.func,
+  TagImplementation: React.PropTypes.func,
+  SuggestionListImplementation: React.PropTypes.func,
+  SuggestionImplementation: React.PropTypes.func,
   tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
   handleInsert: React.PropTypes.func.isRequired,
   handleEdit: React.PropTypes.func.isRequired,
@@ -36,7 +46,6 @@ InputTags.propTypes = {
   suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
   handleUpdateSuggestions: React.PropTypes.func,
   getSuggestionValue: React.PropTypes.func,
-  Tag: React.PropTypes.func,
 };
 
 InputTags.defaultProps = {

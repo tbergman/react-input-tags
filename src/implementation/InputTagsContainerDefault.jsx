@@ -25,13 +25,17 @@ export const handleRemoveDefault = (currentTags, removeTagIndex) => {
 
 export class InputTagsContainerDefault extends React.Component {
   static propTypes = {
+    InputTagsImplementation: React.PropTypes.func,
+    InputImplementation: React.PropTypes.func,
+    TagImplementation: React.PropTypes.func,
+    SuggestionListImplementation: React.PropTypes.func,
+    SuggestionImplementation: React.PropTypes.func,
     tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleUpdateTags: React.PropTypes.func.isRequired,
     inputPlaceholder: React.PropTypes.string,
     suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
     handleUpdateSuggestions: React.PropTypes.func,
     getSuggestionValue: React.PropTypes.func,
-    Tag: React.PropTypes.func,
     handleInsert: React.PropTypes.func.isRequired,
     handleEdit: React.PropTypes.func.isRequired,
     handleRemove: React.PropTypes.func.isRequired,
@@ -63,15 +67,24 @@ export class InputTagsContainerDefault extends React.Component {
 
   render() {
     const {
+      InputTagsImplementation,
+      InputImplementation,
+      TagImplementation,
+      SuggestionListImplementation,
+      SuggestionImplementation,
       tags,
       inputPlaceholder,
       suggestions,
       handleUpdateSuggestions,
       getSuggestionValue,
-      Tag,
     } = this.props;
     return (
       <InputTags
+        InputTagsImplementation={InputTagsImplementation}
+        InputImplementation={InputImplementation}
+        TagImplementation={TagImplementation}
+        SuggestionListImplementation={SuggestionListImplementation}
+        SuggestionImplementation={SuggestionImplementation}
         tags={tags}
         handleInsert={this.handleInsert}
         handleEdit={this.handleEdit}
@@ -80,7 +93,6 @@ export class InputTagsContainerDefault extends React.Component {
         suggestions={suggestions}
         handleUpdateSuggestions={handleUpdateSuggestions}
         getSuggestionValue={getSuggestionValue}
-        Tag={Tag}
       />
     );
   }

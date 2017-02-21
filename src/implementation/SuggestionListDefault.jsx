@@ -5,6 +5,7 @@ import { Suggestion } from '../interface/Suggestion.jsx';
 /* eslint-disable react/prefer-stateless-function */
 export class SuggestionListDefault extends React.Component {
   static propTypes = {
+    SuggestionImplementation: React.PropTypes.func,
     suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     highlightedIndex: React.PropTypes.number.isRequired,
     handleHighlight: React.PropTypes.func.isRequired,
@@ -14,6 +15,7 @@ export class SuggestionListDefault extends React.Component {
 
   render() {
     const {
+      SuggestionImplementation,
       suggestions,
       highlightedIndex,
       getSuggestionValue,
@@ -26,6 +28,7 @@ export class SuggestionListDefault extends React.Component {
           const isHighlighted = highlightedIndex === index;
           return (
             <Suggestion
+              SuggestionImplementation={SuggestionImplementation}
               key={index}
               value={suggestion}
               isHighlighted={isHighlighted}

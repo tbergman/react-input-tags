@@ -15,6 +15,8 @@ import {
 } from '../keyCodes';
 
 export const SuggestionListContainer = ({
+  SuggestionListImplementation,
+  SuggestionImplementation,
   suggestions,
   showSuggestions,
   highlightedSuggestionIndex,
@@ -25,6 +27,8 @@ export const SuggestionListContainer = ({
   if (!showSuggestions) return null;
   return (
     <SuggestionList
+      SuggestionListImplementation={SuggestionListImplementation}
+      SuggestionImplementation={SuggestionImplementation}
       suggestions={suggestions}
       highlightedIndex={highlightedSuggestionIndex}
       handleHighlight={handleHighlight}
@@ -35,6 +39,8 @@ export const SuggestionListContainer = ({
 };
 
 SuggestionListContainer.propTypes = {
+  SuggestionListImplementation: React.PropTypes.func,
+  SuggestionImplementation: React.PropTypes.func,
   suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
   showSuggestions: React.PropTypes.bool.isRequired,
   highlightedSuggestionIndex: React.PropTypes.number.isRequired,
@@ -79,6 +85,10 @@ export const closeKeyCodesDefault = [
 
 export class InputTagsDefault extends React.Component {
   static propTypes = {
+    InputImplementation: React.PropTypes.func,
+    TagImplementation: React.PropTypes.func,
+    SuggestionListImplementation: React.PropTypes.func,
+    SuggestionImplementation: React.PropTypes.func,
     tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleInsert: React.PropTypes.func.isRequired,
     handleEdit: React.PropTypes.func.isRequired,
@@ -207,6 +217,10 @@ export class InputTagsDefault extends React.Component {
 
   render() {
     const {
+      InputImplementation,
+      TagImplementation,
+      SuggestionListImplementation,
+      SuggestionImplementation,
       tags,
       inputPlaceholder,
       suggestions,
@@ -218,6 +232,7 @@ export class InputTagsDefault extends React.Component {
         <div>
           {tags.map((tag, index) =>
             <Tag
+              TagImplementation={TagImplementation}
               key={index}
               value={tag}
               handleEdit={newValue => this.editTag(tags, index, newValue)}
@@ -225,6 +240,7 @@ export class InputTagsDefault extends React.Component {
             />
           )}
           <Input
+            InputImplementation={InputImplementation}
             value={inputValue}
             placeholder={inputPlaceholder}
             handleOnChange={this.handleInputOnChange}
@@ -233,6 +249,8 @@ export class InputTagsDefault extends React.Component {
           />
         </div>
         <SuggestionListContainer
+          SuggestionListImplementation={SuggestionListImplementation}
+          SuggestionImplementation={SuggestionImplementation}
           suggestions={suggestions}
           showSuggestions={showSuggestions}
           highlightedSuggestionIndex={highlightedSuggestionIndex}

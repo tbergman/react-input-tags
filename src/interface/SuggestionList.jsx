@@ -4,6 +4,7 @@ import { SuggestionListDefault } from '../implementation/SuggestionListDefault.j
 
 export const SuggestionList = ({
   SuggestionListImplementation,
+  SuggestionImplementation,
   suggestions,
   highlightedIndex,
   getSuggestionValue,
@@ -11,6 +12,7 @@ export const SuggestionList = ({
   handleHighlight,
 }) =>
   <SuggestionListImplementation
+    SuggestionImplementation={SuggestionImplementation}
     suggestions={suggestions}
     highlightedIndex={highlightedIndex}
     handleHighlight={handleHighlight}
@@ -20,6 +22,7 @@ export const SuggestionList = ({
 
 SuggestionList.propTypes = {
   SuggestionListImplementation: React.PropTypes.func.isRequired,
+  SuggestionImplementation: React.PropTypes.func,
   suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
   highlightedIndex: React.PropTypes.number.isRequired,
   handleHighlight: React.PropTypes.func.isRequired,

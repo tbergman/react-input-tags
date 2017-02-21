@@ -4,26 +4,27 @@ import { InputTagsContainer } from '../index';
 export class CustomTag extends React.Component {
   static propTypes = {
     value: React.PropTypes.string.isRequired,
-    handleEdit: React.PropTypes.func.isRequired,
-    handleRemove: React.PropTypes.func.isRequired,
   }
 
   render() {
-    const { value, handleRemove } = this.props;
+    const { value } = this.props;
     return (
       <span>
-        <span>
-          {value}
-        </span>
-        <button
-          onClick={handleRemove}
-        >
-          {'x'}
-        </button>
+        {value}
       </span>
     );
   }
 }
+
+export const CustomTagFn = ({ value }) => (
+  <span>
+    {value}
+  </span>
+);
+
+CustomTagFn.propTypes = {
+  value: React.PropTypes.string.isRequired,
+};
 
 export class CustomTagExample extends React.Component {
   state = {
@@ -39,6 +40,7 @@ export class CustomTagExample extends React.Component {
       <InputTagsContainer
         tags={this.state.tags}
         handleUpdateTags={this.handleUpdateTags}
+        TagImplementation={CustomTagFn}
       />
     );
   }
