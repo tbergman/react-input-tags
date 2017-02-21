@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Input } from '../interface/Input.jsx';
 import { Tag } from '../interface/Tag.jsx';
-import { List } from '../interface/List.jsx';
+import { SuggestionList } from '../interface/SuggestionList.jsx';
 
 import {
   tabKeyCode,
@@ -14,36 +14,40 @@ import {
   escapeKeyCode,
 } from '../keyCodes';
 
-export const SuggestionList = ({
+export const SuggestionListContainer = ({
+  SuggestionListImplementation,
+  SuggestionImplementation,
   suggestions,
   showSuggestions,
   highlightedSuggestionIndex,
-  getSuggestionValue,
   handleHighlight,
   handleSelect,
+  getSuggestionValue,
 }) => {
   if (!showSuggestions) return null;
   return (
-    <List
-      items={suggestions}
-      handleSelect={handleSelect}
-      getListItemValue={getSuggestionValue}
+    <SuggestionList
+      SuggestionListImplementation={SuggestionListImplementation}
+      SuggestionImplementation={SuggestionImplementation}
+      suggestions={suggestions}
       highlightedIndex={highlightedSuggestionIndex}
       handleHighlight={handleHighlight}
+      handleSelect={handleSelect}
+      getSuggestionValue={getSuggestionValue}
     />
   );
 };
 
-SuggestionList.propTypes = {
+SuggestionListContainer.propTypes = {
+  SuggestionListImplementation: React.PropTypes.func,
+  SuggestionImplementation: React.PropTypes.func,
   suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
   showSuggestions: React.PropTypes.bool.isRequired,
   highlightedSuggestionIndex: React.PropTypes.number.isRequired,
-  getSuggestionValue: React.PropTypes.func.isRequired,
   handleHighlight: React.PropTypes.func.isRequired,
   handleSelect: React.PropTypes.func.isRequired,
+  getSuggestionValue: React.PropTypes.func.isRequired,
 };
-
-export const inputPlaceholderDefault = '';
 
 export const suggestionsDefault = [];
 
@@ -81,11 +85,15 @@ export const closeKeyCodesDefault = [
 
 export class InputTagsDefault extends React.Component {
   static propTypes = {
+    InputImplementation: React.PropTypes.func,
+    TagImplementation: React.PropTypes.func,
+    SuggestionListImplementation: React.PropTypes.func,
+    SuggestionImplementation: React.PropTypes.func,
     tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleInsert: React.PropTypes.func.isRequired,
     handleEdit: React.PropTypes.func.isRequired,
     handleRemove: React.PropTypes.func.isRequired,
-    inputPlaceholder: React.PropTypes.string.isRequired,
+    inputPlaceholder: React.PropTypes.string,
     suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleUpdateSuggestions: React.PropTypes.func.isRequired,
     getSuggestionValue: React.PropTypes.func.isRequired,
@@ -99,7 +107,6 @@ export class InputTagsDefault extends React.Component {
   };
 
   static defaultProps = {
-    inputPlaceholder: inputPlaceholderDefault,
     suggestions: suggestionsDefault,
     handleUpdateSuggestions: handleUpdateSuggestionsDefault,
     getSuggestionValue: getSuggestionValueDefault,
@@ -169,7 +176,7 @@ export class InputTagsDefault extends React.Component {
 
     if (insertKeyCodes.includes(keyCode) && inputValue.length > 0) {
       // prevents typing comma from entering `,` in the input
-      // prevent typing tab from setting the focus not on the input
+      // prevents typing tab from setting the focus on something other than the input
       event.preventDefault();
       if (showSuggestions && suggestions.length > 0) {
         this.insertTag(tags, getSuggestionValue(suggestions[highlightedSuggestionIndex]));
@@ -210,6 +217,10 @@ export class InputTagsDefault extends React.Component {
 
   render() {
     const {
+      InputImplementation,
+      TagImplementation,
+      SuggestionListImplementation,
+      SuggestionImplementation,
       tags,
       inputPlaceholder,
       suggestions,
@@ -221,6 +232,7 @@ export class InputTagsDefault extends React.Component {
         <div>
           {tags.map((tag, index) =>
             <Tag
+              TagImplementation={TagImplementation}
               key={index}
               value={tag}
               handleEdit={newValue => this.editTag(tags, index, newValue)}
@@ -228,6 +240,7 @@ export class InputTagsDefault extends React.Component {
             />
           )}
           <Input
+            InputImplementation={InputImplementation}
             value={inputValue}
             placeholder={inputPlaceholder}
             handleOnChange={this.handleInputOnChange}
@@ -235,13 +248,15 @@ export class InputTagsDefault extends React.Component {
             handleOnKeyDown={this.handleInputOnKeyDown}
           />
         </div>
-        <SuggestionList
+        <SuggestionListContainer
+          SuggestionListImplementation={SuggestionListImplementation}
+          SuggestionImplementation={SuggestionImplementation}
           suggestions={suggestions}
           showSuggestions={showSuggestions}
           highlightedSuggestionIndex={highlightedSuggestionIndex}
-          getSuggestionValue={getSuggestionValue}
           handleHighlight={this.setHighlightedSuggestionIndex}
           handleSelect={suggestion => this.insertTag(tags, suggestion)}
+          getSuggestionValue={getSuggestionValue}
         />
       </div>
     );

@@ -25,6 +25,7 @@ describe('<InputTagsDefault />', () => {
   let handleEdit;
   let handleRemove;
   let suggestions;
+  let handleUpdateSuggestions;
   let getSuggestionValue;
 
   describe('create token manually', () => {
@@ -365,6 +366,7 @@ describe('<InputTagsDefault />', () => {
       tags = [];
       handleInsert = sinon.stub();
       suggestions = items;
+      handleUpdateSuggestions = sinon.stub();
       getSuggestionValue = sinon.stub();
 
       inputTagsWrapper = mount(
@@ -374,10 +376,25 @@ describe('<InputTagsDefault />', () => {
           handleEdit={noop}
           handleRemove={noop}
           suggestions={suggestions}
+          handleUpdateSuggestions={handleUpdateSuggestions}
           getSuggestionValue={getSuggestionValue}
         />
       );
     });
+
+    describe('show suggestions', () => {
+      context('when inputValue is non empty string', () => {
+        const newInputValue = nonEmptyString;
+
+        beforeEach(() => {
+          inputTagsWrapper.find('input').simulate('change', { target: { value: newInputValue }});
+        });
+
+        it('should update the suggestions', () => {
+          expect(handleUpdateSuggestions).to.have.been.calledWith(newInputValue);
+        });
+      });
+    })
 
     describe('highlight suggestion', () => {
       context('when inputValue is non empty string', () => {

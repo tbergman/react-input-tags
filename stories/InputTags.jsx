@@ -14,9 +14,6 @@ storiesOf('InputTags', module)
         handleInsert={action('handleInsert')}
         handleEdit={noop}
         handleRemove={noop}
-        inputPlaceholder={emptyString}
-        suggestions={[]}
-        handleUpdateSuggestions={noop}
       />
     )
   })
@@ -27,9 +24,6 @@ storiesOf('InputTags', module)
         handleInsert={action('handleInsert')}
         handleEdit={noop}
         handleRemove={noop}
-        inputPlaceholder={emptyString}
-        suggestions={[]}
-        handleUpdateSuggestions={noop}
       />
     )
   })
@@ -40,9 +34,6 @@ storiesOf('InputTags', module)
         handleInsert={action('handleInsert')}
         handleEdit={noop}
         handleRemove={noop}
-        inputPlaceholder={emptyString}
-        suggestions={[]}
-        handleUpdateSuggestions={noop}
       />
     )
   })
@@ -53,9 +44,6 @@ storiesOf('InputTags', module)
         handleInsert={noop}
         handleEdit={action('handleEdit')}
         handleRemove={noop}
-        inputPlaceholder={emptyString}
-        suggestions={[]}
-        handleUpdateSuggestions={noop}
       />
     )
   })
@@ -66,9 +54,6 @@ storiesOf('InputTags', module)
         handleInsert={noop}
         handleEdit={noop}
         handleRemove={action('handleRemove')}
-        inputPlaceholder={emptyString}
-        suggestions={[]}
-        handleUpdateSuggestions={noop}
       />
     )
   })
@@ -79,9 +64,6 @@ storiesOf('InputTags', module)
         handleInsert={noop}
         handleEdit={noop}
         handleRemove={action('handleRemove')}
-        inputPlaceholder={emptyString}
-        suggestions={[]}
-        handleUpdateSuggestions={noop}
       />
     )
   })
@@ -93,8 +75,6 @@ storiesOf('InputTags', module)
         handleEdit={noop}
         handleRemove={noop}
         inputPlaceholder={'Add Tag'}
-        suggestions={[]}
-        handleUpdateSuggestions={noop}
       />
     )
   })
@@ -105,9 +85,8 @@ storiesOf('InputTags', module)
         handleInsert={noop}
         handleEdit={noop}
         handleRemove={noop}
-        inputPlaceholder={emptyString}
         suggestions={items}
-        handleUpdateSuggestions={noop}
+        handleUpdateSuggestions={action('handleUpdateSuggestions')}
       />
     )
   })
@@ -118,9 +97,8 @@ storiesOf('InputTags', module)
         handleInsert={action('handleInsert')}
         handleEdit={noop}
         handleRemove={noop}
-        inputPlaceholder={emptyString}
         suggestions={items}
-        handleUpdateSuggestions={noop}
+        getSuggestionValue={action('getSuggestionValue')}
       />
     )
   })
@@ -131,9 +109,7 @@ storiesOf('InputTags', module)
         handleInsert={action('handleInsert')}
         handleEdit={noop}
         handleRemove={noop}
-        inputPlaceholder={emptyString}
         suggestions={items}
-        handleUpdateSuggestions={noop}
       />
     )
   })
@@ -144,9 +120,7 @@ storiesOf('InputTags', module)
         handleInsert={noop}
         handleEdit={noop}
         handleRemove={noop}
-        inputPlaceholder={emptyString}
         suggestions={items}
-        handleUpdateSuggestions={noop}
       />
     )
   })
@@ -157,9 +131,7 @@ storiesOf('InputTags', module)
         handleInsert={noop}
         handleEdit={noop}
         handleRemove={noop}
-        inputPlaceholder={emptyString}
         suggestions={items}
-        handleUpdateSuggestions={noop}
       />
     )
   })
@@ -170,9 +142,7 @@ storiesOf('InputTags', module)
         handleInsert={noop}
         handleEdit={noop}
         handleRemove={noop}
-        inputPlaceholder={emptyString}
         suggestions={items}
-        handleUpdateSuggestions={noop}
       />
     )
   });

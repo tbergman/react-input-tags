@@ -3,28 +3,28 @@ import { shallow, mount } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { ListDefault } from '../src/implementation/ListDefault.jsx';
+import { SuggestionListDefault } from '../src/implementation/SuggestionListDefault.jsx';
 
 import { noop } from './util';
 import { items } from './mock';
 
-describe('<ListDefault />', () => {
-  let listWrapper;
+describe('<SuggestionListDefault />', () => {
+  let suggestionListWrapper;
   let highlightedIndex;
-  let getListItemValue;
+  let getSuggestionValue;
   let handleHighlight;
   let handleSelect;
 
-  describe('highlight item', () => {
+  describe('highlight suggestion', () => {
     highlightedIndex = 0;
     handleHighlight = sinon.stub();
 
     beforeEach(() => {
-      listWrapper = mount(
-        <ListDefault
-          items={items}
+      suggestionListWrapper = mount(
+        <SuggestionListDefault
+          suggestions={items}
           highlightedIndex={highlightedIndex}
-          getListItemValue={noop}
+          getSuggestionValue={noop}
           handleHighlight={handleHighlight}
           handleSelect={noop}
         />
@@ -35,7 +35,7 @@ describe('<ListDefault />', () => {
       const newHighlightedIndex = 1;
 
       beforeEach(() => {
-        listWrapper.find('ul').childAt(newHighlightedIndex).simulate('mouseover');
+        suggestionListWrapper.find('ul').childAt(newHighlightedIndex).simulate('mouseover');
       });
 
       it('should highlight the item', () => {
@@ -46,15 +46,15 @@ describe('<ListDefault />', () => {
 
   describe('select item', () => {
     highlightedIndex = 0;
-    getListItemValue = sinon.stub();
+    getSuggestionValue = sinon.stub();
     handleSelect = sinon.stub();
 
     beforeEach(() => {
-      listWrapper = mount(
-        <ListDefault
-          items={items}
+      suggestionListWrapper = mount(
+        <SuggestionListDefault
+          suggestions={items}
           highlightedIndex={highlightedIndex}
-          getListItemValue={getListItemValue}
+          getSuggestionValue={getSuggestionValue}
           handleHighlight={noop}
           handleSelect={handleSelect}
         />
@@ -63,11 +63,11 @@ describe('<ListDefault />', () => {
 
     context('when item is clicked', () => {
       beforeEach(() => {
-        listWrapper.find('ul').childAt(highlightedIndex).simulate('click');
+        suggestionListWrapper.find('ul').childAt(highlightedIndex).simulate('click');
       });
 
       it('should get the list item value', () => {
-        expect(getListItemValue).to.have.been.calledWith(items[highlightedIndex]);
+        expect(getSuggestionValue).to.have.been.calledWith(items[highlightedIndex]);
       });
 
       it('should select the item', () => {

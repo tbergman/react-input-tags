@@ -1,4 +1,4 @@
-exports[`highlight item by mousing over item`] = `
+exports[`highlight suggestion by mousing over suggestion`] = `
 <li
   className=""
   onClick={[Function]}
@@ -8,7 +8,7 @@ exports[`highlight item by mousing over item`] = `
 </li>
 `;
 
-exports[`select item by clicking item`] = `
+exports[`select suggestion by clicking suggestion`] = `
 <li
   className="highlighted"
   onClick={[Function]}

@@ -4,7 +4,8 @@
   "description": "React component for inputting tags",
   "main": "dist/react-input-tags.js",
   "scripts": {
-    "dev": "start-storybook -p 9001 -c .storybook",
+    "server": "start-storybook -p 9001 -c .storybook",
+    "web": "open http://localhost:9001/",
     "lint": "eslint src/*",
     "pretest": "npm run lint",
     "test": "npm run test-mocha && npm run test-storyshots",

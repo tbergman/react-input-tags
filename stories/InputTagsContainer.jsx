@@ -11,18 +11,12 @@ storiesOf('InputTagsContainer', module)
     <InputTagsContainer
       tags={items}
       handleUpdateTags={noop}
-      inputPlaceholder={emptyString}
-      suggestions={[]}
-      handleUpdateSuggestions={noop}
     />
   ))
   .add('update tags by creating, editing and deleting', () => (
     <InputTagsContainer
       tags={[item]}
       handleUpdateTags={action('handleUpdateTags')}
-      inputPlaceholder={emptyString}
-      suggestions={[]}
-      handleUpdateSuggestions={noop}
     />
   ))
   .add('show placeholder by rendering', () => (
@@ -30,15 +24,12 @@ storiesOf('InputTagsContainer', module)
       tags={[]}
       handleUpdateTags={noop}
       inputPlaceholder={'Add Tag'}
-      suggestions={[]}
-      handleUpdateSuggestions={noop}
     />
   ))
   .add('update suggestions by typing in input', () => (
     <InputTagsContainer
       tags={[]}
       handleUpdateTags={noop}
-      inputPlaceholder={emptyString}
       suggestions={items}
       handleUpdateSuggestions={action('handleUpdateSuggestions')}
     />

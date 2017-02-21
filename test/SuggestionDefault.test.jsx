@@ -3,24 +3,24 @@ import { shallow, mount } from 'enzyme';
 import sinon from 'sinon';
 import { expect } from 'chai';
 
-import { ListItemDefault } from '../src/implementation/ListItemDefault.jsx';
+import { SuggestionDefault } from '../src/implementation/SuggestionDefault.jsx';
 
 import { noop } from './util';
-import { item } from './mock';
+import { suggestion } from './mock';
 
-describe('<ListItemDefault />', () => {
-  let listItemWrapper;
+describe('<SuggestionDefault />', () => {
+  let suggestionWrapper;
   let handleHighlight;
   let handleSelect;
   let focusElement;
 
-  describe('highlight item', () => {
+  describe('highlight suggestion', () => {
     beforeEach(() => {
       handleHighlight = sinon.stub();
 
-      listItemWrapper = shallow(
-        <ListItemDefault
-          value={item}
+      suggestionWrapper = shallow(
+        <SuggestionDefault
+          value={suggestion}
           isHighlighted={false}
           handleHighlight={handleHighlight}
           handleSelect={noop}
@@ -28,24 +28,24 @@ describe('<ListItemDefault />', () => {
       );
     });
 
-    context('when item is moused over', () => {
+    context('when suggestion is moused over', () => {
       beforeEach(() => {
-        listItemWrapper.find('li').simulate('mouseover');
+        suggestionWrapper.find('li').simulate('mouseover');
       });
 
-      it('should highlight the item', () => {
+      it('should highlight the suggestion', () => {
         expect(handleHighlight).to.have.been.called();
       });
     });
   });
 
-  describe('select item', () => {
+  describe('select suggestion', () => {
     beforeEach(() => {
       handleSelect = sinon.stub();
 
-      listItemWrapper = shallow(
-        <ListItemDefault
-          value={item}
+      suggestionWrapper = shallow(
+        <SuggestionDefault
+          value={suggestion}
           isHighlighted={false}
           handleHighlight={noop}
           handleSelect={handleSelect}
@@ -53,12 +53,12 @@ describe('<ListItemDefault />', () => {
       );
     });
 
-    context('when item is clicked', () => {
+    context('when suggestion is clicked', () => {
       beforeEach(() => {
-        listItemWrapper.find('li').simulate('click');
+        suggestionWrapper.find('li').simulate('click');
       });
 
-      it('should select the item', () => {
+      it('should select the suggestion', () => {
         expect(handleSelect).to.have.been.called();
       });
     });

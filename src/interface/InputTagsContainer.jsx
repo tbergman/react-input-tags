@@ -4,27 +4,45 @@ import { InputTagsContainerDefault } from '../implementation/InputTagsContainerD
 
 export const InputTagsContainer = ({
   InputTagsContainerImplementation,
+  InputTagsImplementation,
+  InputImplementation,
+  TagImplementation,
+  SuggestionListImplementation,
+  SuggestionImplementation,
   tags,
   handleUpdateTags,
   inputPlaceholder,
   suggestions,
   handleUpdateSuggestions,
+  getSuggestionValue,
 }) =>
   <InputTagsContainerImplementation
+    InputTagsImplementation={InputTagsImplementation}
+    InputImplementation={InputImplementation}
+    TagImplementation={TagImplementation}
+    SuggestionListImplementation={SuggestionListImplementation}
+    SuggestionImplementation={SuggestionImplementation}
     tags={tags}
     handleUpdateTags={handleUpdateTags}
     inputPlaceholder={inputPlaceholder}
     suggestions={suggestions}
     handleUpdateSuggestions={handleUpdateSuggestions}
+    getSuggestionValue={getSuggestionValue}
   />;
 
 InputTagsContainer.propTypes = {
   InputTagsContainerImplementation: React.PropTypes.func.isRequired,
+  InputTagsImplementation: React.PropTypes.func,
+  InputImplementation: React.PropTypes.func,
+  TagImplementation: React.PropTypes.func,
+  SuggestionListImplementation: React.PropTypes.func,
+  SuggestionImplementation: React.PropTypes.func,
   tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
   handleUpdateTags: React.PropTypes.func.isRequired,
   inputPlaceholder: React.PropTypes.string,
   suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
   handleUpdateSuggestions: React.PropTypes.func,
+  getSuggestionValue: React.PropTypes.func,
 };
 
 InputTagsContainer.defaultProps = {
