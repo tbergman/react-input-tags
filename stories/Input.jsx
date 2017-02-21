@@ -11,10 +11,10 @@ storiesOf('Input', module)
     return (
       <Input
         value={emptyString}
-        placeholder={emptyString}
         handleOnChange={noop}
         handleOnBlur={noop}
         handleOnKeyDown={noop}
+        placeholder={emptyString}
       />
     )
   })
@@ -22,10 +22,10 @@ storiesOf('Input', module)
     return (
       <Input
         value={emptyString}
-        placeholder={nonEmptyString}
         handleOnChange={noop}
         handleOnBlur={noop}
         handleOnKeyDown={noop}
+        placeholder={nonEmptyString}
       />
     )
   })
@@ -33,7 +33,6 @@ storiesOf('Input', module)
     return (
       <Input
         value={emptyString}
-        placeholder={emptyString}
         handleOnChange={action('handleOnChange')}
         handleOnBlur={noop}
         handleOnKeyDown={noop}
@@ -44,7 +43,6 @@ storiesOf('Input', module)
     return (
       <Input
         value={emptyString}
-        placeholder={emptyString}
         handleOnChange={noop}
         handleOnBlur={action('handleOnBlur')}
         handleOnKeyDown={noop}
@@ -55,7 +53,6 @@ storiesOf('Input', module)
     return (
       <Input
         value={emptyString}
-        placeholder={emptyString}
         handleOnChange={noop}
         handleOnBlur={noop}
         handleOnKeyDown={action('handleOnKeyDown')}

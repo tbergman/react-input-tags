@@ -15,7 +15,6 @@ export class TagsExample extends React.Component {
       <InputTagsContainer
         tags={this.state.tags}
         handleUpdateTags={this.handleUpdateTags}
-        inputPlaceholder={'Add tag'}
       />
     );
   }

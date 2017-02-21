@@ -13,18 +13,18 @@ export const SuggestionList = ({
   <SuggestionListImplementation
     suggestions={suggestions}
     highlightedIndex={highlightedIndex}
-    getSuggestionValue={getSuggestionValue}
     handleHighlight={handleHighlight}
     handleSelect={handleSelect}
+    getSuggestionValue={getSuggestionValue}
   />;
 
 SuggestionList.propTypes = {
   SuggestionListImplementation: React.PropTypes.func.isRequired,
   suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
   highlightedIndex: React.PropTypes.number.isRequired,
-  getSuggestionValue: React.PropTypes.func.isRequired,
   handleHighlight: React.PropTypes.func.isRequired,
   handleSelect: React.PropTypes.func.isRequired,
+  getSuggestionValue: React.PropTypes.func,
 };
 
 SuggestionList.defaultProps = {

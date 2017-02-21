@@ -20,7 +20,7 @@ export class InputDefault extends React.Component {
     handleOnChange: React.PropTypes.func.isRequired,
     handleOnBlur: React.PropTypes.func.isRequired,
     handleOnKeyDown: React.PropTypes.func.isRequired,
-    placeholder: React.PropTypes.string,
+    placeholder: React.PropTypes.string.isRequired,
   }
 
   static defaultProps = {

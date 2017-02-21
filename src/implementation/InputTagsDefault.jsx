@@ -15,35 +15,39 @@ import {
 } from '../keyCodes';
 
 export const SuggestionListContainer = ({
+  suggestions,
   showSuggestions,
   highlightedSuggestionIndex,
   handleHighlight,
   handleSelect,
-  suggestions,
   getSuggestionValue,
 }) => {
   if (!showSuggestions) return null;
   return (
     <SuggestionList
       suggestions={suggestions}
-      handleSelect={handleSelect}
-      getSuggestionValue={getSuggestionValue}
       highlightedIndex={highlightedSuggestionIndex}
       handleHighlight={handleHighlight}
+      handleSelect={handleSelect}
+      getSuggestionValue={getSuggestionValue}
     />
   );
 };
 
 SuggestionListContainer.propTypes = {
+  suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
   showSuggestions: React.PropTypes.bool.isRequired,
   highlightedSuggestionIndex: React.PropTypes.number.isRequired,
   handleHighlight: React.PropTypes.func.isRequired,
   handleSelect: React.PropTypes.func.isRequired,
-  suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
-  getSuggestionValue: React.PropTypes.func,
+  getSuggestionValue: React.PropTypes.func.isRequired,
 };
 
+export const suggestionsDefault = [];
+
 export const handleUpdateSuggestionsDefault = () => {};
+
+export const getSuggestionValueDefault = suggestion => suggestion;
 
 export const calcNextIndexDefault = (oldIndex, numItems) =>
   (oldIndex + 1) % numItems;
@@ -80,9 +84,9 @@ export class InputTagsDefault extends React.Component {
     handleEdit: React.PropTypes.func.isRequired,
     handleRemove: React.PropTypes.func.isRequired,
     inputPlaceholder: React.PropTypes.string,
-    suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
-    handleUpdateSuggestions: React.PropTypes.func,
-    getSuggestionValue: React.PropTypes.func,
+    suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
+    handleUpdateSuggestions: React.PropTypes.func.isRequired,
+    getSuggestionValue: React.PropTypes.func.isRequired,
     calcNextIndex: React.PropTypes.func.isRequired,
     calcPreviousIndex: React.PropTypes.func.isRequired,
     insertKeyCodes: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
@@ -93,7 +97,9 @@ export class InputTagsDefault extends React.Component {
   };
 
   static defaultProps = {
+    suggestions: suggestionsDefault,
     handleUpdateSuggestions: handleUpdateSuggestionsDefault,
+    getSuggestionValue: getSuggestionValueDefault,
     calcNextIndex: calcNextIndexDefault,
     calcPreviousIndex: calcPreviousIndexDefault,
     insertKeyCodes: insertKeyCodesDefault,
@@ -230,9 +236,9 @@ export class InputTagsDefault extends React.Component {
           suggestions={suggestions}
           showSuggestions={showSuggestions}
           highlightedSuggestionIndex={highlightedSuggestionIndex}
-          getSuggestionValue={getSuggestionValue}
           handleHighlight={this.setHighlightedSuggestionIndex}
           handleSelect={suggestion => this.insertTag(tags, suggestion)}
+          getSuggestionValue={getSuggestionValue}
         />
       </div>
     );

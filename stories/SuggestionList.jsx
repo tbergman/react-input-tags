@@ -10,26 +10,26 @@ storiesOf('SuggestionList', module)
     <SuggestionList
       suggestions={items}
       highlightedIndex={highlightedIndex}
-      getSuggestionValue={noop}
       handleHighlight={noop}
       handleSelect={noop}
+      getSuggestionValue={noop}
     />
   ))
   .add('highlight suggestion by mousing over suggestion', () => (
     <SuggestionList
       suggestions={items}
       highlightedIndex={highlightedIndex}
-      getSuggestionValue={noop}
       handleHighlight={action('handleHighlight')}
       handleSelect={noop}
+      getSuggestionValue={noop}
     />
   ))
   .add('select suggestion by clicking suggestion', () => (
     <SuggestionList
       suggestions={items}
       highlightedIndex={highlightedIndex}
-      getSuggestionValue={action('getSuggestionValue')}
       handleHighlight={noop}
       handleSelect={action('handleSelect')}
+      getSuggestionValue={action('getSuggestionValue')}
     />
   ));
