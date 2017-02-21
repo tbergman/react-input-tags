@@ -23,7 +23,6 @@ describe('<InputDefault />', () => {
     inputWrapper = mount(
       <InputDefault
         value={emptyString}
-        placeholder={emptyString}
         handleOnChange={handleOnChange}
         handleOnBlur={handleOnBlur}
         handleOnKeyDown={handleOnKeyDown}

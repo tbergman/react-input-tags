@@ -24,7 +24,7 @@ SuggestionList.propTypes = {
   highlightedIndex: React.PropTypes.number.isRequired,
   handleHighlight: React.PropTypes.func.isRequired,
   handleSelect: React.PropTypes.func.isRequired,
-  getSuggestionValue: React.PropTypes.func,
+  getSuggestionValue: React.PropTypes.func.isRequired,
 };
 
 SuggestionList.defaultProps = {
