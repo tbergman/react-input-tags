@@ -1,26 +1,31 @@
 import React from 'react';
 import { InputTagsContainer } from '../index';
 
-export const AvatarSuggestion = ({ value, handleSelect }) => (
+export const AvatarSuggestion = ({ value, isHighlighted, handleHighlight, handleSelect }) => (
   <li // eslint-disable-line jsx-a11y/no-static-element-interactions
+    className={(isHighlighted) ? 'highlighted' : ''}
+    onMouseOver={handleHighlight}
+    onMouseDown={event => event.preventDefault()}
     onClick={handleSelect}
   >
     <img alt={'avatar'} src={`${value.url}`} width={'20px'} height={'20px'} />
-    <span>
+    <div>
       {value.name}
-    </span>
+    </div>
   </li>
   );
 
 AvatarSuggestion.propTypes = {
   value: React.PropTypes.object.isRequired,
+  isHighlighted: React.PropTypes.bool.isRequired,
+  handleHighlight: React.PropTypes.func.isRequired,
   handleSelect: React.PropTypes.func.isRequired,
 };
 
 const suggestionsLocal = [
   { name: 'akinnee', url: 'https://avatars.githubusercontent.com/u/3019562?v=3' },
   { name: 'baldwmic', url: 'https://avatars.githubusercontent.com/u/10538297?v=3' },
-  { name: 'jimbo', url: 'https://avatars.githubusercontent.com/u/1278367?v=3' },
+  { name: 'jimbol', url: 'https://avatars.githubusercontent.com/u/1278367?v=3' },
   { name: 'neurosnap', url: 'https://avatars.githubusercontent.com/u/1940365?v=3' },
 ];
 
