@@ -31,6 +31,7 @@ export class InputTagsContainerDefault extends React.Component {
     suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
     handleUpdateSuggestions: React.PropTypes.func,
     getSuggestionValue: React.PropTypes.func,
+    Tag: React.PropTypes.func,
     handleInsert: React.PropTypes.func.isRequired,
     handleEdit: React.PropTypes.func.isRequired,
     handleRemove: React.PropTypes.func.isRequired,
@@ -67,6 +68,7 @@ export class InputTagsContainerDefault extends React.Component {
       suggestions,
       handleUpdateSuggestions,
       getSuggestionValue,
+      Tag,
     } = this.props;
     return (
       <InputTags
@@ -78,6 +80,7 @@ export class InputTagsContainerDefault extends React.Component {
         suggestions={suggestions}
         handleUpdateSuggestions={handleUpdateSuggestions}
         getSuggestionValue={getSuggestionValue}
+        Tag={Tag}
       />
     );
   }
