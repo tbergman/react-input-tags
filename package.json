@@ -30,6 +30,9 @@
     "url": "https://github.com/baldwmic/react-input-tags/issues"
   },
   "homepage": "https://github.com/baldwmic/react-input-tags#readme",
+  "peerDependencies": {
+    "react": "^15.4.2"
+  },
   "devDependencies": {
     "@kadira/storybook": "^2.35.3",
     "@kadira/storyshots": "^2.1.0",
