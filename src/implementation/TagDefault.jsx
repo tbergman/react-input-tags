@@ -14,6 +14,7 @@ export class TagEdit extends React.Component {
     handleEdit: React.PropTypes.func.isRequired,
     handleRemove: React.PropTypes.func.isRequired,
     setIsEditing: React.PropTypes.func.isRequired,
+    TagClassName: React.PropTypes.string,
     focusElement: React.PropTypes.func.isRequired,
     selectElement: React.PropTypes.func.isRequired,
     exitKeyCodes: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
@@ -85,6 +86,7 @@ TagRead.propTypes = {
   value: React.PropTypes.string.isRequired,
   handleRemove: React.PropTypes.func.isRequired,
   setIsEditing: React.PropTypes.func.isRequired,
+  TagClassName: React.PropTypes.string,
 };
 
 export class TagDefault extends React.Component {
@@ -92,6 +94,7 @@ export class TagDefault extends React.Component {
     value: React.PropTypes.string.isRequired,
     handleEdit: React.PropTypes.func.isRequired,
     handleRemove: React.PropTypes.func.isRequired,
+    TagClassName: React.PropTypes.string,
   }
 
   state = {

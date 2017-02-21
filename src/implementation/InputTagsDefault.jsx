@@ -3,6 +3,7 @@ import React from 'react';
 import { Input } from '../interface/Input.jsx';
 import { Tag } from '../interface/Tag.jsx';
 import { SuggestionList } from '../interface/SuggestionList.jsx';
+import { defaultClassNamePrefix } from './util';
 
 import {
   tabKeyCode,
@@ -23,6 +24,8 @@ export const SuggestionListContainer = ({
   handleHighlight,
   handleSelect,
   getSuggestionValue,
+  SuggestionListClassName,
+  SuggestionClassName,
 }) => {
   if (!showSuggestions) return null;
   return (
@@ -34,6 +37,8 @@ export const SuggestionListContainer = ({
       handleHighlight={handleHighlight}
       handleSelect={handleSelect}
       getSuggestionValue={getSuggestionValue}
+      SuggestionListClassName={SuggestionListClassName}
+      SuggestionClassName={SuggestionClassName}
     />
   );
 };
@@ -47,6 +52,8 @@ SuggestionListContainer.propTypes = {
   handleHighlight: React.PropTypes.func.isRequired,
   handleSelect: React.PropTypes.func.isRequired,
   getSuggestionValue: React.PropTypes.func.isRequired,
+  SuggestionListClassName: React.PropTypes.string,
+  SuggestionClassName: React.PropTypes.string,
 };
 
 export const suggestionsDefault = [];
@@ -54,6 +61,8 @@ export const suggestionsDefault = [];
 export const handleUpdateSuggestionsDefault = () => {};
 
 export const getSuggestionValueDefault = suggestion => suggestion;
+
+export const InputTagsClassNameDefault = `${defaultClassNamePrefix}-input-tags`;
 
 export const calcNextIndexDefault = (oldIndex, numItems) =>
   (oldIndex + 1) % numItems;
@@ -97,6 +106,11 @@ export class InputTagsDefault extends React.Component {
     suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleUpdateSuggestions: React.PropTypes.func.isRequired,
     getSuggestionValue: React.PropTypes.func.isRequired,
+    InputTagsClassName: React.PropTypes.string,
+    InputClassName: React.PropTypes.string,
+    TagClassName: React.PropTypes.string,
+    SuggestionListClassName: React.PropTypes.string,
+    SuggestionClassName: React.PropTypes.string,
     calcNextIndex: React.PropTypes.func.isRequired,
     calcPreviousIndex: React.PropTypes.func.isRequired,
     insertKeyCodes: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
@@ -110,6 +124,7 @@ export class InputTagsDefault extends React.Component {
     suggestions: suggestionsDefault,
     handleUpdateSuggestions: handleUpdateSuggestionsDefault,
     getSuggestionValue: getSuggestionValueDefault,
+    InputTagsClassName: InputTagsClassNameDefault,
     calcNextIndex: calcNextIndexDefault,
     calcPreviousIndex: calcPreviousIndexDefault,
     insertKeyCodes: insertKeyCodesDefault,
@@ -225,10 +240,17 @@ export class InputTagsDefault extends React.Component {
       inputPlaceholder,
       suggestions,
       getSuggestionValue,
+      InputTagsClassName,
+      InputClassName,
+      TagClassName,
+      SuggestionListClassName,
+      SuggestionClassName,
     } = this.props;
     const { inputValue, showSuggestions, highlightedSuggestionIndex } = this.state;
     return (
-      <div>
+      <div
+        className={InputTagsClassName}
+      >
         <div>
           {tags.map((tag, index) =>
             <Tag
@@ -237,6 +259,7 @@ export class InputTagsDefault extends React.Component {
               value={tag}
               handleEdit={newValue => this.editTag(tags, index, newValue)}
               handleRemove={() => this.removeTag(tags, index)}
+              TagClassName={TagClassName}
             />
           )}
           <Input
@@ -246,6 +269,7 @@ export class InputTagsDefault extends React.Component {
             handleOnChange={this.handleInputOnChange}
             handleOnBlur={this.handleInputOnBlur}
             handleOnKeyDown={this.handleInputOnKeyDown}
+            InputClassName={InputClassName}
           />
         </div>
         <SuggestionListContainer
@@ -257,6 +281,8 @@ export class InputTagsDefault extends React.Component {
           handleHighlight={this.setHighlightedSuggestionIndex}
           handleSelect={suggestion => this.insertTag(tags, suggestion)}
           getSuggestionValue={getSuggestionValue}
+          SuggestionListClassName={SuggestionListClassName}
+          SuggestionClassName={SuggestionClassName}
         />
       </div>
     );

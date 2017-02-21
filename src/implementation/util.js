@@ -7,3 +7,5 @@ export const selectElement = (element) => {
   if (!element) return;
   element.select();
 };
+
+export const defaultClassNamePrefix = 'react-input-tags';

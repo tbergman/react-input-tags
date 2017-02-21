@@ -15,6 +15,11 @@ export const InputTagsContainer = ({
   suggestions,
   handleUpdateSuggestions,
   getSuggestionValue,
+  InputTagsClassName,
+  InputClassName,
+  TagClassName,
+  SuggestionListClassName,
+  SuggestionClassName,
 }) =>
   <InputTagsContainerImplementation
     InputTagsImplementation={InputTagsImplementation}
@@ -28,6 +33,11 @@ export const InputTagsContainer = ({
     suggestions={suggestions}
     handleUpdateSuggestions={handleUpdateSuggestions}
     getSuggestionValue={getSuggestionValue}
+    InputTagsClassName={InputTagsClassName}
+    InputClassName={InputClassName}
+    TagClassName={TagClassName}
+    SuggestionListClassName={SuggestionListClassName}
+    SuggestionClassName={SuggestionClassName}
   />;
 
 InputTagsContainer.propTypes = {
@@ -43,6 +53,11 @@ InputTagsContainer.propTypes = {
   suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
   handleUpdateSuggestions: React.PropTypes.func,
   getSuggestionValue: React.PropTypes.func,
+  InputTagsClassName: React.PropTypes.string,
+  InputClassName: React.PropTypes.string,
+  TagClassName: React.PropTypes.string,
+  SuggestionListClassName: React.PropTypes.string,
+  SuggestionClassName: React.PropTypes.string,
 };
 
 InputTagsContainer.defaultProps = {

@@ -48,6 +48,7 @@ Both the high-level `InputTagsContainer` component or the low-level `InputTags` 
 |`suggestions`|Array||An array of data that represents the value of the suggestions|
 |`handleUpdateSuggestions`|Function||A function called when the value of input changes, passes the input value as an argument.|
 |`getSuggestionValue`|Function||A function called when a suggestion is selected, passes the suggestion value as an argument.|
+|`InputTagsContainerImplementation`|Function||A function called when InputTagsContainer component is to be rendered.|
 |`InputTagsImplementation`|Function||A function called when InputTags component is to be rendered.|
 |`InputImplementation`|Function||A function called when Input component is to be rendered.|
 |`TagImplementation`|Function||A function called when Tag component is to be rendered.|
@@ -65,6 +66,7 @@ Both the high-level `InputTagsContainer` component or the low-level `InputTags` 
 |`suggestions`|Array||An array of data that represents the value of the suggestions|
 |`handleUpdateSuggestions`|Function||A function called when the value of input changes, passes the input value as an argument.|
 |`getSuggestionValue`|Function||A function called when a suggestion is selected, passes the suggestion value as an argument.|
+|`InputTagsImplementation`|Function||A function called when InputTags component is to be rendered.|
 |`InputImplementation`|Function||A function called when Input component is to be rendered.|
 |`TagImplementation`|Function||A function called when Tag component is to be rendered.|
 |`SuggestionListImplementation`|Function||A function called when SuggestionList component is to be rendered.|

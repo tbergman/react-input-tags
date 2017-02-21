@@ -1,6 +1,10 @@
 import React from 'react';
 
+import { defaultClassNamePrefix } from './util';
+
 export const placeholderDefault = '';
+
+export const InputClassNameDefault = `${defaultClassNamePrefix}-input`;
 
 export const MIRROR_STYLES = [
   'fontFamily',
@@ -21,10 +25,12 @@ export class InputDefault extends React.Component {
     handleOnBlur: React.PropTypes.func.isRequired,
     handleOnKeyDown: React.PropTypes.func.isRequired,
     placeholder: React.PropTypes.string.isRequired,
+    InputClassName: React.PropTypes.string,
   }
 
   static defaultProps = {
     placeholder: placeholderDefault,
+    InputClassName: InputClassNameDefault,
   }
 
   componentDidMount() {
@@ -51,7 +57,14 @@ export class InputDefault extends React.Component {
   }
 
   render() {
-    const { value, placeholder, handleOnChange, handleOnBlur, handleOnKeyDown } = this.props;
+    const {
+      value,
+      placeholder,
+      handleOnChange,
+      handleOnBlur,
+      handleOnKeyDown,
+      InputClassName,
+    } = this.props;
 
     const mirrorValue = value || placeholder;
     const mirrorStyle = {
@@ -79,6 +92,7 @@ export class InputDefault extends React.Component {
           onChange={handleOnChange}
           onBlur={handleOnBlur}
           onKeyDown={handleOnKeyDown}
+          className={InputClassName}
         />
       </span>
     );
