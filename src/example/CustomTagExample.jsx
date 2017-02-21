@@ -1,29 +1,25 @@
 import React from 'react';
 import { InputTagsContainer } from '../index';
 
-export class CustomTag extends React.Component {
-  static propTypes = {
-    value: React.PropTypes.string.isRequired,
-  }
+export const reverseString = string =>
+  string.split('').reverse().join('');
 
-  render() {
-    const { value } = this.props;
-    return (
-      <span>
-        {value}
-      </span>
-    );
-  }
-}
-
-export const CustomTagFn = ({ value }) => (
+export const ReverseTag = ({ value, handleRemove }) => (
   <span>
-    {value}
+    <span>
+      {reverseString(value)}
+    </span>
+    <button
+      onClick={handleRemove}
+    >
+      {'x'}
+    </button>
   </span>
-);
+  );
 
-CustomTagFn.propTypes = {
+ReverseTag.propTypes = {
   value: React.PropTypes.string.isRequired,
+  handleRemove: React.PropTypes.func.isRequired,
 };
 
 export class CustomTagExample extends React.Component {
@@ -40,7 +36,7 @@ export class CustomTagExample extends React.Component {
       <InputTagsContainer
         tags={this.state.tags}
         handleUpdateTags={this.handleUpdateTags}
-        TagImplementation={CustomTagFn}
+        TagImplementation={ReverseTag}
       />
     );
   }

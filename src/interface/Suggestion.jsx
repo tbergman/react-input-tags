@@ -18,7 +18,7 @@ export const Suggestion = ({
 
 Suggestion.propTypes = {
   SuggestionImplementation: React.PropTypes.func.isRequired,
-  value: React.PropTypes.string.isRequired,
+  value: React.PropTypes.any.isRequired,
   isHighlighted: React.PropTypes.bool.isRequired,
   handleHighlight: React.PropTypes.func.isRequired,
   handleSelect: React.PropTypes.func.isRequired,
