@@ -25,7 +25,7 @@ describe('<TagDefault />', () => {
   describe('enter edit mode', () => {
     context('when tag is clicked', () => {
       beforeEach(() => {
-        tagWrapper.simulate('click');
+        tagWrapper.childAt(0).simulate('click');
       });
 
       it('should set isEditing state to true', () => {
@@ -36,7 +36,7 @@ describe('<TagDefault />', () => {
 
   describe('exit edit mode', () => {
     beforeEach(() => {
-      tagWrapper.simulate('click');
+      tagWrapper.childAt(0).simulate('click');
     });
 
     context('when focus leaves textarea', () => {
@@ -47,6 +47,16 @@ describe('<TagDefault />', () => {
       it('should set isEditing state to false', () => {
         expect(tagWrapper.state().isEditing).to.equal(false);
       });
+    });
+  });
+
+  describe('remove should not enter edit mode', () => {
+    beforeEach(() => {
+      tagWrapper.find('button').simulate('click');
+    });
+
+    it('should not set isEditing state to true', () => {
+      expect(tagWrapper.state().isEditing).to.not.equal(true);
     });
   });
 });
@@ -184,7 +194,7 @@ describe('<TagRead />', () => {
   describe('enter edit mode', () => {
     context('when tag is clicked', () => {
       beforeEach(() => {
-        tagReadWrapper.simulate('click');
+        tagReadWrapper.childAt(0).simulate('click');
       });
 
       it('should set isEditing state to true', () => {

@@ -225,7 +225,7 @@ describe('<InputTagsDefault />', () => {
 
       context('when token is clicked', () => {
         beforeEach(() => {
-          inputTagsWrapper.find('button').simulate('click');
+          inputTagsWrapper.find('button').parent().childAt(0).simulate('click');
         });
 
         it('should render a textarea', () => {

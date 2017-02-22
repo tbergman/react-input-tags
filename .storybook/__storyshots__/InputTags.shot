@@ -34,9 +34,9 @@ exports[`create token by typing non empty string and pressing comma`] = `
   className="react-input-tags-input-tags">
   <div>
     <span
-      className="react-input-tags-tag"
-      onClick={[Function]}>
-      <span>
+      className="react-input-tags-tag">
+      <span
+        onClick={[Function]}>
         insert another
       </span>
       <button
@@ -76,9 +76,9 @@ exports[`create token by typing non empty string and pressing enter`] = `
   className="react-input-tags-input-tags">
   <div>
     <span
-      className="react-input-tags-tag"
-      onClick={[Function]}>
-      <span>
+      className="react-input-tags-tag">
+      <span
+        onClick={[Function]}>
         insert another
       </span>
       <button
@@ -149,9 +149,9 @@ exports[`create token by typing non empty string and pressing tab`] = `
   className="react-input-tags-input-tags">
   <div>
     <span
-      className="react-input-tags-tag"
-      onClick={[Function]}>
-      <span>
+      className="react-input-tags-tag">
+      <span
+        onClick={[Function]}>
         insert another
       </span>
       <button
@@ -191,9 +191,9 @@ exports[`delete token by backspacing when input is empty`] = `
   className="react-input-tags-input-tags">
   <div>
     <span
-      className="react-input-tags-tag"
-      onClick={[Function]}>
-      <span>
+      className="react-input-tags-tag">
+      <span
+        onClick={[Function]}>
         delete me
       </span>
       <button
@@ -233,9 +233,9 @@ exports[`delete token by clicking delete button`] = `
   className="react-input-tags-input-tags">
   <div>
     <span
-      className="react-input-tags-tag"
-      onClick={[Function]}>
-      <span>
+      className="react-input-tags-tag">
+      <span
+        onClick={[Function]}>
         delete me
       </span>
       <button
@@ -275,9 +275,9 @@ exports[`edit token by clicking on tag and typing`] = `
   className="react-input-tags-input-tags">
   <div>
     <span
-      className="react-input-tags-tag"
-      onClick={[Function]}>
-      <span>
+      className="react-input-tags-tag">
+      <span
+        onClick={[Function]}>
         edit me
       </span>
       <button
