@@ -9,6 +9,7 @@ function loadStories() {
   require('../stories/Tag.jsx');
   require('../stories/SuggestionList.jsx');
   require('../stories/Suggestion.jsx');
+  require('../stories/SuggestionsLoader.jsx');
 }
 
 configure(loadStories, module);

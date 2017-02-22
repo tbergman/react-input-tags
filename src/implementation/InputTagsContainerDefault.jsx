@@ -30,12 +30,14 @@ export class InputTagsContainerDefault extends React.Component {
     TagImplementation: React.PropTypes.func,
     SuggestionListImplementation: React.PropTypes.func,
     SuggestionImplementation: React.PropTypes.func,
+    SuggestionsLoaderImplementation: React.PropTypes.func,
     tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleUpdateTags: React.PropTypes.func.isRequired,
     inputPlaceholder: React.PropTypes.string,
     suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
     handleUpdateSuggestions: React.PropTypes.func,
     getSuggestionValue: React.PropTypes.func,
+    suggestionsAreLoading: React.PropTypes.bool,
     handleInsert: React.PropTypes.func.isRequired,
     handleEdit: React.PropTypes.func.isRequired,
     handleRemove: React.PropTypes.func.isRequired,
@@ -44,6 +46,7 @@ export class InputTagsContainerDefault extends React.Component {
     TagClassName: React.PropTypes.string,
     SuggestionListClassName: React.PropTypes.string,
     SuggestionClassName: React.PropTypes.string,
+    SuggestionsLoaderClassName: React.PropTypes.string,
   }
 
   static defaultProps = {
@@ -77,16 +80,19 @@ export class InputTagsContainerDefault extends React.Component {
       TagImplementation,
       SuggestionListImplementation,
       SuggestionImplementation,
+      SuggestionsLoaderImplementation,
       tags,
       inputPlaceholder,
       suggestions,
       handleUpdateSuggestions,
       getSuggestionValue,
+      suggestionsAreLoading,
       InputTagsClassName,
       InputClassName,
       TagClassName,
       SuggestionListClassName,
       SuggestionClassName,
+      SuggestionsLoaderClassName,
     } = this.props;
     return (
       <InputTags
@@ -95,6 +101,7 @@ export class InputTagsContainerDefault extends React.Component {
         TagImplementation={TagImplementation}
         SuggestionListImplementation={SuggestionListImplementation}
         SuggestionImplementation={SuggestionImplementation}
+        SuggestionsLoaderImplementation={SuggestionsLoaderImplementation}
         tags={tags}
         handleInsert={this.handleInsert}
         handleEdit={this.handleEdit}
@@ -103,11 +110,13 @@ export class InputTagsContainerDefault extends React.Component {
         suggestions={suggestions}
         handleUpdateSuggestions={handleUpdateSuggestions}
         getSuggestionValue={getSuggestionValue}
+        suggestionsAreLoading={suggestionsAreLoading}
         InputTagsClassName={InputTagsClassName}
         InputClassName={InputClassName}
         TagClassName={TagClassName}
         SuggestionListClassName={SuggestionListClassName}
         SuggestionClassName={SuggestionClassName}
+        SuggestionsLoaderClassName={SuggestionsLoaderClassName}
       />
     );
   }

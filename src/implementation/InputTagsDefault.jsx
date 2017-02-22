@@ -3,6 +3,7 @@ import React from 'react';
 import { Input } from '../interface/Input.jsx';
 import { Tag } from '../interface/Tag.jsx';
 import { SuggestionList } from '../interface/SuggestionList.jsx';
+import { SuggestionsLoader } from '../interface/SuggestionsLoader.jsx';
 import { defaultClassNamePrefix } from './util';
 
 import {
@@ -98,6 +99,7 @@ export class InputTagsDefault extends React.Component {
     TagImplementation: React.PropTypes.func,
     SuggestionListImplementation: React.PropTypes.func,
     SuggestionImplementation: React.PropTypes.func,
+    SuggestionsLoaderImplementation: React.PropTypes.func,
     tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleInsert: React.PropTypes.func.isRequired,
     handleEdit: React.PropTypes.func.isRequired,
@@ -106,11 +108,13 @@ export class InputTagsDefault extends React.Component {
     suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleUpdateSuggestions: React.PropTypes.func.isRequired,
     getSuggestionValue: React.PropTypes.func.isRequired,
+    suggestionsAreLoading: React.PropTypes.bool,
     InputTagsClassName: React.PropTypes.string,
     InputClassName: React.PropTypes.string,
     TagClassName: React.PropTypes.string,
     SuggestionListClassName: React.PropTypes.string,
     SuggestionClassName: React.PropTypes.string,
+    SuggestionsLoaderClassName: React.PropTypes.string,
     calcNextIndex: React.PropTypes.func.isRequired,
     calcPreviousIndex: React.PropTypes.func.isRequired,
     insertKeyCodes: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
@@ -236,15 +240,18 @@ export class InputTagsDefault extends React.Component {
       TagImplementation,
       SuggestionListImplementation,
       SuggestionImplementation,
+      SuggestionsLoaderImplementation,
       tags,
       inputPlaceholder,
       suggestions,
       getSuggestionValue,
+      suggestionsAreLoading,
       InputTagsClassName,
       InputClassName,
       TagClassName,
       SuggestionListClassName,
       SuggestionClassName,
+      SuggestionsLoaderClassName,
     } = this.props;
     const { inputValue, showSuggestions, highlightedSuggestionIndex } = this.state;
     return (
@@ -270,6 +277,11 @@ export class InputTagsDefault extends React.Component {
             handleOnBlur={this.handleInputOnBlur}
             handleOnKeyDown={this.handleInputOnKeyDown}
             InputClassName={InputClassName}
+          />
+          <SuggestionsLoader
+            SuggestionsLoaderImplementation={SuggestionsLoaderImplementation}
+            suggestionsAreLoading={suggestionsAreLoading}
+            SuggestionsLoaderClassName={SuggestionsLoaderClassName}
           />
         </div>
         <SuggestionListContainer

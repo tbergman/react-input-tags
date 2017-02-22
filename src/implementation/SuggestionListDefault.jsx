@@ -23,9 +23,9 @@ export class SuggestionListDefault extends React.Component {
       SuggestionImplementation,
       suggestions,
       highlightedIndex,
-      getSuggestionValue,
       handleHighlight,
       handleSelect,
+      getSuggestionValue,
       SuggestionListClassName,
       SuggestionClassName,
     } = this.props;

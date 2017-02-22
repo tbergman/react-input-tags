@@ -48,17 +48,20 @@ Both the high-level `InputTagsContainer` component or the low-level `InputTags` 
 |`suggestions`|Array||An array of data that represents the value of the suggestions|
 |`handleUpdateSuggestions`|Function||A function called when the value of input changes, passes the input value as an argument.|
 |`getSuggestionValue`|Function||A function called when a suggestion is selected, passes the suggestion value as an argument.|
+|`suggestionsAreLoading`|Boolean||Whether the suggestions are loading or not.|
 |`InputTagsContainerImplementation`|Function||A function called when InputTagsContainer component is to be rendered.|
 |`InputTagsImplementation`|Function||A function called when InputTags component is to be rendered.|
 |`InputImplementation`|Function||A function called when Input component is to be rendered.|
 |`TagImplementation`|Function||A function called when Tag component is to be rendered.|
 |`SuggestionListImplementation`|Function||A function called when SuggestionList component is to be rendered.|
 |`SuggestionImplementation`|Function||A function called when Suggestion component is to be rendered.|
+|`SuggestionsLoaderImplementation`|Function||A function called when SuggestionsLoader component is to be rendered.|
 |`InputTagsClassName`|String||A class for the InputTags component.|
 |`InputClassName`|String||A class for the Input component.|
 |`TagClassName`|String||A class for the Tag component.|
 |`SuggestionListClassName`|String||A class for the SuggestionList component.|
 |`SuggestionClassName`|String||A class for the Suggestion component.|
+|`SuggestionsLoaderClassName`|String||A class for the SuggestionsLoader component.|
 
 ### [InputTags](src/interface/InputTags.jsx)
 |Property|Type|Required|Description|
@@ -71,13 +74,16 @@ Both the high-level `InputTagsContainer` component or the low-level `InputTags` 
 |`suggestions`|Array||An array of data that represents the value of the suggestions|
 |`handleUpdateSuggestions`|Function||A function called when the value of input changes, passes the input value as an argument.|
 |`getSuggestionValue`|Function||A function called when a suggestion is selected, passes the suggestion value as an argument.|
+|`suggestionsAreLoading`|Boolean||Whether the suggestions are loading or not.|
 |`InputTagsImplementation`|Function||A function called when InputTags component is to be rendered.|
 |`InputImplementation`|Function||A function called when Input component is to be rendered.|
 |`TagImplementation`|Function||A function called when Tag component is to be rendered.|
 |`SuggestionListImplementation`|Function||A function called when SuggestionList component is to be rendered.|
 |`SuggestionImplementation`|Function||A function called when Suggestion component is to be rendered.|
+|`SuggestionsLoaderImplementation`|Function||A function called when SuggestionsLoader component is to be rendered.|
 |`InputTagsClassName`|String||A class for the InputTags component.|
 |`InputClassName`|String||A class for the Input component.|
 |`TagClassName`|String||A class for the Tag component.|
 |`SuggestionListClassName`|String||A class for the SuggestionList component.|
 |`SuggestionClassName`|String||A class for the Suggestion component.|
+|`SuggestionsLoaderClassName`|String||A class for the SuggestionsLoader component.|

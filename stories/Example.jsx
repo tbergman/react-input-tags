@@ -3,6 +3,7 @@ import { storiesOf, action } from '@kadira/storybook';
 
 import { TagsExample } from '../src/example/TagsExample.jsx';
 import { LocalSuggestionsExample } from '../src/example/LocalSuggestionsExample.jsx';
+import { RemoteSuggestionsExample } from '../src/example/RemoteSuggestionsExample.jsx';
 import { CustomTagExample } from '../src/example/CustomTagExample.jsx';
 import { CustomSuggestionExample } from '../src/example/CustomSuggestionExample.jsx';
 
@@ -19,7 +20,7 @@ storiesOf('Example', module)
   })
   .add('remote suggestions', () => {
     return (
-      <div>{'TODO'}</div>
+      <RemoteSuggestionsExample />
     )
   })
   .add('custom tag', () => {

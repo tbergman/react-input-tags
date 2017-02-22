@@ -11,7 +11,7 @@ export class SuggestionDefault extends React.Component {
     isHighlighted: React.PropTypes.bool.isRequired,
     handleHighlight: React.PropTypes.func.isRequired,
     handleSelect: React.PropTypes.func.isRequired,
-    SuggestionClassName: React.PropTypes.string,
+    SuggestionClassName: React.PropTypes.string.isRequired,
   }
 
   static defaultProps = {

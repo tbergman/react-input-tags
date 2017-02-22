@@ -9,17 +9,20 @@ export const InputTagsContainer = ({
   TagImplementation,
   SuggestionListImplementation,
   SuggestionImplementation,
+  SuggestionsLoaderImplementation,
   tags,
   handleUpdateTags,
   inputPlaceholder,
   suggestions,
   handleUpdateSuggestions,
   getSuggestionValue,
+  suggestionsAreLoading,
   InputTagsClassName,
   InputClassName,
   TagClassName,
   SuggestionListClassName,
   SuggestionClassName,
+  SuggestionsLoaderClassName,
 }) =>
   <InputTagsContainerImplementation
     InputTagsImplementation={InputTagsImplementation}
@@ -27,17 +30,20 @@ export const InputTagsContainer = ({
     TagImplementation={TagImplementation}
     SuggestionListImplementation={SuggestionListImplementation}
     SuggestionImplementation={SuggestionImplementation}
+    SuggestionsLoaderImplementation={SuggestionsLoaderImplementation}
     tags={tags}
     handleUpdateTags={handleUpdateTags}
     inputPlaceholder={inputPlaceholder}
     suggestions={suggestions}
     handleUpdateSuggestions={handleUpdateSuggestions}
     getSuggestionValue={getSuggestionValue}
+    suggestionsAreLoading={suggestionsAreLoading}
     InputTagsClassName={InputTagsClassName}
     InputClassName={InputClassName}
     TagClassName={TagClassName}
     SuggestionListClassName={SuggestionListClassName}
     SuggestionClassName={SuggestionClassName}
+    SuggestionsLoaderClassName={SuggestionsLoaderClassName}
   />;
 
 InputTagsContainer.propTypes = {
@@ -47,17 +53,20 @@ InputTagsContainer.propTypes = {
   TagImplementation: React.PropTypes.func,
   SuggestionListImplementation: React.PropTypes.func,
   SuggestionImplementation: React.PropTypes.func,
+  SuggestionsLoaderImplementation: React.PropTypes.func,
   tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
   handleUpdateTags: React.PropTypes.func.isRequired,
   inputPlaceholder: React.PropTypes.string,
   suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
   handleUpdateSuggestions: React.PropTypes.func,
   getSuggestionValue: React.PropTypes.func,
+  suggestionsAreLoading: React.PropTypes.bool,
   InputTagsClassName: React.PropTypes.string,
   InputClassName: React.PropTypes.string,
   TagClassName: React.PropTypes.string,
   SuggestionListClassName: React.PropTypes.string,
   SuggestionClassName: React.PropTypes.string,
+  SuggestionsLoaderClassName: React.PropTypes.string,
 };
 
 InputTagsContainer.defaultProps = {
