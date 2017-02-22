@@ -1,6 +1,9 @@
 import React from 'react';
 
 import { Suggestion } from '../interface/Suggestion.jsx';
+import { defaultClassNamePrefix } from './util';
+
+export const SuggestionListClassNameDefault = `${defaultClassNamePrefix}-suggestion-list`;
 
 /* eslint-disable react/prefer-stateless-function */
 export class SuggestionListDefault extends React.Component {
@@ -11,6 +14,8 @@ export class SuggestionListDefault extends React.Component {
     handleHighlight: React.PropTypes.func.isRequired,
     handleSelect: React.PropTypes.func.isRequired,
     getSuggestionValue: React.PropTypes.func.isRequired,
+    SuggestionListClassName: React.PropTypes.string,
+    SuggestionClassName: React.PropTypes.string,
   }
 
   render() {
@@ -21,9 +26,11 @@ export class SuggestionListDefault extends React.Component {
       getSuggestionValue,
       handleHighlight,
       handleSelect,
+      SuggestionListClassName,
+      SuggestionClassName,
     } = this.props;
     return (
-      <ul>
+      <ul className={SuggestionListClassName}>
         {suggestions.map((suggestion, index) => {
           const isHighlighted = highlightedIndex === index;
           return (
@@ -34,6 +41,7 @@ export class SuggestionListDefault extends React.Component {
               isHighlighted={isHighlighted}
               handleHighlight={() => handleHighlight(index)}
               handleSelect={() => handleSelect(getSuggestionValue(suggestion))}
+              SuggestionClassName={SuggestionClassName}
             />
           );
         })}

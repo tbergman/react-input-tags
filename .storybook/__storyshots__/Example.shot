@@ -1,5 +1,6 @@
 exports[`custom suggestion`] = `
-<div>
+<div
+  className="react-input-tags-input-tags">
   <div>
     <span>
       <span
@@ -15,6 +16,7 @@ exports[`custom suggestion`] = `
         Add tag
       </span>
       <input
+        className="react-input-tags-input"
         id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
@@ -28,7 +30,8 @@ exports[`custom suggestion`] = `
 `;
 
 exports[`custom tag`] = `
-<div>
+<div
+  className="react-input-tags-input-tags">
   <div>
     <span>
       <span
@@ -44,6 +47,7 @@ exports[`custom tag`] = `
         
       </span>
       <input
+        className="react-input-tags-input"
         id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
@@ -57,7 +61,8 @@ exports[`custom tag`] = `
 `;
 
 exports[`local suggestions`] = `
-<div>
+<div
+  className="react-input-tags-input-tags">
   <div>
     <span>
       <span
@@ -73,6 +78,7 @@ exports[`local suggestions`] = `
         Add tag
       </span>
       <input
+        className="react-input-tags-input"
         id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
@@ -86,7 +92,8 @@ exports[`local suggestions`] = `
 `;
 
 exports[`no suggestions`] = `
-<div>
+<div
+  className="react-input-tags-input-tags">
   <div>
     <span>
       <span
@@ -102,6 +109,7 @@ exports[`no suggestions`] = `
         
       </span>
       <input
+        className="react-input-tags-input"
         id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}

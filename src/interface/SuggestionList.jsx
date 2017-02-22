@@ -10,6 +10,8 @@ export const SuggestionList = ({
   getSuggestionValue,
   handleSelect,
   handleHighlight,
+  SuggestionListClassName,
+  SuggestionClassName,
 }) =>
   <SuggestionListImplementation
     SuggestionImplementation={SuggestionImplementation}
@@ -18,6 +20,8 @@ export const SuggestionList = ({
     handleHighlight={handleHighlight}
     handleSelect={handleSelect}
     getSuggestionValue={getSuggestionValue}
+    SuggestionListClassName={SuggestionListClassName}
+    SuggestionClassName={SuggestionClassName}
   />;
 
 SuggestionList.propTypes = {
@@ -28,6 +32,8 @@ SuggestionList.propTypes = {
   handleHighlight: React.PropTypes.func.isRequired,
   handleSelect: React.PropTypes.func.isRequired,
   getSuggestionValue: React.PropTypes.func.isRequired,
+  SuggestionListClassName: React.PropTypes.string,
+  SuggestionClassName: React.PropTypes.string,
 };
 
 SuggestionList.defaultProps = {

@@ -1,5 +1,6 @@
 exports[`show placeholder by rendering`] = `
-<div>
+<div
+  className="react-input-tags-input-tags">
   <div>
     <span>
       <span
@@ -15,6 +16,7 @@ exports[`show placeholder by rendering`] = `
         Add Tag
       </span>
       <input
+        className="react-input-tags-input"
         id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
@@ -28,9 +30,11 @@ exports[`show placeholder by rendering`] = `
 `;
 
 exports[`show tags by rendering`] = `
-<div>
+<div
+  className="react-input-tags-input-tags">
   <div>
     <span
+      className="react-input-tags-tag"
       onDoubleClick={[Function]}>
       <span>
         apple
@@ -41,6 +45,7 @@ exports[`show tags by rendering`] = `
       </button>
     </span>
     <span
+      className="react-input-tags-tag"
       onDoubleClick={[Function]}>
       <span>
         banana
@@ -51,6 +56,7 @@ exports[`show tags by rendering`] = `
       </button>
     </span>
     <span
+      className="react-input-tags-tag"
       onDoubleClick={[Function]}>
       <span>
         cherry
@@ -74,6 +80,7 @@ exports[`show tags by rendering`] = `
         
       </span>
       <input
+        className="react-input-tags-input"
         id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
@@ -87,7 +94,8 @@ exports[`show tags by rendering`] = `
 `;
 
 exports[`update suggestions by typing in input`] = `
-<div>
+<div
+  className="react-input-tags-input-tags">
   <div>
     <span>
       <span
@@ -103,6 +111,7 @@ exports[`update suggestions by typing in input`] = `
         
       </span>
       <input
+        className="react-input-tags-input"
         id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
@@ -116,9 +125,11 @@ exports[`update suggestions by typing in input`] = `
 `;
 
 exports[`update tags by creating, editing and deleting`] = `
-<div>
+<div
+  className="react-input-tags-input-tags">
   <div>
     <span
+      className="react-input-tags-tag"
       onDoubleClick={[Function]}>
       <span>
         apple
@@ -142,6 +153,7 @@ exports[`update tags by creating, editing and deleting`] = `
         
       </span>
       <input
+        className="react-input-tags-input"
         id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}

@@ -13,6 +13,7 @@ exports[`handle blur by clicking on input and clicking something else`] = `
     
   </span>
   <input
+    className="react-input-tags-input"
     id="inputNode"
     onBlur={[Function]}
     onChange={[Function]}
@@ -38,6 +39,7 @@ exports[`handle change by typing in input`] = `
     
   </span>
   <input
+    className="react-input-tags-input"
     id="inputNode"
     onBlur={[Function]}
     onChange={[Function]}
@@ -63,6 +65,7 @@ exports[`handle keydown by typing in input`] = `
     
   </span>
   <input
+    className="react-input-tags-input"
     id="inputNode"
     onBlur={[Function]}
     onChange={[Function]}
@@ -88,6 +91,7 @@ exports[`show empty placeholder by rendering`] = `
     
   </span>
   <input
+    className="react-input-tags-input"
     id="inputNode"
     onBlur={[Function]}
     onChange={[Function]}
@@ -113,6 +117,7 @@ exports[`show non empty placeholder by rendering`] = `
     m
   </span>
   <input
+    className="react-input-tags-input"
     id="inputNode"
     onBlur={[Function]}
     onChange={[Function]}
