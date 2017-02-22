@@ -54,6 +54,11 @@ Both the high-level `InputTagsContainer` component or the low-level `InputTags` 
 |`TagImplementation`|Function||A function called when Tag component is to be rendered.|
 |`SuggestionListImplementation`|Function||A function called when SuggestionList component is to be rendered.|
 |`SuggestionImplementation`|Function||A function called when Suggestion component is to be rendered.|
+|`InputTagsClassName`|String||A class for the InputTags component.|
+|`InputClassName`|String||A class for the Input component.|
+|`TagClassName`|String||A class for the Tag component.|
+|`SuggestionListClassName`|String||A class for the SuggestionList component.|
+|`SuggestionClassName`|String||A class for the Suggestion component.|
 
 ### [InputTags](src/interface/InputTags.jsx)
 |Property|Type|Required|Description|
@@ -71,3 +76,8 @@ Both the high-level `InputTagsContainer` component or the low-level `InputTags` 
 |`TagImplementation`|Function||A function called when Tag component is to be rendered.|
 |`SuggestionListImplementation`|Function||A function called when SuggestionList component is to be rendered.|
 |`SuggestionImplementation`|Function||A function called when Suggestion component is to be rendered.|
+|`InputTagsClassName`|String||A class for the InputTags component.|
+|`InputClassName`|String||A class for the Input component.|
+|`TagClassName`|String||A class for the Tag component.|
+|`SuggestionListClassName`|String||A class for the SuggestionList component.|
+|`SuggestionClassName`|String||A class for the Suggestion component.|
