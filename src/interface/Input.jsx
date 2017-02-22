@@ -6,6 +6,7 @@ export const Input = ({
   InputImplementation,
   value,
   placeholder,
+  tabIndex,
   handleOnChange,
   handleOnBlur,
   handleOnKeyDown,
@@ -13,6 +14,7 @@ export const Input = ({
 }) =>
   <InputImplementation
     value={value}
+    tabIndex={tabIndex}
     placeholder={placeholder}
     handleOnChange={handleOnChange}
     handleOnBlur={handleOnBlur}
@@ -27,6 +29,7 @@ Input.propTypes = {
   handleOnBlur: React.PropTypes.func.isRequired,
   handleOnKeyDown: React.PropTypes.func.isRequired,
   placeholder: React.PropTypes.string,
+  tabIndex: React.PropTypes.number,
   InputClassName: React.PropTypes.string,
 };
 

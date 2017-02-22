@@ -25,6 +25,7 @@ export class InputDefault extends React.Component {
     handleOnBlur: React.PropTypes.func.isRequired,
     handleOnKeyDown: React.PropTypes.func.isRequired,
     placeholder: React.PropTypes.string.isRequired,
+    tabIndex: React.PropTypes.number,
     InputClassName: React.PropTypes.string,
   }
 
@@ -60,6 +61,7 @@ export class InputDefault extends React.Component {
     const {
       value,
       placeholder,
+      tabIndex,
       handleOnChange,
       handleOnBlur,
       handleOnKeyDown,
@@ -89,6 +91,7 @@ export class InputDefault extends React.Component {
           type={'text'}
           value={value}
           placeholder={placeholder}
+          tabIndex={tabIndex}
           onChange={handleOnChange}
           onBlur={handleOnBlur}
           onKeyDown={handleOnKeyDown}

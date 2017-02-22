@@ -7,12 +7,14 @@ export const Tag = ({
   value,
   handleEdit,
   handleRemove,
+  handleDoneEditing,
   TagClassName,
 }) =>
   <TagImplementation
     value={value}
     handleEdit={handleEdit}
     handleRemove={handleRemove}
+    handleDoneEditing={handleDoneEditing}
     TagClassName={TagClassName}
   />;
 
@@ -21,6 +23,7 @@ Tag.propTypes = {
   value: React.PropTypes.string.isRequired,
   handleEdit: React.PropTypes.func.isRequired,
   handleRemove: React.PropTypes.func.isRequired,
+  handleDoneEditing: React.PropTypes.func,
   TagClassName: React.PropTypes.string,
 };
 

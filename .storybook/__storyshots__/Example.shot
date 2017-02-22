@@ -22,6 +22,7 @@ exports[`custom suggestion`] = `
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder="Add tag"
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>
@@ -53,6 +54,7 @@ exports[`custom tag`] = `
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder=""
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>
@@ -84,6 +86,7 @@ exports[`local suggestions`] = `
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder="Add tag"
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>
@@ -115,6 +118,7 @@ exports[`no suggestions`] = `
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder=""
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>
@@ -146,6 +150,7 @@ exports[`remote suggestions`] = `
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder="Add tag"
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>

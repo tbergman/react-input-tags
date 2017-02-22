@@ -104,7 +104,9 @@ export class InputTagsDefault extends React.Component {
     handleInsert: React.PropTypes.func.isRequired,
     handleEdit: React.PropTypes.func.isRequired,
     handleRemove: React.PropTypes.func.isRequired,
+    handleDoneEditing: React.PropTypes.func,
     inputPlaceholder: React.PropTypes.string,
+    inputTabIndex: React.PropTypes.number,
     suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleUpdateSuggestions: React.PropTypes.func.isRequired,
     getSuggestionValue: React.PropTypes.func.isRequired,
@@ -242,7 +244,9 @@ export class InputTagsDefault extends React.Component {
       SuggestionImplementation,
       SuggestionsLoaderImplementation,
       tags,
+      handleDoneEditing,
       inputPlaceholder,
+      inputTabIndex,
       suggestions,
       getSuggestionValue,
       suggestionsAreLoading,
@@ -266,6 +270,7 @@ export class InputTagsDefault extends React.Component {
               value={tag}
               handleEdit={newValue => this.editTag(tags, index, newValue)}
               handleRemove={() => this.removeTag(tags, index)}
+              handleDoneEditing={handleDoneEditing}
               TagClassName={TagClassName}
             />
           )}
@@ -273,6 +278,7 @@ export class InputTagsDefault extends React.Component {
             InputImplementation={InputImplementation}
             value={inputValue}
             placeholder={inputPlaceholder}
+            tabIndex={inputTabIndex}
             handleOnChange={this.handleInputOnChange}
             handleOnBlur={this.handleInputOnBlur}
             handleOnKeyDown={this.handleInputOnKeyDown}

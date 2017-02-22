@@ -29,6 +29,17 @@ storiesOf('Input', module)
       />
     )
   })
+  .add('disable tabbing to input by rendering', () => {
+    return (
+      <Input
+        value={emptyString}
+        handleOnChange={noop}
+        handleOnBlur={noop}
+        handleOnKeyDown={noop}
+        tabIndex={-1}
+      />
+    )
+  })
   .add('handle change by typing in input', () => {
     return (
       <Input

@@ -12,7 +12,9 @@ export const InputTagsContainer = ({
   SuggestionsLoaderImplementation,
   tags,
   handleUpdateTags,
+  handleDoneEditing,
   inputPlaceholder,
+  inputTabIndex,
   suggestions,
   handleUpdateSuggestions,
   getSuggestionValue,
@@ -33,7 +35,9 @@ export const InputTagsContainer = ({
     SuggestionsLoaderImplementation={SuggestionsLoaderImplementation}
     tags={tags}
     handleUpdateTags={handleUpdateTags}
+    handleDoneEditing={handleDoneEditing}
     inputPlaceholder={inputPlaceholder}
+    inputTabIndex={inputTabIndex}
     suggestions={suggestions}
     handleUpdateSuggestions={handleUpdateSuggestions}
     getSuggestionValue={getSuggestionValue}
@@ -56,7 +60,9 @@ InputTagsContainer.propTypes = {
   SuggestionsLoaderImplementation: React.PropTypes.func,
   tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
   handleUpdateTags: React.PropTypes.func.isRequired,
+  handleDoneEditing: React.PropTypes.func,
   inputPlaceholder: React.PropTypes.string,
+  inputTabIndex: React.PropTypes.number,
   suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
   handleUpdateSuggestions: React.PropTypes.func,
   getSuggestionValue: React.PropTypes.func,

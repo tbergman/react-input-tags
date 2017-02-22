@@ -39,6 +39,7 @@ storiesOf('Tag', module)
         value={item}
         handleEdit={noop}
         handleRemove={noop}
+        handleDoneEditing={action('handleDoneEditing')}
       />
     )
   })
@@ -48,6 +49,7 @@ storiesOf('Tag', module)
         value={item}
         handleEdit={noop}
         handleRemove={noop}
+        handleDoneEditing={action('handleDoneEditing')}
       />
     )
   })
@@ -57,6 +59,7 @@ storiesOf('Tag', module)
         value={item}
         handleEdit={noop}
         handleRemove={noop}
+        handleDoneEditing={action('handleDoneEditing')}
       />
     )
   });
