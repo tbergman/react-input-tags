@@ -15,9 +15,9 @@
     "prebuild": "npm run test && npm run remove-dir && npm run create-dir",
     "remove-dir": "rm -rf dist",
     "create-dir": "mkdir -p dist",
-    "build": "npm run build-lib && npm run build-web",
+    "build": "npm run build-lib",
     "build-lib": "browserify -s InputTags -t babelify src/index.js -o dist/react-input-tags.js",
-    "build-web": "build-storybook -c .storybook -o docs",
+    "build-docs": "build-storybook -c .storybook -o docs",
     "predeploy": "npm run build",
     "deploy": "npm publish && git push --follow-tags"
   },

@@ -18,7 +18,7 @@ npm run build
 
 ## Deploy
 ```
+npm run build-docs
 npm version [patch | minor | major]
-...
 npm run deploy
 ```
