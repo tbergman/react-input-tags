@@ -123,7 +123,32 @@ exports[`no suggestions`] = `
 `;
 
 exports[`remote suggestions`] = `
-<div>
-  TODO
+<div
+  className="react-input-tags-input-tags">
+  <div>
+    <span>
+      <span
+        id="mirrorNode"
+        style={
+          Object {
+            "overflow": "scroll",
+            "position": "absolute",
+            "visibility": "hidden",
+            "whiteSpace": "pre",
+          }
+        }>
+        Add tag
+      </span>
+      <input
+        className="react-input-tags-input"
+        id="inputNode"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        placeholder="Add tag"
+        type="text"
+        value="" />
+    </span>
+  </div>
 </div>
 `;
