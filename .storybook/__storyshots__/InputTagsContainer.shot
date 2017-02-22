@@ -35,7 +35,7 @@ exports[`show tags by rendering`] = `
   <div>
     <span
       className="react-input-tags-tag"
-      onDoubleClick={[Function]}>
+      onClick={[Function]}>
       <span>
         apple
       </span>
@@ -46,7 +46,7 @@ exports[`show tags by rendering`] = `
     </span>
     <span
       className="react-input-tags-tag"
-      onDoubleClick={[Function]}>
+      onClick={[Function]}>
       <span>
         banana
       </span>
@@ -57,7 +57,7 @@ exports[`show tags by rendering`] = `
     </span>
     <span
       className="react-input-tags-tag"
-      onDoubleClick={[Function]}>
+      onClick={[Function]}>
       <span>
         cherry
       </span>
@@ -130,7 +130,7 @@ exports[`update tags by creating, editing and deleting`] = `
   <div>
     <span
       className="react-input-tags-tag"
-      onDoubleClick={[Function]}>
+      onClick={[Function]}>
       <span>
         apple
       </span>

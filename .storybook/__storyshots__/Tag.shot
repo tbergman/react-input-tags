@@ -1,7 +1,7 @@
-exports[`edit item by double clicking and typing`] = `
+exports[`edit item by clicking and typing`] = `
 <span
   className="react-input-tags-tag"
-  onDoubleClick={[Function]}>
+  onClick={[Function]}>
   <span>
     apple
   </span>
@@ -15,7 +15,7 @@ exports[`edit item by double clicking and typing`] = `
 exports[`exit edit mode by focus leaving textarea`] = `
 <span
   className="react-input-tags-tag"
-  onDoubleClick={[Function]}>
+  onClick={[Function]}>
   <span>
     apple
   </span>
@@ -29,7 +29,7 @@ exports[`exit edit mode by focus leaving textarea`] = `
 exports[`exit edit mode by pressing enter`] = `
 <span
   className="react-input-tags-tag"
-  onDoubleClick={[Function]}>
+  onClick={[Function]}>
   <span>
     apple
   </span>
@@ -43,7 +43,7 @@ exports[`exit edit mode by pressing enter`] = `
 exports[`exit edit mode by pressing tab`] = `
 <span
   className="react-input-tags-tag"
-  onDoubleClick={[Function]}>
+  onClick={[Function]}>
   <span>
     apple
   </span>
@@ -54,10 +54,10 @@ exports[`exit edit mode by pressing tab`] = `
 </span>
 `;
 
-exports[`focus and select text by double clicking to enter edit mode`] = `
+exports[`focus and select text by clicking to enter edit mode`] = `
 <span
   className="react-input-tags-tag"
-  onDoubleClick={[Function]}>
+  onClick={[Function]}>
   <span>
     apple
   </span>
@@ -71,7 +71,7 @@ exports[`focus and select text by double clicking to enter edit mode`] = `
 exports[`remove item by clicking button`] = `
 <span
   className="react-input-tags-tag"
-  onDoubleClick={[Function]}>
+  onClick={[Function]}>
   <span>
     apple
   </span>

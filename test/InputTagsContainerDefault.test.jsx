@@ -52,12 +52,12 @@ describe('<InputTagsContainerDefault />', () => {
     });
 
     describe('edit tag', () => {
-      context('when double click tag', () => {
+      context('when click tag', () => {
         const editTagIndex = 0;
         const newValue = 'cool';
 
         beforeEach(() => {
-          inputTagsContainerWrapper.find('span').at(editTagIndex).simulate('dblclick');
+          inputTagsContainerWrapper.find('span').at(editTagIndex).simulate('click');
         });
 
         context('when text area is changed to non empty string', () => {

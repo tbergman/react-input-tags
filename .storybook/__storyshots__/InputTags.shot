@@ -35,7 +35,7 @@ exports[`create token by typing non empty string and pressing comma`] = `
   <div>
     <span
       className="react-input-tags-tag"
-      onDoubleClick={[Function]}>
+      onClick={[Function]}>
       <span>
         insert another
       </span>
@@ -77,7 +77,7 @@ exports[`create token by typing non empty string and pressing enter`] = `
   <div>
     <span
       className="react-input-tags-tag"
-      onDoubleClick={[Function]}>
+      onClick={[Function]}>
       <span>
         insert another
       </span>
@@ -150,7 +150,7 @@ exports[`create token by typing non empty string and pressing tab`] = `
   <div>
     <span
       className="react-input-tags-tag"
-      onDoubleClick={[Function]}>
+      onClick={[Function]}>
       <span>
         insert another
       </span>
@@ -192,7 +192,7 @@ exports[`delete token by backspacing when input is empty`] = `
   <div>
     <span
       className="react-input-tags-tag"
-      onDoubleClick={[Function]}>
+      onClick={[Function]}>
       <span>
         delete me
       </span>
@@ -234,7 +234,7 @@ exports[`delete token by clicking delete button`] = `
   <div>
     <span
       className="react-input-tags-tag"
-      onDoubleClick={[Function]}>
+      onClick={[Function]}>
       <span>
         delete me
       </span>
@@ -270,13 +270,13 @@ exports[`delete token by clicking delete button`] = `
 </div>
 `;
 
-exports[`edit token by double clicking on tag and typing`] = `
+exports[`edit token by clicking on tag and typing`] = `
 <div
   className="react-input-tags-input-tags">
   <div>
     <span
       className="react-input-tags-tag"
-      onDoubleClick={[Function]}>
+      onClick={[Function]}>
       <span>
         edit me
       </span>
