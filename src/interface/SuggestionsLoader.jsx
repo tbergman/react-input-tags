@@ -14,7 +14,7 @@ export const SuggestionsLoader = ({
 
 SuggestionsLoader.propTypes = {
   SuggestionsLoaderImplementation: React.PropTypes.func.isRequired,
-  suggestionsAreLoading: React.PropTypes.bool.isRequired,
+  suggestionsAreLoading: React.PropTypes.bool,
   SuggestionsLoaderClassName: React.PropTypes.string,
 };
 
