@@ -1,6 +1,6 @@
 {
   "name": "react-input-tags",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "description": "React component for inputting tags",
   "main": "dist/react-input-tags.js",
   "scripts": {
@@ -13,8 +13,8 @@
     "test-storyshots": "storyshots",
     "test-storyshots-update": "storyshots -u",
     "prebuild": "npm run test && npm run remove-dir && npm run create-dir",
-    "remove-dirs": "rm -rf dist",
-    "create-dirs": "mkdir -p dist",
+    "remove-dir": "rm -rf dist",
+    "create-dir": "mkdir -p dist",
     "build": "npm run build-lib && npm run build-web",
     "build-lib": "browserify -s InputTags -t babelify src/index.js -o dist/react-input-tags.js",
     "build-web": "build-storybook -c .storybook -o docs",
