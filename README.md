@@ -44,7 +44,9 @@ Both the high-level `InputTagsContainer` component or the low-level `InputTags` 
 |--------|----|:-----:|-----------|
 |`tags`|Array|✓|An array of data that represents the value of the tags|
 |`handleUpdateTags`|Function|✓|A function called when the value of tags changes, passes the tags value as an argument.|
+|`handleDoneEditing`|Function|✓|A function called when a tag has exited edit mode.|
 |`inputPlaceholder`|String||The placeholder to populate the input with|
+|`inputTabIndex`|Number||The tab index for the input|
 |`suggestions`|Array||An array of data that represents the value of the suggestions|
 |`handleUpdateSuggestions`|Function||A function called when the value of input changes, passes the input value as an argument.|
 |`getSuggestionValue`|Function||A function called when a suggestion is selected, passes the suggestion value as an argument.|
@@ -70,7 +72,9 @@ Both the high-level `InputTagsContainer` component or the low-level `InputTags` 
 |`handleInsert`|Function|✓|A function called when a tag will be inserted, passes the current tags value and new tag value as arguments.|
 |`handleEdit`|Function|✓|A function called when a tag will be edited, passes the current tags value, index of the tag to be edited, and the new tag value as arguments.|
 |`handleRemove`|Function|✓|A function called when a tag will be removed, passes the current tags value and index of the tag to be removed as arguments.|
+|`handleDoneEditing`|Function|✓|A function called when a tag has exited edit mode.|
 |`inputPlaceholder`|String||The placeholder to populate the input with|
+|`inputTabIndex`|Number||The tab index for the input|
 |`suggestions`|Array||An array of data that represents the value of the suggestions|
 |`handleUpdateSuggestions`|Function||A function called when the value of input changes, passes the input value as an argument.|
 |`getSuggestionValue`|Function||A function called when a suggestion is selected, passes the suggestion value as an argument.|
