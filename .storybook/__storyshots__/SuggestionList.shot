@@ -1,21 +1,22 @@
 exports[`highlight suggestion by mousing over suggestion`] = `
-<ul>
+<ul
+  className={undefined}>
   <li
-    className="highlighted"
+    className="react-input-tags-suggestion highlighted"
     onClick={[Function]}
     onMouseDown={[Function]}
     onMouseOver={[Function]}>
     apple
   </li>
   <li
-    className=""
+    className="react-input-tags-suggestion "
     onClick={[Function]}
     onMouseDown={[Function]}
     onMouseOver={[Function]}>
     banana
   </li>
   <li
-    className=""
+    className="react-input-tags-suggestion "
     onClick={[Function]}
     onMouseDown={[Function]}
     onMouseOver={[Function]}>
@@ -25,23 +26,24 @@ exports[`highlight suggestion by mousing over suggestion`] = `
 `;
 
 exports[`select suggestion by clicking suggestion`] = `
-<ul>
+<ul
+  className={undefined}>
   <li
-    className="highlighted"
+    className="react-input-tags-suggestion highlighted"
     onClick={[Function]}
     onMouseDown={[Function]}
     onMouseOver={[Function]}>
     apple
   </li>
   <li
-    className=""
+    className="react-input-tags-suggestion "
     onClick={[Function]}
     onMouseDown={[Function]}
     onMouseOver={[Function]}>
     banana
   </li>
   <li
-    className=""
+    className="react-input-tags-suggestion "
     onClick={[Function]}
     onMouseDown={[Function]}
     onMouseOver={[Function]}>
@@ -51,23 +53,24 @@ exports[`select suggestion by clicking suggestion`] = `
 `;
 
 exports[`show highlighted suggestion by rendering`] = `
-<ul>
+<ul
+  className={undefined}>
   <li
-    className="highlighted"
+    className="react-input-tags-suggestion highlighted"
     onClick={[Function]}
     onMouseDown={[Function]}
     onMouseOver={[Function]}>
     apple
   </li>
   <li
-    className=""
+    className="react-input-tags-suggestion "
     onClick={[Function]}
     onMouseDown={[Function]}
     onMouseOver={[Function]}>
     banana
   </li>
   <li
-    className=""
+    className="react-input-tags-suggestion "
     onClick={[Function]}
     onMouseDown={[Function]}
     onMouseOver={[Function]}>

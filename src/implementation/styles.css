@@ -1,0 +1,32 @@
+.react-input-tags-input-tags {
+  max-width: 200px;
+}
+
+.react-input-tags-input input {
+  /* input element does * not * inherit font styling by default */
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.react-input-tags-tag {
+  word-wrap: break-word;
+  background-color: black;
+  color: white;
+}
+
+.react-input-tags-tag textarea {
+  resize: none;
+}
+
+.react-input-tags-suggestion-list {
+  position: absolute;
+}
+
+.react-input-tags-suggestion {
+  cursor: pointer;
+}
+
+.react-input-tags-suggestion.highlighted {
+  background-color: lightgray;
+  color: black;
+}

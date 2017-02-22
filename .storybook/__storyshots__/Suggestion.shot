@@ -1,6 +1,6 @@
 exports[`highlight suggestion by mousing over suggestion`] = `
 <li
-  className=""
+  className="react-input-tags-suggestion "
   onClick={[Function]}
   onMouseDown={[Function]}
   onMouseOver={[Function]}>
@@ -10,7 +10,7 @@ exports[`highlight suggestion by mousing over suggestion`] = `
 
 exports[`select suggestion by clicking suggestion`] = `
 <li
-  className="highlighted"
+  className="react-input-tags-suggestion highlighted"
   onClick={[Function]}
   onMouseDown={[Function]}
   onMouseOver={[Function]}>

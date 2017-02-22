@@ -1,5 +1,6 @@
 exports[`create token by typing non empty string and clicking suggestion`] = `
-<div>
+<div
+  className="react-input-tags-input-tags">
   <div>
     <span>
       <span
@@ -15,6 +16,7 @@ exports[`create token by typing non empty string and clicking suggestion`] = `
         
       </span>
       <input
+        className="react-input-tags-input"
         id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
@@ -28,9 +30,11 @@ exports[`create token by typing non empty string and clicking suggestion`] = `
 `;
 
 exports[`create token by typing non empty string and pressing comma`] = `
-<div>
+<div
+  className="react-input-tags-input-tags">
   <div>
     <span
+      className="react-input-tags-tag"
       onDoubleClick={[Function]}>
       <span>
         insert another
@@ -54,6 +58,7 @@ exports[`create token by typing non empty string and pressing comma`] = `
         
       </span>
       <input
+        className="react-input-tags-input"
         id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
@@ -67,9 +72,11 @@ exports[`create token by typing non empty string and pressing comma`] = `
 `;
 
 exports[`create token by typing non empty string and pressing enter`] = `
-<div>
+<div
+  className="react-input-tags-input-tags">
   <div>
     <span
+      className="react-input-tags-tag"
       onDoubleClick={[Function]}>
       <span>
         insert another
@@ -93,6 +100,7 @@ exports[`create token by typing non empty string and pressing enter`] = `
         
       </span>
       <input
+        className="react-input-tags-input"
         id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
@@ -106,7 +114,8 @@ exports[`create token by typing non empty string and pressing enter`] = `
 `;
 
 exports[`create token by typing non empty string and pressing enter for highlighted suggestion`] = `
-<div>
+<div
+  className="react-input-tags-input-tags">
   <div>
     <span>
       <span
@@ -122,6 +131,7 @@ exports[`create token by typing non empty string and pressing enter for highligh
         
       </span>
       <input
+        className="react-input-tags-input"
         id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
@@ -135,9 +145,11 @@ exports[`create token by typing non empty string and pressing enter for highligh
 `;
 
 exports[`create token by typing non empty string and pressing tab`] = `
-<div>
+<div
+  className="react-input-tags-input-tags">
   <div>
     <span
+      className="react-input-tags-tag"
       onDoubleClick={[Function]}>
       <span>
         insert another
@@ -161,6 +173,7 @@ exports[`create token by typing non empty string and pressing tab`] = `
         
       </span>
       <input
+        className="react-input-tags-input"
         id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
@@ -174,9 +187,11 @@ exports[`create token by typing non empty string and pressing tab`] = `
 `;
 
 exports[`delete token by backspacing when input is empty`] = `
-<div>
+<div
+  className="react-input-tags-input-tags">
   <div>
     <span
+      className="react-input-tags-tag"
       onDoubleClick={[Function]}>
       <span>
         delete me
@@ -200,6 +215,7 @@ exports[`delete token by backspacing when input is empty`] = `
         
       </span>
       <input
+        className="react-input-tags-input"
         id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
@@ -213,9 +229,11 @@ exports[`delete token by backspacing when input is empty`] = `
 `;
 
 exports[`delete token by clicking delete button`] = `
-<div>
+<div
+  className="react-input-tags-input-tags">
   <div>
     <span
+      className="react-input-tags-tag"
       onDoubleClick={[Function]}>
       <span>
         delete me
@@ -239,6 +257,7 @@ exports[`delete token by clicking delete button`] = `
         
       </span>
       <input
+        className="react-input-tags-input"
         id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
@@ -252,9 +271,11 @@ exports[`delete token by clicking delete button`] = `
 `;
 
 exports[`edit token by double clicking on tag and typing`] = `
-<div>
+<div
+  className="react-input-tags-input-tags">
   <div>
     <span
+      className="react-input-tags-tag"
       onDoubleClick={[Function]}>
       <span>
         edit me
@@ -278,6 +299,7 @@ exports[`edit token by double clicking on tag and typing`] = `
         
       </span>
       <input
+        className="react-input-tags-input"
         id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
@@ -291,7 +313,8 @@ exports[`edit token by double clicking on tag and typing`] = `
 `;
 
 exports[`hide suggestions list by typing non empty string and pressing escape`] = `
-<div>
+<div
+  className="react-input-tags-input-tags">
   <div>
     <span>
       <span
@@ -307,6 +330,7 @@ exports[`hide suggestions list by typing non empty string and pressing escape`] 
         
       </span>
       <input
+        className="react-input-tags-input"
         id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
@@ -320,7 +344,8 @@ exports[`hide suggestions list by typing non empty string and pressing escape`] 
 `;
 
 exports[`highlight next suggestion by typing non empty string and pressing down`] = `
-<div>
+<div
+  className="react-input-tags-input-tags">
   <div>
     <span>
       <span
@@ -336,6 +361,7 @@ exports[`highlight next suggestion by typing non empty string and pressing down`
         
       </span>
       <input
+        className="react-input-tags-input"
         id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
@@ -349,7 +375,8 @@ exports[`highlight next suggestion by typing non empty string and pressing down`
 `;
 
 exports[`highlight previous suggestion by typing non empty string and pressing up`] = `
-<div>
+<div
+  className="react-input-tags-input-tags">
   <div>
     <span>
       <span
@@ -365,6 +392,7 @@ exports[`highlight previous suggestion by typing non empty string and pressing u
         
       </span>
       <input
+        className="react-input-tags-input"
         id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
@@ -378,7 +406,8 @@ exports[`highlight previous suggestion by typing non empty string and pressing u
 `;
 
 exports[`show input placeholder by rendering`] = `
-<div>
+<div
+  className="react-input-tags-input-tags">
   <div>
     <span>
       <span
@@ -394,6 +423,7 @@ exports[`show input placeholder by rendering`] = `
         Add Tag
       </span>
       <input
+        className="react-input-tags-input"
         id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
@@ -407,7 +437,8 @@ exports[`show input placeholder by rendering`] = `
 `;
 
 exports[`show suggestions list by typing non empty string`] = `
-<div>
+<div
+  className="react-input-tags-input-tags">
   <div>
     <span>
       <span
@@ -423,6 +454,7 @@ exports[`show suggestions list by typing non empty string`] = `
         
       </span>
       <input
+        className="react-input-tags-input"
         id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}

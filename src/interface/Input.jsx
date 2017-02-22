@@ -9,6 +9,7 @@ export const Input = ({
   handleOnChange,
   handleOnBlur,
   handleOnKeyDown,
+  InputClassName,
 }) =>
   <InputImplementation
     value={value}
@@ -16,6 +17,7 @@ export const Input = ({
     handleOnChange={handleOnChange}
     handleOnBlur={handleOnBlur}
     handleOnKeyDown={handleOnKeyDown}
+    InputClassName={InputClassName}
   />;
 
 Input.propTypes = {
@@ -25,6 +27,7 @@ Input.propTypes = {
   handleOnBlur: React.PropTypes.func.isRequired,
   handleOnKeyDown: React.PropTypes.func.isRequired,
   placeholder: React.PropTypes.string,
+  InputClassName: React.PropTypes.string,
 };
 
 Input.defaultProps = {
