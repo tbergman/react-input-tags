@@ -223,9 +223,9 @@ describe('<InputTagsDefault />', () => {
         );
       });
 
-      context('when token is double clicked', () => {
+      context('when token is clicked', () => {
         beforeEach(() => {
-          inputTagsWrapper.find('button').simulate('dblclick');
+          inputTagsWrapper.find('button').simulate('click');
         });
 
         it('should render a textarea', () => {

@@ -6,7 +6,7 @@ import { noop } from '../test/util';
 import { item } from '../test/mock';
 
 storiesOf('Tag', module)
-  .add('focus and select text by double clicking to enter edit mode', () => {
+  .add('focus and select text by clicking to enter edit mode', () => {
     return (
       <Tag
         value={item}
@@ -15,7 +15,7 @@ storiesOf('Tag', module)
       />
     )
   })
-  .add('edit item by double clicking and typing', () => {
+  .add('edit item by clicking and typing', () => {
     return (
       <Tag
         value={item}

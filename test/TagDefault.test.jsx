@@ -23,9 +23,9 @@ describe('<TagDefault />', () => {
   });
 
   describe('enter edit mode', () => {
-    context('when tag is double clicked', () => {
+    context('when tag is clicked', () => {
       beforeEach(() => {
-        tagWrapper.simulate('dblclick');
+        tagWrapper.simulate('click');
       });
 
       it('should set isEditing state to true', () => {
@@ -36,7 +36,7 @@ describe('<TagDefault />', () => {
 
   describe('exit edit mode', () => {
     beforeEach(() => {
-      tagWrapper.simulate('dblclick');
+      tagWrapper.simulate('click');
     });
 
     context('when focus leaves textarea', () => {
@@ -182,9 +182,9 @@ describe('<TagRead />', () => {
   });
 
   describe('enter edit mode', () => {
-    context('when tag is double clicked', () => {
+    context('when tag is clicked', () => {
       beforeEach(() => {
-        tagReadWrapper.simulate('dblclick');
+        tagReadWrapper.simulate('click');
       });
 
       it('should set isEditing state to true', () => {
