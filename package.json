@@ -1,6 +1,6 @@
 {
   "name": "react-input-tags",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "React component for inputting tags",
   "main": "dist/react-input-tags.js",
   "scripts": {
