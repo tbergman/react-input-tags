@@ -13,7 +13,9 @@ export const InputTags = ({
   handleInsert,
   handleEdit,
   handleRemove,
+  handleDoneEditing,
   inputPlaceholder,
+  inputTabIndex,
   suggestions,
   handleUpdateSuggestions,
   getSuggestionValue,
@@ -35,7 +37,9 @@ export const InputTags = ({
     handleInsert={handleInsert}
     handleEdit={handleEdit}
     handleRemove={handleRemove}
+    handleDoneEditing={handleDoneEditing}
     inputPlaceholder={inputPlaceholder}
+    inputTabIndex={inputTabIndex}
     suggestions={suggestions}
     handleUpdateSuggestions={handleUpdateSuggestions}
     getSuggestionValue={getSuggestionValue}
@@ -59,7 +63,9 @@ InputTags.propTypes = {
   handleInsert: React.PropTypes.func.isRequired,
   handleEdit: React.PropTypes.func.isRequired,
   handleRemove: React.PropTypes.func.isRequired,
+  handleDoneEditing: React.PropTypes.func,
   inputPlaceholder: React.PropTypes.string,
+  inputTabIndex: React.PropTypes.number,
   suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
   handleUpdateSuggestions: React.PropTypes.func,
   getSuggestionValue: React.PropTypes.func,

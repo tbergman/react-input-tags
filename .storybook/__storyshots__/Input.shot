@@ -19,6 +19,7 @@ exports[`handle blur by clicking on input and clicking something else`] = `
     onChange={[Function]}
     onKeyDown={[Function]}
     placeholder=""
+    tabIndex={undefined}
     type="text"
     value="" />
 </span>
@@ -45,6 +46,7 @@ exports[`handle change by typing in input`] = `
     onChange={[Function]}
     onKeyDown={[Function]}
     placeholder=""
+    tabIndex={undefined}
     type="text"
     value="" />
 </span>
@@ -71,6 +73,7 @@ exports[`handle keydown by typing in input`] = `
     onChange={[Function]}
     onKeyDown={[Function]}
     placeholder=""
+    tabIndex={undefined}
     type="text"
     value="" />
 </span>
@@ -97,6 +100,7 @@ exports[`show empty placeholder by rendering`] = `
     onChange={[Function]}
     onKeyDown={[Function]}
     placeholder=""
+    tabIndex={undefined}
     type="text"
     value="" />
 </span>
@@ -123,6 +127,7 @@ exports[`show non empty placeholder by rendering`] = `
     onChange={[Function]}
     onKeyDown={[Function]}
     placeholder="m"
+    tabIndex={undefined}
     type="text"
     value="" />
 </span>

@@ -33,7 +33,9 @@ export class InputTagsContainerDefault extends React.Component {
     SuggestionsLoaderImplementation: React.PropTypes.func,
     tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleUpdateTags: React.PropTypes.func.isRequired,
+    handleDoneEditing: React.PropTypes.func,
     inputPlaceholder: React.PropTypes.string,
+    inputTabIndex: React.PropTypes.number,
     suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
     handleUpdateSuggestions: React.PropTypes.func,
     getSuggestionValue: React.PropTypes.func,
@@ -82,7 +84,9 @@ export class InputTagsContainerDefault extends React.Component {
       SuggestionImplementation,
       SuggestionsLoaderImplementation,
       tags,
+      handleDoneEditing,
       inputPlaceholder,
+      inputTabIndex,
       suggestions,
       handleUpdateSuggestions,
       getSuggestionValue,
@@ -106,7 +110,9 @@ export class InputTagsContainerDefault extends React.Component {
         handleInsert={this.handleInsert}
         handleEdit={this.handleEdit}
         handleRemove={this.handleRemove}
+        handleDoneEditing={handleDoneEditing}
         inputPlaceholder={inputPlaceholder}
+        inputTabIndex={inputTabIndex}
         suggestions={suggestions}
         handleUpdateSuggestions={handleUpdateSuggestions}
         getSuggestionValue={getSuggestionValue}

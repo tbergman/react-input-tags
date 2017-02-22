@@ -5,6 +5,8 @@ import { enterKeyCode, tabKeyCode } from '../keyCodes';
 
 export const TagClassNameDefault = `${defaultClassNamePrefix}-tag`;
 
+export const handleDoneEditingDefault = () => {};
+
 const exitKeyCodesDefault = [
   enterKeyCode,
   tabKeyCode,
@@ -15,6 +17,7 @@ export class TagEdit extends React.Component {
     value: React.PropTypes.string.isRequired,
     handleEdit: React.PropTypes.func.isRequired,
     handleRemove: React.PropTypes.func.isRequired,
+    handleDoneEditing: React.PropTypes.func.isRequired,
     setIsEditing: React.PropTypes.func.isRequired,
     TagClassName: React.PropTypes.string,
     focusElement: React.PropTypes.func.isRequired,
@@ -23,6 +26,7 @@ export class TagEdit extends React.Component {
   }
 
   static defaultProps = {
+    handleDoneEditing: handleDoneEditingDefault,
     focusElement,
     selectElement,
     exitKeyCodes: exitKeyCodesDefault,
@@ -49,16 +53,28 @@ export class TagEdit extends React.Component {
     const { exitKeyCodes, setIsEditing } = this.props;
     if (exitKeyCodes.includes(keyCode)) {
       setIsEditing(false);
+      this.handleDoneEditing();
     }
   }
 
+  handleOnBlur = () => {
+    const { setIsEditing } = this.props;
+    setIsEditing(false);
+    this.handleDoneEditing();
+  }
+
+  handleDoneEditing = () => {
+    const { handleDoneEditing } = this.props;
+    handleDoneEditing();
+  }
+
   render() {
-    const { value, setIsEditing, TagClassName } = this.props;
+    const { value, TagClassName } = this.props;
     return (
       <textarea
         ref={(c) => { this.tagTextArea = c; }}
         value={value}
-        onBlur={() => setIsEditing(false)}
+        onBlur={this.handleOnBlur}
         onChange={this.handleOnChange}
         onKeyDown={this.handleOnKeyDown}
         className={TagClassName}
@@ -100,6 +116,7 @@ export class TagDefault extends React.Component {
     value: React.PropTypes.string.isRequired,
     handleEdit: React.PropTypes.func.isRequired,
     handleRemove: React.PropTypes.func.isRequired,
+    handleDoneEditing: React.PropTypes.func,
     TagClassName: React.PropTypes.string,
   }
 
@@ -116,7 +133,7 @@ export class TagDefault extends React.Component {
   }
 
   render() {
-    const { value, handleEdit, handleRemove, TagClassName } = this.props;
+    const { value, handleEdit, handleRemove, handleDoneEditing, TagClassName } = this.props;
     const { isEditing } = this.state;
     if (isEditing) {
       return (
@@ -124,6 +141,7 @@ export class TagDefault extends React.Component {
           value={value}
           handleEdit={handleEdit}
           handleRemove={handleRemove}
+          handleDoneEditing={handleDoneEditing}
           setIsEditing={this.setIsEditing}
           TagClassName={TagClassName}
         />

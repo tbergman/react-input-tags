@@ -22,6 +22,7 @@ exports[`create token by typing non empty string and clicking suggestion`] = `
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder=""
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>
@@ -64,6 +65,7 @@ exports[`create token by typing non empty string and pressing comma`] = `
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder=""
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>
@@ -106,6 +108,7 @@ exports[`create token by typing non empty string and pressing enter`] = `
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder=""
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>
@@ -137,6 +140,7 @@ exports[`create token by typing non empty string and pressing enter for highligh
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder=""
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>
@@ -179,6 +183,7 @@ exports[`create token by typing non empty string and pressing tab`] = `
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder=""
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>
@@ -221,6 +226,7 @@ exports[`delete token by backspacing when input is empty`] = `
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder=""
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>
@@ -263,6 +269,7 @@ exports[`delete token by clicking delete button`] = `
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder=""
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>
@@ -305,6 +312,7 @@ exports[`edit token by clicking on tag and typing`] = `
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder=""
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>
@@ -336,6 +344,7 @@ exports[`hide suggestions list by typing non empty string and pressing escape`] 
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder=""
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>
@@ -367,6 +376,7 @@ exports[`highlight next suggestion by typing non empty string and pressing down`
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder=""
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>
@@ -398,6 +408,7 @@ exports[`highlight previous suggestion by typing non empty string and pressing u
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder=""
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>
@@ -429,6 +440,7 @@ exports[`show input placeholder by rendering`] = `
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder="Add Tag"
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>
@@ -460,6 +472,7 @@ exports[`show suggestions list by typing non empty string`] = `
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder=""
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>

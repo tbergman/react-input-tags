@@ -65,6 +65,7 @@ describe('<TagEdit />', () => {
   let tagEditWrapper;
   let handleEdit;
   let handleRemove;
+  let handleDoneEditing;
   let setIsEditing;
   let focusElement;
   let selectElement;
@@ -72,6 +73,7 @@ describe('<TagEdit />', () => {
   beforeEach(() => {
     handleEdit = sinon.stub();
     handleRemove = sinon.stub();
+    handleDoneEditing = sinon.stub();
     setIsEditing = sinon.stub();
     focusElement = sinon.stub();
     selectElement = sinon.stub();
@@ -81,6 +83,7 @@ describe('<TagEdit />', () => {
         value={item}
         handleEdit={handleEdit}
         handleRemove={handleRemove}
+        handleDoneEditing={handleDoneEditing}
         setIsEditing={setIsEditing}
         focusElement={focusElement}
         selectElement={selectElement}
@@ -137,6 +140,10 @@ describe('<TagEdit />', () => {
       it('should set isEditing state to false', () => {
         expect(setIsEditing).to.have.been.calledWith(false);
       });
+
+      it('should handle done editing', () => {
+        expect(handleDoneEditing).to.have.been.called();
+      });
     });
 
     context('when enter is pressed', () => {
@@ -147,6 +154,10 @@ describe('<TagEdit />', () => {
       it('should set isEditing state to false', () => {
         expect(setIsEditing).to.have.been.calledWith(false);
       });
+
+      it('should handle done editing', () => {
+        expect(handleDoneEditing).to.have.been.called();
+      });
     });
 
     context('when tab is pressed', () => {
@@ -156,6 +167,10 @@ describe('<TagEdit />', () => {
 
       it('should set isEditing state to false', () => {
         expect(setIsEditing).to.have.been.calledWith(false);
+      });
+
+      it('should handle done editing', () => {
+        expect(handleDoneEditing).to.have.been.called();
       });
     });
   });

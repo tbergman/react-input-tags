@@ -22,6 +22,7 @@ exports[`show placeholder by rendering`] = `
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder="Add Tag"
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>
@@ -86,6 +87,7 @@ exports[`show tags by rendering`] = `
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder=""
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>
@@ -117,6 +119,7 @@ exports[`update suggestions by typing in input`] = `
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder=""
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>
@@ -159,6 +162,7 @@ exports[`update tags by creating, editing and deleting`] = `
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder=""
+        tabIndex={undefined}
         type="text"
         value="" />
     </span>
