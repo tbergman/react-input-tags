@@ -5,7 +5,7 @@ export const reverseString = string =>
   string.split('').reverse().join('');
 
 export const ReverseTag = ({ value, handleRemove }) => (
-  <span>
+  <span className={'react-input-tags-tag'}>
     <span>
       {reverseString(value)}
     </span>
