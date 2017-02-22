@@ -57,7 +57,7 @@ describe('<InputTagsContainerDefault />', () => {
         const newValue = 'cool';
 
         beforeEach(() => {
-          inputTagsContainerWrapper.find('span').at(editTagIndex).simulate('click');
+          inputTagsContainerWrapper.find('span').at(editTagIndex).childAt(0).simulate('click');
         });
 
         context('when text area is changed to non empty string', () => {

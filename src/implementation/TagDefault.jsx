@@ -73,11 +73,12 @@ export const TagRead = ({
   setIsEditing,
   TagClassName,
 }) =>
-  <span // eslint-disable-line jsx-a11y/no-static-element-interactions
-    onClick={() => setIsEditing(true)}
+  <span
     className={TagClassName}
   >
-    <span>
+    <span // eslint-disable-line jsx-a11y/no-static-element-interactions
+      onClick={() => setIsEditing(true)}
+    >
       {value}
     </span>
     <button
