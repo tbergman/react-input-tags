@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { defaultClassNamePrefix } from './util';
+import { focusElement, selectElement, defaultClassNamePrefix } from './util';
 
 export const placeholderDefault = '';
 
@@ -27,14 +27,21 @@ export class InputDefault extends React.Component {
     placeholder: React.PropTypes.string.isRequired,
     tabIndex: React.PropTypes.number,
     InputClassName: React.PropTypes.string,
+    focusElement: React.PropTypes.func.isRequired,
+    selectElement: React.PropTypes.func.isRequired,
   }
 
   static defaultProps = {
     placeholder: placeholderDefault,
     InputClassName: InputClassNameDefault,
+    focusElement,
+    selectElement,
   }
 
   componentDidMount() {
+    // const element = this.inputNode;
+    // this.props.focusElement(element);
+    // this.props.selectElement(element);
     this.mirrorInputStyle();
     this.updateInputWidth();
   }
@@ -44,26 +51,41 @@ export class InputDefault extends React.Component {
   }
 
   mirrorInputStyle() {
-    if (!this.inputNode) return;
-    const inputStyle = window.getComputedStyle(this.inputNode);
+    const inputNode = this.getInputNode();
+    const mirrorNode = this.getMirrorNode();
+    if (!inputNode || !mirrorNode) return;
+    const inputStyle = window.getComputedStyle(inputNode);
     MIRROR_STYLES.forEach((mStyle) => {
-      this.mirrorNode.style[mStyle] = inputStyle[mStyle];
+      mirrorNode.style[mStyle] = inputStyle[mStyle];
     });
   }
 
   updateInputWidth() {
-    if (!this.mirrorNode) return;
-    const newInputWidth = this.mirrorNode.offsetWidth + INPUT_WIDTH_EXTRA;
-    this.inputNode.style.width = `${newInputWidth}px`;
+    const inputNode = this.getInputNode();
+    const mirrorNode = this.getMirrorNode();
+    if (!inputNode || !mirrorNode) return;
+    const newInputWidth = mirrorNode.offsetWidth + INPUT_WIDTH_EXTRA;
+    inputNode.style.width = `${newInputWidth}px`;
+  }
+
+  getInputNode() {
+    return this.inputNode;
+    // return this.props.inputRef;
+  }
+
+  getMirrorNode() {
+    return this.mirrorNode;
   }
 
   render() {
     const {
+      inputRef,
       value,
       placeholder,
       tabIndex,
       handleOnChange,
       handleOnBlur,
+      handleOnFocus,
       handleOnKeyDown,
       InputClassName,
     } = this.props;
@@ -88,12 +110,14 @@ export class InputDefault extends React.Component {
         <input
           id={'inputNode'}
           ref={(c) => { this.inputNode = c; }}
+          // ref={inputRef}
           type={'text'}
           value={value}
           placeholder={placeholder}
           tabIndex={tabIndex}
           onChange={handleOnChange}
           onBlur={handleOnBlur}
+          onFocus={handleOnFocus}
           onKeyDown={handleOnKeyDown}
           className={InputClassName}
         />

@@ -7,6 +7,7 @@ export const Tag = ({
   value,
   handleEdit,
   handleRemove,
+  handleStartEditing,
   handleDoneEditing,
   TagClassName,
 }) =>
@@ -14,6 +15,7 @@ export const Tag = ({
     value={value}
     handleEdit={handleEdit}
     handleRemove={handleRemove}
+    handleStartEditing={handleStartEditing}
     handleDoneEditing={handleDoneEditing}
     TagClassName={TagClassName}
   />;

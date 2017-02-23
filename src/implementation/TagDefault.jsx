@@ -129,7 +129,9 @@ export class TagDefault extends React.Component {
   }
 
   setIsEditing = (isEditing) => {
-    this.setState({ isEditing });
+    // this.setState({ isEditing });
+    const { handleStartEditing } = this.props;
+    handleStartEditing();
   }
 
   render() {

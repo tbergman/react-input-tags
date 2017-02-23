@@ -4,19 +4,23 @@ import { InputDefault } from '../implementation/InputDefault.jsx';
 
 export const Input = ({
   InputImplementation,
+  inputRef,
   value,
   placeholder,
   tabIndex,
   handleOnChange,
+  handleOnFocus,
   handleOnBlur,
   handleOnKeyDown,
   InputClassName,
 }) =>
   <InputImplementation
+    inputRef={inputRef}
     value={value}
     tabIndex={tabIndex}
     placeholder={placeholder}
     handleOnChange={handleOnChange}
+    handleOnFocus={handleOnFocus}
     handleOnBlur={handleOnBlur}
     handleOnKeyDown={handleOnKeyDown}
     InputClassName={InputClassName}

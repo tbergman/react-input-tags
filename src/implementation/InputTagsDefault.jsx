@@ -142,14 +142,15 @@ export class InputTagsDefault extends React.Component {
 
   state = {
     inputValue: '',
+    inputIndex: 0,
     showSuggestions: false,
     highlightedSuggestionIndex: 0,
   }
 
-  insertTag = (tags, inputValue) => {
+  insertTag = (tags, insertTagIndex, inputValue) => {
     const { handleInsert } = this.props;
-    this.setState({ inputValue: '', showSuggestions: false });
-    handleInsert(tags, inputValue);
+    this.setState({ inputValue: '', inputIndex: tags.length + 1, showSuggestions: false });
+    handleInsert(tags, insertTagIndex, inputValue);
   }
 
   editTag = (tags, editTagIndex, newValue) => {
@@ -159,7 +160,14 @@ export class InputTagsDefault extends React.Component {
 
   removeTag = (tags, removeTagIndex) => {
     const { handleRemove } = this.props;
+    this.setState({ inputIndex: tags.length - 1 });
     handleRemove(tags, removeTagIndex);
+  }
+
+  startEditing = (tags, editTagIndex) => {
+    this.removeTag(tags, editTagIndex);
+    this.setState({ inputValue: tags[editTagIndex], inputIndex: editTagIndex });
+    this.focusOnInput();
   }
 
   handleInputOnChange = (event) => {
@@ -170,18 +178,24 @@ export class InputTagsDefault extends React.Component {
     handleUpdateSuggestions(inputValue);
   }
 
+  focusOnInput = () => {
+    // TODO: findDomNode
+    // passing a ref doesn't work
+    console.log(this.inputNode);
+  }
+
   handleInputOnBlur = () => {
-    const { inputValue } = this.state;
+    const { inputValue, inputIndex } = this.state;
     const { tags } = this.props;
 
     if (inputValue.length > 0) {
-      this.insertTag(tags, inputValue);
+      this.insertTag(tags, inputIndex, inputValue);
     }
   }
 
   handleInputOnKeyDown = (event) => {
     const { keyCode } = event;
-    const { inputValue, showSuggestions, highlightedSuggestionIndex } = this.state;
+    const { inputValue, inputIndex, showSuggestions, highlightedSuggestionIndex } = this.state;
     const {
       tags,
       suggestions,
@@ -200,9 +214,9 @@ export class InputTagsDefault extends React.Component {
       // prevents typing tab from setting the focus on something other than the input
       event.preventDefault();
       if (showSuggestions && suggestions.length > 0) {
-        this.insertTag(tags, getSuggestionValue(suggestions[highlightedSuggestionIndex]));
+        this.insertTag(tags, inputIndex, getSuggestionValue(suggestions[highlightedSuggestionIndex]));
       } else {
-        this.insertTag(tags, inputValue);
+        this.insertTag(tags, inputIndex, inputValue);
       }
     }
 
@@ -257,33 +271,49 @@ export class InputTagsDefault extends React.Component {
       SuggestionClassName,
       SuggestionsLoaderClassName,
     } = this.props;
-    const { inputValue, showSuggestions, highlightedSuggestionIndex } = this.state;
+    const { inputValue, inputIndex, showSuggestions, highlightedSuggestionIndex } = this.state;
     return (
       <div
         className={InputTagsClassName}
       >
         <div>
-          {tags.map((tag, index) =>
+          {tags.slice(0, inputIndex).map((tag, index) =>
             <Tag
               TagImplementation={TagImplementation}
               key={index}
               value={tag}
               handleEdit={newValue => this.editTag(tags, index, newValue)}
               handleRemove={() => this.removeTag(tags, index)}
+              handleStartEditing={() => this.startEditing(tags, index)}
               handleDoneEditing={handleDoneEditing}
               TagClassName={TagClassName}
             />
           )}
           <Input
             InputImplementation={InputImplementation}
+            // inputRef={node => this.inputNode = node}
+            // inputRef={(node) => { this.inputNode = node; }}
             value={inputValue}
             placeholder={inputPlaceholder}
             tabIndex={inputTabIndex}
             handleOnChange={this.handleInputOnChange}
+            handleOnFocus={this.handleInputOnFocus}
             handleOnBlur={this.handleInputOnBlur}
             handleOnKeyDown={this.handleInputOnKeyDown}
             InputClassName={InputClassName}
           />
+          {tags.slice(inputIndex).map((tag, index) =>
+            <Tag
+              TagImplementation={TagImplementation}
+              key={index}
+              value={tag}
+              handleEdit={newValue => this.editTag(tags, index, newValue)}
+              handleRemove={() => this.removeTag(tags, index)}
+              handleStartEditing={() => this.startEditing(tags, index)}
+              handleDoneEditing={handleDoneEditing}
+              TagClassName={TagClassName}
+            />
+          )}
           <SuggestionsLoader
             SuggestionsLoaderImplementation={SuggestionsLoaderImplementation}
             suggestionsAreLoading={suggestionsAreLoading}

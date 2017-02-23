@@ -1,11 +1,17 @@
 import React from 'react';
 import { InputTags } from '../interface/InputTags.jsx';
 
-export const handleInsertDefault = (currentTags, newTag) => {
-  const newTags = [...currentTags, newTag];
+// TODO: test
+export const handleInsertDefault = (currentTags, insertTagIndex, newTag) => {
+  const newTags = [
+    ...currentTags.slice(0, insertTagIndex),
+    newTag,
+    ...currentTags.slice(insertTagIndex),
+  ];
   return newTags;
 };
 
+// TODO: remove?
 export const handleEditDefault = (currentTags, editTagIndex, newValue) => {
   const newTags = [
     ...currentTags.slice(0, editTagIndex),
@@ -57,9 +63,9 @@ export class InputTagsContainerDefault extends React.Component {
     handleRemove: handleRemoveDefault,
   }
 
-  handleInsert = (currentTags, newTag) => {
+  handleInsert = (currentTags, insertTagIndex, newTag) => {
     const { handleInsert, handleUpdateTags } = this.props;
-    const newTags = handleInsert(currentTags, newTag);
+    const newTags = handleInsert(currentTags, insertTagIndex, newTag);
     handleUpdateTags(newTags);
   }
 
