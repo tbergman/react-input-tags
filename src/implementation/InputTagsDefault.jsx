@@ -212,7 +212,9 @@ export class InputTagsDefault extends React.Component {
     const inputNode = this.inputNode;
     const mirrorNode = this.mirrorNode;
     if (!inputNode || !mirrorNode) return;
-    const newInputWidth = mirrorNode.offsetWidth + INPUT_WIDTH_EXTRA;
+    let newInputWidth = mirrorNode.offsetWidth + INPUT_WIDTH_EXTRA;
+    if (newInputWidth > 195) newInputWidth = 195;
+    // TODO: inputMaxWidth prop
     inputNode.style.width = `${newInputWidth}px`;
   }
 
