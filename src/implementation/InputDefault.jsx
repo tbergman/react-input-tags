@@ -42,12 +42,19 @@ export class InputDefault extends React.Component {
     // const element = this.inputNode;
     // this.props.focusElement(element);
     // this.props.selectElement(element);
-    this.mirrorInputStyle();
-    this.updateInputWidth();
+    // this.mirrorInputStyle();
+    // this.updateInputWidth();
+    this.props.mirrorInputStyle();
+    this.props.updateInputWidth();
   }
 
-  componentDidUpdate() {
-    this.updateInputWidth();
+  componentDidUpdate(prevProps, prevState) {
+    // this.updateInputWidth();
+    this.props.updateInputWidth();
+    if (prevProps.editMode === false && this.props.editMode === true) {
+      this.props.setFocus();
+    }
+
   }
 
   mirrorInputStyle() {
@@ -80,6 +87,7 @@ export class InputDefault extends React.Component {
   render() {
     const {
       inputRef,
+      mirrorRef,
       value,
       placeholder,
       tabIndex,
@@ -102,15 +110,16 @@ export class InputDefault extends React.Component {
       <span>
         <span
           id={'mirrorNode'}
-          ref={(c) => { this.mirrorNode = c; }}
+          ref={mirrorRef}
+          // ref={(c) => { this.mirrorNode = c; }}
           style={mirrorStyle}
         >
           {mirrorValue}
         </span>
         <input
           id={'inputNode'}
-          ref={(c) => { this.inputNode = c; }}
-          // ref={inputRef}
+          ref={inputRef}
+          // ref={(c) => { this.inputNode = c; }}
           type={'text'}
           value={value}
           placeholder={placeholder}

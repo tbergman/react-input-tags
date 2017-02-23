@@ -93,6 +93,18 @@ export const closeKeyCodesDefault = [
   escapeKeyCode,
 ];
 
+export const MIRROR_STYLES = [
+  'fontFamily',
+  'fontSize',
+  'fontStyle',
+  'fontWeight',
+  'lineHeight',
+  'letterSpacing',
+  'wordSpacing',
+];
+
+export const INPUT_WIDTH_EXTRA = 2;
+
 export class InputTagsDefault extends React.Component {
   static propTypes = {
     InputImplementation: React.PropTypes.func,
@@ -143,13 +155,14 @@ export class InputTagsDefault extends React.Component {
   state = {
     inputValue: '',
     inputIndex: 0,
+    inputEditMode: false,
     showSuggestions: false,
     highlightedSuggestionIndex: 0,
   }
 
   insertTag = (tags, insertTagIndex, inputValue) => {
     const { handleInsert } = this.props;
-    this.setState({ inputValue: '', inputIndex: tags.length + 1, showSuggestions: false });
+    this.setState({ inputValue: '', inputIndex: tags.length + 1, inputEditMode: false, showSuggestions: false });
     handleInsert(tags, insertTagIndex, inputValue);
   }
 
@@ -166,8 +179,8 @@ export class InputTagsDefault extends React.Component {
 
   startEditing = (tags, editTagIndex) => {
     this.removeTag(tags, editTagIndex);
-    this.setState({ inputValue: tags[editTagIndex], inputIndex: editTagIndex });
-    this.focusOnInput();
+    const newValue = tags[editTagIndex];
+    this.setState({ inputValue: newValue, inputIndex: editTagIndex, inputEditMode: true });
   }
 
   handleInputOnChange = (event) => {
@@ -179,9 +192,28 @@ export class InputTagsDefault extends React.Component {
   }
 
   focusOnInput = () => {
-    // TODO: findDomNode
-    // passing a ref doesn't work
-    console.log(this.inputNode);
+    const element = this.inputNode;
+    if (!element) return;
+    element.focus();
+    element.select();
+  }
+
+  mirrorInputStyle = () => {
+    const inputNode = this.inputNode;
+    const mirrorNode = this.mirrorNode;
+    if (!inputNode || !mirrorNode) return;
+    const inputStyle = window.getComputedStyle(inputNode);
+    MIRROR_STYLES.forEach((mStyle) => {
+      mirrorNode.style[mStyle] = inputStyle[mStyle];
+    });
+  }
+
+  updateInputWidth = () => {
+    const inputNode = this.inputNode;
+    const mirrorNode = this.mirrorNode;
+    if (!inputNode || !mirrorNode) return;
+    const newInputWidth = mirrorNode.offsetWidth + INPUT_WIDTH_EXTRA;
+    inputNode.style.width = `${newInputWidth}px`;
   }
 
   handleInputOnBlur = () => {
@@ -271,7 +303,7 @@ export class InputTagsDefault extends React.Component {
       SuggestionClassName,
       SuggestionsLoaderClassName,
     } = this.props;
-    const { inputValue, inputIndex, showSuggestions, highlightedSuggestionIndex } = this.state;
+    const { inputValue, inputIndex, inputEditMode, showSuggestions, highlightedSuggestionIndex } = this.state;
     return (
       <div
         className={InputTagsClassName}
@@ -291,9 +323,14 @@ export class InputTagsDefault extends React.Component {
           )}
           <Input
             InputImplementation={InputImplementation}
-            // inputRef={node => this.inputNode = node}
-            // inputRef={(node) => { this.inputNode = node; }}
+            inputRef={(node) => { this.inputNode = node; }}
+            mirrorRef={(node) => { this.mirrorNode = node; }}
+            mirrorInputStyle={this.mirrorInputStyle}
+            updateInputWidth={this.updateInputWidth}
+            setFocus={this.focusOnInput}
             value={inputValue}
+            editMode={inputEditMode}
+            stopEditing={this.stopEditing}
             placeholder={inputPlaceholder}
             tabIndex={inputTabIndex}
             handleOnChange={this.handleInputOnChange}
@@ -327,7 +364,7 @@ export class InputTagsDefault extends React.Component {
           showSuggestions={showSuggestions}
           highlightedSuggestionIndex={highlightedSuggestionIndex}
           handleHighlight={this.setHighlightedSuggestionIndex}
-          handleSelect={suggestion => this.insertTag(tags, suggestion)}
+          handleSelect={suggestion => this.insertTag(tags, inputIndex, suggestion)}
           getSuggestionValue={getSuggestionValue}
           SuggestionListClassName={SuggestionListClassName}
           SuggestionClassName={SuggestionClassName}

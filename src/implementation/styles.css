@@ -3,6 +3,9 @@
 }
 
 .react-input-tags-input input {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   /* input element does * not * inherit font styling by default */
   font-family: inherit;
   font-size: inherit;

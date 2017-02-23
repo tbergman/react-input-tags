@@ -5,7 +5,13 @@ import { InputDefault } from '../implementation/InputDefault.jsx';
 export const Input = ({
   InputImplementation,
   inputRef,
+  mirrorRef,
+  mirrorInputStyle,
+  updateInputWidth,
+  setFocus,
   value,
+  editMode,
+  stopEditing,
   placeholder,
   tabIndex,
   handleOnChange,
@@ -16,7 +22,13 @@ export const Input = ({
 }) =>
   <InputImplementation
     inputRef={inputRef}
+    mirrorRef={mirrorRef}
+    mirrorInputStyle={mirrorInputStyle}
+    updateInputWidth={updateInputWidth}
+    setFocus={setFocus}
     value={value}
+    editMode={editMode}
+    stopEditing={stopEditing}
     tabIndex={tabIndex}
     placeholder={placeholder}
     handleOnChange={handleOnChange}
