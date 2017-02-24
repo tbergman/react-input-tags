@@ -171,7 +171,6 @@ export class InputTagsDefault extends React.Component {
   removeTag = (tags, removeTagIndex) => {
     const { handleRemove } = this.props;
 
-    this.setState({ inputIndex: removeTagIndex });
     handleRemove(tags, removeTagIndex);
   }
 
@@ -180,7 +179,7 @@ export class InputTagsDefault extends React.Component {
 
     const inputValue = event.target.value;
     const showSuggestions = inputValue.length > 0;
-    this.setState({ inputValue, showSuggestions });
+    this.setState({ inputValue, showSuggestions, inputIsEditing: false });
     handleUpdateSuggestions(inputValue);
   }
 
@@ -221,14 +220,11 @@ export class InputTagsDefault extends React.Component {
       }
     }
 
-    if (removeKeyCodes.includes(keyCode) && inputValue.length === 0 && tags.length > 0) {
-      // TODO: should we use inputIndex here?
-      // swap tags.length - 1 for inputIndex ?
-      // this.removeTag(tags, inputIndex - 1);
-      this.removeTag(tags, tags.length - 1);
-
-      // TODO: when would we want to use inputIndex?
-      // when inputIndex is less than tags.length - 1 ?
+    if (removeKeyCodes.includes(keyCode) && inputValue.length === 0 && tags.length > 0
+        && inputIndex > 0) {
+      const removeTagIndex = inputIndex - 1;
+      this.removeTag(tags, removeTagIndex);
+      this.setState({ inputIndex: removeTagIndex });
     }
 
     if (closeKeyCodes.includes(keyCode)) {
@@ -313,11 +309,7 @@ export class InputTagsDefault extends React.Component {
               key={index}
               value={tag}
               handleEdit={() => this.editTag(tags, index)}
-              handleRemove={() => {
-                // TODO: remove
-                console.log('1st group called');
-                this.removeTag(tags, index);
-              }}
+              handleRemove={() => this.removeTag(tags, index)}
               {...otherProps}
             />
           )}
@@ -339,11 +331,7 @@ export class InputTagsDefault extends React.Component {
               key={index + inputIndex}
               value={tag}
               handleEdit={() => this.editTag(tags, index + inputIndex)}
-              handleRemove={() => {
-                // TODO: remove
-                console.log('2nd group called');
-                this.removeTag(tags, index + inputIndex);
-              }}
+              handleRemove={() => this.removeTag(tags, index + inputIndex)}
               {...otherProps}
             />
           )}
