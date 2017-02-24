@@ -4,7 +4,6 @@ exports[`create token by typing non empty string and clicking suggestion`] = `
   <div>
     <span>
       <span
-        id="mirrorNode"
         style={
           Object {
             "overflow": "scroll",
@@ -12,16 +11,13 @@ exports[`create token by typing non empty string and clicking suggestion`] = `
             "visibility": "hidden",
             "whiteSpace": "pre",
           }
-        }>
-        
-      </span>
+        } />
       <input
         className="react-input-tags-input"
-        id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
-        placeholder=""
+        placeholder={undefined}
         tabIndex={undefined}
         type="text"
         value="" />
@@ -47,7 +43,6 @@ exports[`create token by typing non empty string and pressing comma`] = `
     </span>
     <span>
       <span
-        id="mirrorNode"
         style={
           Object {
             "overflow": "scroll",
@@ -55,16 +50,13 @@ exports[`create token by typing non empty string and pressing comma`] = `
             "visibility": "hidden",
             "whiteSpace": "pre",
           }
-        }>
-        
-      </span>
+        } />
       <input
         className="react-input-tags-input"
-        id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
-        placeholder=""
+        placeholder={undefined}
         tabIndex={undefined}
         type="text"
         value="" />
@@ -90,7 +82,6 @@ exports[`create token by typing non empty string and pressing enter`] = `
     </span>
     <span>
       <span
-        id="mirrorNode"
         style={
           Object {
             "overflow": "scroll",
@@ -98,16 +89,13 @@ exports[`create token by typing non empty string and pressing enter`] = `
             "visibility": "hidden",
             "whiteSpace": "pre",
           }
-        }>
-        
-      </span>
+        } />
       <input
         className="react-input-tags-input"
-        id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
-        placeholder=""
+        placeholder={undefined}
         tabIndex={undefined}
         type="text"
         value="" />
@@ -122,7 +110,6 @@ exports[`create token by typing non empty string and pressing enter for highligh
   <div>
     <span>
       <span
-        id="mirrorNode"
         style={
           Object {
             "overflow": "scroll",
@@ -130,16 +117,13 @@ exports[`create token by typing non empty string and pressing enter for highligh
             "visibility": "hidden",
             "whiteSpace": "pre",
           }
-        }>
-        
-      </span>
+        } />
       <input
         className="react-input-tags-input"
-        id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
-        placeholder=""
+        placeholder={undefined}
         tabIndex={undefined}
         type="text"
         value="" />
@@ -165,7 +149,6 @@ exports[`create token by typing non empty string and pressing tab`] = `
     </span>
     <span>
       <span
-        id="mirrorNode"
         style={
           Object {
             "overflow": "scroll",
@@ -173,16 +156,13 @@ exports[`create token by typing non empty string and pressing tab`] = `
             "visibility": "hidden",
             "whiteSpace": "pre",
           }
-        }>
-        
-      </span>
+        } />
       <input
         className="react-input-tags-input"
-        id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
-        placeholder=""
+        placeholder={undefined}
         tabIndex={undefined}
         type="text"
         value="" />
@@ -208,7 +188,6 @@ exports[`delete token by backspacing when input is empty`] = `
     </span>
     <span>
       <span
-        id="mirrorNode"
         style={
           Object {
             "overflow": "scroll",
@@ -216,16 +195,13 @@ exports[`delete token by backspacing when input is empty`] = `
             "visibility": "hidden",
             "whiteSpace": "pre",
           }
-        }>
-        
-      </span>
+        } />
       <input
         className="react-input-tags-input"
-        id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
-        placeholder=""
+        placeholder={undefined}
         tabIndex={undefined}
         type="text"
         value="" />
@@ -251,7 +227,6 @@ exports[`delete token by clicking delete button`] = `
     </span>
     <span>
       <span
-        id="mirrorNode"
         style={
           Object {
             "overflow": "scroll",
@@ -259,16 +234,13 @@ exports[`delete token by clicking delete button`] = `
             "visibility": "hidden",
             "whiteSpace": "pre",
           }
-        }>
-        
-      </span>
+        } />
       <input
         className="react-input-tags-input"
-        id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
-        placeholder=""
+        placeholder={undefined}
         tabIndex={undefined}
         type="text"
         value="" />
@@ -277,7 +249,7 @@ exports[`delete token by clicking delete button`] = `
 </div>
 `;
 
-exports[`edit token by clicking on tag and typing`] = `
+exports[`edit token by clicking on tag`] = `
 <div
   className="react-input-tags-input-tags">
   <div>
@@ -294,7 +266,6 @@ exports[`edit token by clicking on tag and typing`] = `
     </span>
     <span>
       <span
-        id="mirrorNode"
         style={
           Object {
             "overflow": "scroll",
@@ -302,16 +273,13 @@ exports[`edit token by clicking on tag and typing`] = `
             "visibility": "hidden",
             "whiteSpace": "pre",
           }
-        }>
-        
-      </span>
+        } />
       <input
         className="react-input-tags-input"
-        id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
-        placeholder=""
+        placeholder={undefined}
         tabIndex={undefined}
         type="text"
         value="" />
@@ -326,7 +294,6 @@ exports[`hide suggestions list by typing non empty string and pressing escape`] 
   <div>
     <span>
       <span
-        id="mirrorNode"
         style={
           Object {
             "overflow": "scroll",
@@ -334,16 +301,13 @@ exports[`hide suggestions list by typing non empty string and pressing escape`] 
             "visibility": "hidden",
             "whiteSpace": "pre",
           }
-        }>
-        
-      </span>
+        } />
       <input
         className="react-input-tags-input"
-        id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
-        placeholder=""
+        placeholder={undefined}
         tabIndex={undefined}
         type="text"
         value="" />
@@ -358,7 +322,6 @@ exports[`highlight next suggestion by typing non empty string and pressing down`
   <div>
     <span>
       <span
-        id="mirrorNode"
         style={
           Object {
             "overflow": "scroll",
@@ -366,16 +329,13 @@ exports[`highlight next suggestion by typing non empty string and pressing down`
             "visibility": "hidden",
             "whiteSpace": "pre",
           }
-        }>
-        
-      </span>
+        } />
       <input
         className="react-input-tags-input"
-        id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
-        placeholder=""
+        placeholder={undefined}
         tabIndex={undefined}
         type="text"
         value="" />
@@ -390,7 +350,6 @@ exports[`highlight previous suggestion by typing non empty string and pressing u
   <div>
     <span>
       <span
-        id="mirrorNode"
         style={
           Object {
             "overflow": "scroll",
@@ -398,16 +357,13 @@ exports[`highlight previous suggestion by typing non empty string and pressing u
             "visibility": "hidden",
             "whiteSpace": "pre",
           }
-        }>
-        
-      </span>
+        } />
       <input
         className="react-input-tags-input"
-        id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
-        placeholder=""
+        placeholder={undefined}
         tabIndex={undefined}
         type="text"
         value="" />
@@ -422,7 +378,6 @@ exports[`show input placeholder by rendering`] = `
   <div>
     <span>
       <span
-        id="mirrorNode"
         style={
           Object {
             "overflow": "scroll",
@@ -435,7 +390,6 @@ exports[`show input placeholder by rendering`] = `
       </span>
       <input
         className="react-input-tags-input"
-        id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
@@ -454,7 +408,6 @@ exports[`show suggestions list by typing non empty string`] = `
   <div>
     <span>
       <span
-        id="mirrorNode"
         style={
           Object {
             "overflow": "scroll",
@@ -462,16 +415,13 @@ exports[`show suggestions list by typing non empty string`] = `
             "visibility": "hidden",
             "whiteSpace": "pre",
           }
-        }>
-        
-      </span>
+        } />
       <input
         className="react-input-tags-input"
-        id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
-        placeholder=""
+        placeholder={undefined}
         tabIndex={undefined}
         type="text"
         value="" />

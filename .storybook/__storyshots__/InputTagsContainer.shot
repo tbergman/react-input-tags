@@ -4,7 +4,6 @@ exports[`show placeholder by rendering`] = `
   <div>
     <span>
       <span
-        id="mirrorNode"
         style={
           Object {
             "overflow": "scroll",
@@ -17,7 +16,6 @@ exports[`show placeholder by rendering`] = `
       </span>
       <input
         className="react-input-tags-input"
-        id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
@@ -69,7 +67,6 @@ exports[`show tags by rendering`] = `
     </span>
     <span>
       <span
-        id="mirrorNode"
         style={
           Object {
             "overflow": "scroll",
@@ -77,16 +74,13 @@ exports[`show tags by rendering`] = `
             "visibility": "hidden",
             "whiteSpace": "pre",
           }
-        }>
-        
-      </span>
+        } />
       <input
         className="react-input-tags-input"
-        id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
-        placeholder=""
+        placeholder={undefined}
         tabIndex={undefined}
         type="text"
         value="" />
@@ -101,7 +95,6 @@ exports[`update suggestions by typing in input`] = `
   <div>
     <span>
       <span
-        id="mirrorNode"
         style={
           Object {
             "overflow": "scroll",
@@ -109,16 +102,13 @@ exports[`update suggestions by typing in input`] = `
             "visibility": "hidden",
             "whiteSpace": "pre",
           }
-        }>
-        
-      </span>
+        } />
       <input
         className="react-input-tags-input"
-        id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
-        placeholder=""
+        placeholder={undefined}
         tabIndex={undefined}
         type="text"
         value="" />
@@ -144,7 +134,6 @@ exports[`update tags by creating, editing and deleting`] = `
     </span>
     <span>
       <span
-        id="mirrorNode"
         style={
           Object {
             "overflow": "scroll",
@@ -152,16 +141,13 @@ exports[`update tags by creating, editing and deleting`] = `
             "visibility": "hidden",
             "whiteSpace": "pre",
           }
-        }>
-        
-      </span>
+        } />
       <input
         className="react-input-tags-input"
-        id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
-        placeholder=""
+        placeholder={undefined}
         tabIndex={undefined}
         type="text"
         value="" />

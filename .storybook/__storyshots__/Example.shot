@@ -4,7 +4,6 @@ exports[`custom suggestion`] = `
   <div>
     <span>
       <span
-        id="mirrorNode"
         style={
           Object {
             "overflow": "scroll",
@@ -17,7 +16,6 @@ exports[`custom suggestion`] = `
       </span>
       <input
         className="react-input-tags-input"
-        id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
@@ -36,7 +34,6 @@ exports[`custom tag`] = `
   <div>
     <span>
       <span
-        id="mirrorNode"
         style={
           Object {
             "overflow": "scroll",
@@ -44,16 +41,13 @@ exports[`custom tag`] = `
             "visibility": "hidden",
             "whiteSpace": "pre",
           }
-        }>
-        
-      </span>
+        } />
       <input
         className="react-input-tags-input"
-        id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
-        placeholder=""
+        placeholder={undefined}
         tabIndex={undefined}
         type="text"
         value="" />
@@ -68,7 +62,6 @@ exports[`local suggestions`] = `
   <div>
     <span>
       <span
-        id="mirrorNode"
         style={
           Object {
             "overflow": "scroll",
@@ -81,7 +74,6 @@ exports[`local suggestions`] = `
       </span>
       <input
         className="react-input-tags-input"
-        id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
@@ -100,7 +92,6 @@ exports[`no suggestions`] = `
   <div>
     <span>
       <span
-        id="mirrorNode"
         style={
           Object {
             "overflow": "scroll",
@@ -108,16 +99,13 @@ exports[`no suggestions`] = `
             "visibility": "hidden",
             "whiteSpace": "pre",
           }
-        }>
-        
-      </span>
+        } />
       <input
         className="react-input-tags-input"
-        id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
-        placeholder=""
+        placeholder={undefined}
         tabIndex={undefined}
         type="text"
         value="" />
@@ -132,7 +120,6 @@ exports[`remote suggestions`] = `
   <div>
     <span>
       <span
-        id="mirrorNode"
         style={
           Object {
             "overflow": "scroll",
@@ -145,7 +132,6 @@ exports[`remote suggestions`] = `
       </span>
       <input
         className="react-input-tags-input"
-        id="inputNode"
         onBlur={[Function]}
         onChange={[Function]}
         onKeyDown={[Function]}
