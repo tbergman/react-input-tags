@@ -1,18 +1,24 @@
 import React from 'react';
 import { InputTags } from '../interface/InputTags.jsx';
 
-export const handleInsertDefault = (currentTags, insertTagIndex, newTag) =>
-  [
+export const handleInsertDefault = (currentTags, insertTagIndex, newTag) => {
+  // console.log(currentTags, insertTagIndex, newTag);
+  const newTags = [
     ...currentTags.slice(0, insertTagIndex),
     newTag,
     ...currentTags.slice(insertTagIndex),
   ];
+  // console.log(newTags);
+  return newTags;
+};
 
-export const handleRemoveDefault = (currentTags, removeTagIndex) =>
-  [
+export const handleRemoveDefault = (currentTags, removeTagIndex) => {
+  const newTags = [
     ...currentTags.slice(0, removeTagIndex),
     ...currentTags.slice(removeTagIndex + 1),
   ];
+  return newTags;
+};
 
 export class InputTagsContainerDefault extends React.Component {
   static propTypes = {
@@ -28,8 +34,8 @@ export class InputTagsContainerDefault extends React.Component {
   }
 
   handleInsert = (currentTags, insertTagIndex, newTag) => {
-    const { handleInsert, handleUpdateTags } = this.props;
-    const newTags = handleInsert(currentTags, insertTagIndex, newTag);
+    const { handleUpdateTags } = this.props;
+    const newTags = this.props.handleInsert(currentTags, insertTagIndex, newTag);
     handleUpdateTags(newTags);
   }
 
@@ -44,11 +50,13 @@ export class InputTagsContainerDefault extends React.Component {
       tags,
       ...otherProps
     } = this.props;
-    console.log(otherProps);
     return (
       <InputTags
         tags={tags}
-        handleInsert={this.handleInsert}
+        handleInsert={() => {
+          console.log('hi');
+          // this.handleInsert
+        }}
         handleRemove={this.handleRemove}
         {...otherProps}
       />

@@ -37,7 +37,7 @@ storiesOf('InputTags', module)
       />
     )
   })
-  .add('edit token by clicking on tag and typing', () => {
+  .add('edit token by clicking on tag', () => {
     return (
       <InputTags
         tags={['edit me']}

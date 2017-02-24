@@ -3,7 +3,12 @@ import { mount } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { InputTagsDefault, SuggestionList, calcNextIndexDefault, calcPreviousIndexDefault } from '../src/implementation/InputTagsDefault.jsx';
+import {
+  InputTagsDefault,
+  SuggestionList,
+  calcNextIndexDefault,
+  calcPreviousIndexDefault,
+} from '../src/implementation/InputTagsDefault.jsx';
 import {
   enterKeyCode,
   tabKeyCode,
@@ -18,38 +23,31 @@ import {
 import { noop } from './util';
 import { emptyString, nonEmptyString, items } from './mock';
 
-// TODO: input mount
-/*
-it('should copy the font styling from the input to the mirror element', () => {
-  const inputStyles = window.getComputedStyle(inputWrapper.find('#inputNode').node);
-  const mirrorStyles = inputWrapper.find('#mirrorNode').node.style;
-  MIRROR_STYLES.forEach((mStyle) => {
-    expect(mirrorStyles[mStyle]).to.equal(inputStyles[mStyle]);
-  });
-})
-*/;
-
 describe('<InputTagsDefault />', () => {
   let inputTagsWrapper;
   let tags;
   let handleInsert;
-  let handleEdit;
   let handleRemove;
   let suggestions;
   let handleUpdateSuggestions;
   let getSuggestionValue;
+  let focusElement;
+  let selectElement;
 
-  describe('create token manually', () => {
+  describe('create tag manually', () => {
     beforeEach(() => {
       tags = [];
       handleInsert = sinon.stub();
+      focusElement = sinon.stub();
+      selectElement = sinon.stub();
 
       inputTagsWrapper = mount(
         <InputTagsDefault
           tags={tags}
           handleInsert={handleInsert}
-          handleEdit={noop}
           handleRemove={noop}
+          focusElement={focusElement}
+          selectElement={selectElement}
         />
       );
     });
@@ -69,17 +67,33 @@ describe('<InputTagsDefault />', () => {
         expect(inputTagsWrapper.state().showSuggestions).to.equal(true);
       });
 
+      it('should *not* focus on the input element', () => {
+        expect(focusElement).to.not.have.been.called();
+      });
+
+      it('should *not* select the text in the input element', () => {
+        expect(selectElement).to.not.have.been.called();
+      });
+
       context('when focus leaves input field', () => {
         beforeEach(() => {
           inputTagsWrapper.find('input').simulate('blur');
         });
 
         it('should insert typed string as token', () => {
-          expect(handleInsert).to.have.been.calledWith(tags, inputValue);
+          expect(handleInsert).to.have.been.calledWith(tags, tags.length, inputValue);
         });
 
         it('should clear the state `inputValue`', () => {
           expect(inputTagsWrapper.state().inputValue).to.equal(emptyString);
+        });
+
+        it('should set the state `inputIndex` to be one greater than length of tags', () => {
+          expect(inputTagsWrapper.state().inputIndex).to.equal(tags.length + 1);
+        });
+
+        it('should set the state of `inputIsEditing` to be false', () => {
+          expect(inputTagsWrapper.state().inputIsEditing).to.equal(false);
         });
 
         it('should set the state `showSuggestions` to be false', () => {
@@ -93,11 +107,19 @@ describe('<InputTagsDefault />', () => {
         });
 
         it('should insert typed string as token', () => {
-          expect(handleInsert).to.have.been.calledWith(tags, inputValue);
+          expect(handleInsert).to.have.been.calledWith(tags, tags.length, inputValue);
         });
 
         it('should clear the state `inputValue`', () => {
           expect(inputTagsWrapper.state().inputValue).to.equal(emptyString);
+        });
+
+        it('should set the state `inputIndex` to be one greater than length of tags', () => {
+          expect(inputTagsWrapper.state().inputIndex).to.equal(tags.length + 1);
+        });
+
+        it('should set the state of `inputIsEditing` to be false', () => {
+          expect(inputTagsWrapper.state().inputIsEditing).to.equal(false);
         });
 
         it('should set the state `showSuggestions` to be false', () => {
@@ -111,11 +133,19 @@ describe('<InputTagsDefault />', () => {
         });
 
         it('should insert typed string as token', () => {
-          expect(handleInsert).to.have.been.calledWith(tags, inputValue);
+          expect(handleInsert).to.have.been.calledWith(tags, tags.length, inputValue);
         });
 
         it('should clear the state `inputValue`', () => {
           expect(inputTagsWrapper.state().inputValue).to.equal(emptyString);
+        });
+
+        it('should set the state `inputIndex` to be one greater than length of tags', () => {
+          expect(inputTagsWrapper.state().inputIndex).to.equal(tags.length + 1);
+        });
+
+        it('should set the state of `inputIsEditing` to be false', () => {
+          expect(inputTagsWrapper.state().inputIsEditing).to.equal(false);
         });
 
         it('should set the state `showSuggestions` to be false', () => {
@@ -129,11 +159,19 @@ describe('<InputTagsDefault />', () => {
         });
 
         it('should insert typed string as token', () => {
-          expect(handleInsert).to.have.been.calledWith(tags, inputValue);
+          expect(handleInsert).to.have.been.calledWith(tags, tags.length, inputValue);
         });
 
         it('should clear the state `inputValue`', () => {
           expect(inputTagsWrapper.state().inputValue).to.equal(emptyString);
+        });
+
+        it('should set the state `inputIndex` to be one greater than length of tags', () => {
+          expect(inputTagsWrapper.state().inputIndex).to.equal(tags.length + 1);
+        });
+
+        it('should set the state of `inputIsEditing` to be false', () => {
+          expect(inputTagsWrapper.state().inputIsEditing).to.equal(false);
         });
 
         it('should set the state `showSuggestions` to be false', () => {
@@ -152,6 +190,10 @@ describe('<InputTagsDefault />', () => {
 
         it('should *not* clear the state `inputValue`', () => {
           expect(inputTagsWrapper.state().inputValue).to.equal(inputValue);
+        });
+
+        it('should *not* set the state `inputIndex`', () => {
+          expect(inputTagsWrapper.state().inputIndex).to.not.equal(tags.length + 1);
         });
 
         it('should *not* set the state `showSuggestions` to be false', () => {
@@ -217,70 +259,63 @@ describe('<InputTagsDefault />', () => {
     });
   });
 
-  describe('edit token', () => {
+  describe('edit tag', () => {
     context('when there is at least one tag', () => {
       beforeEach(() => {
         tags = ['edit me'];
-        handleEdit = sinon.stub();
+        handleInsert = sinon.stub();
         handleRemove = sinon.stub();
+        focusElement = sinon.stub();
+        selectElement = sinon.stub();
 
         inputTagsWrapper = mount(
           <InputTagsDefault
             tags={tags}
-            handleInsert={noop}
-            handleEdit={handleEdit}
+            handleInsert={handleInsert}
             handleRemove={handleRemove}
+            focusElement={focusElement}
+            selectElement={selectElement}
           />
         );
       });
 
-      context('when token is clicked', () => {
-        beforeEach(() => {
-          inputTagsWrapper.find('button').parent().childAt(0).simulate('click');
-        });
-
-        it('should render a textarea', () => {
-          expect(inputTagsWrapper.find('textarea')).to.have.length(1);
-        });
-
-        context('when textarea is changed to non empty string', () => {
-          const inputValue = nonEmptyString;
+      describe('start editing tag', () => {
+        context('when token is clicked', () => {
+          const editTagIndex = 0;
 
           beforeEach(() => {
-            inputTagsWrapper.find('textarea').simulate('change', { target: { value: inputValue } });
+            inputTagsWrapper.find('button').parent().childAt(0).simulate('click');
           });
 
-          it('should edit the token', () => {
-            expect(handleEdit).to.have.been.calledWith(tags, tags.length - 1, nonEmptyString);
-          });
-        });
-
-        context('when textarea is changed to empty string', () => {
-          const inputValue = emptyString;
-
-          beforeEach(() => {
-            inputTagsWrapper.find('textarea').simulate('change', { target: { value: inputValue } });
+          it('should remove the current tag', () => {
+            expect(handleRemove).to.have.been.calledWith(tags, editTagIndex);
           });
 
-          it('should remove the token', () => {
-            expect(handleRemove).to.have.been.calledWith(tags, tags.length - 1);
-          });
-        });
-
-        context('when focus leaves textarea', () => {
-          beforeEach(() => {
-            inputTagsWrapper.find('textarea').simulate('blur');
+          it('should set state `inputValue` to the previous tag', () => {
+            expect(inputTagsWrapper.state().inputValue).to.equal(tags[editTagIndex]);
           });
 
-          it('should *not* render a textarea', () => {
-            expect(inputTagsWrapper.find('textarea')).to.have.length(0);
+          it('should set state `inputIndex` to the index of the tag being edited', () => {
+            expect(inputTagsWrapper.state().inputIndex).to.equal(editTagIndex);
+          });
+
+          it('should set state `inputIsEditing` to true', () => {
+            expect(inputTagsWrapper.state().inputIsEditing).to.equal(true);
+          });
+
+          it('should focus on the input element', () => {
+            expect(focusElement).to.have.been.called();
+          });
+
+          it('should select the text in the input element', () => {
+            expect(selectElement).to.have.been.called();
           });
         });
       });
     });
   });
 
-  describe('delete token', () => {
+  describe('delete tag', () => {
     context('when there is at least one tag', () => {
       beforeEach(() => {
         tags = ['delete me'];
@@ -290,7 +325,6 @@ describe('<InputTagsDefault />', () => {
           <InputTagsDefault
             tags={tags}
             handleInsert={noop}
-            handleEdit={noop}
             handleRemove={handleRemove}
           />
         );
@@ -301,6 +335,7 @@ describe('<InputTagsDefault />', () => {
           inputTagsWrapper.find('button').simulate('click');
         });
 
+        // TODO: fix
         it('should remove token', () => {
           expect(handleRemove).to.have.been.calledWith(tags, tags.length - 1);
         });
@@ -469,6 +504,7 @@ describe('<InputTagsDefault />', () => {
           const suggestionsIndex = 0;
 
           beforeEach(() => {
+            getSuggestionValue.returns(suggestions[suggestionsIndex]);
             inputTagsWrapper.find('ul').childAt(suggestionsIndex).simulate('click');
           });
 
@@ -477,7 +513,7 @@ describe('<InputTagsDefault />', () => {
           });
 
           it('should insert the suggestion as token', () => {
-            expect(handleInsert).to.have.been.calledWith(tags, getSuggestionValue(suggestions[suggestionsIndex]));
+            expect(handleInsert).to.have.been.calledWith(tags, tags.length, getSuggestionValue(suggestions[suggestionsIndex]));
           });
         });
 
@@ -485,6 +521,7 @@ describe('<InputTagsDefault />', () => {
           const suggestionsIndex = 0; // first suggestion is highlighted by default
 
           beforeEach(() => {
+            getSuggestionValue.returns(suggestions[suggestionsIndex]);
             inputTagsWrapper.find('input').simulate('keydown', { keyCode: enterKeyCode });
           });
 
@@ -493,7 +530,7 @@ describe('<InputTagsDefault />', () => {
           });
 
           it('should insert the suggestion as token', () => {
-            expect(handleInsert).to.have.been.calledWith(tags, getSuggestionValue(suggestions[suggestionsIndex]));
+            expect(handleInsert).to.have.been.calledWith(tags, tags.length, getSuggestionValue(suggestions[suggestionsIndex]));
           });
         });
 
@@ -501,6 +538,7 @@ describe('<InputTagsDefault />', () => {
           const suggestionsIndex = 0; // first suggestion is highlighted by default
 
           beforeEach(() => {
+            getSuggestionValue.returns(suggestions[suggestionsIndex]);
             inputTagsWrapper.find('input').simulate('keydown', { keyCode: tabKeyCode });
           });
 
@@ -509,7 +547,7 @@ describe('<InputTagsDefault />', () => {
           });
 
           it('should insert the suggestion as token', () => {
-            expect(handleInsert).to.have.been.calledWith(tags, getSuggestionValue(suggestions[suggestionsIndex]));
+            expect(handleInsert).to.have.been.calledWith(tags, tags.length, getSuggestionValue(suggestions[suggestionsIndex]));
           });
         });
 
@@ -517,6 +555,7 @@ describe('<InputTagsDefault />', () => {
           const suggestionsIndex = 0; // first suggestion is highlighted by default
 
           beforeEach(() => {
+            getSuggestionValue.returns(suggestions[suggestionsIndex]);
             inputTagsWrapper.find('input').simulate('keydown', { keyCode: commaKeyCode });
           });
 
@@ -525,7 +564,7 @@ describe('<InputTagsDefault />', () => {
           });
 
           it('should insert the suggestion as token', () => {
-            expect(handleInsert).to.have.been.calledWith(tags, getSuggestionValue(suggestions[suggestionsIndex]));
+            expect(handleInsert).to.have.been.calledWith(tags, tags.length, getSuggestionValue(suggestions[suggestionsIndex]));
           });
         });
       });

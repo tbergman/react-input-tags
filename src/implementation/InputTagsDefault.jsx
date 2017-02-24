@@ -95,6 +95,8 @@ export const MIRROR_STYLES = [
 
 export const INPUT_WIDTH_EXTRA = 2;
 
+export const INPUT_MAX_WIDTH = 9999;
+
 export class InputTagsDefault extends React.Component {
   static propTypes = {
     tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
@@ -104,6 +106,9 @@ export class InputTagsDefault extends React.Component {
     handleUpdateSuggestions: React.PropTypes.func,
     getSuggestionValue: React.PropTypes.func,
     InputTagsClassName: React.PropTypes.string,
+    inputMaxWidth: React.PropTypes.number,
+    mirrorStyles: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+    inputWidthExtra: React.PropTypes.number.isRequired,
     focusElement: React.PropTypes.func.isRequired,
     selectElement: React.PropTypes.func.isRequired,
     calcNextIndex: React.PropTypes.func.isRequired,
@@ -120,6 +125,9 @@ export class InputTagsDefault extends React.Component {
     handleUpdateSuggestions: handleUpdateSuggestionsDefault,
     getSuggestionValue: getSuggestionValueDefault,
     InputTagsClassName: InputTagsClassNameDefault,
+    inputMaxWidth: INPUT_MAX_WIDTH,
+    mirrorStyles: MIRROR_STYLES,
+    inputWidthExtra: INPUT_WIDTH_EXTRA,
     focusElement,
     selectElement,
     calcNextIndex: calcNextIndexDefault,
@@ -134,6 +142,8 @@ export class InputTagsDefault extends React.Component {
   state = {
     inputValue: '',
     inputIndex: 0,
+    // inputIndex: this.props.tags.length,
+    // TODO: inputIndex: this.props.tags.length, ?
     inputIsEditing: false,
     showSuggestions: false,
     highlightedSuggestionIndex: 0,
@@ -152,13 +162,17 @@ export class InputTagsDefault extends React.Component {
 
   editTag = (tags, editTagIndex) => {
     this.removeTag(tags, editTagIndex);
-    const editValue = tags[editTagIndex];
-    this.setState({ inputValue: editValue, inputIndex: editTagIndex, inputIsEditing: true });
+    this.setState({
+      inputValue: tags[editTagIndex],
+      inputIndex: editTagIndex,
+      inputIsEditing: true,
+    });
   }
 
   removeTag = (tags, removeTagIndex) => {
+    console.log('removing tag');
     const { handleRemove } = this.props;
-    this.setState({ inputIndex: tags.length - 1 });
+    // TODO: this.setState({ inputIndex: tags.length - 1 });
     handleRemove(tags, removeTagIndex);
   }
 
@@ -168,32 +182,6 @@ export class InputTagsDefault extends React.Component {
     const showSuggestions = inputValue.length > 0;
     this.setState({ inputValue, showSuggestions });
     handleUpdateSuggestions(inputValue);
-  }
-
-  focusOnInput = () => {
-    const element = this.inputNode;
-    this.props.focusElement(element);
-    this.props.selectElement(element);
-  }
-
-  mirrorInputStyle = () => {
-    const inputNode = this.inputNode;
-    const mirrorNode = this.mirrorNode;
-    if (!inputNode || !mirrorNode) return;
-    const inputStyle = window.getComputedStyle(inputNode);
-    MIRROR_STYLES.forEach((mStyle) => {
-      mirrorNode.style[mStyle] = inputStyle[mStyle];
-    });
-  }
-
-  updateInputWidth = () => {
-    const inputNode = this.inputNode;
-    const mirrorNode = this.mirrorNode;
-    if (!inputNode || !mirrorNode) return;
-    let newInputWidth = mirrorNode.offsetWidth + INPUT_WIDTH_EXTRA;
-    if (newInputWidth > 195) newInputWidth = 195;
-    // TODO: inputMaxWidth prop
-    inputNode.style.width = `${newInputWidth}px`;
   }
 
   handleInputOnBlur = () => {
@@ -226,13 +214,15 @@ export class InputTagsDefault extends React.Component {
       // prevents typing tab from setting the focus on something other than the input
       event.preventDefault();
       if (showSuggestions && suggestions.length > 0) {
-        this.insertTag(tags, inputIndex, getSuggestionValue(suggestions[highlightedSuggestionIndex]));
+        const suggestion = getSuggestionValue(suggestions[highlightedSuggestionIndex]);
+        this.insertTag(tags, inputIndex, suggestion);
       } else {
         this.insertTag(tags, inputIndex, inputValue);
       }
     }
 
     if (removeKeyCodes.includes(keyCode) && inputValue.length === 0 && tags.length > 0) {
+      // TODO: swap tags.length - 1 for inputIndex ?
       this.removeTag(tags, tags.length - 1);
     }
 
@@ -252,6 +242,33 @@ export class InputTagsDefault extends React.Component {
       const newHighlightedIndex = calcPreviousIndex(oldHighlightedIndex, numSuggestions);
       this.setHighlightedSuggestionIndex(newHighlightedIndex);
     }
+  }
+
+  handleEdit = () => {
+    const element = this.inputNode;
+    this.props.focusElement(element);
+    this.props.selectElement(element);
+  }
+
+  mirrorInputStyle = () => {
+    const { mirrorStyles } = this.props;
+    const inputNode = this.inputNode;
+    const mirrorNode = this.mirrorNode;
+    if (!inputNode || !mirrorNode) return;
+    const inputStyle = window.getComputedStyle(inputNode);
+    mirrorStyles.forEach((mStyle) => {
+      mirrorNode.style[mStyle] = inputStyle[mStyle];
+    });
+  }
+
+  updateInputWidth = () => {
+    const { inputWidthExtra, inputMaxWidth } = this.props;
+    const inputNode = this.inputNode;
+    const mirrorNode = this.mirrorNode;
+    if (!inputNode || !mirrorNode) return;
+    const updatedInputWidth = mirrorNode.offsetWidth + inputWidthExtra;
+    const newInputWidth = (updatedInputWidth < inputMaxWidth) ? updatedInputWidth : inputMaxWidth;
+    inputNode.style.width = `${newInputWidth}px`;
   }
 
   setShowSuggestions = (showSuggestions) => {
@@ -277,7 +294,6 @@ export class InputTagsDefault extends React.Component {
       showSuggestions,
       highlightedSuggestionIndex,
     } = this.state;
-    // TODO: Tags+Input Component
     return (
       <div
         className={InputTagsClassName}
@@ -301,16 +317,16 @@ export class InputTagsDefault extends React.Component {
             mirrorRef={(node) => { this.mirrorNode = node; }}
             mirrorInputStyle={this.mirrorInputStyle}
             updateInputWidth={this.updateInputWidth}
-            isEditing={inputIsEditing}
-            handleEdit={this.focusOnInput}
+            inputIsEditing={inputIsEditing}
+            handleEdit={this.handleEdit}
             {...otherProps}
           />
           {tags.slice(inputIndex).map((tag, index) =>
             <Tag
-              key={index}
+              key={index + inputIndex}
               value={tag}
-              handleEdit={() => this.editTag(tags, index)}
-              handleRemove={() => this.removeTag(tags, index)}
+              handleEdit={() => this.editTag(tags, index + inputIndex)}
+              handleRemove={() => this.removeTag(tags, index + inputIndex)}
               {...otherProps}
             />
           )}
@@ -323,10 +339,7 @@ export class InputTagsDefault extends React.Component {
           suggestions={suggestions}
           highlightedSuggestionIndex={highlightedSuggestionIndex}
           handleHighlight={this.setHighlightedSuggestionIndex}
-          handleSelect={suggestion => {
-            console.log(suggestion);
-            this.insertTag(tags, inputIndex, suggestion);
-          }}
+          handleSelect={suggestion => this.insertTag(tags, inputIndex, suggestion)}
           getSuggestionValue={getSuggestionValue}
           {...otherProps}
         />
