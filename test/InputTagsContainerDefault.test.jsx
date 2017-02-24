@@ -44,8 +44,7 @@ describe('<InputTagsContainerDefault />', () => {
           });
 
           it('should update tags', () => {
-            expect(handleUpdateTags).to.have.been.called();
-            // expect(handleUpdateTags).to.have.been.calledWith(handleInsertDefault(tags, tags.length, item));
+            expect(handleUpdateTags).to.have.been.calledWith(handleInsertDefault(tags, tags.length, item));
           });
         });
       });
@@ -54,21 +53,13 @@ describe('<InputTagsContainerDefault />', () => {
     describe('edit tag', () => {
       context('when click tag', () => {
         const editTagIndex = 0;
-        const newValue = 'cool';
 
         beforeEach(() => {
           inputTagsContainerWrapper.find('span').at(editTagIndex).childAt(0).simulate('click');
-          // inputTagsContainerWrapper.find('span').at(editTagIndex).simulate('click');
         });
 
-        context('when text area is changed to non empty string', () => {
-          beforeEach(() => {
-            inputTagsContainerWrapper.find('textarea').simulate('change', { target: { value: newValue }});
-          });
-
-          it('should update tags', () => {
-            expect(handleUpdateTags).to.have.been.calledWith(handleEditDefault(tags, editTagIndex, newValue));
-          });
+        it('should update tags', () => {
+          expect(handleUpdateTags).to.have.been.calledWith(handleRemoveDefault(tags, editTagIndex));
         });
       });
     });

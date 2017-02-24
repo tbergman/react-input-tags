@@ -141,9 +141,7 @@ export class InputTagsDefault extends React.Component {
 
   state = {
     inputValue: '',
-    inputIndex: 0,
-    // inputIndex: this.props.tags.length,
-    // TODO: inputIndex: this.props.tags.length, ?
+    inputIndex: this.props.tags.length,
     inputIsEditing: false,
     showSuggestions: false,
     highlightedSuggestionIndex: 0,
@@ -151,6 +149,7 @@ export class InputTagsDefault extends React.Component {
 
   insertTag = (tags, insertTagIndex, inputValue) => {
     const { handleInsert } = this.props;
+
     this.setState({
       inputValue: '',
       inputIndex: tags.length + 1,
@@ -170,14 +169,15 @@ export class InputTagsDefault extends React.Component {
   }
 
   removeTag = (tags, removeTagIndex) => {
-    console.log('removing tag');
     const { handleRemove } = this.props;
-    // TODO: this.setState({ inputIndex: tags.length - 1 });
+
+    this.setState({ inputIndex: removeTagIndex });
     handleRemove(tags, removeTagIndex);
   }
 
   handleInputOnChange = (event) => {
     const { handleUpdateSuggestions } = this.props;
+
     const inputValue = event.target.value;
     const showSuggestions = inputValue.length > 0;
     this.setState({ inputValue, showSuggestions });
@@ -222,8 +222,13 @@ export class InputTagsDefault extends React.Component {
     }
 
     if (removeKeyCodes.includes(keyCode) && inputValue.length === 0 && tags.length > 0) {
-      // TODO: swap tags.length - 1 for inputIndex ?
+      // TODO: should we use inputIndex here?
+      // swap tags.length - 1 for inputIndex ?
+      // this.removeTag(tags, inputIndex - 1);
       this.removeTag(tags, tags.length - 1);
+
+      // TODO: when would we want to use inputIndex?
+      // when inputIndex is less than tags.length - 1 ?
     }
 
     if (closeKeyCodes.includes(keyCode)) {
@@ -255,6 +260,7 @@ export class InputTagsDefault extends React.Component {
     const inputNode = this.inputNode;
     const mirrorNode = this.mirrorNode;
     if (!inputNode || !mirrorNode) return;
+
     const inputStyle = window.getComputedStyle(inputNode);
     mirrorStyles.forEach((mStyle) => {
       mirrorNode.style[mStyle] = inputStyle[mStyle];
@@ -266,6 +272,7 @@ export class InputTagsDefault extends React.Component {
     const inputNode = this.inputNode;
     const mirrorNode = this.mirrorNode;
     if (!inputNode || !mirrorNode) return;
+
     const updatedInputWidth = mirrorNode.offsetWidth + inputWidthExtra;
     const newInputWidth = (updatedInputWidth < inputMaxWidth) ? updatedInputWidth : inputMaxWidth;
     inputNode.style.width = `${newInputWidth}px`;
@@ -282,6 +289,8 @@ export class InputTagsDefault extends React.Component {
   render() {
     const {
       tags,
+      // must pull out handleRemove prop, otherwise will override Tag handleRemove in otherProps
+      handleRemove, // eslint-disable-line no-unused-vars
       suggestions,
       getSuggestionValue,
       InputTagsClassName,
@@ -304,7 +313,11 @@ export class InputTagsDefault extends React.Component {
               key={index}
               value={tag}
               handleEdit={() => this.editTag(tags, index)}
-              handleRemove={() => this.removeTag(tags, index)}
+              handleRemove={() => {
+                // TODO: remove
+                console.log('1st group called');
+                this.removeTag(tags, index);
+              }}
               {...otherProps}
             />
           )}
@@ -326,7 +339,11 @@ export class InputTagsDefault extends React.Component {
               key={index + inputIndex}
               value={tag}
               handleEdit={() => this.editTag(tags, index + inputIndex)}
-              handleRemove={() => this.removeTag(tags, index + inputIndex)}
+              handleRemove={() => {
+                // TODO: remove
+                console.log('2nd group called');
+                this.removeTag(tags, index + inputIndex);
+              }}
               {...otherProps}
             />
           )}

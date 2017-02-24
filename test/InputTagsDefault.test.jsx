@@ -34,6 +34,40 @@ describe('<InputTagsDefault />', () => {
   let focusElement;
   let selectElement;
 
+  describe('when component mounts', () => {
+    beforeEach(() => {
+      tags = items;
+
+      inputTagsWrapper = mount(
+        <InputTagsDefault
+          tags={tags}
+          handleInsert={noop}
+          handleRemove={noop}
+        />
+      )
+    });
+
+    it('should set state `inputValue` to empty string', () => {
+      expect(inputTagsWrapper.state().inputValue).to.equal(emptyString);
+    });
+
+    it('should set state `inputIndex` to length of tags', () => {
+      expect(inputTagsWrapper.state().inputIndex).to.equal(tags.length);
+    });
+
+    it('should set state `inputIsEditing` to false', () => {
+      expect(inputTagsWrapper.state().inputIsEditing).to.equal(false);
+    });
+
+    it('should set state `showSuggestions` to length of tags', () => {
+      expect(inputTagsWrapper.state().showSuggestions).to.equal(false);
+    });
+
+    it('should set state `highlightedSuggestionIndex` to zero', () => {
+      expect(inputTagsWrapper.state().highlightedSuggestionIndex).to.equal(0);
+    });
+  });
+
   describe('create tag manually', () => {
     beforeEach(() => {
       tags = [];
@@ -335,9 +369,12 @@ describe('<InputTagsDefault />', () => {
           inputTagsWrapper.find('button').simulate('click');
         });
 
-        // TODO: fix
         it('should remove token', () => {
           expect(handleRemove).to.have.been.calledWith(tags, tags.length - 1);
+        });
+
+        it('should set the state `inputIndex`', () => {
+          expect(inputTagsWrapper.state().inputIndex).to.equal(tags.length - 1);
         });
       });
 
@@ -349,6 +386,10 @@ describe('<InputTagsDefault />', () => {
 
           it('should remove token', () => {
             expect(handleRemove).to.have.been.calledWith(tags, tags.length - 1);
+          });
+
+          it('should set the state `inputIndex`', () => {
+            expect(inputTagsWrapper.state().inputIndex).to.equal(tags.length - 1);
           });
         });
 
@@ -362,6 +403,10 @@ describe('<InputTagsDefault />', () => {
 
           it('should remove token', () => {
             expect(handleRemove).to.have.been.calledWith(tags, tags.length - 1);
+          });
+
+          it('should set the state `inputIndex`', () => {
+            expect(inputTagsWrapper.state().inputIndex).to.equal(tags.length - 1);
           });
         });
 

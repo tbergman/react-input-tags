@@ -1,47 +1,41 @@
 import React from 'react';
 import { InputTags } from '../interface/InputTags.jsx';
 
-export const handleInsertDefault = (currentTags, insertTagIndex, newTag) => {
-  // console.log(currentTags, insertTagIndex, newTag);
-  const newTags = [
+export const handleInsertDefault = (currentTags, insertTagIndex, newTag) =>
+  [
     ...currentTags.slice(0, insertTagIndex),
     newTag,
     ...currentTags.slice(insertTagIndex),
   ];
-  // console.log(newTags);
-  return newTags;
-};
 
-export const handleRemoveDefault = (currentTags, removeTagIndex) => {
-  const newTags = [
+export const handleRemoveDefault = (currentTags, removeTagIndex) =>
+  [
     ...currentTags.slice(0, removeTagIndex),
     ...currentTags.slice(removeTagIndex + 1),
   ];
-  return newTags;
-};
 
 export class InputTagsContainerDefault extends React.Component {
   static propTypes = {
     tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleUpdateTags: React.PropTypes.func.isRequired,
-    handleInsert: React.PropTypes.func,
-    handleRemove: React.PropTypes.func,
+    handleInsertTag: React.PropTypes.func,
+    handleRemoveTag: React.PropTypes.func,
   }
 
   static defaultProps = {
-    handleInsert: handleInsertDefault,
-    handleRemove: handleRemoveDefault,
+    handleInsertTag: handleInsertDefault,
+    handleRemoveTag: handleRemoveDefault,
   }
 
   handleInsert = (currentTags, insertTagIndex, newTag) => {
-    const { handleUpdateTags } = this.props;
-    const newTags = this.props.handleInsert(currentTags, insertTagIndex, newTag);
+    const { handleInsertTag, handleUpdateTags } = this.props;
+    const newTags = handleInsertTag(currentTags, insertTagIndex, newTag);
     handleUpdateTags(newTags);
   }
 
   handleRemove = (currentTags, removeTagIndex) => {
-    const { handleRemove, handleUpdateTags } = this.props;
-    const newTags = handleRemove(currentTags, removeTagIndex);
+    const { handleRemoveTag, handleUpdateTags } = this.props;
+    const newTags = handleRemoveTag(currentTags, removeTagIndex);
     handleUpdateTags(newTags);
   }
 
@@ -53,10 +47,7 @@ export class InputTagsContainerDefault extends React.Component {
     return (
       <InputTags
         tags={tags}
-        handleInsert={() => {
-          console.log('hi');
-          // this.handleInsert
-        }}
+        handleInsert={this.handleInsert}
         handleRemove={this.handleRemove}
         {...otherProps}
       />

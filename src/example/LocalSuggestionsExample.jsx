@@ -33,6 +33,7 @@ export class LocalSuggestionsExample extends React.Component {
         tags={this.state.tags}
         handleUpdateTags={this.handleUpdateTags}
         inputPlaceholder={'Add tag'}
+        inputMaxWidth={200}
         suggestions={this.state.suggestions}
         handleUpdateSuggestions={this.handleUpdateSuggestions}
       />
