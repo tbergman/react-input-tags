@@ -8,40 +8,36 @@ export const SuggestionListClassNameDefault = `${defaultClassNamePrefix}-suggest
 /* eslint-disable react/prefer-stateless-function */
 export class SuggestionListDefault extends React.Component {
   static propTypes = {
-    SuggestionImplementation: React.PropTypes.func,
     suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
-    highlightedIndex: React.PropTypes.number.isRequired,
+    highlightedSuggestionIndex: React.PropTypes.number.isRequired,
     handleHighlight: React.PropTypes.func.isRequired,
     handleSelect: React.PropTypes.func.isRequired,
     getSuggestionValue: React.PropTypes.func.isRequired,
     SuggestionListClassName: React.PropTypes.string,
-    SuggestionClassName: React.PropTypes.string,
   }
 
   render() {
     const {
-      SuggestionImplementation,
       suggestions,
-      highlightedIndex,
+      highlightedSuggestionIndex,
       handleHighlight,
       handleSelect,
       getSuggestionValue,
       SuggestionListClassName,
-      SuggestionClassName,
+      ...otherProps
     } = this.props;
     return (
       <ul className={SuggestionListClassName}>
         {suggestions.map((suggestion, index) => {
-          const isHighlighted = highlightedIndex === index;
+          const isHighlighted = highlightedSuggestionIndex === index;
           return (
             <Suggestion
-              SuggestionImplementation={SuggestionImplementation}
               key={index}
               value={suggestion}
               isHighlighted={isHighlighted}
               handleHighlight={() => handleHighlight(index)}
               handleSelect={() => handleSelect(getSuggestionValue(suggestion))}
-              SuggestionClassName={SuggestionClassName}
+              {...otherProps}
             />
           );
         })}

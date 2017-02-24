@@ -1,77 +1,35 @@
 import React from 'react';
 import { InputTags } from '../interface/InputTags.jsx';
 
-// TODO: test
-export const handleInsertDefault = (currentTags, insertTagIndex, newTag) => {
-  const newTags = [
+export const handleInsertDefault = (currentTags, insertTagIndex, newTag) =>
+  [
     ...currentTags.slice(0, insertTagIndex),
     newTag,
     ...currentTags.slice(insertTagIndex),
   ];
-  return newTags;
-};
 
-// TODO: remove?
-export const handleEditDefault = (currentTags, editTagIndex, newValue) => {
-  const newTags = [
-    ...currentTags.slice(0, editTagIndex),
-    newValue,
-    ...currentTags.slice(editTagIndex + 1),
-  ];
-  return newTags;
-};
-
-export const handleRemoveDefault = (currentTags, removeTagIndex) => {
-  const newTags = [
+export const handleRemoveDefault = (currentTags, removeTagIndex) =>
+  [
     ...currentTags.slice(0, removeTagIndex),
     ...currentTags.slice(removeTagIndex + 1),
   ];
-  return newTags;
-};
 
 export class InputTagsContainerDefault extends React.Component {
   static propTypes = {
-    InputTagsImplementation: React.PropTypes.func,
-    InputImplementation: React.PropTypes.func,
-    TagImplementation: React.PropTypes.func,
-    SuggestionListImplementation: React.PropTypes.func,
-    SuggestionImplementation: React.PropTypes.func,
-    SuggestionsLoaderImplementation: React.PropTypes.func,
     tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleUpdateTags: React.PropTypes.func.isRequired,
-    handleDoneEditing: React.PropTypes.func,
-    inputPlaceholder: React.PropTypes.string,
-    inputTabIndex: React.PropTypes.number,
-    suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
-    handleUpdateSuggestions: React.PropTypes.func,
-    getSuggestionValue: React.PropTypes.func,
-    suggestionsAreLoading: React.PropTypes.bool,
-    handleInsert: React.PropTypes.func.isRequired,
-    handleEdit: React.PropTypes.func.isRequired,
-    handleRemove: React.PropTypes.func.isRequired,
-    InputTagsClassName: React.PropTypes.string,
-    InputClassName: React.PropTypes.string,
-    TagClassName: React.PropTypes.string,
-    SuggestionListClassName: React.PropTypes.string,
-    SuggestionClassName: React.PropTypes.string,
-    SuggestionsLoaderClassName: React.PropTypes.string,
+    handleInsert: React.PropTypes.func,
+    handleRemove: React.PropTypes.func,
   }
 
   static defaultProps = {
     handleInsert: handleInsertDefault,
-    handleEdit: handleEditDefault,
     handleRemove: handleRemoveDefault,
   }
 
   handleInsert = (currentTags, insertTagIndex, newTag) => {
     const { handleInsert, handleUpdateTags } = this.props;
     const newTags = handleInsert(currentTags, insertTagIndex, newTag);
-    handleUpdateTags(newTags);
-  }
-
-  handleEdit = (currentTags, editTagIndex, newValue) => {
-    const { handleEdit, handleUpdateTags } = this.props;
-    const newTags = handleEdit(currentTags, editTagIndex, newValue);
     handleUpdateTags(newTags);
   }
 
@@ -83,52 +41,16 @@ export class InputTagsContainerDefault extends React.Component {
 
   render() {
     const {
-      InputTagsImplementation,
-      InputImplementation,
-      TagImplementation,
-      SuggestionListImplementation,
-      SuggestionImplementation,
-      SuggestionsLoaderImplementation,
       tags,
-      handleDoneEditing,
-      inputPlaceholder,
-      inputTabIndex,
-      suggestions,
-      handleUpdateSuggestions,
-      getSuggestionValue,
-      suggestionsAreLoading,
-      InputTagsClassName,
-      InputClassName,
-      TagClassName,
-      SuggestionListClassName,
-      SuggestionClassName,
-      SuggestionsLoaderClassName,
+      ...otherProps
     } = this.props;
+    console.log(otherProps);
     return (
       <InputTags
-        InputTagsImplementation={InputTagsImplementation}
-        InputImplementation={InputImplementation}
-        TagImplementation={TagImplementation}
-        SuggestionListImplementation={SuggestionListImplementation}
-        SuggestionImplementation={SuggestionImplementation}
-        SuggestionsLoaderImplementation={SuggestionsLoaderImplementation}
         tags={tags}
         handleInsert={this.handleInsert}
-        handleEdit={this.handleEdit}
         handleRemove={this.handleRemove}
-        handleDoneEditing={handleDoneEditing}
-        inputPlaceholder={inputPlaceholder}
-        inputTabIndex={inputTabIndex}
-        suggestions={suggestions}
-        handleUpdateSuggestions={handleUpdateSuggestions}
-        getSuggestionValue={getSuggestionValue}
-        suggestionsAreLoading={suggestionsAreLoading}
-        InputTagsClassName={InputTagsClassName}
-        InputClassName={InputClassName}
-        TagClassName={TagClassName}
-        SuggestionListClassName={SuggestionListClassName}
-        SuggestionClassName={SuggestionClassName}
-        SuggestionsLoaderClassName={SuggestionsLoaderClassName}
+        {...otherProps}
       />
     );
   }

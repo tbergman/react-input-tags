@@ -15,13 +15,13 @@ export class InputDefault extends React.Component {
     handleOnBlur: React.PropTypes.func.isRequired,
     handleOnKeyDown: React.PropTypes.func.isRequired,
     InputClassName: React.PropTypes.string,
-    placeholder: React.PropTypes.string,
-    tabIndex: React.PropTypes.number,
+    inputPlaceholder: React.PropTypes.string,
+    inputTabIndex: React.PropTypes.number,
     inputRef: React.PropTypes.func,
     mirrorRef: React.PropTypes.func,
     mirrorInputStyle: React.PropTypes.func,
     updateInputWidth: React.PropTypes.func,
-    isEditing: React.PropTypes.bool,
+    inputIsEditing: React.PropTypes.bool,
     handleEdit: React.PropTypes.func,
   }
 
@@ -42,7 +42,7 @@ export class InputDefault extends React.Component {
     const { updateInputWidth, handleEdit } = this.props;
     updateInputWidth();
 
-    if (prevProps.isEditing === false && this.props.isEditing === true) {
+    if (prevProps.inputIsEditing === false && this.props.inputIsEditing === true) {
       handleEdit();
     }
   }
@@ -53,14 +53,14 @@ export class InputDefault extends React.Component {
       handleOnChange,
       handleOnBlur,
       handleOnKeyDown,
-      placeholder,
-      tabIndex,
+      inputPlaceholder,
+      inputTabIndex,
       inputRef,
       mirrorRef,
       InputClassName,
     } = this.props;
 
-    const mirrorValue = value || placeholder;
+    const mirrorValue = value || inputPlaceholder;
     const mirrorStyle = {
       position: 'absolute',
       whiteSpace: 'pre',
@@ -83,8 +83,8 @@ export class InputDefault extends React.Component {
           onChange={handleOnChange}
           onBlur={handleOnBlur}
           onKeyDown={handleOnKeyDown}
-          placeholder={placeholder}
-          tabIndex={tabIndex}
+          placeholder={inputPlaceholder}
+          tabIndex={inputTabIndex}
           className={InputClassName}
         />
       </span>

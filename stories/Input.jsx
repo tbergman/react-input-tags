@@ -64,7 +64,7 @@ storiesOf('Input', module)
         handleOnChange={noop}
         handleOnBlur={noop}
         handleOnKeyDown={noop}
-        placeholder={nonEmptyString}
+        inputPlaceholder={nonEmptyString}
       />
     )
   })
@@ -75,7 +75,7 @@ storiesOf('Input', module)
         handleOnChange={noop}
         handleOnBlur={noop}
         handleOnKeyDown={noop}
-        tabIndex={-1}
+        inputTabIndex={-1}
       />
     )
   })

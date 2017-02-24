@@ -16,7 +16,7 @@ describe('<InputDefault />', () => {
   let handleOnKeyDown;
   let mirrorInputStyle;
   let updateInputWidth;
-  let isEditing;
+  let inputIsEditing;
   let handleEdit;
 
   describe('handling input', () => {
@@ -118,9 +118,9 @@ describe('<InputDefault />', () => {
     });
   });
 
-  context('when isEditing is false', () => {
+  context('when inputIsEditing is false', () => {
     beforeEach(() => {
-      isEditing = false;
+      inputIsEditing = false;
       handleEdit = sinon.stub();
 
       inputWrapper = mount(
@@ -129,15 +129,15 @@ describe('<InputDefault />', () => {
           handleOnChange={noop}
           handleOnBlur={noop}
           handleOnKeyDown={noop}
-          isEditing={isEditing}
+          inputIsEditing={inputIsEditing}
           handleEdit={handleEdit}
         />
       )
     });
 
-    context('when isEditing changes from false to true', () => {
+    context('when inputIsEditing changes from false to true', () => {
       beforeEach(() => {
-        inputWrapper.setProps({ isEditing: true });
+        inputWrapper.setProps({ inputIsEditing: true });
       });
 
       it('should handle the edit', () => {

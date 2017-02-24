@@ -8,14 +8,14 @@ export const Suggestion = ({
   isHighlighted,
   handleHighlight,
   handleSelect,
-  SuggestionClassName,
+  ...otherProps
 }) =>
   <SuggestionImplementation
     value={value}
     isHighlighted={isHighlighted}
     handleHighlight={handleHighlight}
     handleSelect={handleSelect}
-    SuggestionClassName={SuggestionClassName}
+    {...otherProps}
   />;
 
 Suggestion.propTypes = {
@@ -24,7 +24,6 @@ Suggestion.propTypes = {
   isHighlighted: React.PropTypes.bool.isRequired,
   handleHighlight: React.PropTypes.func.isRequired,
   handleSelect: React.PropTypes.func.isRequired,
-  SuggestionClassName: React.PropTypes.string,
 };
 
 Suggestion.defaultProps = {

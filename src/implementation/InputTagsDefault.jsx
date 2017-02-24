@@ -4,7 +4,7 @@ import { Input } from '../interface/Input.jsx';
 import { Tag } from '../interface/Tag.jsx';
 import { SuggestionList } from '../interface/SuggestionList.jsx';
 import { SuggestionsLoader } from '../interface/SuggestionsLoader.jsx';
-import { defaultClassNamePrefix } from './util';
+import { focusElement, selectElement, defaultClassNamePrefix } from './util';
 
 import {
   tabKeyCode,
@@ -17,44 +17,34 @@ import {
 } from '../keyCodes';
 
 export const SuggestionListContainer = ({
-  SuggestionListImplementation,
-  SuggestionImplementation,
-  suggestions,
   showSuggestions,
+  suggestions,
   highlightedSuggestionIndex,
   handleHighlight,
   handleSelect,
   getSuggestionValue,
-  SuggestionListClassName,
-  SuggestionClassName,
+  ...otherProps
 }) => {
   if (!showSuggestions) return null;
   return (
     <SuggestionList
-      SuggestionListImplementation={SuggestionListImplementation}
-      SuggestionImplementation={SuggestionImplementation}
       suggestions={suggestions}
-      highlightedIndex={highlightedSuggestionIndex}
+      highlightedSuggestionIndex={highlightedSuggestionIndex}
       handleHighlight={handleHighlight}
       handleSelect={handleSelect}
       getSuggestionValue={getSuggestionValue}
-      SuggestionListClassName={SuggestionListClassName}
-      SuggestionClassName={SuggestionClassName}
+      {...otherProps}
     />
   );
 };
 
 SuggestionListContainer.propTypes = {
-  SuggestionListImplementation: React.PropTypes.func,
-  SuggestionImplementation: React.PropTypes.func,
-  suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
   showSuggestions: React.PropTypes.bool.isRequired,
+  suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
   highlightedSuggestionIndex: React.PropTypes.number.isRequired,
   handleHighlight: React.PropTypes.func.isRequired,
   handleSelect: React.PropTypes.func.isRequired,
   getSuggestionValue: React.PropTypes.func.isRequired,
-  SuggestionListClassName: React.PropTypes.string,
-  SuggestionClassName: React.PropTypes.string,
 };
 
 export const suggestionsDefault = [];
@@ -107,28 +97,15 @@ export const INPUT_WIDTH_EXTRA = 2;
 
 export class InputTagsDefault extends React.Component {
   static propTypes = {
-    InputImplementation: React.PropTypes.func,
-    TagImplementation: React.PropTypes.func,
-    SuggestionListImplementation: React.PropTypes.func,
-    SuggestionImplementation: React.PropTypes.func,
-    SuggestionsLoaderImplementation: React.PropTypes.func,
     tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleInsert: React.PropTypes.func.isRequired,
-    handleEdit: React.PropTypes.func.isRequired,
     handleRemove: React.PropTypes.func.isRequired,
-    handleDoneEditing: React.PropTypes.func,
-    inputPlaceholder: React.PropTypes.string,
-    inputTabIndex: React.PropTypes.number,
-    suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
-    handleUpdateSuggestions: React.PropTypes.func.isRequired,
-    getSuggestionValue: React.PropTypes.func.isRequired,
-    suggestionsAreLoading: React.PropTypes.bool,
+    suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
+    handleUpdateSuggestions: React.PropTypes.func,
+    getSuggestionValue: React.PropTypes.func,
     InputTagsClassName: React.PropTypes.string,
-    InputClassName: React.PropTypes.string,
-    TagClassName: React.PropTypes.string,
-    SuggestionListClassName: React.PropTypes.string,
-    SuggestionClassName: React.PropTypes.string,
-    SuggestionsLoaderClassName: React.PropTypes.string,
+    focusElement: React.PropTypes.func.isRequired,
+    selectElement: React.PropTypes.func.isRequired,
     calcNextIndex: React.PropTypes.func.isRequired,
     calcPreviousIndex: React.PropTypes.func.isRequired,
     insertKeyCodes: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
@@ -143,6 +120,8 @@ export class InputTagsDefault extends React.Component {
     handleUpdateSuggestions: handleUpdateSuggestionsDefault,
     getSuggestionValue: getSuggestionValueDefault,
     InputTagsClassName: InputTagsClassNameDefault,
+    focusElement,
+    selectElement,
     calcNextIndex: calcNextIndexDefault,
     calcPreviousIndex: calcPreviousIndexDefault,
     insertKeyCodes: insertKeyCodesDefault,
@@ -155,32 +134,32 @@ export class InputTagsDefault extends React.Component {
   state = {
     inputValue: '',
     inputIndex: 0,
-    inputEditMode: false,
+    inputIsEditing: false,
     showSuggestions: false,
     highlightedSuggestionIndex: 0,
   }
 
   insertTag = (tags, insertTagIndex, inputValue) => {
     const { handleInsert } = this.props;
-    this.setState({ inputValue: '', inputIndex: tags.length + 1, inputEditMode: false, showSuggestions: false });
+    this.setState({
+      inputValue: '',
+      inputIndex: tags.length + 1,
+      inputIsEditing: false,
+      showSuggestions: false,
+    });
     handleInsert(tags, insertTagIndex, inputValue);
   }
 
-  editTag = (tags, editTagIndex, newValue) => {
-    const { handleEdit } = this.props;
-    handleEdit(tags, editTagIndex, newValue);
+  editTag = (tags, editTagIndex) => {
+    this.removeTag(tags, editTagIndex);
+    const editValue = tags[editTagIndex];
+    this.setState({ inputValue: editValue, inputIndex: editTagIndex, inputIsEditing: true });
   }
 
   removeTag = (tags, removeTagIndex) => {
     const { handleRemove } = this.props;
     this.setState({ inputIndex: tags.length - 1 });
     handleRemove(tags, removeTagIndex);
-  }
-
-  startEditing = (tags, editTagIndex) => {
-    this.removeTag(tags, editTagIndex);
-    const newValue = tags[editTagIndex];
-    this.setState({ inputValue: newValue, inputIndex: editTagIndex, inputEditMode: true });
   }
 
   handleInputOnChange = (event) => {
@@ -193,9 +172,8 @@ export class InputTagsDefault extends React.Component {
 
   focusOnInput = () => {
     const element = this.inputNode;
-    if (!element) return;
-    element.focus();
-    element.select();
+    this.props.focusElement(element);
+    this.props.selectElement(element);
   }
 
   mirrorInputStyle = () => {
@@ -286,26 +264,20 @@ export class InputTagsDefault extends React.Component {
 
   render() {
     const {
-      InputImplementation,
-      TagImplementation,
-      SuggestionListImplementation,
-      SuggestionImplementation,
-      SuggestionsLoaderImplementation,
       tags,
-      handleDoneEditing,
-      inputPlaceholder,
-      inputTabIndex,
       suggestions,
       getSuggestionValue,
-      suggestionsAreLoading,
       InputTagsClassName,
-      InputClassName,
-      TagClassName,
-      SuggestionListClassName,
-      SuggestionClassName,
-      SuggestionsLoaderClassName,
+      ...otherProps
     } = this.props;
-    const { inputValue, inputIndex, inputEditMode, showSuggestions, highlightedSuggestionIndex } = this.state;
+    const {
+      inputValue,
+      inputIndex,
+      inputIsEditing,
+      showSuggestions,
+      highlightedSuggestionIndex,
+    } = this.state;
+    // TODO: Tags+Input Component
     return (
       <div
         className={InputTagsClassName}
@@ -313,59 +285,50 @@ export class InputTagsDefault extends React.Component {
         <div>
           {tags.slice(0, inputIndex).map((tag, index) =>
             <Tag
-              TagImplementation={TagImplementation}
               key={index}
               value={tag}
-              handleEdit={newValue => this.editTag(tags, index, newValue)}
+              handleEdit={() => this.editTag(tags, index)}
               handleRemove={() => this.removeTag(tags, index)}
-              handleStartEditing={() => this.startEditing(tags, index)}
-              handleDoneEditing={handleDoneEditing}
-              TagClassName={TagClassName}
+              {...otherProps}
             />
           )}
           <Input
-            InputImplementation={InputImplementation}
             value={inputValue}
             handleOnChange={this.handleInputOnChange}
             handleOnBlur={this.handleInputOnBlur}
             handleOnKeyDown={this.handleInputOnKeyDown}
-            placeholder={inputPlaceholder}
-            tabIndex={inputTabIndex}
             inputRef={(node) => { this.inputNode = node; }}
             mirrorRef={(node) => { this.mirrorNode = node; }}
             mirrorInputStyle={this.mirrorInputStyle}
             updateInputWidth={this.updateInputWidth}
-            isEditing={inputEditMode}
+            isEditing={inputIsEditing}
             handleEdit={this.focusOnInput}
-            InputClassName={InputClassName}
+            {...otherProps}
           />
           {tags.slice(inputIndex).map((tag, index) =>
             <Tag
-              TagImplementation={TagImplementation}
               key={index}
               value={tag}
-              handleEdit={() => this.startEditing(tags, index)}
+              handleEdit={() => this.editTag(tags, index)}
               handleRemove={() => this.removeTag(tags, index)}
-              TagClassName={TagClassName}
+              {...otherProps}
             />
           )}
           <SuggestionsLoader
-            SuggestionsLoaderImplementation={SuggestionsLoaderImplementation}
-            suggestionsAreLoading={suggestionsAreLoading}
-            SuggestionsLoaderClassName={SuggestionsLoaderClassName}
+            {...otherProps}
           />
         </div>
         <SuggestionListContainer
-          SuggestionListImplementation={SuggestionListImplementation}
-          SuggestionImplementation={SuggestionImplementation}
-          suggestions={suggestions}
           showSuggestions={showSuggestions}
+          suggestions={suggestions}
           highlightedSuggestionIndex={highlightedSuggestionIndex}
           handleHighlight={this.setHighlightedSuggestionIndex}
-          handleSelect={suggestion => this.insertTag(tags, inputIndex, suggestion)}
+          handleSelect={suggestion => {
+            console.log(suggestion);
+            this.insertTag(tags, inputIndex, suggestion);
+          }}
           getSuggestionValue={getSuggestionValue}
-          SuggestionListClassName={SuggestionListClassName}
-          SuggestionClassName={SuggestionClassName}
+          {...otherProps}
         />
       </div>
     );

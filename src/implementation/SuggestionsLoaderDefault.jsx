@@ -9,8 +9,8 @@ export const SuggestionsLoaderClassNameDefault = `${defaultClassNamePrefix}-sugg
 /* eslint-disable react/prefer-stateless-function */
 export class SuggestionsLoaderDefault extends React.Component {
   static propTypes = {
-    suggestionsAreLoading: React.PropTypes.bool.isRequired,
-    SuggestionsLoaderClassName: React.PropTypes.string.isRequired,
+    suggestionsAreLoading: React.PropTypes.bool,
+    SuggestionsLoaderClassName: React.PropTypes.string,
   }
 
   static defaultProps = {
