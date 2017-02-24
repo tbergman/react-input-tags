@@ -4,36 +4,29 @@ import { SuggestionListDefault } from '../implementation/SuggestionListDefault.j
 
 export const SuggestionList = ({
   SuggestionListImplementation,
-  SuggestionImplementation,
   suggestions,
-  highlightedIndex,
-  getSuggestionValue,
-  handleSelect,
+  highlightedSuggestionIndex,
   handleHighlight,
-  SuggestionListClassName,
-  SuggestionClassName,
+  handleSelect,
+  getSuggestionValue,
+  ...otherProps
 }) =>
   <SuggestionListImplementation
-    SuggestionImplementation={SuggestionImplementation}
     suggestions={suggestions}
-    highlightedIndex={highlightedIndex}
+    highlightedSuggestionIndex={highlightedSuggestionIndex}
     handleHighlight={handleHighlight}
     handleSelect={handleSelect}
     getSuggestionValue={getSuggestionValue}
-    SuggestionListClassName={SuggestionListClassName}
-    SuggestionClassName={SuggestionClassName}
+    {...otherProps}
   />;
 
 SuggestionList.propTypes = {
   SuggestionListImplementation: React.PropTypes.func.isRequired,
-  SuggestionImplementation: React.PropTypes.func,
   suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
-  highlightedIndex: React.PropTypes.number.isRequired,
+  highlightedSuggestionIndex: React.PropTypes.number.isRequired,
   handleHighlight: React.PropTypes.func.isRequired,
   handleSelect: React.PropTypes.func.isRequired,
   getSuggestionValue: React.PropTypes.func.isRequired,
-  SuggestionListClassName: React.PropTypes.string,
-  SuggestionClassName: React.PropTypes.string,
 };
 
 SuggestionList.defaultProps = {

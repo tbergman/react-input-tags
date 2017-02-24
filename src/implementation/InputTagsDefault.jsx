@@ -4,7 +4,7 @@ import { Input } from '../interface/Input.jsx';
 import { Tag } from '../interface/Tag.jsx';
 import { SuggestionList } from '../interface/SuggestionList.jsx';
 import { SuggestionsLoader } from '../interface/SuggestionsLoader.jsx';
-import { defaultClassNamePrefix } from './util';
+import { focusElement, selectElement, defaultClassNamePrefix } from './util';
 
 import {
   tabKeyCode,
@@ -17,44 +17,34 @@ import {
 } from '../keyCodes';
 
 export const SuggestionListContainer = ({
-  SuggestionListImplementation,
-  SuggestionImplementation,
-  suggestions,
   showSuggestions,
+  suggestions,
   highlightedSuggestionIndex,
   handleHighlight,
   handleSelect,
   getSuggestionValue,
-  SuggestionListClassName,
-  SuggestionClassName,
+  ...otherProps
 }) => {
   if (!showSuggestions) return null;
   return (
     <SuggestionList
-      SuggestionListImplementation={SuggestionListImplementation}
-      SuggestionImplementation={SuggestionImplementation}
       suggestions={suggestions}
-      highlightedIndex={highlightedSuggestionIndex}
+      highlightedSuggestionIndex={highlightedSuggestionIndex}
       handleHighlight={handleHighlight}
       handleSelect={handleSelect}
       getSuggestionValue={getSuggestionValue}
-      SuggestionListClassName={SuggestionListClassName}
-      SuggestionClassName={SuggestionClassName}
+      {...otherProps}
     />
   );
 };
 
 SuggestionListContainer.propTypes = {
-  SuggestionListImplementation: React.PropTypes.func,
-  SuggestionImplementation: React.PropTypes.func,
-  suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
   showSuggestions: React.PropTypes.bool.isRequired,
+  suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
   highlightedSuggestionIndex: React.PropTypes.number.isRequired,
   handleHighlight: React.PropTypes.func.isRequired,
   handleSelect: React.PropTypes.func.isRequired,
   getSuggestionValue: React.PropTypes.func.isRequired,
-  SuggestionListClassName: React.PropTypes.string,
-  SuggestionClassName: React.PropTypes.string,
 };
 
 export const suggestionsDefault = [];
@@ -93,30 +83,34 @@ export const closeKeyCodesDefault = [
   escapeKeyCode,
 ];
 
+export const MIRROR_STYLES = [
+  'fontFamily',
+  'fontSize',
+  'fontStyle',
+  'fontWeight',
+  'lineHeight',
+  'letterSpacing',
+  'wordSpacing',
+];
+
+export const INPUT_WIDTH_EXTRA = 2;
+
+export const INPUT_MAX_WIDTH = 9999;
+
 export class InputTagsDefault extends React.Component {
   static propTypes = {
-    InputImplementation: React.PropTypes.func,
-    TagImplementation: React.PropTypes.func,
-    SuggestionListImplementation: React.PropTypes.func,
-    SuggestionImplementation: React.PropTypes.func,
-    SuggestionsLoaderImplementation: React.PropTypes.func,
     tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleInsert: React.PropTypes.func.isRequired,
-    handleEdit: React.PropTypes.func.isRequired,
     handleRemove: React.PropTypes.func.isRequired,
-    handleDoneEditing: React.PropTypes.func,
-    inputPlaceholder: React.PropTypes.string,
-    inputTabIndex: React.PropTypes.number,
-    suggestions: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
-    handleUpdateSuggestions: React.PropTypes.func.isRequired,
-    getSuggestionValue: React.PropTypes.func.isRequired,
-    suggestionsAreLoading: React.PropTypes.bool,
+    suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
+    handleUpdateSuggestions: React.PropTypes.func,
+    getSuggestionValue: React.PropTypes.func,
     InputTagsClassName: React.PropTypes.string,
-    InputClassName: React.PropTypes.string,
-    TagClassName: React.PropTypes.string,
-    SuggestionListClassName: React.PropTypes.string,
-    SuggestionClassName: React.PropTypes.string,
-    SuggestionsLoaderClassName: React.PropTypes.string,
+    inputMaxWidth: React.PropTypes.number,
+    mirrorStyles: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+    inputWidthExtra: React.PropTypes.number.isRequired,
+    focusElement: React.PropTypes.func.isRequired,
+    selectElement: React.PropTypes.func.isRequired,
     calcNextIndex: React.PropTypes.func.isRequired,
     calcPreviousIndex: React.PropTypes.func.isRequired,
     insertKeyCodes: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
@@ -131,6 +125,11 @@ export class InputTagsDefault extends React.Component {
     handleUpdateSuggestions: handleUpdateSuggestionsDefault,
     getSuggestionValue: getSuggestionValueDefault,
     InputTagsClassName: InputTagsClassNameDefault,
+    inputMaxWidth: INPUT_MAX_WIDTH,
+    mirrorStyles: MIRROR_STYLES,
+    inputWidthExtra: INPUT_WIDTH_EXTRA,
+    focusElement,
+    selectElement,
     calcNextIndex: calcNextIndexDefault,
     calcPreviousIndex: calcPreviousIndexDefault,
     insertKeyCodes: insertKeyCodesDefault,
@@ -142,46 +141,60 @@ export class InputTagsDefault extends React.Component {
 
   state = {
     inputValue: '',
+    inputIndex: this.props.tags.length,
+    inputIsEditing: false,
     showSuggestions: false,
     highlightedSuggestionIndex: 0,
   }
 
-  insertTag = (tags, inputValue) => {
+  insertTag = (tags, insertTagIndex, inputValue) => {
     const { handleInsert } = this.props;
-    this.setState({ inputValue: '', showSuggestions: false });
-    handleInsert(tags, inputValue);
+
+    this.setState({
+      inputValue: '',
+      inputIndex: tags.length + 1,
+      inputIsEditing: false,
+      showSuggestions: false,
+    });
+    handleInsert(tags, insertTagIndex, inputValue);
   }
 
-  editTag = (tags, editTagIndex, newValue) => {
-    const { handleEdit } = this.props;
-    handleEdit(tags, editTagIndex, newValue);
+  editTag = (tags, editTagIndex) => {
+    this.removeTag(tags, editTagIndex);
+    this.setState({
+      inputValue: tags[editTagIndex],
+      inputIndex: editTagIndex,
+      inputIsEditing: true,
+    });
   }
 
   removeTag = (tags, removeTagIndex) => {
     const { handleRemove } = this.props;
+
     handleRemove(tags, removeTagIndex);
   }
 
   handleInputOnChange = (event) => {
     const { handleUpdateSuggestions } = this.props;
+
     const inputValue = event.target.value;
     const showSuggestions = inputValue.length > 0;
-    this.setState({ inputValue, showSuggestions });
+    this.setState({ inputValue, showSuggestions, inputIsEditing: false });
     handleUpdateSuggestions(inputValue);
   }
 
   handleInputOnBlur = () => {
-    const { inputValue } = this.state;
+    const { inputValue, inputIndex } = this.state;
     const { tags } = this.props;
 
     if (inputValue.length > 0) {
-      this.insertTag(tags, inputValue);
+      this.insertTag(tags, inputIndex, inputValue);
     }
   }
 
   handleInputOnKeyDown = (event) => {
     const { keyCode } = event;
-    const { inputValue, showSuggestions, highlightedSuggestionIndex } = this.state;
+    const { inputValue, inputIndex, showSuggestions, highlightedSuggestionIndex } = this.state;
     const {
       tags,
       suggestions,
@@ -200,14 +213,18 @@ export class InputTagsDefault extends React.Component {
       // prevents typing tab from setting the focus on something other than the input
       event.preventDefault();
       if (showSuggestions && suggestions.length > 0) {
-        this.insertTag(tags, getSuggestionValue(suggestions[highlightedSuggestionIndex]));
+        const suggestion = getSuggestionValue(suggestions[highlightedSuggestionIndex]);
+        this.insertTag(tags, inputIndex, suggestion);
       } else {
-        this.insertTag(tags, inputValue);
+        this.insertTag(tags, inputIndex, inputValue);
       }
     }
 
-    if (removeKeyCodes.includes(keyCode) && inputValue.length === 0 && tags.length > 0) {
-      this.removeTag(tags, tags.length - 1);
+    if (removeKeyCodes.includes(keyCode) && inputValue.length === 0 && tags.length > 0
+        && inputIndex > 0) {
+      const removeTagIndex = inputIndex - 1;
+      this.removeTag(tags, removeTagIndex);
+      this.setState({ inputIndex: removeTagIndex });
     }
 
     if (closeKeyCodes.includes(keyCode)) {
@@ -228,6 +245,35 @@ export class InputTagsDefault extends React.Component {
     }
   }
 
+  handleEdit = () => {
+    const element = this.inputNode;
+    this.props.focusElement(element);
+    this.props.selectElement(element);
+  }
+
+  mirrorInputStyle = () => {
+    const { mirrorStyles } = this.props;
+    const inputNode = this.inputNode;
+    const mirrorNode = this.mirrorNode;
+    if (!inputNode || !mirrorNode) return;
+
+    const inputStyle = window.getComputedStyle(inputNode);
+    mirrorStyles.forEach((mStyle) => {
+      mirrorNode.style[mStyle] = inputStyle[mStyle];
+    });
+  }
+
+  updateInputWidth = () => {
+    const { inputWidthExtra, inputMaxWidth } = this.props;
+    const inputNode = this.inputNode;
+    const mirrorNode = this.mirrorNode;
+    if (!inputNode || !mirrorNode) return;
+
+    const updatedInputWidth = mirrorNode.offsetWidth + inputWidthExtra;
+    const newInputWidth = (updatedInputWidth < inputMaxWidth) ? updatedInputWidth : inputMaxWidth;
+    inputNode.style.width = `${newInputWidth}px`;
+  }
+
   setShowSuggestions = (showSuggestions) => {
     this.setState({ showSuggestions });
   }
@@ -236,71 +282,77 @@ export class InputTagsDefault extends React.Component {
     this.setState({ highlightedSuggestionIndex });
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.suggestions !== this.props.suggestions) {
+      this.setState({ highlightedSuggestionIndex: 0 });
+    }
+  }
+
   render() {
     const {
-      InputImplementation,
-      TagImplementation,
-      SuggestionListImplementation,
-      SuggestionImplementation,
-      SuggestionsLoaderImplementation,
       tags,
-      handleDoneEditing,
-      inputPlaceholder,
-      inputTabIndex,
+      // must pull out handleRemove prop, otherwise will override Tag handleRemove in otherProps
+      handleRemove, // eslint-disable-line no-unused-vars
       suggestions,
       getSuggestionValue,
-      suggestionsAreLoading,
       InputTagsClassName,
-      InputClassName,
-      TagClassName,
-      SuggestionListClassName,
-      SuggestionClassName,
-      SuggestionsLoaderClassName,
+      ...otherProps
     } = this.props;
-    const { inputValue, showSuggestions, highlightedSuggestionIndex } = this.state;
+    const {
+      inputValue,
+      inputIndex,
+      inputIsEditing,
+      showSuggestions,
+      highlightedSuggestionIndex,
+    } = this.state;
     return (
       <div
         className={InputTagsClassName}
       >
         <div>
-          {tags.map((tag, index) =>
+          {tags.slice(0, inputIndex).map((tag, index) =>
             <Tag
-              TagImplementation={TagImplementation}
               key={index}
               value={tag}
-              handleEdit={newValue => this.editTag(tags, index, newValue)}
+              handleEdit={() => this.editTag(tags, index)}
               handleRemove={() => this.removeTag(tags, index)}
-              handleDoneEditing={handleDoneEditing}
-              TagClassName={TagClassName}
+              {...otherProps}
             />
           )}
           <Input
-            InputImplementation={InputImplementation}
             value={inputValue}
-            placeholder={inputPlaceholder}
-            tabIndex={inputTabIndex}
             handleOnChange={this.handleInputOnChange}
             handleOnBlur={this.handleInputOnBlur}
             handleOnKeyDown={this.handleInputOnKeyDown}
-            InputClassName={InputClassName}
+            inputRef={(node) => { this.inputNode = node; }}
+            mirrorRef={(node) => { this.mirrorNode = node; }}
+            mirrorInputStyle={this.mirrorInputStyle}
+            updateInputWidth={this.updateInputWidth}
+            inputIsEditing={inputIsEditing}
+            handleEdit={this.handleEdit}
+            {...otherProps}
           />
+          {tags.slice(inputIndex).map((tag, index) =>
+            <Tag
+              key={index + inputIndex}
+              value={tag}
+              handleEdit={() => this.editTag(tags, index + inputIndex)}
+              handleRemove={() => this.removeTag(tags, index + inputIndex)}
+              {...otherProps}
+            />
+          )}
           <SuggestionsLoader
-            SuggestionsLoaderImplementation={SuggestionsLoaderImplementation}
-            suggestionsAreLoading={suggestionsAreLoading}
-            SuggestionsLoaderClassName={SuggestionsLoaderClassName}
+            {...otherProps}
           />
         </div>
         <SuggestionListContainer
-          SuggestionListImplementation={SuggestionListImplementation}
-          SuggestionImplementation={SuggestionImplementation}
-          suggestions={suggestions}
           showSuggestions={showSuggestions}
+          suggestions={suggestions}
           highlightedSuggestionIndex={highlightedSuggestionIndex}
           handleHighlight={this.setHighlightedSuggestionIndex}
-          handleSelect={suggestion => this.insertTag(tags, suggestion)}
+          handleSelect={suggestion => this.insertTag(tags, inputIndex, suggestion)}
           getSuggestionValue={getSuggestionValue}
-          SuggestionListClassName={SuggestionListClassName}
-          SuggestionClassName={SuggestionClassName}
+          {...otherProps}
         />
       </div>
     );

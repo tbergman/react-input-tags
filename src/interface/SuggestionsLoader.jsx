@@ -4,18 +4,14 @@ import { SuggestionsLoaderDefault } from '../implementation/SuggestionsLoaderDef
 
 export const SuggestionsLoader = ({
   SuggestionsLoaderImplementation,
-  suggestionsAreLoading,
-  SuggestionsLoaderClassName,
+  ...otherProps
 }) =>
   <SuggestionsLoaderImplementation
-    suggestionsAreLoading={suggestionsAreLoading}
-    SuggestionsLoaderClassName={SuggestionsLoaderClassName}
+    {...otherProps}
   />;
 
 SuggestionsLoader.propTypes = {
   SuggestionsLoaderImplementation: React.PropTypes.func.isRequired,
-  suggestionsAreLoading: React.PropTypes.bool,
-  SuggestionsLoaderClassName: React.PropTypes.string,
 };
 
 SuggestionsLoader.defaultProps = {

@@ -12,7 +12,6 @@ storiesOf('InputTags', module)
       <InputTags
         tags={['insert another']}
         handleInsert={action('handleInsert')}
-        handleEdit={noop}
         handleRemove={noop}
       />
     )
@@ -22,7 +21,6 @@ storiesOf('InputTags', module)
       <InputTags
         tags={['insert another']}
         handleInsert={action('handleInsert')}
-        handleEdit={noop}
         handleRemove={noop}
       />
     )
@@ -32,18 +30,16 @@ storiesOf('InputTags', module)
       <InputTags
         tags={['insert another']}
         handleInsert={action('handleInsert')}
-        handleEdit={noop}
         handleRemove={noop}
       />
     )
   })
-  .add('edit token by clicking on tag and typing', () => {
+  .add('edit token by clicking on tag', () => {
     return (
       <InputTags
         tags={['edit me']}
         handleInsert={noop}
-        handleEdit={action('handleEdit')}
-        handleRemove={noop}
+        handleRemove={action('handleRemove')}
       />
     )
   })
@@ -52,7 +48,6 @@ storiesOf('InputTags', module)
       <InputTags
         tags={['delete me']}
         handleInsert={noop}
-        handleEdit={noop}
         handleRemove={action('handleRemove')}
       />
     )
@@ -62,7 +57,6 @@ storiesOf('InputTags', module)
       <InputTags
         tags={['delete me']}
         handleInsert={noop}
-        handleEdit={noop}
         handleRemove={action('handleRemove')}
       />
     )
@@ -72,7 +66,6 @@ storiesOf('InputTags', module)
       <InputTags
         tags={[]}
         handleInsert={noop}
-        handleEdit={noop}
         handleRemove={noop}
         inputPlaceholder={'Add Tag'}
       />
@@ -83,7 +76,6 @@ storiesOf('InputTags', module)
       <InputTags
         tags={[]}
         handleInsert={noop}
-        handleEdit={noop}
         handleRemove={noop}
         suggestions={items}
         handleUpdateSuggestions={action('handleUpdateSuggestions')}
@@ -95,10 +87,8 @@ storiesOf('InputTags', module)
       <InputTags
         tags={[]}
         handleInsert={action('handleInsert')}
-        handleEdit={noop}
         handleRemove={noop}
         suggestions={items}
-        getSuggestionValue={action('getSuggestionValue')}
       />
     )
   })
@@ -107,7 +97,6 @@ storiesOf('InputTags', module)
       <InputTags
         tags={[]}
         handleInsert={action('handleInsert')}
-        handleEdit={noop}
         handleRemove={noop}
         suggestions={items}
       />
@@ -118,7 +107,6 @@ storiesOf('InputTags', module)
       <InputTags
         tags={[]}
         handleInsert={noop}
-        handleEdit={noop}
         handleRemove={noop}
         suggestions={items}
       />
@@ -129,7 +117,6 @@ storiesOf('InputTags', module)
       <InputTags
         tags={[]}
         handleInsert={noop}
-        handleEdit={noop}
         handleRemove={noop}
         suggestions={items}
       />
@@ -140,7 +127,6 @@ storiesOf('InputTags', module)
       <InputTags
         tags={[]}
         handleInsert={noop}
-        handleEdit={noop}
         handleRemove={noop}
         suggestions={items}
       />

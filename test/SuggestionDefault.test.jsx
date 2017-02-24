@@ -6,7 +6,7 @@ import { expect } from 'chai';
 import { SuggestionDefault } from '../src/implementation/SuggestionDefault.jsx';
 
 import { noop } from './util';
-import { suggestion } from './mock';
+import { item } from './mock';
 
 describe('<SuggestionDefault />', () => {
   let suggestionWrapper;
@@ -20,7 +20,7 @@ describe('<SuggestionDefault />', () => {
 
       suggestionWrapper = shallow(
         <SuggestionDefault
-          value={suggestion}
+          value={item}
           isHighlighted={false}
           handleHighlight={handleHighlight}
           handleSelect={noop}
@@ -45,7 +45,7 @@ describe('<SuggestionDefault />', () => {
 
       suggestionWrapper = shallow(
         <SuggestionDefault
-          value={suggestion}
+          value={item}
           isHighlighted={false}
           handleHighlight={noop}
           handleSelect={handleSelect}

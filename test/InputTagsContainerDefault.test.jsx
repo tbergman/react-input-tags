@@ -6,7 +6,6 @@ import sinon from 'sinon';
 import {
   InputTagsContainerDefault,
   handleInsertDefault,
-  handleEditDefault,
   handleRemoveDefault,
 } from '../src/implementation/InputTagsContainerDefault.jsx';
 
@@ -45,7 +44,7 @@ describe('<InputTagsContainerDefault />', () => {
           });
 
           it('should update tags', () => {
-            expect(handleUpdateTags).to.have.been.calledWith(handleInsertDefault(tags, item));
+            expect(handleUpdateTags).to.have.been.calledWith(handleInsertDefault(tags, tags.length, item));
           });
         });
       });
@@ -54,20 +53,13 @@ describe('<InputTagsContainerDefault />', () => {
     describe('edit tag', () => {
       context('when click tag', () => {
         const editTagIndex = 0;
-        const newValue = 'cool';
 
         beforeEach(() => {
           inputTagsContainerWrapper.find('span').at(editTagIndex).childAt(0).simulate('click');
         });
 
-        context('when text area is changed to non empty string', () => {
-          beforeEach(() => {
-            inputTagsContainerWrapper.find('textarea').simulate('change', { target: { value: newValue }});
-          });
-
-          it('should update tags', () => {
-            expect(handleUpdateTags).to.have.been.calledWith(handleEditDefault(tags, editTagIndex, newValue));
-          });
+        it('should update tags', () => {
+          expect(handleUpdateTags).to.have.been.calledWith(handleRemoveDefault(tags, editTagIndex));
         });
       });
     });
@@ -118,27 +110,22 @@ describe('<InputTagsContainerDefault />', () => {
 });
 
 describe('handleInsertDefault()', () => {
-  const currentTags = items;
-  const newTag = item;
+  describe('insert tag at end of tags', () => {
+    const newTags = handleInsertDefault(items, items.length, item);
+    const expectedNewTags = [...items, item];
 
-  const newTags = handleInsertDefault(currentTags, newTag);
-  const expectedNewTags = [...items, item];
-
-  it('should add the new tag to currentTags', () => {
-    expect(newTags).to.deep.equal(expectedNewTags);
+    it('should add the new tag at the end of the array', () => {
+      expect(newTags).to.deep.equal(expectedNewTags);
+    });
   });
-});
 
-describe('handleEditDefault()', () => {
-  const currentTags = items;
-  const editTagIndex = 1;
-  const newValue = item;
+  describe('insert tag in between tags', () => {
+    const newTags = handleInsertDefault(items, 1, item);
+    const expectedNewTags = [items[0], item, items[1], items[2]];
 
-  const newTags = handleEditDefault(currentTags, editTagIndex, newValue);
-  const expectedNewTags = [items[0], newValue, items[2]];
-
-  it('should edit the tag at the specified index', () => {
-    expect(newTags).to.deep.equal(expectedNewTags);
+    it('should add the new tag at the specified index', () => {
+      expect(newTags).to.deep.equal(expectedNewTags);
+    });
   });
 });
 

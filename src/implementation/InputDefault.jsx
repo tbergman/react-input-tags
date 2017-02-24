@@ -1,22 +1,12 @@
 import React from 'react';
 
-import { defaultClassNamePrefix } from './util';
-
-export const placeholderDefault = '';
+import { defaultClassNamePrefix, noop } from './util';
 
 export const InputClassNameDefault = `${defaultClassNamePrefix}-input`;
 
-export const MIRROR_STYLES = [
-  'fontFamily',
-  'fontSize',
-  'fontStyle',
-  'fontWeight',
-  'lineHeight',
-  'letterSpacing',
-  'wordSpacing',
-];
-
-export const INPUT_WIDTH_EXTRA = 2;
+export const mirrorInputStyleDefault = noop;
+export const updateInputWidthDefault = noop;
+export const handleEditDefault = noop;
 
 export class InputDefault extends React.Component {
   static propTypes = {
@@ -24,51 +14,53 @@ export class InputDefault extends React.Component {
     handleOnChange: React.PropTypes.func.isRequired,
     handleOnBlur: React.PropTypes.func.isRequired,
     handleOnKeyDown: React.PropTypes.func.isRequired,
-    placeholder: React.PropTypes.string.isRequired,
-    tabIndex: React.PropTypes.number,
     InputClassName: React.PropTypes.string,
+    inputPlaceholder: React.PropTypes.string,
+    inputTabIndex: React.PropTypes.number,
+    inputRef: React.PropTypes.func,
+    mirrorRef: React.PropTypes.func,
+    mirrorInputStyle: React.PropTypes.func,
+    updateInputWidth: React.PropTypes.func,
+    inputIsEditing: React.PropTypes.bool,
+    handleEdit: React.PropTypes.func,
   }
 
   static defaultProps = {
-    placeholder: placeholderDefault,
     InputClassName: InputClassNameDefault,
+    mirrorInputStyle: mirrorInputStyleDefault,
+    updateInputWidth: updateInputWidthDefault,
+    handleEdit: handleEditDefault,
   }
 
   componentDidMount() {
-    this.mirrorInputStyle();
-    this.updateInputWidth();
+    const { mirrorInputStyle, updateInputWidth } = this.props;
+    mirrorInputStyle();
+    updateInputWidth();
   }
 
-  componentDidUpdate() {
-    this.updateInputWidth();
-  }
+  componentDidUpdate(prevProps) {
+    const { updateInputWidth, handleEdit } = this.props;
+    updateInputWidth();
 
-  mirrorInputStyle() {
-    if (!this.inputNode) return;
-    const inputStyle = window.getComputedStyle(this.inputNode);
-    MIRROR_STYLES.forEach((mStyle) => {
-      this.mirrorNode.style[mStyle] = inputStyle[mStyle];
-    });
-  }
-
-  updateInputWidth() {
-    if (!this.mirrorNode) return;
-    const newInputWidth = this.mirrorNode.offsetWidth + INPUT_WIDTH_EXTRA;
-    this.inputNode.style.width = `${newInputWidth}px`;
+    if (prevProps.inputIsEditing === false && this.props.inputIsEditing === true) {
+      handleEdit();
+    }
   }
 
   render() {
     const {
       value,
-      placeholder,
-      tabIndex,
       handleOnChange,
       handleOnBlur,
       handleOnKeyDown,
+      inputPlaceholder,
+      inputTabIndex,
+      inputRef,
+      mirrorRef,
       InputClassName,
     } = this.props;
 
-    const mirrorValue = value || placeholder;
+    const mirrorValue = value || inputPlaceholder;
     const mirrorStyle = {
       position: 'absolute',
       whiteSpace: 'pre',
@@ -79,22 +71,20 @@ export class InputDefault extends React.Component {
     return (
       <span>
         <span
-          id={'mirrorNode'}
-          ref={(c) => { this.mirrorNode = c; }}
+          ref={mirrorRef}
           style={mirrorStyle}
         >
           {mirrorValue}
         </span>
         <input
-          id={'inputNode'}
-          ref={(c) => { this.inputNode = c; }}
+          ref={inputRef}
           type={'text'}
           value={value}
-          placeholder={placeholder}
-          tabIndex={tabIndex}
           onChange={handleOnChange}
           onBlur={handleOnBlur}
           onKeyDown={handleOnKeyDown}
+          placeholder={inputPlaceholder}
+          tabIndex={inputTabIndex}
           className={InputClassName}
         />
       </span>

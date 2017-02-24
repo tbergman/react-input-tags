@@ -1,7 +1,6 @@
 exports[`disable tabbing to input by rendering`] = `
 <span>
   <span
-    id="mirrorNode"
     style={
       Object {
         "overflow": "scroll",
@@ -9,16 +8,13 @@ exports[`disable tabbing to input by rendering`] = `
         "visibility": "hidden",
         "whiteSpace": "pre",
       }
-    }>
-    
-  </span>
+    } />
   <input
     className="react-input-tags-input"
-    id="inputNode"
     onBlur={[Function]}
     onChange={[Function]}
     onKeyDown={[Function]}
-    placeholder=""
+    placeholder={undefined}
     tabIndex={-1}
     type="text"
     value="" />
@@ -28,7 +24,6 @@ exports[`disable tabbing to input by rendering`] = `
 exports[`handle blur by clicking on input and clicking something else`] = `
 <span>
   <span
-    id="mirrorNode"
     style={
       Object {
         "overflow": "scroll",
@@ -36,16 +31,13 @@ exports[`handle blur by clicking on input and clicking something else`] = `
         "visibility": "hidden",
         "whiteSpace": "pre",
       }
-    }>
-    
-  </span>
+    } />
   <input
     className="react-input-tags-input"
-    id="inputNode"
     onBlur={[Function]}
     onChange={[Function]}
     onKeyDown={[Function]}
-    placeholder=""
+    placeholder={undefined}
     tabIndex={undefined}
     type="text"
     value="" />
@@ -55,7 +47,6 @@ exports[`handle blur by clicking on input and clicking something else`] = `
 exports[`handle change by typing in input`] = `
 <span>
   <span
-    id="mirrorNode"
     style={
       Object {
         "overflow": "scroll",
@@ -63,16 +54,13 @@ exports[`handle change by typing in input`] = `
         "visibility": "hidden",
         "whiteSpace": "pre",
       }
-    }>
-    
-  </span>
+    } />
   <input
     className="react-input-tags-input"
-    id="inputNode"
     onBlur={[Function]}
     onChange={[Function]}
     onKeyDown={[Function]}
-    placeholder=""
+    placeholder={undefined}
     tabIndex={undefined}
     type="text"
     value="" />
@@ -82,7 +70,6 @@ exports[`handle change by typing in input`] = `
 exports[`handle keydown by typing in input`] = `
 <span>
   <span
-    id="mirrorNode"
     style={
       Object {
         "overflow": "scroll",
@@ -90,26 +77,22 @@ exports[`handle keydown by typing in input`] = `
         "visibility": "hidden",
         "whiteSpace": "pre",
       }
-    }>
-    
-  </span>
+    } />
   <input
     className="react-input-tags-input"
-    id="inputNode"
     onBlur={[Function]}
     onChange={[Function]}
     onKeyDown={[Function]}
-    placeholder=""
+    placeholder={undefined}
     tabIndex={undefined}
     type="text"
     value="" />
 </span>
 `;
 
-exports[`show empty placeholder by rendering`] = `
+exports[`mirror input style and update input width by rendering`] = `
 <span>
   <span
-    id="mirrorNode"
     style={
       Object {
         "overflow": "scroll",
@@ -117,26 +100,45 @@ exports[`show empty placeholder by rendering`] = `
         "visibility": "hidden",
         "whiteSpace": "pre",
       }
-    }>
-    
-  </span>
+    } />
   <input
     className="react-input-tags-input"
-    id="inputNode"
     onBlur={[Function]}
     onChange={[Function]}
     onKeyDown={[Function]}
-    placeholder=""
+    placeholder={undefined}
     tabIndex={undefined}
     type="text"
     value="" />
 </span>
 `;
 
-exports[`show non empty placeholder by rendering`] = `
+exports[`show no placeholder by rendering`] = `
 <span>
   <span
-    id="mirrorNode"
+    style={
+      Object {
+        "overflow": "scroll",
+        "position": "absolute",
+        "visibility": "hidden",
+        "whiteSpace": "pre",
+      }
+    } />
+  <input
+    className="react-input-tags-input"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onKeyDown={[Function]}
+    placeholder={undefined}
+    tabIndex={undefined}
+    type="text"
+    value="" />
+</span>
+`;
+
+exports[`show placeholder by rendering`] = `
+<span>
+  <span
     style={
       Object {
         "overflow": "scroll",
@@ -149,7 +151,6 @@ exports[`show non empty placeholder by rendering`] = `
   </span>
   <input
     className="react-input-tags-input"
-    id="inputNode"
     onBlur={[Function]}
     onChange={[Function]}
     onKeyDown={[Function]}
@@ -157,5 +158,30 @@ exports[`show non empty placeholder by rendering`] = `
     tabIndex={undefined}
     type="text"
     value="" />
+</span>
+`;
+
+exports[`show value by rendering`] = `
+<span>
+  <span
+    style={
+      Object {
+        "overflow": "scroll",
+        "position": "absolute",
+        "visibility": "hidden",
+        "whiteSpace": "pre",
+      }
+    }>
+    m
+  </span>
+  <input
+    className="react-input-tags-input"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onKeyDown={[Function]}
+    placeholder={undefined}
+    tabIndex={undefined}
+    type="text"
+    value="m" />
 </span>
 `;

@@ -7,36 +7,13 @@ import { noop } from '../test/util';
 import { emptyString, nonEmptyString } from '../test/mock';
 
 storiesOf('Input', module)
-  .add('show empty placeholder by rendering', () => {
+  .add('show value by rendering', () => {
     return (
       <Input
-        value={emptyString}
+        value={nonEmptyString}
         handleOnChange={noop}
         handleOnBlur={noop}
         handleOnKeyDown={noop}
-        placeholder={emptyString}
-      />
-    )
-  })
-  .add('show non empty placeholder by rendering', () => {
-    return (
-      <Input
-        value={emptyString}
-        handleOnChange={noop}
-        handleOnBlur={noop}
-        handleOnKeyDown={noop}
-        placeholder={nonEmptyString}
-      />
-    )
-  })
-  .add('disable tabbing to input by rendering', () => {
-    return (
-      <Input
-        value={emptyString}
-        handleOnChange={noop}
-        handleOnBlur={noop}
-        handleOnKeyDown={noop}
-        tabIndex={-1}
       />
     )
   })
@@ -67,6 +44,50 @@ storiesOf('Input', module)
         handleOnChange={noop}
         handleOnBlur={noop}
         handleOnKeyDown={action('handleOnKeyDown')}
+      />
+    )
+  })
+  .add('show no placeholder by rendering', () => {
+    return (
+      <Input
+        value={emptyString}
+        handleOnChange={noop}
+        handleOnBlur={noop}
+        handleOnKeyDown={noop}
+      />
+    )
+  })
+  .add('show placeholder by rendering', () => {
+    return (
+      <Input
+        value={emptyString}
+        handleOnChange={noop}
+        handleOnBlur={noop}
+        handleOnKeyDown={noop}
+        inputPlaceholder={nonEmptyString}
+      />
+    )
+  })
+  .add('disable tabbing to input by rendering', () => {
+    return (
+      <Input
+        value={emptyString}
+        handleOnChange={noop}
+        handleOnBlur={noop}
+        handleOnKeyDown={noop}
+        inputTabIndex={-1}
+      />
+    )
+  })
+  .add('mirror input style and update input width by rendering', () => {
+    return (
+      <Input
+        value={emptyString}
+        handleOnChange={noop}
+        handleOnBlur={noop}
+        handleOnKeyDown={noop}
+        mirrorInputStyle={action('mirrorInputStyle')}
+        updateInputWidth={action('updateInputWidth')}
       />
     )
   });

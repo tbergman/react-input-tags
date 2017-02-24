@@ -10,20 +10,20 @@ import { items } from './mock';
 
 describe('<SuggestionListDefault />', () => {
   let suggestionListWrapper;
-  let highlightedIndex;
+  let highlightedSuggestionIndex;
   let getSuggestionValue;
   let handleHighlight;
   let handleSelect;
 
   describe('highlight suggestion', () => {
-    highlightedIndex = 0;
+    highlightedSuggestionIndex = 0;
     handleHighlight = sinon.stub();
 
     beforeEach(() => {
       suggestionListWrapper = mount(
         <SuggestionListDefault
           suggestions={items}
-          highlightedIndex={highlightedIndex}
+          highlightedSuggestionIndex={highlightedSuggestionIndex}
           getSuggestionValue={noop}
           handleHighlight={handleHighlight}
           handleSelect={noop}
@@ -45,7 +45,7 @@ describe('<SuggestionListDefault />', () => {
   });
 
   describe('select item', () => {
-    highlightedIndex = 0;
+    highlightedSuggestionIndex = 0;
     getSuggestionValue = sinon.stub();
     handleSelect = sinon.stub();
 
@@ -53,7 +53,7 @@ describe('<SuggestionListDefault />', () => {
       suggestionListWrapper = mount(
         <SuggestionListDefault
           suggestions={items}
-          highlightedIndex={highlightedIndex}
+          highlightedSuggestionIndex={highlightedSuggestionIndex}
           getSuggestionValue={getSuggestionValue}
           handleHighlight={noop}
           handleSelect={handleSelect}
@@ -63,15 +63,15 @@ describe('<SuggestionListDefault />', () => {
 
     context('when item is clicked', () => {
       beforeEach(() => {
-        suggestionListWrapper.find('ul').childAt(highlightedIndex).simulate('click');
+        suggestionListWrapper.find('ul').childAt(highlightedSuggestionIndex).simulate('click');
       });
 
       it('should get the list item value', () => {
-        expect(getSuggestionValue).to.have.been.calledWith(items[highlightedIndex]);
+        expect(getSuggestionValue).to.have.been.calledWith(items[highlightedSuggestionIndex]);
       });
 
       it('should select the item', () => {
-        expect(handleSelect).to.have.been.calledWith(handleSelect(items[highlightedIndex]));
+        expect(handleSelect).to.have.been.calledWith(handleSelect(items[highlightedSuggestionIndex]));
       });
     });
   });

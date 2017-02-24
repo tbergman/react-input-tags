@@ -8,4 +8,6 @@ export const selectElement = (element) => {
   element.select();
 };
 
+export const noop = () => {};
+
 export const defaultClassNamePrefix = 'react-input-tags';
