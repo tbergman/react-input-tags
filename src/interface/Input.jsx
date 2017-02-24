@@ -8,14 +8,14 @@ export const Input = ({
   handleOnChange,
   handleOnBlur,
   handleOnKeyDown,
-  ...tagProps
+  ...otherProps
 }) =>
   <InputImplementation
     value={value}
     handleOnChange={handleOnChange}
     handleOnBlur={handleOnBlur}
     handleOnKeyDown={handleOnKeyDown}
-    {...tagProps}
+    {...otherProps}
   />;
 
 Input.propTypes = {

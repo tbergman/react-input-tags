@@ -344,10 +344,8 @@ export class InputTagsDefault extends React.Component {
               TagImplementation={TagImplementation}
               key={index}
               value={tag}
-              handleEdit={newValue => this.editTag(tags, index, newValue)}
+              handleEdit={() => this.startEditing(tags, index)}
               handleRemove={() => this.removeTag(tags, index)}
-              handleStartEditing={() => this.startEditing(tags, index)}
-              handleDoneEditing={handleDoneEditing}
               TagClassName={TagClassName}
             />
           )}

@@ -18,6 +18,17 @@ import {
 import { noop } from './util';
 import { emptyString, nonEmptyString, items } from './mock';
 
+// TODO: input mount
+/*
+it('should copy the font styling from the input to the mirror element', () => {
+  const inputStyles = window.getComputedStyle(inputWrapper.find('#inputNode').node);
+  const mirrorStyles = inputWrapper.find('#mirrorNode').node.style;
+  MIRROR_STYLES.forEach((mStyle) => {
+    expect(mirrorStyles[mStyle]).to.equal(inputStyles[mStyle]);
+  });
+})
+*/;
+
 describe('<InputTagsDefault />', () => {
   let inputTagsWrapper;
   let tags;

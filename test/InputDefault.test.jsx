@@ -9,7 +9,7 @@ import { aKeyCode } from '../src/keyCodes';
 import { noop } from './util';
 import { emptyString, nonEmptyString } from './mock';
 
-describe.only('<InputDefault />', () => {
+describe('<InputDefault />', () => {
   let inputWrapper;
   let handleOnChange;
   let handleOnBlur;
@@ -18,34 +18,6 @@ describe.only('<InputDefault />', () => {
   let updateInputWidth;
   let isEditing;
   let handleEdit;
-
-  context('when component mounts', () => {
-    /*
-    it('should copy the font styling from the input to the mirror element', () => {
-      const inputStyles = window.getComputedStyle(inputWrapper.find('#inputNode').node);
-      const mirrorStyles = inputWrapper.find('#mirrorNode').node.style;
-      MIRROR_STYLES.forEach((mStyle) => {
-        expect(mirrorStyles[mStyle]).to.equal(inputStyles[mStyle]);
-      });
-    })
-    */;
-
-    // Note: jsdom does not implement browser box model so we can * not * test the following
-    it('should set the input width with the mirror width');
-    // const inputWidth = wrapper.find('#inputNode').node.style.width;
-    // const mirrorWidth = wrapper.find('#mirrorNode').node.style.width;
-    // expect(inputWidth).to.equal(mirrorWidth);
-  });
-
-  context('when component updates', () => {
-
-    // Note: jsdom does not implement browser box model so we can * not * test the following
-    it('should update the input width with the mirror width');
-    // wrapper.find('input').simulate('change', { target: { value: 'a' }})
-    // const inputWidth = wrapper.find('#inputNode').node.style.width;
-    // const mirrorWidth = wrapper.find('#mirrorNode').node.style.width;
-    // expect(inputWidth).to.equal(mirrorWidth);
-  });
 
   describe('handling input', () => {
     beforeEach(() => {
