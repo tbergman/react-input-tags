@@ -325,20 +325,18 @@ export class InputTagsDefault extends React.Component {
           )}
           <Input
             InputImplementation={InputImplementation}
+            value={inputValue}
+            handleOnChange={this.handleInputOnChange}
+            handleOnBlur={this.handleInputOnBlur}
+            handleOnKeyDown={this.handleInputOnKeyDown}
+            placeholder={inputPlaceholder}
+            tabIndex={inputTabIndex}
             inputRef={(node) => { this.inputNode = node; }}
             mirrorRef={(node) => { this.mirrorNode = node; }}
             mirrorInputStyle={this.mirrorInputStyle}
             updateInputWidth={this.updateInputWidth}
-            setFocus={this.focusOnInput}
-            value={inputValue}
-            editMode={inputEditMode}
-            stopEditing={this.stopEditing}
-            placeholder={inputPlaceholder}
-            tabIndex={inputTabIndex}
-            handleOnChange={this.handleInputOnChange}
-            handleOnFocus={this.handleInputOnFocus}
-            handleOnBlur={this.handleInputOnBlur}
-            handleOnKeyDown={this.handleInputOnKeyDown}
+            isEditing={inputEditMode}
+            handleEdit={this.focusOnInput}
             InputClassName={InputClassName}
           />
           {tags.slice(inputIndex).map((tag, index) =>

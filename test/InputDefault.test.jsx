@@ -9,35 +9,26 @@ import { aKeyCode } from '../src/keyCodes';
 import { noop } from './util';
 import { emptyString, nonEmptyString } from './mock';
 
-describe('<InputDefault />', () => {
+describe.only('<InputDefault />', () => {
   let inputWrapper;
   let handleOnChange;
   let handleOnBlur;
   let handleOnKeyDown;
-
-  beforeEach(() => {
-    handleOnChange = sinon.stub();
-    handleOnBlur = sinon.stub();
-    handleOnKeyDown = sinon.stub();
-
-    inputWrapper = mount(
-      <InputDefault
-        value={emptyString}
-        handleOnChange={handleOnChange}
-        handleOnBlur={handleOnBlur}
-        handleOnKeyDown={handleOnKeyDown}
-      />
-    )
-  });
+  let mirrorInputStyle;
+  let updateInputWidth;
+  let isEditing;
+  let handleEdit;
 
   context('when component mounts', () => {
+    /*
     it('should copy the font styling from the input to the mirror element', () => {
       const inputStyles = window.getComputedStyle(inputWrapper.find('#inputNode').node);
       const mirrorStyles = inputWrapper.find('#mirrorNode').node.style;
       MIRROR_STYLES.forEach((mStyle) => {
         expect(mirrorStyles[mStyle]).to.equal(inputStyles[mStyle]);
       });
-    });
+    })
+    */;
 
     // Note: jsdom does not implement browser box model so we can * not * test the following
     it('should set the input width with the mirror width');
@@ -56,33 +47,130 @@ describe('<InputDefault />', () => {
     // expect(inputWidth).to.equal(mirrorWidth);
   });
 
-  context('when input value changes', () => {
+  describe('handling input', () => {
     beforeEach(() => {
-      inputWrapper.find('input').simulate('change', { target: { value: nonEmptyString }});
+      handleOnChange = sinon.stub();
+      handleOnBlur = sinon.stub();
+      handleOnKeyDown = sinon.stub();
+
+      inputWrapper = mount(
+        <InputDefault
+          value={emptyString}
+          handleOnChange={handleOnChange}
+          handleOnBlur={handleOnBlur}
+          handleOnKeyDown={handleOnKeyDown}
+        />
+      )
     });
 
-    it('should handle the change', () => {
-      expect(handleOnChange).to.have.been.called();
+    context('when input value changes', () => {
+      beforeEach(() => {
+        inputWrapper.find('input').simulate('change', { target: { value: nonEmptyString }});
+      });
+
+      it('should handle the change', () => {
+        expect(handleOnChange).to.have.been.called();
+      });
+    });
+
+    context('when focus leaves input value', () => {
+      beforeEach(() => {
+        inputWrapper.find('input').simulate('blur');
+      });
+
+      it('should handle the blur', () => {
+        expect(handleOnBlur).to.have.been.called();
+      });
+    });
+
+    context('when input is typed in', () => {
+      beforeEach(() => {
+        inputWrapper.find('input').simulate('keydown', { keyCode: aKeyCode });
+      });
+
+      it('should handle the keydown', () => {
+        expect(handleOnKeyDown).to.have.been.called();
+      });
     });
   });
 
-  context('when focus leaves input value', () => {
+  context('when component mounts', () => {
     beforeEach(() => {
-      inputWrapper.find('input').simulate('blur');
+      mirrorInputStyle = sinon.stub();
+      updateInputWidth = sinon.stub();
+
+      inputWrapper = mount(
+        <InputDefault
+          value={emptyString}
+          handleOnChange={noop}
+          handleOnBlur={noop}
+          handleOnKeyDown={noop}
+          mirrorInputStyle={mirrorInputStyle}
+          updateInputWidth={updateInputWidth}
+        />
+      )
     });
 
-    it('should handle the blur', () => {
-      expect(handleOnBlur).to.have.been.called();
+    it('should mirror the input style', () => {
+      expect(mirrorInputStyle).to.have.been.called();
+    });
+
+    it('should update the input width', () => {
+      expect(updateInputWidth).to.have.been.called();
     });
   });
 
-  context('when input is typed in', () => {
+  context('when component updates', () => {
     beforeEach(() => {
-      inputWrapper.find('input').simulate('keydown', { keyCode: aKeyCode });
+      updateInputWidth = sinon.stub();
+
+      inputWrapper = mount(
+        <InputDefault
+          value={emptyString}
+          handleOnChange={noop}
+          handleOnBlur={noop}
+          handleOnKeyDown={noop}
+          updateInputWidth={updateInputWidth}
+        />
+      )
     });
 
-    it('should handle the keydown', () => {
-      expect(handleOnKeyDown).to.have.been.called();
+    context('when component updates', () => {
+      beforeEach(() => {
+        inputWrapper.setProps({ value: nonEmptyString });
+      });
+
+      it('should update the input width', () => {
+        expect(updateInputWidth).to.have.been.called();
+      });
+    });
+  });
+
+  context('when isEditing is false', () => {
+    beforeEach(() => {
+      isEditing = false;
+      handleEdit = sinon.stub();
+
+      inputWrapper = mount(
+        <InputDefault
+          value={emptyString}
+          handleOnChange={noop}
+          handleOnBlur={noop}
+          handleOnKeyDown={noop}
+          isEditing={isEditing}
+          handleEdit={handleEdit}
+        />
+      )
+    });
+
+    context('when isEditing changes from false to true', () => {
+      beforeEach(() => {
+        inputWrapper.setProps({ isEditing: true });
+      });
+
+      it('should handle the edit', () => {
+        expect(handleEdit).to.have.been.called();
+      });
     });
   });
 });
