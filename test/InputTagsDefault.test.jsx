@@ -482,6 +482,18 @@ describe('<InputTagsDefault />', () => {
         it('should update the suggestions', () => {
           expect(handleUpdateSuggestions).to.have.been.calledWith(newInputValue);
         });
+
+        context('when suggestions are updated', () => {
+          const newSuggestions = items.slice(0, 2);
+
+          beforeEach(() => {
+            inputTagsWrapper.setProps({ suggestions: newSuggestions });
+          });
+
+          it('should set state `highlightedSuggestionIndex` to zero', () => {
+            expect(inputTagsWrapper.state().highlightedSuggestionIndex).to.equal(0);
+          });
+        });
       });
     })
 

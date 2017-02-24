@@ -282,6 +282,12 @@ export class InputTagsDefault extends React.Component {
     this.setState({ highlightedSuggestionIndex });
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.suggestions !== this.props.suggestions) {
+      this.setState({ highlightedSuggestionIndex: 0 });
+    }
+  }
+
   render() {
     const {
       tags,
