@@ -449,57 +449,6 @@ describe('<InputTagsDefault />', () => {
         });
       });
     });
-
-    context('when there are three tags', () => {
-      beforeEach(() => {
-        tags = ['abc', 'def', 'ghi'];
-        handleRemove = sinon.stub();
-
-        inputTagsWrapper = mount(
-          <InputTagsDefault
-            tags={tags}
-            handleInsert={noop}
-            handleRemove={handleRemove}
-          />
-        );
-      });
-
-      context('when clicking first tag', () => {
-        it('should remove tag');
-      });
-
-      context('when second tag is edited', () => {
-        beforeEach(() => {
-          inputTagsWrapper.find('button').at(1).parent().childAt(0).simulate('click');
-        });
-
-        it('should remove second tag', () => {
-          expect(handleRemove).to.have.been.calledWith();
-        });
-
-        context('when input field has been changed to empty string', () => {
-          beforeEach(() => {
-            inputTagsWrapper.find('input').simulate('change', { target: { value: emptyString } });
-          });
-
-          context('when `backspace` key is pressed', () => {
-            beforeEach(() => {
-              inputTagsWrapper.find('input').simulate('keydown', { keyCode: backspaceKeyCode });
-            });
-
-            it('should remove tag', () => {
-              expect(handleRemove).to.have.been.calledWith()
-            });
-
-            it('should set inputIndex');
-
-            context('when backspace more', () => {
-              it('should not remove tag');
-            });
-          });
-        });
-      });
-    });
   });
 
   describe('suggestions', () => {
