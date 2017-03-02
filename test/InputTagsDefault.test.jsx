@@ -28,6 +28,8 @@ describe('<InputTagsDefault />', () => {
   let tags;
   let handleInsert;
   let handleRemove;
+  let getTagValue;
+  let createTag;
   let suggestions;
   let handleUpdateSuggestions;
   let getSuggestionValue;
@@ -72,6 +74,7 @@ describe('<InputTagsDefault />', () => {
     beforeEach(() => {
       tags = [];
       handleInsert = sinon.stub();
+      createTag = sinon.stub();
       focusElement = sinon.stub();
       selectElement = sinon.stub();
 
@@ -80,6 +83,7 @@ describe('<InputTagsDefault />', () => {
           tags={tags}
           handleInsert={handleInsert}
           handleRemove={noop}
+          createTag={createTag}
           focusElement={focusElement}
           selectElement={selectElement}
         />
@@ -90,6 +94,7 @@ describe('<InputTagsDefault />', () => {
       const inputValue = nonEmptyString;
 
       beforeEach(() => {
+        createTag.returns(inputValue);
         inputTagsWrapper.find('input').simulate('change', { target: { value: inputValue } });
       });
 
@@ -112,6 +117,10 @@ describe('<InputTagsDefault />', () => {
       context('when focus leaves input field', () => {
         beforeEach(() => {
           inputTagsWrapper.find('input').simulate('blur');
+        });
+
+        it('should create the tag with input value', () => {
+          expect(createTag).to.have.been.calledWith(inputValue);
         });
 
         it('should insert typed string as token', () => {
@@ -140,6 +149,10 @@ describe('<InputTagsDefault />', () => {
           inputTagsWrapper.find('input').simulate('keydown', { keyCode: enterKeyCode });
         });
 
+        it('should create the tag with input value', () => {
+          expect(createTag).to.have.been.calledWith(inputValue);
+        });
+
         it('should insert typed string as token', () => {
           expect(handleInsert).to.have.been.calledWith(tags, tags.length, inputValue);
         });
@@ -164,6 +177,10 @@ describe('<InputTagsDefault />', () => {
       context('when `tab` key is pressed', () => {
         beforeEach(() => {
           inputTagsWrapper.find('input').simulate('keydown', { keyCode: tabKeyCode });
+        });
+
+        it('should create the tag with input value', () => {
+          expect(createTag).to.have.been.calledWith(inputValue);
         });
 
         it('should insert typed string as token', () => {
@@ -192,6 +209,10 @@ describe('<InputTagsDefault />', () => {
           inputTagsWrapper.find('input').simulate('keydown', { keyCode: commaKeyCode });
         });
 
+        it('should create the tag with input value', () => {
+          expect(createTag).to.have.been.calledWith(inputValue);
+        });
+
         it('should insert typed string as token', () => {
           expect(handleInsert).to.have.been.calledWith(tags, tags.length, inputValue);
         });
@@ -216,6 +237,10 @@ describe('<InputTagsDefault />', () => {
       context('when `a` key is pressed', () => {
         beforeEach(() => {
           inputTagsWrapper.find('input').simulate('keydown', { keyCode: aKeyCode });
+        });
+
+        it('should not create the tag', () => {
+          expect(createTag).to.not.have.been.called();
         });
 
         it('should *not* insert typed string as token', () => {
@@ -303,6 +328,7 @@ describe('<InputTagsDefault />', () => {
         tags = ['edit me'];
         handleInsert = sinon.stub();
         handleRemove = sinon.stub();
+        getTagValue = sinon.stub();
         focusElement = sinon.stub();
         selectElement = sinon.stub();
 
@@ -311,6 +337,7 @@ describe('<InputTagsDefault />', () => {
             tags={tags}
             handleInsert={handleInsert}
             handleRemove={handleRemove}
+            getTagValue={getTagValue}
             focusElement={focusElement}
             selectElement={selectElement}
           />
@@ -322,11 +349,16 @@ describe('<InputTagsDefault />', () => {
           const editTagIndex = 0;
 
           beforeEach(() => {
+            getTagValue.returns(tags[editTagIndex]);
             inputTagsWrapper.find('button').parent().childAt(0).simulate('click');
           });
 
           it('should remove the current tag', () => {
             expect(handleRemove).to.have.been.calledWith(tags, editTagIndex);
+          });
+
+          it('should get the tag value', () => {
+            expect(getTagValue).to.have.been.calledWith(tags[editTagIndex]);
           });
 
           it('should set state `inputValue` to the previous tag', () => {

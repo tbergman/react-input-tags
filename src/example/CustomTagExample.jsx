@@ -1,10 +1,10 @@
 import React from 'react';
 import { InputTagsContainer } from '../index';
 
-export const reverseString = string =>
+const reverseString = string =>
   string.split('').reverse().join('');
 
-export const ReverseTag = ({ value, handleRemove }) => (
+const ReverseTag = ({ value, handleRemove }) => (
   <span className={'react-input-tags-tag'}>
     <span>
       {reverseString(value)}

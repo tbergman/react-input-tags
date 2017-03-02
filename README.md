@@ -11,7 +11,7 @@ React component for tagging inputs.
 npm install --save react-input-tags
 ```
 
-### Use Package
+### [Use Package](src/example/TagsExample.jsx)
 ```
 import React from 'react';
 import { InputTagsContainer } from 'react-input-tags';
@@ -44,6 +44,8 @@ Both the high-level `InputTagsContainer` component or the low-level `InputTags` 
 |--------|----|:-----:|-----------|
 |`tags`|Array|✓|An array of data that represents the value of the tags|
 |`handleUpdateTags`|Function|✓|A function called when the value of tags changes, passes the tags value as an argument.|
+|`getTagValue`|Function||A function called when a tag is edited, passes the tag as an argument.|
+|`createTag`|Function||A function called when a tag is to be inserted, passes the input value as an argument.|
 |`inputPlaceholder`|String||The placeholder to populate the input with|
 |`inputTabIndex`|Number||The tab index for the input|
 |`inputMaxWidth`|Number||The max width the input can take up in pixels|
@@ -71,6 +73,8 @@ Both the high-level `InputTagsContainer` component or the low-level `InputTags` 
 |`tags`|Array|✓|An array of data that represents the value of the tags|
 |`handleInsert`|Function|✓|A function called when a tag will be inserted, passes the current tags value and new tag value as arguments.|
 |`handleRemove`|Function|✓|A function called when a tag will be removed, passes the current tags value and index of the tag to be removed as arguments.|
+|`getTagValue`|Function||A function called when a tag is edited, passes the tag as an argument.|
+|`createTag`|Function||A function called when a tag is to be inserted, passes the input value as an argument.|
 |`inputPlaceholder`|String||The placeholder to populate the input with|
 |`inputTabIndex`|Number||The tab index for the input|
 |`inputMaxWidth`|Number||The max width the input can take up in pixels|

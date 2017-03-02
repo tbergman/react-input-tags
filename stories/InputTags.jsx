@@ -7,6 +7,15 @@ import { noop } from '../test/util';
 import { items, emptyString } from '../test/mock';
 
 storiesOf('InputTags', module)
+  .add('create token by typing non empty string and clicking on something else', () => {
+    return (
+      <InputTags
+        tags={['insert another']}
+        handleInsert={action('handleInsert')}
+        handleRemove={noop}
+      />
+    )
+  })
   .add('create token by typing non empty string and pressing tab', () => {
     return (
       <InputTags
