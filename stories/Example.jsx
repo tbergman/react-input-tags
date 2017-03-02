@@ -6,6 +6,7 @@ import { LocalSuggestionsExample } from '../src/example/LocalSuggestionsExample.
 import { RemoteSuggestionsExample } from '../src/example/RemoteSuggestionsExample.jsx';
 import { CustomTagExample } from '../src/example/CustomTagExample.jsx';
 import { CustomSuggestionExample } from '../src/example/CustomSuggestionExample.jsx';
+import { CustomTagSuggestionExample } from '../src/example/CustomTagSuggestionExample.jsx';
 
 storiesOf('Example', module)
   .add('no suggestions', () => {
@@ -31,5 +32,10 @@ storiesOf('Example', module)
   .add('custom suggestion', () => {
     return (
       <CustomSuggestionExample />
+    )
+  })
+  .add('custom tag and suggestion', () => {
+    return (
+      <CustomTagSuggestionExample />
     )
   });

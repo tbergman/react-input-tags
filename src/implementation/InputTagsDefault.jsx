@@ -47,6 +47,10 @@ SuggestionListContainer.propTypes = {
   getSuggestionValue: React.PropTypes.func.isRequired,
 };
 
+export const getTagValueDefault = tag => tag;
+
+export const createTagDefault = inputValue => inputValue;
+
 export const suggestionsDefault = [];
 
 export const handleUpdateSuggestionsDefault = () => {};
@@ -102,6 +106,8 @@ export class InputTagsDefault extends React.Component {
     tags: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
     handleInsert: React.PropTypes.func.isRequired,
     handleRemove: React.PropTypes.func.isRequired,
+    getTagValue: React.PropTypes.func,
+    createTag: React.PropTypes.func,
     suggestions: React.PropTypes.arrayOf(React.PropTypes.any),
     handleUpdateSuggestions: React.PropTypes.func,
     getSuggestionValue: React.PropTypes.func,
@@ -121,6 +127,8 @@ export class InputTagsDefault extends React.Component {
   };
 
   static defaultProps = {
+    getTagValue: getTagValueDefault,
+    createTag: createTagDefault,
     suggestions: suggestionsDefault,
     handleUpdateSuggestions: handleUpdateSuggestionsDefault,
     getSuggestionValue: getSuggestionValueDefault,
@@ -160,9 +168,11 @@ export class InputTagsDefault extends React.Component {
   }
 
   editTag = (tags, editTagIndex) => {
+    const { getTagValue } = this.props;
+
     this.removeTag(tags, editTagIndex);
     this.setState({
-      inputValue: tags[editTagIndex],
+      inputValue: getTagValue(tags[editTagIndex]),
       inputIndex: editTagIndex,
       inputIsEditing: true,
     });
@@ -185,10 +195,10 @@ export class InputTagsDefault extends React.Component {
 
   handleInputOnBlur = () => {
     const { inputValue, inputIndex } = this.state;
-    const { tags } = this.props;
+    const { tags, createTag } = this.props;
 
     if (inputValue.length > 0) {
-      this.insertTag(tags, inputIndex, inputValue);
+      this.insertTag(tags, inputIndex, createTag(inputValue));
     }
   }
 
@@ -197,6 +207,7 @@ export class InputTagsDefault extends React.Component {
     const { inputValue, inputIndex, showSuggestions, highlightedSuggestionIndex } = this.state;
     const {
       tags,
+      createTag,
       suggestions,
       getSuggestionValue,
       calcNextIndex,
@@ -216,7 +227,7 @@ export class InputTagsDefault extends React.Component {
         const suggestion = getSuggestionValue(suggestions[highlightedSuggestionIndex]);
         this.insertTag(tags, inputIndex, suggestion);
       } else {
-        this.insertTag(tags, inputIndex, inputValue);
+        this.insertTag(tags, inputIndex, createTag(inputValue));
       }
     }
 

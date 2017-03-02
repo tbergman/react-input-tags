@@ -1,7 +1,7 @@
 import React from 'react';
 import { InputTagsContainer } from '../index';
 
-export const AvatarSuggestion = ({ value, isHighlighted, handleHighlight, handleSelect }) => (
+const AvatarSuggestion = ({ value, isHighlighted, handleHighlight, handleSelect }) => (
   <li // eslint-disable-line jsx-a11y/no-static-element-interactions
     className={(isHighlighted) ? 'react-input-tags-suggestion highlighted' : 'react-input-tags-suggestion'}
     onMouseOver={handleHighlight}

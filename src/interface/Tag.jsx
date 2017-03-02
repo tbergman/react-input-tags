@@ -18,7 +18,7 @@ export const Tag = ({
 
 Tag.propTypes = {
   TagImplementation: React.PropTypes.func.isRequired,
-  value: React.PropTypes.string.isRequired,
+  value: React.PropTypes.any.isRequired,
   handleEdit: React.PropTypes.func.isRequired,
   handleRemove: React.PropTypes.func.isRequired,
 };
